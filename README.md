@@ -1,6 +1,6 @@
 ## About this repository
 
-## Best practices
+## Best Practices
 
 ## Image Gallery
 
