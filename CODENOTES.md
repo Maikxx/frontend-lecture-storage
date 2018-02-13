@@ -86,7 +86,7 @@ Je hebt conditionals nodig om beslissingen te maken.
 Je hebt loops nodig om herhaaldelijk taken uit te voeren, totdat de condition false wordt.
 Je hebt functies nodig om je code te organiseren in logische en herbruikbare delen.
 
-## You don't know JS - Up and going - Hoofdstuk 2
+## You don't know JS - Up and Going - Hoofdstuk 2
 
 ECMASCRIPT is de officiële naam voor de JavaScript specificatie.
 
