@@ -354,3 +354,51 @@ Als de engine een LHS aanvraag aan het doen is en het komt op de bovenste etage 
 Strict mode zorgt ervoor dat er niet automatisch of impliciet variabelen aangemaakt kunnen worden op de bovenstaande manier. Ook dan zal de engine een ReferenceError geven.
 
 Als je een RHS aanvraag doet, maar de waarde komt niet overeen met wat je er mee probeert ermee te doen, zal de engine een andere error geven: TypeError.
+
+## You don't know JS - Types & Grammar - Hoofdstuk 1
+
+ES types:
+Undefined
+Null
+Boolean
+String
+Number
+Object
+Symbol
+
+Een type is (in JavaScript) een intrinsieke, ingebouwde set karakteristieken, die op een unieke manier het gedrag, van een gegeven waarde identificeert en onderscheidt van andere waardes, voor de engine én de developer.
+
+Alle types, behalve objecten heten primitives.
+
+Null is de enige primitieve waarde, die falsy is.
+
+Een function is een subtype van een object. Het is een aanroepbaar object.
+De length property van een function komt overeen met de hoeveelheid benoemde parameters.
+
+Ook arrays zijn subtypes van objecten.
+
+In JS hebben de variabelen geen types, maar juist de waardes.
+JS heeft dus geen type enforcement.
+
+typeof over een variabele aanroepen geeft de waarde van die variabele terug.
+
+Variabelen die op dit moment geen waarde hebben, returnen undefined.
+
+Undeclared en undefined zijn twee verschillende dingen. Undeclared betekent dat er geen variabele is aangemaakt in de toegankelijke scope.
+
+typeof returnt undefined, ook als er iets undeclared is.
+
+Als je een property van een object probeert te refereren, terwijl deze onverklaard is, zal er geen ReferecError worden gegooid.
+
+Dependency injection:
+In plaats van gokken of er iets globaal is verklaard, kan je er voor zorgen dat mensen per se een variabele meegeven aan je functie:
+
+```js
+function doSomethingCool(FeatureXYZ) {
+	var helper = FeatureXYZ ||
+		function() { /*.. default feature ..*/ };
+
+	var val = helper();
+	// ..
+}
+```
