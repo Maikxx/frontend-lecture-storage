@@ -1,3 +1,5 @@
+# You don't know JS Samenvattingen
+
 ## You don't know JS - Up and Going - Hoofdstuk 1
 
 Synoniemen voor programma: source code en code. Een set instructies die de computer vertellen welke taak deze moet uitvoeren.
@@ -217,7 +219,7 @@ Modules laten je privé implementatie details (zoals variabelen en functies) aan
 
 ```js
 function User(){
-	var username, password;
+    var username, password;
 
 	function doLogin(user,pw) {
 		username = user;
@@ -395,10 +397,143 @@ In plaats van gokken of er iets globaal is verklaard, kan je er voor zorgen dat 
 
 ```js
 function doSomethingCool(FeatureXYZ) {
-	var helper = FeatureXYZ ||
-		function() { /*.. default feature ..*/ };
+var helper = FeatureXYZ ||
+function() { /*.. default feature ..*/ };
 
-	var val = helper();
-	// ..
+var val = helper();
 }
 ```
+
+## You don't know JS - Types & Grammar - H2
+
+Bouwstenen van iedere taal: arrays, strings en numbers. JavaScript heeft hier enkele unieke karakteristieken aan verbonden.
+
+Arrays in arrays worden multidimensionale arrays genoemd.
+
+Als je in arrays genummerde waardes overslaat bij het toevoegen (0 > 2), dan wordt dat een sparse array. Hierin is de tweede waarde (1) undefined.
+
+Je kan ook string keys/properties aan arrays toevoegen, die zullen niet meetellen aan de length property van de array.
+
+Als een string waarde, bedoeld als een key, met een base-10 nummer waarde in de string, gaat een array er vanuit dat je bedoelde dat het nummer wou hebben.
+
+Strings worden vaak gezien als arrays van karakters, echter zijn ze totaal anders.
+JS strings zijn immutable, terwijl arrays wel mutable zijn.
+
+Arrays hebben een reverse methode.
+De meest gebruikte methode om strings te reversen, is door ze in een array om te zetten, te reversen en vervolgens weer terug naar een string om te zetten.
+
+JS nummers bevatten beide integer en decimale nummers.
+De implementatie waarop JS zijn nummer systeem heeft gebaseerd heet IEEE754, vaak ook floating-point genoemd. JS gebruikt daarvan het double precision (64-bit binary) format van die standaard.
+
+Hele grote nummers worden automatisch omgezet naar de exponentiële vorm van dat nummer. Dit is hetzelfde als .toExponential( ) op een getal aanroepen.
+
+De .toFixed( ) prototype functie van het Number object, zorgt ervoor dat je kan zien op hoeveel decimalen een nummer echt eindigt:
+
+```js
+Var a = 42.42.
+a.toFixed(4); // “42.4200”
+```
+
+De .toPrecision( ) methode doet iets soortgelijks, maar kijkt dan naar hoeveel significante getallen aanwezig moeten zijn om een waarde te representeren. De waardes die uit deze functie komen zijn string representaties.
+
+```js
+42..toFixed(4); // Dit is een correcte functie call.
+42 .toFixed(3); // Ook dit is valide.
+```
+
+Numerieke waardes kunnen ook in andere vormen worden uitgelegd: binary, octal, hexadecimal.
+De octale waarde 0363 is sinds ES6 + strict mode niet meer toegestaan.
+De nieuwe vormen, die wel valide zijn: 0o363 en 0O363. Gebruik echter altijd de lowercase o.
+
+Het meest bekende side effect van binary floating-point numbers (niet alleen in JS) is dat:
+
+```js
+0.1 + 0.2 === 0.3 // False
+```
+
+Dit komt doordat het antwoord: 0.30000000000000004 is.
+Integers hebben dit probleem niet.
+
+De meest geaccepteerde manier om met deze rounding error om te gaan, is door een kleine waarde te gebruiken als tolerantie voor deze vergelijking. Deze waarde heet machine epsilon, 2^-52. In ES6 is dit nummer ingebouwd als property op het Number object, .EPSILON.
+
+De maximale floating-point waarde is Number.MAX\_VALUE en de minimale floating-point waarde is Number.MIN_VALUE.
+
+Het hoogst veilig te gebruiken integer getal is: 2^53 -1. In ES6: Number.MAX\_SAFE\_INTEGER en Number.MIN\_SAFE_INTEGER.
+Deze waardes worden vaak alleen geraakt als je werkt met 64-bit ID’s van databases. Deze kunnen dus niet als getal worden opgeslagen, maar wel als string.
+
+Sinds ES6 kan je checken of een variabele een integer is, met Number.isInteger( ).
+Je kan ook testen of een nummer een safe integer is, met Number.isSafeInteger( ).
+
+Om een nummer te forceren, dat het een 32-bit integer waarde wordt, gebruik je a | 0. Dit werkt, omdat de | bitwise operator alleen werkt voor 32-bits getallen.
+
+Null is een lege waarde. Had een waarde, maar nu niet meer. Dit is een special keyword.
+Undefined is een missende waarde. Heeft geen waarde gehad nog. Undefined is een identifier.
+
+Een andere manier om de undefined waarde te krijgen is, met behulp van de void operator.
+Als je ergens een waarde graag undefined wilt hebben, kun je dus de void operator gebruiken.
+
+Als je twee niet nummers aan elkaar probeert te koppelen in een operation, krijg je een NaN. Not a Number. NaN is nooit gelijk aan een andere NaN. Je kan testen of een waarde NaN is met isNaN( ). Dit heeft echter een probleem, dat het ook true returnt als je string eraan meegeeft.
+Je kan ook checken of een waarde niet gelijk is aan zichzelf, aangezien NaN de enige variant binnen JS is, waar dat het geval is.
+
+Als je var a = 1 / 0 doet, krijg je Infinity. Hier is een positieve (POSITIVE\_INFINITY) en een negatieve (NEGATIVE_INFINITY) variant van.
+
+Een negatieve 0 waarde kan je alleen vinden als 0 deelt door of vermenigvuldigt met een negatieve waarde. Als je dit om zet naar een string werkt het niet, dan wordt er gewoon een string met 0 en geen min gegeven. Als je het reversed (vanuit een string naar number) werkt het wel.
+Ook als je vergelijkingen doet met 0 en -0, zal dit true teruggeven.
+
+Om de speciale gelijkheid van -0 en NaN te vergelijken kan je sinds ES6 gebruik maken van object.is( ). Gebruik dit alleen bij deze twee cases.
+
+In JS kan je geen referentie hebben van een variabele in een andere variabele. Een referentie richt zich op een (gedeelde) waarde.
+
+```js
+var a = 2;
+var b = a; // `b` is always a copy of the value in `a`
+b++;
+a; // 2
+b; // 3
+
+var c = [1,2,3];
+var d = c; // `d` is a reference to the shared `[1,2,3]` value
+d.push( 4 );
+c; // [1,2,3,4]
+d; // [1,2,3,4]
+```
+
+Simpele waardes (scalar primitives) zijn altijd kopieën. (null, undefined, string, number, boolean, symbol).
+Compound values (samengestelde waardes) maken altijd een kopie, met een referentie naar het oorspronkelijke object. (objects, functions en arrays)
+
+```js
+function foo(x) {
+    x.push( 4 );
+    x; // [1,2,3,4]
+
+	// later
+    x = [4,5,6];
+    x.push( 7 );
+	x; // [4,5,6,7]
+}
+
+var a = [1,2,3];
+
+foo( a );
+
+a; // [1,2,3,4]  not  [4,5,6,7]
+```
+
+Als je dit gedrag (manual object wrapper) niet wilt hebben moet je x leegmaken met x.length = 0 en vervolgens je gewenste variabelen hierin pushen.
+
+Slice( ) zonder parameters maakt een (shallow) kopie van een array. Hierdoor kan de kopie niet de oorspronkelijke array aanpassen.
+
+```js
+function foo(x) {
+	x = x + 1;
+	x; // 3
+}
+
+var a = 2;
+var b = new Number( a ); // or equivalently `Object(a)`
+
+foo( b );
+console.log( b ); // 2, not 3
+```
+
+Het probleem hiermee (boxed object wrappers) is, dat de onderliggende scalar primitive waarde niet mutable is.
