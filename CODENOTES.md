@@ -506,10 +506,10 @@ function foo(x) {
     x.push( 4 );
     x; // [1,2,3,4]
 
-	// later
+    // later
     x = [4,5,6];
     x.push( 7 );
-	x; // [4,5,6,7]
+    x; // [4,5,6,7]
 }
 
 var a = [1,2,3];
@@ -525,8 +525,8 @@ Slice( ) zonder parameters maakt een (shallow) kopie van een array. Hierdoor kan
 
 ```js
 function foo(x) {
-	x = x + 1;
-	x; // 3
+    x = x + 1;
+    x; // 3
 }
 
 var a = 2;
