@@ -266,17 +266,17 @@ var obj2 = {
 
 // --------
 
-foo();				// “global” // In strict mode geeft dit een undefined error.
-obj1.foo();			// "obj1"
-foo.call( obj2 );		// "obj2"
-new foo();			// undefined
+foo();                // “global” // In strict mode geeft dit een undefined error.
+obj1.foo();            // "obj1"
+foo.call( obj2 );        // "obj2"
+new foo();            // undefined
 ```
 
 Als je een property van een object probeert te refereren, die niet bestaat, zal JS automatisch de interne prototype van dat object gebruiken, om een ander object op te zoeken, waar die property wel opstaat.
 
 ```js
 var foo = {
-	a: 42
+    a: 42
 };
 
 // create `bar` and link it to `foo`
@@ -284,8 +284,8 @@ var bar = Object.create( foo );
 
 bar.b = "hello world";
 
-bar.b;		// "hello world"
-bar.a;		// 42 <-- delegated to `foo`
+bar.b;        // "hello world"
+bar.a;        // 42 <-- delegated to `foo`
 ```
 
 Dit systeem wordt vaak gebruikt en misbruikt om het te laten lijken op een class met inheritance.
