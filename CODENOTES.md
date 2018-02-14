@@ -237,6 +237,7 @@ function User(){
 ```
 
 // create a `User` module instance
+
 ```js
 var fred = User();
 
