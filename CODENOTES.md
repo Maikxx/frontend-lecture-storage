@@ -112,12 +112,12 @@ Var b = a * 1 — impliciete coersie tot het nummer 42.
 
 Waardes die false zijn:
 “” - lege string.
-0, -0, NaN.
-Null, undefined.
+`0`, `-0`, `NaN`.
+`Null`, `undefined`.
 false.
 
-== - Kijkt naar de waarde gelijkheid, met coersie toegestaan.
-=== - Kijkt naar de waarde gelijkheid, zonder dat coersie is toegestaan.
+`==` - Kijkt naar de waarde gelijkheid, met coersie toegestaan.
+`===` - Kijkt naar de waarde gelijkheid, zonder dat coersie is toegestaan.
 
 Bij a == b wordt de a waarde gelijk aan het type van b. (“42” -> 42).
 
@@ -131,8 +131,8 @@ Als je twee non-primitieve waardes vergelijkt, zoals objecten, moet je heel goed
 Arrays worden standaard gecoerced naar strings, gescheiden met komma’s, zonder spaties. Twee arrays met dezelfde waarde aan elkaar vergelijken, levert geen true op.
 
 Inequality:
-<, >, <=, >= - Relational comparison.
-Als je de waardes 32 < “42” met elkaar vergelijkt komt hier true uit, omdat een van de waardes geen string is, worden beide waardes naar nummers omgezet.
+`<`, `>`, `<=`, `>=` - Relational comparison.
+Als je de waardes `32 < “42”` met elkaar vergelijkt komt hier true uit, omdat een van de waardes geen string is, worden beide waardes naar nummers omgezet.
 Als je “42” < “43” vergelijkt komt hier true uit, omdat de waardes lexicografisch met elkaar worden vergelijken (op alfabetische waarde).
 
 Strings die worden omgezet naar nummers worden NaN. Een NaN waarde is altijd groter dan of kleiner dan iedere andere waarde. Je kan hier dus niet mee vergelijken.
@@ -538,3 +538,102 @@ console.log( b ); // 2, not 3
 ```
 
 Het probleem hiermee (boxed object wrappers) is, dat de onderliggende scalar primitive waarde niet mutable is.
+
+## You don't know JS - Types & Grammar - H3
+
+Ingebouwde types heten natives.
+
+De meest bekende natives:
+
+```js
+String( )
+Number( )
+Boolean( )
+Array( )
+Object( )
+Function( )
+RegExp( )
+Date( )
+Error( )
+Symbol( )
+```
+
+Natives zijn eigenlijk ingebouwde functies.
+
+Als je ze aanroept als constructor functie, dan zal typeof een object teruggeven, maar instanceof geeft wel de juiste native.
+
+Via de constructor functie instanties aanmaken levert een wrapper object op van dat type, niet de primitieve waarde, die je wellicht bedoelde.
+
+Er zijn geen Null en Undefined native constructors.
+
+Voor de andere primitieve waarde, zoals strings, booleans en numbers, gebeurt er iets dat boxing heet.
+
+Primitieve waardes hebben geen methodes of properties, hiervoor heb je een object wrapper nodig. JS doet dit automatisch.
+
+Als je bijvoorbeeld var a = new Boolean (false) doet, zal dit alsnog true returnen in een vergelijking, omdat er een object omheen zit.
+
+Als je wel een object wrapper hebt en je wilt de onderliggende waarde hebben, kun je gebruik maken van:
+
+```js
+.valueOf( )
+```
+
+Als je aan `Array()`, slechts een waarde meegeeft, wordt dat gezien als de lengte van de array.
+Een array met minstens één lege slot, heet een sparse array.
+
+`.apply()` is een utlity beschikbaar op alle functies, deze roept de functie op, waarmee het gebruikt wordt, maar op een speciale manier.
+
+```js
+Var a = Array.apply(null, {length: 3});
+```
+
+Bovenstaande maakt een array handmatig aan met drie x undefined.
+
+Functie constructor is alleen hulpvol op sommige momenten, waar je dynamisch de functie parameters / diens functiebody moet bepalen.
+
+Ook RegExps kun je beter in de literal form maken, in verband met performance.
+Het is wel handig om dynamisch het patroon voor een regex te be	palen.
+
+De Date en Error constructors zijn veel nuttiger dan de andere, omdat er geen literal form van is.
+
+```js
+new Date( ).getTime();
+```
+
+Het bovenstaande geeft een integer terug, wat het aantal miliseconde vertegenwoordigd sinds 1 januari 1970. Sinds ES6 kan je Date.now( ) gebruiken.
+
+De `Error()` constructor gedraagt zich hetzelfde met het new keyword, als zonder.
+Dit object gebruik je vaak in combinatie met de throw operator.
+
+Symbols zijn speciale unieke (niet altijd) waardes, die gebruikt kunnen worden als properties op objecten, met weinig angst dat ze botsen.
+Je mag bij deze constructor geen new keyword gebruiken.
+Je gebruikt ze voornamelijk voor privé of speciale properties.
+
+De String.prototype.(methode) zijn volgens de spec te vinden op String#methode. Geen enkele van deze methodes passen de string aan in place.
+
+Function.prototype geeft een lege functie terug, net als dat Array.prototype dat doet. Dit is handig, om errors in zelf gedefineerde functies te voorkomen:
+
+```js
+function isThisCool(vals,fn,rx) {
+    vals = vals || Array.prototype;
+    fn = fn || Function.prototype;
+    rx = rx || RegExp.prototype;
+
+    return rx.test(
+        vals.map( fn ).join( "" )
+    );
+}
+
+isThisCool();        // true
+
+isThisCool(
+    ["a","b","c"],
+    function(v){ return v.toUpperCase(); },
+    /D/
+);
+```
+
+Sinds ES6 is dit niet meer nodig.
+Het zorgt wel voor Memory/CPU trashing.
+
+Gebruik ook nooit `Array.prototype` die achtereenvolgend worden aangepast.
