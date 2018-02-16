@@ -592,7 +592,7 @@ Bovenstaande maakt een array handmatig aan met drie x undefined.
 Functie constructor is alleen hulpvol op sommige momenten, waar je dynamisch de functie parameters / diens functiebody moet bepalen.
 
 Ook RegExps kun je beter in de literal form maken, in verband met performance.
-Het is wel handig om dynamisch het patroon voor een regex te be	palen.
+Het is wel handig om dynamisch het patroon voor een regex te bepalen.
 
 De Date en Error constructors zijn veel nuttiger dan de andere, omdat er geen literal form van is.
 
@@ -637,3 +637,101 @@ Sinds ES6 is dit niet meer nodig.
 Het zorgt wel voor Memory/CPU trashing.
 
 Gebruik ook nooit `Array.prototype` die achtereenvolgend worden aangepast.
+
+## You don't know JS - Types & Grammar - H4
+
+Het ombouwen van een waarde, van het ene type naar het andere heet vaak type casting, als het expliciet wordt gedaan en coercion als het impliciet gedaan wordt (door JS zelf, die volgt de regels op die gaan over hoe een waarde gebruikt mag en kan worden).
+
+Eigenlijk wordt bij beide varianten gepraat over coercion, dus tegenwoordig heet het explicit coercion en implicit coercion.
+
+```js
+Var b = 42 + ‘’; // Implicit coercion
+```
+
+Het side effect van bovenstaande is dat 42 een string wordt.
+
+Astract operations: internal-only operations.
+
+### toString
+
+toString maakt van waardes een string.
+array.toString geeft een string vertegenwoordiging van de array terug, waar de waardes gescheiden zijn met een komma.
+
+### JSON
+
+JSON.stringify( ) zorgt ervoor dat waardes geschikt zijn, als JSON string waarde.
+JSON-safe: Iedere waarde die op een correcte manier kan worden vertegenwoordigd in een JSON representatie.
+JSON.stringify is geen directe vorm van coercion.
+
+Illegale JSON waardes:
+
+* Undefined
+* Functions
+* Symbols
+* Objects met circular references (property referenties binnen een object structuur, die een nooit-eindigende cyclus creëren)
+
+Als JSON in een array een invalide waarde vindt, vervangt deze de waarde met null. Als het op een object gebeurt, wordt die property verwijderd.
+
+toJSON moet een JSON-safe representatie teruggeven, niet een JSON string.
+
+Je kan ook een optioneel tweede argument meegeven aan JSON.stringify. Dit heet de replacer, dit kan een array of functie zijn.
+Het wordt gebruikt om de recusive serialization van een object aan te passen, door een filter mechanisme te gebruiken, die aangeeft welke properties er wel en welke niet moeten worden geïnclude.
+
+Als het een array is, moet het een array zijn van strings, die in de serialization mogen zitten van een object.
+
+Als het een function is, zal het eens worden aangeroepen voor het object zelf, en verder iedere keer bij een property. Iedere keer wordt er een key en value aan meegegeven. Je kan een key skippen als je undefined returnt.
+
+Een derde argument aan de functie stringify heet space en zorgt ervoor dat er een beter leesbare versie van een object uit komt. Het kan een nummer zijn of een string, waarvan de eerste tien karakters gelden als spacing.
+
+### toNumber
+
+True wordt 1, false wordt 0, undefined wordt NaN, null wordt 0.
+
+```js
+var a = {
+    valueOf: function(){
+        return "42";
+    }
+};
+
+var b = {
+    toString: function(){
+        return "42";
+    }
+};
+
+var c = [4,2];
+c.toString = function(){
+    return this.join( "" );// "42"
+};
+
+Number( a );// 42
+Number( b );// 42
+Number( c );// 42
+Number( "" );// 0
+Number( [] );// 0
+Number( [ "abc" ] );// NaN
+```
+
+### toBoolean
+
+1 en 0 zijn niet hetzelfde als true en false, echter kun je ze wel converteren van 1 > true en 0 > false.
+
+Alle JS waardes kunnen in een van de twee categorieën vallen:
+Waardes die false worden als ze omgezet worden naar een boolean.
+Alle andere gevallen (true).
+
+Falsy values list:
+
+* Undefined
+* Null
+* False
+* +0, -0, NaN
+* “”
+
+Falsy objects zijn niet slechts objecten die falsy waardes omringen.Een falsy object is een waarde, die lijkt op en zich hetzelfde gedraagt als een normaal
+Object, maar als je ze naar een boolean coerced, zal het een false waarde worden.
+
+Falsy objects werden gebruikt voornamelijk in legacy code. Zoals document.all, dit zal true returnen. Het zit niet in JS zelf, maar in de implementatie van oude browsers.
+
+### Explicit Coercion
