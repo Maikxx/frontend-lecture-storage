@@ -301,6 +301,7 @@ NaN waardes zijn de enige waardes die nooit gelijk zijn aan zichzelf.
 Transpiling: een proces dat nieuwe code omzet naar oudere varianten van die code. Het transformeert de code en compiled deze. Transpiling gebeurt in het build-proces.
 
 Waarom zouden we transpilen?:
+
 * Nieuwe syntax maakt je code leesbaarder en onderhoudsarmer.
 * Als je de getranspilede code alleen gebruikt voor oudere browsers en de nieuwe serveert aan de nieuwere browsers, kun je gebruik maken van de performance optimalizations, die met de nieuwe syntax zijn meegebracht. Zorgt er ook voor dat browser makers meer echte code hebben om mee te testen.
 * Geeft feedback aan het JS comité (TC39).
@@ -735,3 +736,187 @@ Object, maar als je ze naar een boolean coerced, zal het een false waarde worden
 Falsy objects werden gebruikt voornamelijk in legacy code. Zoals document.all, dit zal true returnen. Het zit niet in JS zelf, maar in de implementatie van oude browsers.
 
 ### Explicit Coercion
+
+Dit is het converteren van een type, op een duidelijke en expliciete manier.
+
+Strings <—> Numbers
+Hiervoor gebruik je de ingebouwde String en Number functies. Hierbij gebruik je geen new. Je kan ook toString gebruiken, of +getal. Het laatstgenoemde heet een unary operator (operator met slechts één operand)
+
+\- - maakt een positieve string ook een positief nummer.
+
+### Date to number
+
+Het meest gebruikte hiervoor is:
+
+```js
+Var timestamp = +new Date( );
+```
+
+Dit geeft het directe ‘nu’ moment terug in ms sinds 1970.
+Je kan echter beter Date.now( ) gebruiken tegenwoordig.
+
+### ~
+
+De tilde operator (bitwise NOT) wordt vaak niet gebruikt, omdat het niet begrepen wordt. Deze voert eerst de ToInt32 functie uit en voert vervolgens een bitwise negation (het draait de gelijkheid van iedere bit om).
+
+ToInt32 voert eerst een toNumber transformatie uit.
+Soms als je bitwise operators gebruikt, met bepaalde nummers, zullen de waardes een andere nummer waarde hebben.
+
+```js
+~42;    // -(42+1) ==> -43
+```
+
+-1 heet een sentinel value, wat betekent: een waarde, die een arbitraire semantische betekenis heeft gekregen, binnen een set van soortgelijke waardes (nummers).
+
+Deze waarde wordt bijvoorbeeld gebruikt bij het checken of een string een andere substring heeft, met indexOf( ). Deze geeft -1 terug, als er niks is gevonden en anders een 0-based index waar de substring begint.
+
+```js
+var a = "Hello World";
+
+~a.indexOf( "lo" );            // -4   <-- truthy!
+
+if (~a.indexOf( "lo" )) {	// true
+    // found it!
+}
+
+~a.indexOf( "ol" );            // 0    <-- falsy!
+!~a.indexOf( "ol" );        // true
+
+if (!~a.indexOf( "ol" )) {    // true
+    // not found!
+}
+```
+
+### Truncating bits
+
+Sommige developers gebruiken ~~ om het decimale deel van een nummer af te ronden.
+Het lijkt op, maar is niet hetzelfde als Math.floor.
+Eerst maakt deze operator van een getal een int32 en doet vervolgens een bitwise flip, waarna het nog een keer geflipt wordt. In principe voert deze operatie dus alleen ToInt32 uit.
+
+```js
+Math.floor( -49.6 );    // -50
+~~-49.6;				// -49
+```
+
+### Parsing numeric strings
+
+parseInt is een functie die zoekt in een string naar het eerst te vinden nummer en transformeert deze naar een nummer.
+Er is ook parseFloat.
+Gebruik dit alleen met string waardes.
+
+```js
+parseInt( 0.000008 );		// 0   ("0" from "0.000008")
+parseInt( 0.0000008 );		// 8   ("8" from "8e-7")
+parseInt( false, 16 );		// 250 ("fa" from "false")
+parseInt( parseInt, 16 );	// 15  ("f" from "function..")
+
+parseInt( "0x10" );			// 16
+parseInt( "103", 2 );		// 2
+
+*—> Boolean
+Boolean( ) is een manier om een waarde in een boolean om te zetten.
+
+var a = "0";
+var b = [];
+var c = {};
+
+var d = "";
+var e = 0;
+var f = null;
+var g;
+
+Boolean( a ); // true
+Boolean( b ); // true
+Boolean( c ); // true
+
+Boolean( d ); // false
+Boolean( e ); // false
+Boolean( f ); // false
+Boolean( g ); // false
+
+var a = "0";
+var b = [];
+var c = {};
+
+var d = "";
+var e = 0;
+var f = null;
+var g;
+
+!!a;	// true
+!!b;	// true
+!!c;	// true
+
+!!d;	// false
+!!e;	// false
+!!f;	// false
+!!g;	// false
+var b = a ? true : false;
+```
+
+Bovenstaande zou expliciet te noemen zijn, maar a moet eerst naar een boolean worden omgezet impliciet. Dit heet dus explicitly implicit.
+
+### Implicit Coercion
+
+Dit zijn type conversies, die niet duidelijk zijn, voor jou als developer.
+Het doel hiervan: verminderen van breedsprakigheid, standaardtekst, en / of onnodige implementatie details, die de code opvullen met rommel.
+
+### Strings <—> Numbers
+
+Als een van de twee operands een string is, wordt het bij + een string, anders zal het een nummer worden.
+
+```js
+42 + “” // “42”
+```
+
+### Booleans —> Numbers
+
+```js
+function onlyOne() {
+	var sum = 0;
+	for (var i=0; i < arguments.length; i++) {
+		// skip falsy values. same as treating
+		// them as 0's, but avoids NaN's.
+		if (arguments[i]) {
+			sum += arguments[i];
+		}
+	}
+	return sum == 1;
+}
+
+var a = true;
+var b = false;
+
+onlyOne( b, a );        // true
+onlyOne( b, a, b, b, b );    // true
+
+onlyOne( b, b );        // false
+onlyOne( b, a, b, b, b, a );    // false
+```
+
+### Alles —> Boolean
+
+Dingen die impliciet iets naar een boolean omvormen:
+
+* If statement
+* For (second clause)
+* While en do while
+* Ternary operator
+* && || -> Moeten eigenlijk operand selector operators worden genoemd, omdat het niet duidelijk is wat ze doen
+
+Guard operator: De eerste expressie test beschermt de tweede expressie:
+
+```js
+function foo() {
+    console.log( a );
+}
+
+var a = 42;
+
+a && foo(); // 42
+```
+
+Als _a_ niet truthy is, zal foo nooit worden aangeroepen, dit heet *short circuiting*.
+De impliciete transformatie naar een boolean zal plaatsvinden nadat de compound expression is geëvalueerd.
+
+### Symbol Coercion
