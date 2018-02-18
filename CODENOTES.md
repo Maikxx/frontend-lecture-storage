@@ -920,3 +920,169 @@ Als _a_ niet truthy is, zal foo nooit worden aangeroepen, dit heet *short circui
 De impliciete transformatie naar een boolean zal plaatsvinden nadat de compound expression is geëvalueerd.
 
 ### Symbol Coercion
+
+Expliciete coercion naar strings is toegestaan, maar impliciet niet en geeft een error.
+Ook kan het nooit naar een nummer gecoerced worden, maar wel naar een boolean (dat wordt true).
+
+### Loose equals vs. Strict equals
+
+*==* : Sta coercion toe in de vergelijking.
+*===* : Sta geen coercion toe in de vergelijking.
+
+### Abstract equality
+
+*==* heet eigenlijk de abstract equality comparison algorithm.
+
++0 en -0 zijn gelijk aan elkaar.
+Objecten (ook functies en arrays) zijn alleen gelijk aan elkaar als ze beide een referentie hebben met exact dezelfde waarde. Hier gebeurt geen coercion.
+== en === gedragen zich precies hetzelfde als je objecten met elkaar vergelijkt.
+
+#### Comparing: strings to number
+
+Strings worden omgezet naar nummers.
+
+#### Comparing: anything to boolean
+
+Booleans worden omgezet naar nummers en vervolgens vergeleken.
+
+```js
+var x = true;
+var y = "42";
+
+x == y; // false
+```
+
+Een boolean wordt altijd eerst omgezet in een nummer, als het wordt vergeleken.
+
+```js
+var a = "42";
+
+// bad (will fail!):
+if (a == true) {
+	// ..
+}
+
+// also bad (will fail!):
+if (a === true) {
+	// ..
+}
+
+// good enough (works implicitly):
+if (a) {
+	// ..
+}
+
+// better (works explicitly):
+if (!!a) {
+	// ..
+}
+
+// also great (works explicitly):
+if (Boolean( a )) {
+	// ..
+}
+
+```
+
+#### Comparing: null to undefined
+
+Als je null en undefined met == vergelijkt, zal dit altijd true geven.
+
+#### Comparing: object to non-objects
+
+In deze situatie worden objecten omgezet met toPrimitive en vervolgens vergeleken.
+In een array worden nummers omgezet in strings en dan als er vergeleken wordt met == omgezet tot nummers.
+
+```js
+var a = "abc";
+var b = Object( a );	// same as `new String( a )`
+
+a === b;				// false
+a == b;					// true
+```
+
+Gevallen waar dit niet zo is:
+
+```js
+var a = null;
+var b = Object( a );	// same as `Object()`
+a == b;					// false
+
+var c = undefined;
+var d = Object( c );	// same as `Object()`
+c == d;					// false
+
+var e = NaN;
+var f = Object( e );	// same as `new Number( e )`
+e == f;					// false
+```
+
+### Edge cases
+
+```js
+"0" == null;			// false
+"0" == undefined;		// false
+"0" == false;			// true -- UH OH!
+"0" == NaN;				// false
+"0" == 0;				// true
+"0" == "";				// false
+
+false == null;			// false
+false == undefined;		// false
+false == NaN;			// false
+false == 0;				// true -- UH OH!
+false == "";			// true -- UH OH!
+false == [];			// true -- UH OH!
+false == {};			// false
+
+"" == null;				// false
+"" == undefined;		// false
+"" == NaN;				// false
+"" == 0;				// true -- UH OH!
+"" == [];				// true -- UH OH!
+"" == {};				// false
+
+0 == null;				// false
+0 == undefined;			// false
+0 == NaN;				// false
+0 == [];				// true -- UH OH!
+0 == {};				// false
+
+0 == "\n";		// true
+```
+
+Het laatste voorbeeld hierboven werkt, omdat ieder karakter met een soort van witruimte wordt via toNumber omgezet naar 0.
+
+Je moet loose equal vergelijkingen met false altijd vermijden.
+
+### Safely using implicit coercion
+
+Je moet ervoor zorgen dat je van te voren weet welke waardes er aan beide kanten van een vergelijking komen te staan.
+
+Om problemen te voorkomen gebruik de volgende stappen:
+
+1. Als een van de kanten true of false kan hebben, gebruik dan nooit ==.
+2. Als een van de kanten [], “” of 0 kan hebben, vraag je af of je == wilt gebruiken.
+
+Een andere plek waar je coercion kunt gebruiken, zonder angst, is met de typeof operator.
+Deze geeft één van de zeven strings terug, genoemd in H1, hiervan is er geen één een “”.
+
+[Javascript Equality Table](https://github.com/dorey/JavaScript-Equality-Table)
+
+### Abstract relational comparison
+
+Dit algorithme wordt altijd afgehandeld met <.
+Dus a > b, wordt afgehandeld als b < a.
+
+Dit algorithme roept eerst toPrimitive aan op beide waardes, als één van de twee resultaten daarvan geen string is, worden beide waardes omgezet naar nummers.
+
+```js
+var a = { b: 42 };
+var b = { b: 43 };
+
+a < b;	// false
+```
+
+Dit wordt false, omdat beide variabelen omgezet worden tot [object Object], waardoor ze gelijk zijn aan elkaar en dus niet minder.
+
+<= wordt in JS vaak gezien als not greater than.
