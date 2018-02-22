@@ -1605,3 +1605,127 @@ Als de engine with of eval tegenkomt, moet deze gaan gokken, of al de locaties v
 Dit zorgt ervoor dat de engine helemaal geen performance optimalizations meer doet.
 
 Gebruik deze twee manieren niet.
+
+## You don't know JS - Scopes & Closures - Hoofdstuk 3
+
+### Scope from functions
+
+Een functie is een manier om een scope te maken. Dingen die in deze scope zijn gedefineerd zijn daarbuiten niet beschikbaar. Met dit patroon maak je goed gebruik van de dynamische aard van JS variabelen.
+
+### Hiding in plain scope
+Je kan code verstoppen door een functie eromheen te zetten.
+
+Waarom je dit zou doen komt voort uit **Principles of Least Privilege**, ofwel **Least Authority**, of **Least Exposure**. De reden: verstop alles, behalve dat wat nodig is om je API werkend te krijgen voor mensen die het gebruiken.
+
+Het vrijgeven van variabelen, die bij een functie horen, aan (vaak) de globale scope, is niet alleen onnodig, maar ook gevaarlijk, omdat ze zomaar eens veranderd zouden kunnen worden.
+
+### Collision avoidance
+
+Een ander voordeel van het verstoppen van variabelen en functies, is dat je voorkomt dat je per ongeluk variabele namen overwrite.
+
+### Global namespaces
+
+Als je veel verschillende libraries in je JS laadt, die niet hun variabelen goed zouden verstoppen, zou dat veel overwriting en errors veroorzaken.Goede libraries gebruiken vaak een unieke naam en wordt vervolgens gebruikt als namespace voor die library.
+
+### Module management
+
+Een andere mogelijkheid om collision te vermijden is het gebruiken van de moderne module techniek. Met deze techniek wordt deze code in een privé, onmogelijk te botsen scope gezet.
+
+### Functions as scopes
+
+Het hebben van functies als scopes is vaak niet ideaal, omdat je ze moet aanroepen en een naam moet geven, maar je kan wel gebruik maken van een **IIFE**.
+
+Als function het eerste woord is in een statement heet het een function declaration en anders een function expression.
+
+In een IIFE is de naam van de functie niet buiten de omringende ( ) beschikbaar.
+
+### Anonymous vs. named
+
+```js
+setTimeout( function(){
+	console.log("I waited 1 second!");
+}, 1000 );
+```
+
+Het bovenstaande is een anonieme functie expressie. Functie expressies kunnen anoniem zijn, maar functie declarations niet.
+
+Nadelen aan anonieme functies:
+
+* Debugging moeilijker.
+* Als je in de functie naar deze functie moet refereren, moet je de deprecated arguments.callee gebruiken.
+* Verminderd leesbaarheid.
+
+Inline function expressions zijn krachtig en bruikbaar, het maakt niet uit of ze benaamd zijn of niet. Gebruik altijd een naam in je function expressions.
+
+### Invoking function expressions immediately
+
+Immediately Invoked Function Expression: IIFE. Gebruik ook hier gewoon een naam.
+
+(function { } ( )) is hetzelfde als (function { })( )
+
+Je kan ook parameters meegeven aan een IIFE.
+
+Met een IIFE kan je ook heel goed ervoor zorgen dat in die scope undefined niet veranderd is.
+
+Een ander gebruik van een IIFE is om de volgorde van dingen te veranderen, met het UMD (Universal Module Definition) project:
+
+```js
+var a = 2;
+
+(function IIFE( def ){
+	def( window );
+})(function def( global ){
+
+	var a = 3;
+	console.log( a ); // 3
+	console.log( global.a ); // 2
+
+});
+```
+
+Hier is de dev function scope gegeven in het tweede deel van de snippet.
+
+### Blocks as scopes
+
+**Block scoping** gaat over het verklaren van variabelen zo dichtbij en lokaal mogelijk als waar ze gebruikt moeten gaan worden.
+Block scoping is een tool om Principles of Least Exposure te verlengen.
+
+Block scoping bestaat niet direct in JS.
+Sommige kenmerken van JS doen daar wel op lijken:
+ With
+ Try / Catch -> Het catch deel is geblockscoped.
+ Let -> Koppelt een variabele aan de scope van een block code ({ }) waar deze in is geplaatst. Sommige mensen plaatsen liever om alles waar ze een block van willen maken { } dit is dan een expliciete manier van scoping. Anders is het impliciet.  Verklaringen die met let zijn gedaan zullen niet hoisten, dus als je ze probeert te bereiken voordat ze gedefineerd zijn, krijg je een referenceerror.
+
+### Garbage collection
+
+Een andere reden waarom block-scoping handig is, heeft te maken met closures en garbage collection om geheugen terug te winnen.
+
+```js
+function process(data) {
+	// do something interesting
+}
+
+// anything declared inside this block can go away after!
+{
+	let someReallyBigData = { .. };
+
+	process( someReallyBigData );
+}
+
+var btn = document.getElementById( "my_button" );
+
+btn.addEventListener( "click", function click(evt){
+	console.log("button clicked");
+}, /*capturingPhase=*/false );
+```
+
+### Let loops
+
+Als je gebruik maakt van let loops zal de variabele die je daarin aanmaakt niet buiten de loop beschikbaar zijn.
+
+Let bindt i aan de for loop body en herbind het iedere iteratie van de loop.
+Let bindt zich aan artibraire blocks code in plaats van functie scopes of globale scopes, kunnen er problemen opspelen als je de code gaat refactoren.
+
+### Const
+
+Dit maakt ook een block scoped variabele, maar die waarde kan niet worden veranderd.
