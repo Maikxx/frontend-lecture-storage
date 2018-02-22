@@ -1086,3 +1086,522 @@ a < b;	// false
 Dit wordt false, omdat beide variabelen omgezet worden tot [object Object], waardoor ze gelijk zijn aan elkaar en dus niet minder.
 
 <= wordt in JS vaak gezien als not greater than.
+
+## You don't know JS - Types & Grammar - H5
+
+**Grammar**: Hoe de JS taal syntax werkt. Het beschrijft de regels over hoe een taal werkt.
+
+**Expression** en **statement** zijn niet hetzelfde.
+Statements zijn volledige zinnen en expressions zijn delen van zinnen, regels. Operators zijn de samenvoegingen tussen regels.
+
+Een statement bevat expressions.
+Als je een waarde ergens aan toewijst, heet dat een **declaration statement**.
+A = 3 * 6 is een voorbeeld van een **assignment expression**. Deze zijn altijd zonder het var keyword.
+Als je alleen een expressie hebt, heet dat een **expression statement**.
+
+Je krijgt undefined bij het verklaren van een variabele in de console, omdat het zo in de spec staat.
+
+**REPL**: Read, evaluate, print, loop tool.
+
+### Statement completion values
+
+De completion value van een statement is bijna als een impliciete return van het laatste statement waarde in het block. Om dit op een normale manier wel op te kunnen vangen, kun je:
+
+* Eval gebruiken (doe dit niet).
+* ES7 do expression.
+
+```js
+var a, b;
+
+a = do {
+	if (true) {
+		b = 4 + 38;
+	}
+};
+
+a;	// 42
+```
+
+Hier voert do een block uit (met een of meerdere statements erin) en de laatste statement completion value van de do expression kan aan een variabele worden toegewezen.
+
+### Expression side effects
+
+De meeste statements hebben geen onverwachte side effects.
+Vaak hebben functie calls wel mogelijke bijeffecten.
+
+```js
+var a = 42;
+var b = a++;
+
+a;	// 43
+b;	// 42
+```
+
+++ en - - kunnen beide worden gebruikt als **postfix** (na) en **prefix** (voor).
+Als het in de prefix versie wordt gebruikt, gebeurt het side effect voordat de waarde is gereturned.
+Het side effect verdwijnt niet als je het in ( ) wrapt.
+
+, = **Statement-series comma operator**.
+
+```js
+var a = 42, b;
+b = ( a++, a );
+
+a;	// 43
+b;	// 43
+```
+
+Dit betekent: de tweede expressie (a) zal worden uitgevoerd, nadat het after side effect van a++ is gebeurt.
+
+**delete** wordt gebruikt om properties van objecten te halen.
+Het resultaat van het succesvol verwijderen van iets, is true als het lukt en false als het niet lukt.
+Het side effect hiervan is, dat het een property verwijderd.
+
+Van een assignment statement is het directe resultaat dat de waarde die eraan toe wordt gewezen, wordt gelogd en het neven effect is dat het ook echt wordt toegewezen.
+
+```js
+Var a, b, c;
+A = b = c = 42;
+```
+
+C = 42 wordt eerst uitgevoerd, gevolgd door b = 42, gevolgd door a = 42.
+Let op dat je niet var a = b = c = 42 doet, want dat kan niet.
+
+### Contextual rules
+
+```js
+Var a = {
+	foo: bar( )
+};
+```
+
+Hier is a een **l-value**, omdat het het eindpunt is van de assignment.
+De curly braces is de **r-value**.
+
+```js
+{
+	foo: bar( )
+} // Dit is een standalone block.
+```
+
+Het is valide JS. En foo: bar( ) is een **labeled statement**. Dit is een soort van **goto**, wat volgens vele een hele slechte manier van coden is.
+JS heeft **labeled jumps**. Het betekent niet letterlijk ga hierheen, maar meer dat het hier iets mee moet doen.
+
+```js
+// `foo` labeled-loop
+foo: for (var i=0; i<4; i++) {
+	for (var j=0; j<4; j++) {
+		if ((i * j) >= 3) {
+			console.log( "stopping!", i, j );
+			// break out of the `foo` labeled loop
+			break foo;
+		}
+
+		console.log( i, j );
+	}
+}
+// 0 0
+// 0 1
+// 0 2
+// 0 3
+// 1 0
+// 1 1
+// 1 2
+// stopping! 1 3
+```
+
+Statement labels kunnen geen quotes om zich heen hebben, zoals dat bij JSON wel zo is.
+**JSON-P**: Het wrappen van JSON data in een functie. Het zorgt er voor dat JSON valide JS syntax wordt.
+
+### Blocks
+
+```js
+[] + {}; // "[object Object]"
+{} + []; // 0
+```
+
+### Object Destructuring
+
+Een andere plek waar je {} tegenkomt is bij een destructuring assignment.
+
+```js
+function getData() {
+	// ..
+	return {
+		a: 42,
+		b: "foo"
+	};
+}
+
+var { a, b } = getData();
+
+console.log( a, b ); // 42 “foo"
+```
+
+Het kan ook gebruikt worden voor het direct deconstructen van objecten als parameters in functies:
+
+```js
+function foo({ a, b, c }) {
+	// no need for:
+	// var a = obj.a, b = obj.b, c = obj.c
+	console.log( a, b, c );
+}
+
+foo( {
+	c: [1,2,3],
+	a: 42,
+	b: "foo"
+} );	// 42 "foo" [1, 2, 3]
+```
+
+### Else if and optional blocks
+
+In JS is er geen else if, maar doordat je met een if en else de {} kan omzeilen, wordt else if geldige syntax. Under the hood wordt het omgezet tot slechts if else chains genest.
+
+### Operator precedence
+
+De , operator heeft de laagste presedence.
+Het chainen van verschillende operators achter elkaar is iets wat heel vaak gebeurd.
+&& heeft de hoogste presedence, gevolgt door ||.
+
+### Short circuited
+
+Dit betekent en komt voor als een van de twee operatoren (&& of ||) de linker operand als genoege neemt om de uitkomt van de operation te weergeven.
+
+### Tighter binding
+
+De ternary operator heeft minder precedence dan de && of ||. De laatste twee *binden dus hechter*.
+
+Operators zijn óf **links-associatief** of **rechts-associatief**. Dit slaat op de manier of groeperen wordt toegepast op basis van links naar rechts.
+&& is links-associatief, net als ||.
+Rechts associativiteit heeft niks te maken met rechts-naar-links evaluatie van de code. Het betekent het groeperen van rechts naar links.
+
+De ternary operator is rechts-associatief.
+
+```js
+true ? false : true ? true : true;		// false
+
+true ? false : (true ? true : true);	// false
+(true ? false : true) ? true : true;	// true
+```
+
+Ook de = operator is rechts-associatief.
+
+```js
+var a, b, c;
+
+a = b = c = 42;
+```
+
+### Disambiguation
+
+Je moet beide operator presedence en handmatig groeperen ( ) in je programma’s mixen. Gebruik handmatig groeperen als je verwarring moet verminderen en duidelijkheid moet scheppen.
+
+### Automatic semicolons
+
+**ASI**: Automatic Semicolon Insertion. Dit betekent het vervangen van vergeten semicolons op plekken waar het wel nodig is.
+Dit gebeurt, omdat als je één semicolon zou vergeten en het dit niet zou doen, je hele programma zou falen.
+ASI gebeurt alleen als er sprake is van een *newline*.
+
+ASI komt ook voor:
+
+* Na do … while (a)
+* Break
+* Continue
+* Return -> Als je multiline wilt returnen, moet je het wrappen in ( ).
+* ES6 yield
+
+### Error correction
+
+Bijna alle semicolons zijn optioneel, behalve die in de for.
+ASI is een **error correction routine**, met als error **parser error**.
+Gebruik gewoon zo veel mogelijk wel semicolons, waar ze nodig zijn.
+
+### Errors
+
+**Early errors**: Errors die gebeuren tijdens het compilen, hieronder vallen ook grammatische fouten.
+Doordat ze niet gevonden kunnen worden in het executen van je code, kan je ze niet catchen.
+
+Early errors:
+
+* Invalide regular expressions.
+* Waardes aan de linker kant van een assignment operation.
+* Duplicate functie parameter namen.
+* Object literal met twee keer dezelfde naam.
+
+Technisch gezien zijn dit niet echt syntax errors, maar meer **grammar errors**, maar omdat dat type error niet bestaat, wordt een **SyntaxError** teruggegeven.
+
+### Using variables too early
+
+ES6 heeft een nieuw concept mogelijk gemaakt: **TDZ** (Temporal Dead Zone).
+Dit slaat op een plek in de code, waar de variabele referentie nog niet gemaakt kan worden, omdat het nog niet zijn vereiste initialisatie heeft bereikt.
+
+Het duidelijkste voorbeeld komt uit ES6 let block-scoping:
+
+```js
+{
+	a = 2;		// ReferenceError!
+	let a;
+}
+```
+
+Er zit een duidelijk verschil in een variabele die helemaal niet in een block is verklaard en een variabele die wel verklaard is, maar nog niet tot de initialisatie is gekomen. (**undefined vs ReferenceError**).
+
+### Function arguments
+
+Je kan ook de TDZ fout krijgen, als je in een functie in de default parameters een variabele van buiten aan een parameter assignt.
+
+```js
+function foo( a = 42, b = a + 1 ) {
+	console.log( a, b );
+}
+
+foo();					// 42 43
+foo( undefined );		// 42 43
+foo( 5 );				// 5 6
+foo( void 0, 7 );		// 42 7
+foo( null );			// null 1
+```
+
+Null wordt omgezet in het cijfer 0 als je null + 1 doet.
+Bij een **default parameter** in ES6 is er geen onderscheid tussen undefined en het niet meegeven van een waarde aan die parameter.
+Je kan wel zien of er een undefined wordt meegegeven door te checken via arguments[waarde waar je undefined zou verwachten].
+
+```js
+function foo(a) {
+	a = 42;
+	console.log( arguments[0] );
+}
+
+foo( 2 );	// 42 (linked)
+foo();		// undefined (not linked)
+```
+
+In het voorbeeld hierboven zijn de meegegeven arguments slot (arguments[x]) en de benaamde parameter gelinkt aan dezelfde waarde. In strict mode werkt dit echter ook niet.
+
+### try…finally
+
+De code in het finally block zal altijd lopen, zelfs als er een error is. Het wordt altijd na try en catch gebruikt. Het lijkt op een callback functie, die altijd aangeroepen wordt.
+
+```js
+function foo() {
+	try {
+		return 42;
+	}
+	finally {
+		console.log( "Hello" );
+	}
+
+	console.log( "never runs" );
+}
+
+console.log( foo() );
+// Hello
+// 42
+
+function foo() {
+	try {
+		return 42;
+	}
+	finally {
+		throw "Oops!";
+	}
+
+	console.log( "never runs" );
+}
+
+console.log( foo() );
+// Uncaught Exception: Oops!
+```
+
+**Yield** kan worden gezien als een directe return statement. Echter, niet zoals een return, is een yield niet compleet totdat de generator is hervat. Finally zal niet direct na een try block lopen, met daarin een yield.
+
+Als er een return is gezet in een finally block, zal deze de return van een try overschrijven. Je moet hiervoor wel expliciet return aanroepen.
+
+### Switch
+
+Als er in een switch een case matcht, zal dit block beginnen executen, totdat het een break tegenkomt of het eind van het switch block.
+
+```js
+var a = "42";
+
+switch (true) {
+	case a == 10:
+		console.log( "10 or '10'" );
+		break;
+	case a == 42:
+		console.log( "42 or '42'" );
+		break;
+	default:
+		// never gets here
+}
+// 42 or ’42'
+```
+
+In dit geval moet bijvoorbeeld a == 10 gelijk zijn aan true.
+
+```js
+var a = "hello world";
+var b = 10;
+
+switch (true) {
+	case (a || b == 10):
+		// never gets here
+		break;
+	default:
+		console.log( "Oops" );
+}
+// Oops
+```
+
+Als je wilt dat het bovenstaande voorbeeld werkt moet je (a || b == 10) expliciet naar een boolean omzetten door er !! Voor te zetten.
+
+```js
+switch (a) {
+	case 1:
+	case 2:
+		// never gets here
+	default:
+		console.log( "default" );
+	case 3:
+		console.log( "3" );
+		break;
+	case 4:
+		console.log( "4" );
+}
+// default
+// 3
+```
+
+In dit geval kijkt de switch eerst of er een match is (die is er niet), vervolgens gaat deze terug naar de top en komt een default en een break (in case 3) tegen die die allebei uitvoert.
+
+## You don't know JS - Scopes & Closures - Hoofdstuk 2
+
+**Scope**: Een set regels, die leidend zijn voor hoe de Engine verschillende variabelen kan opzoeken met hun naam. Deze kan dan gevonden worden in de huidige scope, of in de geneste scopes waar deze call vandaan komt.
+
+Twee manieren om met scopes om te gaan:
+
+* Lexical Scope - Wordt het meest gebruikt.
+* Dynamic Scope.
+
+### Lex-time
+
+De eerste stap in een traditionele fase van een standaard taal compiler, heet **lexing**.
+
+**Lexical scope** is een scope die wordt gezet tijdens het lexing. Het wordt bepaald door de manier waarop jij je code schrijft en is eigenlijk altijd vast als het lexing bereikt.
+
+```js
+function foo(a) {
+
+	var b = a * 2;
+
+	function bar(c) {
+		console.log( a, b, c );
+	}
+
+	bar(b * 3);
+}
+
+foo( 2 ); // 2 4 12
+```
+
+In dit voorbeeld zitten drie scopes, globale scope, foo’s inner scope met de waarde a meegenomen, en bar’s inner scope met de waarde c meegenomen. Deze scopes kunnen worden gezien als scope bubbles.
+
+Deze bubbles zijn bepaald, door waar de scope blocks zijn geschreven.
+Elke functie maakt een nieuwe bubble van scope.
+
+### Look-ups
+
+Als er twee variabelen met dezelfde naam binnen het bereik van de look-up zitten, pakt het altijd de dichtstbijzijnde. Als dezelfde naam op meerdere levels voorkomt, heet dat shadowing.
+
+Globale variabelen zijn ook automatisch properties van het globale object, dus het is mogelijk om waardes niet alleen te refereren met hun lexicale naam, maar ook indirect als property van het globale object.
+
+Het maakt niet uit waar je de functie vandaan aanroept of hoe, de lexicale scope is alleen bepaald door de plek waar deze is verklaard.
+
+### Cheating lexical
+
+Als je de lexicale scope faket, zal dit leiden tot veel slechtere performance.
+
+**Eval**
+Deze functie neemt een string als argument en behandeld vervolgens de content van de string alsof het geschreven is op dat moment in het programma.
+
+```js
+function foo(str, a) {
+	eval( str ); // cheating!
+	console.log( a, b );
+}
+
+var b = 2;
+
+foo( "var b = 3;", 1 ); // 1 3
+```
+
+In dit geval zal er in foo een nieuwe variabele b worden aangemaakt, die de globale b overshadowt.
+
+Als je in strict mode zit, zal eval in zijn eigen lexicale scope werken. In dit geval zullen veranderingen die in eval gedaan worden, niet de omringende scope van waar deze is aangeroepen, aanpassen.
+
+Andere dingen in JS, die ongeveer hetzelfde doen:
+
+* setInterval
+* setTimeout
+* Function constructor
+
+**With**
+Dit is een depricated kenmerk van JS.
+With wordt normaal gezien als een short-hand voor het maken van meerdere property references tegen een object, zonder het object steeds opnieuw te refereren.
+
+```js
+var obj = {
+	a: 1,
+	b: 2,
+	c: 3
+};
+
+// more "tedious" to repeat "obj"
+obj.a = 2;
+obj.b = 3;
+obj.c = 4;
+
+// "easier" short-hand
+with (obj) {
+	a = 3;
+	b = 4;
+	c = 5;
+}
+```
+
+Het bovenstaande ziet er logisch uit, maar er gaat wel een hoop fout achter de schermen:
+
+```js
+function foo(obj) {
+	with (obj) {
+		a = 2;
+	}
+}
+
+var o1 = {
+	a: 3
+};
+
+var o2 = {
+	b: 3
+};
+
+foo( o1 );
+console.log( o1.a ); // 2
+
+foo( o2 );
+console.log( o2.a ); // undefined
+console.log( a ); // 2 -- Oops, leaked global!
+```
+
+With maakt een hele nieuwe lexicale scope uit het niets.
+Doordat er geen variabele a in het tweede object zit dat meegegeven werd, wordt er een globale variabele a aangemaakt.
+Deze functie is in strict mode niet meer toegestaan.
+
+### Performance
+
+Als de engine with of eval tegenkomt, moet deze gaan gokken, of al de locaties van de variabelen wel correct zijn.
+Dit zorgt ervoor dat de engine helemaal geen performance optimalizations meer doet.
+
+Gebruik deze twee manieren niet.
