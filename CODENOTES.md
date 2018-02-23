@@ -1613,6 +1613,7 @@ Gebruik deze twee manieren niet.
 Een functie is een manier om een scope te maken. Dingen die in deze scope zijn gedefineerd zijn daarbuiten niet beschikbaar. Met dit patroon maak je goed gebruik van de dynamische aard van JS variabelen.
 
 ### Hiding in plain scope
+
 Je kan code verstoppen door een functie eromheen te zetten.
 
 Waarom je dit zou doen komt voort uit **Principles of Least Privilege**, ofwel **Least Authority**, of **Least Exposure**. De reden: verstop alles, behalve dat wat nodig is om je API werkend te krijgen voor mensen die het gebruiken.
@@ -1729,3 +1730,110 @@ Let bindt zich aan artibraire blocks code in plaats van functie scopes of global
 ### Const
 
 Dit maakt ook een block scoped variabele, maar die waarde kan niet worden veranderd.
+
+## You don't know JS - Scopes & Closures - Hoofdstuk 4 - Hoisting
+
+Iedere variabele verklaard in een scope is verbonden met die scope.
+
+### Chicken or the egg?
+
+Je JS programma wordt uitgevoerd van **top-to-bottom**, echter is er één ding dat fout denken over je programma kan opleveren.
+
+```js
+a = 2;
+
+var a;
+
+console.log( a ); // 2
+
+//////////////////////
+
+console.log( a );
+
+var a = 2; // undefined
+```
+
+Wat komt er eerder, de kip (assignment) of het ei (declaration)?
+
+### The compiler strikes again
+
+Alle verklaringen, van variabelen en functies, zullen als eerst worden uitgevoerd in je code.
+
+Var a = 2 lijkt alsof het één statement is, maar het wordt door de compiler opgedeeld in twee delen: var a en a = 2.
+
+Het eerste deel van de statement (declaration) wordt verwerkt tijdens de compilation phase, terwijl het tweede deel van de statement (assignment) wordt op zijn plaats gelaten tot de execution phase.
+
+Het tweede voorbeeld is dus eigenlijk:
+
+```js
+console.log( a );
+
+a = 2;
+```
+
+Vandaar dat er een undefined wordt gegeven.
+
+Variabele en functie verklaringen (var a) worden naar het bovenste deel van de code in de huidige scope geplaatst, vandaar de naam hoisting.
+De declaration komt dus eerder dan de assignment.
+
+Hoisting gebeurt dus per scope.
+
+**Function declarations** worden gehoist, maar **function expressions** niet.
+
+```js
+foo(); // not ReferenceError, but TypeError!
+
+var foo = function bar() {
+	// ...
+};
+```
+
+In dit geval wordt foo losgehaald van de expression en boven de executing declaration gezet, waardoor er een functie call gedaan wordt op undefined en dat levert een TypeError op.
+
+### Functions first
+
+Functions worden als eerst gehoist, gevolgd door de variabelen.
+
+```js
+foo(); // 1
+
+var foo;
+
+function foo() {
+	console.log( 1 );
+}
+
+foo = function() {
+	console.log( 2 );
+};
+
+//////////////////////////
+
+function foo() {
+	console.log( 1 );
+}
+
+foo(); // 1
+
+foo = function() {
+	console.log( 2 );
+};
+```
+
+Doordat in dit geval in de bovenste code var foo een duplicate was, werd deze genegeerd, zelfs terwijl het voor de functie verklaring kwam. Dit werkt, omdat functies dus hoger in de rangorde staan als het om hoisting gaat.
+
+Als je echter meer functies on elkaar hebt met dezelfde naam, dan zal deze echter wel de eerste variant overschrijden.
+
+```js
+foo(); // "b"
+
+var a = true;
+if (a) {
+   function foo() { console.log( "a" ); }
+}
+else {
+   function foo() { console.log( "b" ); }
+}
+```
+
+Je kan beter functies in blocks vermijden.
