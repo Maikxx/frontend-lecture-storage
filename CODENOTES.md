@@ -1837,3 +1837,263 @@ else {
 ```
 
 Je kan beter functies in blocks vermijden.
+
+## You don't know JS - Scopes & Closures - Hoofdstuk 4 - Scope Closures
+
+**Closures** zijn overal in JS en je moet ze kunnen herkennen en er mee om gaan.
+Closures zijn een resultaat van het schrijven van code, dat vertrouwt op de **lexical scope**.
+
+### Nitty Gritty
+Een closure betekent: Het herinneren en toegang hebben tot de lexicale scope van een functie, terwijl die functie wordt uitgevoerd buiten diens lexical scope.
+
+De lookup rules van de lexical scope zijn slecht een (belangrijk) deel van closure, maar het is niet het enige.
+
+Als iets over de scope van een ander iets ‘closes’ dan heeft het eerste iets een closure over de scope van het andere iets.
+
+```js
+function foo() {
+	var a = 2;
+
+	function bar() {
+		console.log( a );
+	}
+
+	return bar;
+}
+
+var baz = foo();
+
+baz(); // 2 -- Whoa, closure was just observed, man.
+```
+
+In dit geval wordt bar aangeroepen buiten de lexical scope, waar hij in is verklaard, omdat je het als waarde meegeeft aan de baz variabele.
+
+Omdat bar nog een referentie heeft naar de scope, nadat het is uitgevoerd (omdat het via een variabele is meegegeven) zal deze niet worden garbage collected. Deze referentie is een closure.
+
+Closure zorgt ervoor dat functies toegang behouden tot de lexicale scope, zoals deze was bepaald tijdens author-time.
+
+Iedere manier waarop inner functions meegegeven worden aan een scope buiten hun eigen lexical scope, zal de binnenste functie toegang houden tot de originele waardes van de lexicale scope en zal de closure blijven bestaan.
+
+Een **IIFE** wordt niet uitgevoerd buiten zijn lexicale scope, waardoor er vaak geen closure zichtbaar is.
+
+### Loops + Closure
+
+```js
+for (var i=1; i<=5; i++) {
+	setTimeout( function timer(){
+		console.log( i );
+	}, i*1000 );
+}
+```
+
+In dit geval wordt ‘6’ vijf keer uitgeprint in de console. Dit komt omdat de ‘uitvoerende condition’ van de loop is, wanneer i niet minder is dan of gelijk aan 5. De eerste keer dat dat het geval is, is als i ‘6’ is.
+
+Alle functies in de for loop worden wel apart aangemaakt, maar ze hebben allemaal closure over de gedeelde globale scope, die slechts één i in zich heeft.
+
+In dit geval heb je een nieuwe closure nodig voor iedere iteratie van de loop.
+
+Als je hier een lege IIFE omheen zet, werkt het alsnog niet, omdat het dan iedere keer alsnog dezelfde i pakt, echter als je var j = i boven de setTimeout in deze functie zet, werkt het wel.
+
+### Block Scoping Revisited
+In het bovenstaande voorbeeld had je een per-iteration block scope nodig om het op te lossen.
+
+Let veranderd als het ware een block in een scope waar we closure over hebben. Om die reden werkt de volgende code wel, ten opzichte van de vorige bovenstaande gevallen:
+
+```js
+for (var i=1; i<=5; i++) {
+	let j = i; // yay, block-scope for closure!
+	setTimeout( function timer(){
+		console.log( j );
+	}, j*1000 );
+}
+```
+
+Het kan zelfs nog makkelijk worden gemaakt met JS, doordat er speciaal gedrag is vastgesteld voor let in het hoofd van een for-loop. Als je hier namelijk let gebruikt, zal dit aangeven dat je de variabele niet slechts één keer wilt verklaren voor de hele loop, maar voor iedere iteratie.
+
+```js
+for (let i=1; i<=5; i++) {
+	setTimeout( function timer(){
+		console.log( i );
+	}, i*1000 );
+}
+```
+
+### Modules
+Er zijn nog meer code patronen, die de kracht van closures omarmen, maar aan het oppervlak geen schijn van callbacks tonen, hiervan is de meest bekende en krachtigste het module patroon. De meest bekende vorm binnen het module pattern is de revealing module.
+
+```js
+function CoolModule() {
+	var something = "cool";
+	var another = [1, 2, 3];
+
+	function doSomething() {
+		console.log( something );
+	}
+
+	function doAnother() {
+		console.log( another.join( " ! " ) );
+	}
+
+	return {
+		doSomething: doSomething,
+		doAnother: doAnother
+	};
+}
+
+var foo = CoolModule();
+
+foo.doSomething(); // cool
+foo.doAnother(); // 1 ! 2 ! 3
+```
+
+De bovenstaande CoolModule( ) is slechts een functie, die moet worden aangeroepen, zodat er een module instance wordt gemaakt.
+
+Hetgeen wat hierboven wordt gereturnt kan worden gezien als de public API van de module, aangezien deze gereturnde waardes geen toegang geven tot de privé variabelen.
+
+De innerlijke functies hebben closure over de binnenste scope van de instance van de module, doordat deze wordt aangeroepen en dus ergens anders beschikbaar worden.
+
+Vereisten module pattern:
+Er moet een omringende functie zijn, die wordt aangeroepen, ten minste één keer.
+De omringende functie moet tenminste één binnenste functie returnen, zodat deze functie closure heeft over de privé scope en toegang heeft tot en/of de privé state kan aanpassen.
+
+De bovenstaande code maakt het niet uit hoeveel module instanties ervan afstammen. Als een module daar wel om geeft heet het een singleton.
+
+```js
+var foo = (function CoolModule() {
+	var something = "cool";
+	var another = [1, 2, 3];
+
+	function doSomething() {
+		console.log( something );
+	}
+
+	function doAnother() {
+		console.log( another.join( " ! " ) );
+	}
+
+	return {
+		doSomething: doSomething,
+		doAnother: doAnother
+	};
+})();
+
+foo.doSomething(); // cool
+foo.doAnother(); // 1 ! 2 ! 3
+```
+
+In het bovenstaande geval is de module omgezet tot IIFE, die direct wordt uitgevoerd en aan een variabele wordt meegegeven.
+
+Modules zijn functies, dus ze kunnen parameters meekrijgen.
+
+Een andere krachtige, kleine, variatie op een singleton is door een benoemd object te returnen met de naam publicAPI.
+
+```js
+var foo = (function CoolModule(id) {
+	function change() {
+		// modifying the public API
+		publicAPI.identify = identify2;
+	}
+
+	function identify1() {
+		console.log( id );
+	}
+
+	function identify2() {
+		console.log( id.toUpperCase() );
+	}
+
+	var publicAPI = {
+		change: change,
+		identify: identify1
+	};
+
+	return publicAPI;
+})( "foo module" );
+
+foo.identify(); // foo module
+foo.change();
+foo.identify(); // FOO MODULE
+```
+
+Doordat hier een referentie tot de public API wordt behouden kun je van die instance, van binnen uit dingen veranderen, zoals het toevoegen of verwijderen van methodes, properties en diens waardes.
+
+### Modern Modules
+Veel dependency loaders/managers verpakken dit module verklaringspatroon in een vriendelijke API. Het werkt als volgt:
+
+```js
+var MyModules = (function Manager() {
+	var modules = {};
+
+	function define(name, deps, impl) {
+		for (var i=0; i<deps.length; i++) {
+			deps[i] = modules[deps[i]];
+		}
+		modules[name] = impl.apply( impl, deps );
+	}
+
+	function get(name) {
+		return modules[name];
+	}
+
+	return {
+		define: define,
+		get: get
+	};
+})();
+```
+
+In het bovenstaande geval is dit belangrijk:
+
+```js
+modules[name] = impl.apply(impl, deps)
+```
+
+Dit voert de functie (die meegegeven wordt) uit, met de dependencies als parameter(s). Vervolgens wordt de gereturnde waarde opgeslagen (de API van die module) in een interne lijst van modules die worden gevolgd per naam.
+
+Vervolgens kunnen er dingen mee gedaan worden op de volgende manier:
+
+```js
+MyModules.define( "bar", [], function(){
+	function hello(who) {
+		return "Let me introduce: " + who;
+	}
+
+	return {
+		hello: hello
+	};
+} );
+
+MyModules.define( "foo", ["bar"], function(bar){
+	var hungry = "hippo";
+
+	function awesome() {
+		console.log( bar.hello( hungry ).toUpperCase() );
+	}
+
+	return {
+		awesome: awesome
+	};
+} );
+
+var bar = MyModules.get( "bar" );
+var foo = MyModules.get( "foo" );
+
+console.log(
+	bar.hello( "hippo" )
+); // Let me introduce: hippo
+
+foo.awesome(); // LET ME INTRODUCE: HIPPO
+```
+
+### Future Modules
+Met de nieuwe ES6 module syntax, kan je je JS opdelen in files en al deze losse files worden als modules behandeld. Iedere module kan dingen importeren, net als exporteren.
+
+**Statically recognized pattern**: Iets waar de compiler iets van begrijpt.
+
+**ES6 Module API’s** zijn statisch (de API’s veranderen niet tijdens het uitvoeren van de code). Aangezien de compiler dat weet, kan en zal deze tijdens het compilen kijken of de referentie naar de gemaakte geïmporteerde module API ook echt bestaat.
+
+ES6 modules hebben geen inline variant, dus als je ze wilt gebruiken moet je ze allemaal los in aparte files zetten. Doordat de browsers een module loader hebben, zullen de files geïmporteerd worden in de volgorde waarop ze zijn aangegeven.
+
+import x from “y” haalt een deel van een module op, terwijl module x from “x” de hele api van die module ophaalt.
+
+De inhoudt van een module file wordt behandeld, alsof er een omringende scope closure omheen ligt, zoals at bij functie-closure modules ook zo is.
