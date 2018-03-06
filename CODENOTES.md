@@ -2097,3 +2097,166 @@ ES6 modules hebben geen inline variant, dus als je ze wilt gebruiken moet je ze 
 import x from “y” haalt een deel van een module op, terwijl module x from “x” de hele api van die module ophaalt.
 
 De inhoudt van een module file wordt behandeld, alsof er een omringende scope closure omheen ligt, zoals at bij functie-closure modules ook zo is.
+
+## You don't know JS - This & Object Prototypes - Hoofdstuk 1 - This or That?
+
+**This**: Een speciaal identifier keyword, dat automatisch wordt bepaald in de scope van iedere functie.
+
+### Why this?
+
+```js
+function identify() {
+	return this.name.toUpperCase();
+}
+
+function speak() {
+	var greeting = "Hello, I'm " + identify.call( this );
+	console.log( greeting );
+}
+
+var me = {
+	name: "Kyle"
+};
+
+var you = {
+	name: "Reader"
+};
+
+identify.call( me ); // KYLE
+identify.call( you ); // READER
+
+speak.call( me ); // Hello, I'm KYLE
+speak.call( you ); // Hello, I'm READER
+```
+
+Zonder `this`:
+
+```js
+function identify(context) {
+	return context.name.toUpperCase();
+}
+
+function speak(context) {
+	var greeting = "Hello, I'm " + identify( context );
+	console.log( greeting );
+}
+
+identify( you ); // READER
+speak( me ); // Hello, I'm KYLE
+```
+
+This zorgt voor een elegantere manier van het doorgeven van referenties naar objecten. Dit leidt weer tot een schonere API en het makkelijker hergebruiken van functies.
+
+### Itself
+
+This refereert niet naar de functie zelf.
+Je kan **state** opslaan (als waardes in properties van een functie).
+
+Veel developers vallen terug op een ander mechanisme als ze niet snappen waarom het onderstaande niet werkt, zoals ze willen.
+
+```js
+function foo(num) {
+	console.log( "foo: " + num );
+
+	// keep track of how many times `foo` is called
+	this.count++;
+}
+
+foo.count = 0;
+
+var i;
+
+for (i=0; i<10; i++) {
+	if (i > 5) {
+		foo( i );
+	}
+}
+// foo: 6
+// foo: 7
+// foo: 8
+// foo: 9
+
+// how many times was `foo` called?
+console.log( foo.count ); // 0 -- WTF?
+```
+
+De oplossing is ook niet per se, om de naam van de functie te gebruiken als this (het kan wel, maar dan moet je functie wel altijd een naam hebben):
+
+```js
+function foo() {
+	foo.count = 4; // `foo` refers to itself
+}
+
+setTimeout( function(){
+	// anonymous function (no name), cannot
+	// refer to itself
+}, 10 );
+```
+
+Wat wel werkt, is .call() te gebruiken:
+
+```js
+function foo(num) {
+	console.log( "foo: " + num );
+
+	// keep track of how many times `foo` is called
+	// Note: `this` IS actually `foo` now, based on
+	// how `foo` is called (see below)
+	this.count++;
+}
+
+foo.count = 0;
+
+var i;
+
+for (i=0; i<10; i++) {
+	if (i > 5) {
+		// using `call(..)`, we ensure the `this`
+		// points at the function object (`foo`) itself
+		foo.call( foo, i );
+	}
+}
+// foo: 6
+// foo: 7
+// foo: 8
+// foo: 9
+
+// how many times was `foo` called?
+console.log( foo.count ); // 4
+```
+
+### Its scope
+
+Veel andere mensen denken dat `this` verwijst naar de scope van de functie. Dit is deels, maar niet volledig waar.
+
+Het verwijst **niet** niet naar de **lexical scope** van de functie.
+
+```js
+function foo() {
+	var a = 2;
+	this.bar();
+}
+
+function bar() {
+	console.log( this.a );
+}
+
+foo(); //undefined
+```
+
+In dit bovenstaande voorbeeld gaan meerdere dingen mis, ten eerste dat this.bar() wordt aangeroepen (wat overigens wel lukt), om vervolgens te falen bij het loggen van this.a.
+
+Je kan this niet gebruiken om in de lexicale scope iets op te zoeken.
+
+### What's this?
+
+This heeft niks te maken met waar de functie is verklaard, maar juist de manier waarop deze wordt aangeroepen.
+
+Als een functie wordt aangeroepen, wordt er een **activation record** of **execution context** aangemaakt. Deze bevat informatie over:
+
+* **Waar** de functie **vandaan** is aangeroepen (**call-stack**)
+* **Hoe** de functie is aangeroepen
+* Welke parameters er werden meegegeven
+* Etcetera
+
+Hierin staat ook een waarde van de 'this' reference, die voor de levensduur van de functie geldt.
