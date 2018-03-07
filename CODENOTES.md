@@ -2451,7 +2451,7 @@ Als het om this binding gaat, gedragen beide methodes (call en apply) zich hetze
 
 Dit zorgt er nog niet voor dat een functie diens bedoelde this binding verliest.
 
-### Hard binding
+##### Hard binding
 
 ```js
 function foo() {
@@ -2522,3 +2522,237 @@ var bar = bind( foo, obj );
 var b = bar( 3 ); // 2 3
 console.log( b ); // 5
 ```
+
+Dit patroon is zo standaard geworden dat sinds ES5 er een ingebouwde functie in is gebouwd: **Function.prototype.bind**.
+
+```js
+function foo(something) {
+	console.log( this.a, something );
+	return this.a + something;
+}
+
+var obj = {
+	a: 2
+};
+
+var bar = foo.bind( obj );
+
+var b = bar( 3 ); // 2 3
+console.log( b ); // 5
+```
+
+##### API Call 'Contexts'
+
+Veel API's hebben een optionele parameter, met de **context** van this, zodat bind() niet gebruikt hoeft te worden.
+
+```js
+function foo(el) {
+	console.log( el, this.id );
+}
+
+var obj = {
+	id: "awesome"
+};
+
+// use `obj` as `this` for `foo(..)` calls
+[1, 2, 3].forEach( foo, obj ); // 1 awesome  2 awesome  3 awesome
+```
+
+### new Binding
+
+In class-oriented languages, zijn constructors speciale methodes op classes die die functie uitvoeren als de class wordt aangeroepen met **new**.
+
+De JS syntax lijkt hetzelfde, maar het is achter de schermen totaal niet zo.
+
+**constructors** zijn functies die worden aangeroepen met het new keyword voor zich.
+
+Ze zijn niet verbonden aan classes, en ze vormen een class ook niet. Het zijn geen eens speciale functies.
+
+Elke functie met **new** ervoor kan worden gezien als **constructor call**.
+
+Als een functie wordt aangeroepen met new ervoor, dus een constructor call wordt gedaan, dan gebeuren de volgende dingen automatisch:
+1. Een nieuw object wordt gemaakt.
+2. Het nieuwe object wordt via prototype gelinkt.
+3. Het nieuwe object wordt gezet als **this** voor die functie call.
+4. Tenzij de functie een alternatief object returnt, zal de new-aangeroepen functie automatisch het nieuwe object returnen.
+
+```js
+function foo(a) {
+	this.a = a;
+}
+
+var bar = new foo( 2 );
+console.log( bar.a ); // 2
+```
+
+### Everything in order
+
+Als meerdere van de bovenstaande regels gelden voor function binding, heeft **default binding** altijd de laagste prioriteit.
+
+```js
+function foo() {
+	console.log( this.a );
+}
+
+var obj1 = {
+	a: 2,
+	foo: foo
+};
+
+var obj2 = {
+	a: 3,
+	foo: foo
+};
+
+obj1.foo(); // 2
+obj2.foo(); // 3
+
+obj1.foo.call( obj2 ); // 3
+obj2.foo.call( obj1 ); // 2
+```
+
+Zoals hier te zien is, heeft **explicit binding** meer voorang dan **implicit binding**.
+
+```js
+function foo(something) {
+	this.a = something;
+}
+
+var obj1 = {
+	foo: foo
+};
+
+var obj2 = {};
+
+obj1.foo( 2 );
+console.log( obj1.a ); // 2
+
+obj1.foo.call( obj2, 3 );
+console.log( obj2.a ); // 3
+
+var bar = new obj1.foo( 4 );
+console.log( obj1.a ); // 2
+console.log( bar.a ); // 4
+```
+
+Zoals hier te zien heeft **new binding** meer voorang dan **implicit binding**.
+
+new en call/apply zijn niet te combineren. Je kan wel **hard binding** gebruiken.
+
+**new binding** heeft meer voorang dan en zal dus **hard binding** overriden.
+
+Dit kan, omdat het handig kan zijn om hard binding te overriden:
+> The primary reason for this behavior is to create a function (that can be used with new for constructing objects) that essentially ignores the this hard binding but which presets some or all of the function's arguments. One of the capabilities of bind(..) is that any arguments passed after the first this binding argument are defaulted as standard arguments to the underlying function (technically called "partial application", which is a subset of "currying").
+
+```js
+function foo(p1,p2) {
+	this.val = p1 + p2;
+}
+
+// using `null` here because we don't care about
+// the `this` hard-binding in this scenario, and
+// it will be overridden by the `new` call anyway!
+var bar = foo.bind( null, "p1" );
+
+var baz = new bar( "p2" );
+
+baz.val; // p1p2
+```
+
+### Determining this
+
+1. Als de functie met new wordt aangeroepen, is `this` het nieuw gemaakte object.
+2. Als de functie aangeroepen wordt met call, apply of bind dan is `this` het meegegeven object.
+3. Als de functie met een context wordt aangeroepen, is `this` die context.
+4. Anders in strict mode undefined of de global object.
+
+### Binding exceptions
+
+#### Ignored this
+
+Als je null of undefined mee geeft aan een expliciete binding, zijn die waardes genegeerd en zal de default binding het overnemen.
+
+**Apply** kan worden gebruikt om arrays van waardes te spreaden in een functie call.
+**Bind** kan parameters **curryen** (standaard waardes zetten).
+
+```js
+function foo(a,b) {
+	console.log( "a:" + a + ", b:" + b );
+}
+
+// spreading out array as parameters
+foo.apply( null, [2, 3] ); // a:2, b:3
+
+// currying with `bind(..)`
+var bar = foo.bind( null, 2 );
+bar( 3 ); // a:2, b:3
+```
+
+Er zit echter een gevaar in het altijd gebruiken van undefined of null bij deze methodes, omdat als je het doet bij een library waar je geen controle over hebt, er wellicht 'per ongeluk' veranderingen aan het globale object worden gedaan.
+
+#### Safer this
+
+Het opzetten van objecten, voor `this`, zodat het geen problematische side-effects heeft voor je programma heet **DMZ** (De-Militarized Zone).
+
+Om dit te doen kan je dus gewoon een leeg object meegeven aan de bind functies. De beste manier om een heel leeg object te maken is met Object.create(null), omdat Object.prototype hier niet op zit.
+
+#### Indirection
+
+Je kan ook *indirecte referenties* maken naar functies, bewust of niet, en in die gevallen zullen de **default binding** regels worden toegepast.
+
+#### Softening binding
+
+**Hard-binding** verminderd de flexibiliteit van een functie aanzienlijk.
+**Soft-binding** een manier om alternatief gedrag te stellen voor **default binding**, terwijl het mogelijk blijft om `this bound` te kunnen worden, via impliciete of expliciete bindings.
+
+```js
+function foo() {
+   console.log("name: " + this.name);
+}
+
+var obj = { name: "obj" },
+    obj2 = { name: "obj2" },
+    obj3 = { name: "obj3" };
+
+var fooOBJ = foo.softBind( obj );
+
+fooOBJ(); // name: obj
+
+obj2.foo = foo.softBind(obj);
+obj2.foo(); // name: obj2   <---- look!!!
+
+fooOBJ.call( obj3 ); // name: obj3   <---- look!
+
+setTimeout( obj2.foo, 10 ); // name: obj   <---- falls back to soft-binding
+```
+
+#### Lexical this
+
+ES6 introduceert een nieuw soort functie, die niet de bovenstaande vier regels volgt: **arrow functions**.
+
+`=>` **fat-arrow operator**
+
+Arrow functions nemen `this` over van de enclosing scope (function of global).
+
+```js
+function foo() {
+	// return an arrow function
+	return (a) => {
+		// `this` here is lexically adopted from `foo()`
+		console.log( this.a );
+	};
+}
+
+var obj1 = {
+	a: 2
+};
+
+var obj2 = {
+	a: 3
+};
+
+var bar = foo.call( obj1 );
+bar.call( obj2 ); // 2, not 3!
+```
+
+In dit geval is foo bound aan obj1. bar zal dan ook this-bound zijn aan obj1, deze kan niet worden overschreven, zoals te zien is bij de laatste call, zelfs niet met new.
