@@ -2336,7 +2336,7 @@ Dit geldt echter alleen als de content van de foo function 'strict mode' aan hee
 
 Vaak kom je dit probleem niet tegen, want je hele code loopt óf in strict mode, of niet.
 
-### Implicit binding
+#### Implicit binding
 
 Heeft de call-site een **context object** of **owning / containing object**.
 
@@ -2377,7 +2377,7 @@ var obj1 = {
 obj1.obj2.foo(); // 42
 ```
 
-### Implicitly lost
+#### Implicitly lost
 
 Als een implicitly bound function de binding met **this** verliest, om vervolgens terug te vallen op **default binding**.
 
@@ -2425,7 +2425,7 @@ doFoo( obj.foo ); // "oops, global"
 
 Zelfs als de functie een ingebouwde JS functie is, zoals setTimeout(), geldt dit.
 
-### Explicit binding
+#### Explicit binding
 
 Als je een function call wilt dwingen om een bepaald object te gebruiken als **this** binding, zonder een property reference op een object te zetten.
 
