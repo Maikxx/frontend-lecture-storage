@@ -2260,3 +2260,265 @@ Als een functie wordt aangeroepen, wordt er een **activation record** of **execu
 * Etcetera
 
 Hierin staat ook een waarde van de 'this' reference, die voor de levensduur van de functie geldt.
+
+## You don't know JS - This & Object Prototypes - Hoofdstuk 2 - This all makes sense now!
+
+This binding is volledig afhankelijk van de **call-site** (Hoe de functie is aangeroepen).
+
+### Call-site
+
+Dit is de locatie van waar de functie vandaan is aangeroepen,niet waar die functie verklaard is.
+
+Het is belangrijk om over de **call-stack** (de functies die zijn aangeroepen tot op dit moment) na te denken.
+
+De **call-site** staat in de invocation *voor* de huidig uitvoerende functie.
+
+```js
+function baz() {
+    // call-stack is: `baz`
+    // so, our call-site is in the global scope
+
+    console.log( "baz" );
+    bar(); // <-- call-site for `bar`
+}
+
+function bar() {
+    // call-stack is: `baz` -> `bar`
+    // so, our call-site is in `baz`
+
+    console.log( "bar" );
+    foo(); // <-- call-site for `foo`
+}
+
+function foo() {
+    // call-stack is: `baz` -> `bar` -> `foo`
+    // so, our call-site is in `bar`
+
+    console.log( "foo" );
+}
+
+baz(); // <-- call-site for `baz`
+```
+
+Je kan de call-stack vinden via de debugger in de browser.
+
+### Nothing but rules
+
+#### Default binding
+
+De standaard versie van this binding, komt van standaard alleenstaande functie calls. Dit is de default, als geen van de onderstaande regels gelden.
+
+```js
+function foo() {
+	console.log( this.a );
+}
+
+var a = 2;
+
+foo(); // 2
+```
+
+Als 'strict mode' aan staat breekt de bovenstaande code, omdat het globale object niet **default binding** ondersteunt.
+
+```js
+function foo() {
+	"use strict";
+
+	console.log( this.a );
+}
+
+var a = 2;
+
+foo(); // TypeError: `this` is `undefined`
+```
+
+Dit geldt echter alleen als de content van de foo function 'strict mode' aan heeft staan, als de call-site dit aan heeft staan, refereert this wel naar het globale object.
+
+Vaak kom je dit probleem niet tegen, want je hele code loopt óf in strict mode, of niet.
+
+### Implicit binding
+
+Heeft de call-site een **context object** of **owning / containing object**.
+
+```js
+function foo() {
+	console.log( this.a );
+}
+
+var obj = {
+	a: 2,
+	foo: foo
+};
+
+obj.foo(); // 2
+```
+
+Ookal heeft foo een reference in het object gekregen, wordt de functie niet eigendom of omringd door een object, zoals de regel doet denken.
+
+In dit geval gebruikt de call-site de context van het object om te refereren naar de functie. In dit geval is het object eigenaar en omringer van de **functie referentie**.
+
+Alleen het laatste / hoogste level van een object property reference chain geldt voor de call-site.
+
+```js
+function foo() {
+	console.log( this.a );
+}
+
+var obj2 = {
+	a: 42,
+	foo: foo
+};
+
+var obj1 = {
+	a: 2,
+	obj2: obj2
+};
+
+obj1.obj2.foo(); // 42
+```
+
+### Implicitly lost
+
+Als een implicitly bound function de binding met **this** verliest, om vervolgens terug te vallen op **default binding**.
+
+```js
+function foo() {
+	console.log( this.a );
+}
+
+var obj = {
+	a: 2,
+	foo: foo
+};
+
+var bar = obj.foo; // function reference/alias!
+
+var a = "oops, global"; // `a` also property on global object
+
+bar(); // "oops, global"
+```
+
+In dit geval is bar() de call site, wat dus **default binding** veroorzaakt en refereert naar het globale object.
+
+Ook als je functies meegeeft via de parameters, geldt het bovenstaande fenomeen:
+
+```js
+function foo() {
+	console.log( this.a );
+}
+
+function doFoo(fn) {
+	// `fn` is just another reference to `foo`
+
+	fn(); // <-- call-site!
+}
+
+var obj = {
+	a: 2,
+	foo: foo
+};
+
+var a = "oops, global"; // `a` also property on global object
+
+doFoo( obj.foo ); // "oops, global"
+```
+
+Zelfs als de functie een ingebouwde JS functie is, zoals setTimeout(), geldt dit.
+
+### Explicit binding
+
+Als je een function call wilt dwingen om een bepaald object te gebruiken als **this** binding, zonder een property reference op een object te zetten.
+
+Enkele tools om dit te doen in JS zijn, dingen zoals **.call() en .apply()**. Elke functie die je zelf maakt heeft deze properties via diens prototype.
+
+Deze functies werken, door beide als eerste argument een object mee te krijgen, die gebruikt moet worden voor this, om vervolgens de functie aan te roepen met die this.
+
+```js
+function foo() {
+	console.log( this.a );
+}
+
+var obj = {
+	a: 2
+};
+
+foo.call( obj ); // 2
+```
+
+Als je een string meegeeft als this, wordt deze gewrapt in diens Object vorm (new String etc.).
+
+Als het om this binding gaat, gedragen beide methodes (call en apply) zich hetzelfde, behalve als er meerdere parameters worden meegegeven.
+
+Dit zorgt er nog niet voor dat een functie diens bedoelde this binding verliest.
+
+### Hard binding
+
+```js
+function foo() {
+	console.log( this.a );
+}
+
+var obj = {
+	a: 2
+};
+
+var bar = function() {
+	foo.call( obj );
+};
+
+bar(); // 2
+setTimeout( bar, 100 ); // 2
+
+// `bar` hard binds `foo`'s `this` to `obj`
+// so that it cannot be overriden
+bar.call( window ); // 2
+```
+
+Het type binding, dat hierboven wordt gebruikt, is beide **sterk en expliciet**, dus vandaar dat het **hard binding** heet.
+
+Het maakt hierbij niet uit, hoe je de functie bar aanroept, foo zal altijd worden gebonden aan obj.
+
+Door **arguments** te gebruiken kan je alsnog parameters meegeven aan de inner function.
+
+```js
+function foo(something) {
+	console.log( this.a, something );
+	return this.a + something;
+}
+
+var obj = {
+	a: 2
+};
+
+var bar = function() {
+	return foo.apply( obj, arguments );
+};
+
+var b = bar( 3 ); // 2 3
+console.log( b ); // 5
+```
+
+Je kan ook een **bind helper** maken.
+
+```js
+function foo(something) {
+	console.log( this.a, something );
+	return this.a + something;
+}
+
+// simple `bind` helper
+function bind(fn, obj) {
+	return function() {
+		return fn.apply( obj, arguments );
+	};
+}
+
+var obj = {
+	a: 2
+};
+
+var bar = bind( foo, obj );
+
+var b = bar( 3 ); // 2 3
+console.log( b ); // 5
+```
