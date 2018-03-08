@@ -2756,3 +2756,183 @@ bar.call( obj2 ); // 2, not 3!
 ```
 
 In dit geval is foo bound aan obj1. bar zal dan ook this-bound zijn aan obj1, deze kan niet worden overschreven, zoals te zien is bij de laatste call, zelfs niet met new.
+
+## You don't know JS - This & Object Prototypes - Hoofdstuk 3 - Objects
+
+**Objects** komen in twee vormen:
+
+* **Declarative of literal form**
+* **Constructed form**
+
+```js
+// Literal
+var myObj = {
+	key: value
+	// ...
+};
+
+// Constructed
+var myObj = new Object();
+myObj.key = value;
+```
+
+Je gebruikt bijna altijd de literal form.
+
+### Type
+
+Objects zijn een van de zes primaire JS types.
+Dingen, zoals string, number, boolean, null en undefined zijn zelf geen objecten.
+
+Er zijn enkele **complex primitives**:
+
+* Functions - Sub-type van een object - **callable object**.
+* Arrays - Sub-type van een object - Meer gestructureerd dan normale objecten.
+
+### Built-in objects
+
+Er zijn nog meer sub-types van objecten (**built-in objects**):
+
+* String
+* Number
+* Boolean
+* Object
+* Function
+* Array
+* Date
+* RegExp
+* Error
+
+Deze staan niet gelijk aan hun primitieve waardes.
+Dit zijn eigenlijk allemaal ingebouwde functies, in JS.
+
+```js
+var strPrimitive = "I am a string";
+typeof strPrimitive;							// "string"
+strPrimitive instanceof String;					// false
+
+var strObject = new String( "I am a string" );
+typeof strObject; 								// "object"
+strObject instanceof String;					// true
+
+// inspect the object sub-type
+Object.prototype.toString.call( strObject );	// [object String]
+```
+
+Om dingen met de waarde te doen van bijvoorbeeld een string moet het naar een String object vorm worden omgezet, gelukkig gebeurt dat automatisch, dus hoef je bijna nooit de constructed vorm te gebruiken.
+
+null en undefined hebben geen object wrapper vorm, alleen de primitieve waardes.
+
+Date kan alleen worden aangemaakt met de constructed vorm.
+
+Gebruik alleen de constructed vorm als je extra opties nodig hebt.
+
+### Contents
+
+De content van objecten bestaan uit waardes, die worden opgeslagen op specifieke benaamde locaties, die **properties** heten.
+
+De waardes van een property hoeven niet altijd in het object zelf aanwezig te zijn.
+
+Om properties te bereiken in een object gebruik je:
+
+* **.** operator / property access - Heeft een Identifier toegankelijke naam nodig.
+* **[ ]** operator / key access - Kan elke UTF-8 / Unicode string bereiken.
+
+Je kan met de key access operator programmatisch de identifier opbouwen:
+
+```js
+var wantA = true;
+var myObject = {
+	a: 2
+};
+
+var idx;
+
+if (wantA) {
+	idx = "a";
+}
+
+// later
+
+console.log( myObject[idx] ); // 2
+```
+
+Alle property namen worden naar strings omgezet.
+
+### Computed property names
+
+ES6 voegt **computed property names** toe:
+
+```js
+var prefix = "foo";
+
+var myObject = {
+	[prefix + "bar"]: "hello",
+	[prefix + "baz"]: "world"
+};
+
+myObject["foobar"]; // hello
+myObject["foobaz"]; // world
+```
+
+Dit type wordt vooral gebruikt in ES6 Symbols.
+
+### Property vs. method
+
+Functies die tot een object behoren worden gezien als **methods**, in andere talen.
+
+In JS wordt een property niet een **method** als het toevallig de waarde van een functie heeft.
+
+**Function** en **method** zijn te verwisselen als benaming voor een functie.
+
+### Arrays
+
+Arrays worden ook bereikt met de key access methode.
+Arrays slaan waardes op, op basis van **numeric indexing**. Dit betekent dat de waardes worden opgeslagen in locaties, die vaak **indices** worden genoemd.
+
+Je kan ook properties toevoegen op arrays, dit veranderd niet de length van een array.
+
+Als je een property toevoegd op een array, en het kan worden omgezet worden tot / is een nummer, dan wordt deze waarde toegevoegd aan de array.
+
+### Duplicating objects
+
+Er is geen ingebouwde manier om objecten te kopiëren in andere objecten.
+
+Er zit verschil tussen **shallow copy** en **deep copy** van objecten. Een deep copy zorgt voor circulation en een shallow copy zou alleen waardes kopiëren.
+
+Een manier om objecten te kopiëren is via **JSON.parse**, als een object naar een JSON string kan worden omgezet en vervolgens met dezelfde structuur en waardes kan worden omgezet tot object.
+
+Je kan het beste een shallow copy maken, in ES6 zit nu Object.assign() voor deze taak. Deze neemt een *target object* als eerste parameter en een of meerdere *source objects* als de rest parameters.
+
+Deze zal over alle **enumerable**, **owned keys** (die direct aanwezig zijn), van de source objects loopen en die kopieëren via '=' naar het *target object*, het returnt vervolgs het *target object*.
+
+```js
+var newObj = Object.assign( {}, myObject );
+
+newObj.a;						// 2
+newObj.b === anotherObject;		// true
+newObj.c === anotherArray;		// true
+newObj.d === anotherFunction;	// true
+```
+
+### Property descriptors
+
+Sinds ES5 zijn alle properties beschreven in termen van een  **property description**.
+
+```js
+var myObject = {
+	a: 2
+};
+
+Object.getOwnPropertyDescriptor( myObject, "a" );
+// {
+//    value: 2,
+//    writable: true,
+//    enumerable: true,
+//    configurable: true
+// }
+```
+
+## You don't know JS - This & Object Prototypes - Hoofdstuk 4 -
+
+
+## You don't know JS - This & Object Prototypes - Hoofdstuk 5 -
