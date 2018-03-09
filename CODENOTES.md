@@ -2916,7 +2916,7 @@ newObj.d === anotherFunction;	// true
 
 ### Property descriptors
 
-Sinds ES5 zijn alle properties beschreven in termen van een  **property description**.
+Sinds ES5 zijn alle properties beschreven in termen van een  **property descriptors**.
 
 ```js
 var myObject = {
@@ -2931,6 +2931,276 @@ Object.getOwnPropertyDescriptor( myObject, "a" );
 //    configurable: true
 // }
 ```
+
+Als een property descriptor alleen maar data waardes heeft heet het een **data descriptor**.
+
+Als een object **configurable** is, dan kan je via de **Object.defineProperty()** methode bestaande properties aanpassen, en als het **writable** is, kun je hier dingen aan toevoegen.
+
+```js
+var myObject = {};
+
+Object.defineProperty( myObject, "a", {
+	value: 2,
+	writable: true,
+	configurable: true,
+	enumerable: true
+} );
+
+myObject.a; // 2
+```
+
+#### Writable
+
+Als je een object via de defineProperty methode op writable: false zet, dan kan je die property niet meer veranderen.
+Je krijgt een TypeError in strict mode.
+
+#### Configurable
+
+Als je een configurable property via de bovenstaande methode op false zet kan je die niet meer terug zetten naar true, het levert een TypeError op.
+
+Als een property al configurable false is, kan je writeable nog wel naar false zetten, maar niet meer naar true.
+
+**configurable:false** zorgt er ook voor dat je een property niet meer kan verwijderen met **delete**.
+
+#### Enumerable
+
+Deze karakteristiek beheert of een property te vinden is in **object-property enumerations**, zoals een **for..in** loop. Je kan alsnog de waardes bereiken, op alle andere manieren.
+
+#### Immutability
+
+Soms wil je properties hebben, die niet kunnen worden veranderd, sinds ES5 kan dat. Alle mogelijkheden om dit te doen, zorgen voor **shallow immutability**, dit betekent dat het alleen het object en de directe properties omvat. Als je diepere elementen, zoals arrays ook immutable wilt hebben, zul je het volgende proces voor die ook moeten herhalen.
+
+##### Object constant
+
+Als je *writable: false* en *configurable:false* combineert, creëer je als het ware een **constant** (iets dat niet kan worden verwijderd, veranderd of hergedefineerd).
+
+```js
+var myObject = {};
+
+Object.defineProperty( myObject, "FAVORITE_NUMBER", {
+	value: 42,
+	writable: false,
+	configurable: false
+} );
+```
+
+##### Prevent extensions
+
+Als je wilt dat een object geen *nieuwe* properties kan krijgen, maar degene die die al heeft onveranderd laat kun je **Object.preventExtensions()** aanroepen.
+
+```js
+var myObject = {
+	a: 2
+};
+
+Object.preventExtensions( myObject );
+
+myObject.b = 3;
+myObject.b; // undefined
+```
+
+##### Seal
+
+**Object.seal()** maakt een sealed object, wat betekent het pakt een bestaand object en roept daarop aan Object.preventExtensions(), maar zet ook diens configurable: false.
+
+Je kan dus geen properties meer toevoegen, maar je kan ook de bestaande properties niet meer veranderen of verwijderen. Je kan nog wel de waardes veranderen.
+
+##### Freeze
+
+**Object.freeze()** doet hetzelfde als seal, maar zet ook alle **data accesor** properties writable: false, zodat de waardes niet meer kunnen veranderen.
+
+Dit is de hoogst mogelijke vorm van immutability.
+
+### [[Get]]
+
+```js
+var myObject = {
+	a: 2
+};
+
+myObject.a; // 2
+```
+
+Volgens de specificatie voort de bovenstaande code een **[[Get]] operation** uit.
+
+Deze methode bekijkt eerst of het object een property heeft met de naam die wordt opgevraagd, als dat niet zo is zal de [[Prototype]] chain worden gevolgd.
+
+Als het via de bovenstaande manier, op geen enkele manier, een waarde kan teruggeven voor de gewenste property, zal undefined worden teruggegeven.
+
+### [[Put]]
+
+Je zou denken dat deze methode wordt aangeroepen als je een waarde toevoegd aan een object, maar het ligt meer genuanceerd, voornamelijk met betrekking tot het gedrag dat gebeurt als het property al bestaat.
+
+1. Is de property een **accesor descriptor**? Roep dan de setter aan, als die er is.
+2. Is de property een **data descriptor** met writable:false, doe niks in non-strict, en geef een TypeError in strict mode.
+3. Zet anders de waarde als normaal.
+
+### Getters & Setters
+
+ES5 zorgt ervoor dat je de standaard acties van de [[Set]] en [[Put]] methodes deels kan overschrijven, per property.
+
+**Getters** zijn properties die een verborgen functie aanroepen, om een waarde te verkrijgen.
+
+**Setters** zijn properties die een verborgen functie aanroepen, om een waarde te setten.
+
+Als een property opzet, zodat deze een getter of setter, of beide heeft, wordt deze een **accessor descriptor**.
+
+```js
+var myObject = {
+	// define a getter for `a`
+	get a() {
+		return 2;
+	}
+};
+
+Object.defineProperty(
+	myObject,	// target
+	"b",		// property name
+	{			// descriptor
+		// define a getter for `b`
+		get: function(){ return this.a * 2 },
+
+		// make sure `b` shows up as an object property
+		enumerable: true
+	}
+);
+
+myObject.a; // 2
+
+myObject.b; // 4
+```
+
+Dit zijn twee manieren om een getter te maken.
+
+```js
+var myObject = {
+	// define a getter for `a`
+	get a() {
+		return 2;
+	}
+};
+
+myObject.a = 3;
+
+myObject.a; // 2
+```
+
+In dit geval is alleen een getter gemaakt, en wordt bij een poging om de waarde van a te veranderen deze assignment genegeerd.
+
+```js
+	// define a getter for `a`
+	get a() {
+		return this._a_;
+	},
+
+	// define a setter for `a`
+	set a(val) {
+		this._a_ = val * 2;
+	}
+};
+
+myObject.a = 2;
+
+myObject.a; // 4
+```
+
+Om dit wel mogelijk te maken, moet je altijd een setter defineren.
+
+### Existence
+
+```js
+var myObject = {
+	a: 2
+};
+
+("a" in myObject);				// true
+("b" in myObject);				// false
+
+myObject.hasOwnProperty( "a" );	// true
+myObject.hasOwnProperty( "b" );	// false
+```
+
+Je kan een van deze twee manieren gebruiken, om erachter te komen of een property bestaat op een object, of dat er gewoon undefined aan deze property is toegewezen.
+
+De **in** methode kijkt of het object een property heeft met die naam, of dat het in de prototype zit.
+De **hasOwnProperty** methode kijkt alleen of het object een property heeft met die naam. Deze kijkt ook naar de [[Prototype]]
+
+### Enumeration
+
+Niet enumerable properties worden alsnog gezien via hasOwnProperty en de in methode, behalve als de in methode zich bevindt in een for loop.
+**Object.keys(obj)** returnt een array van alle enumerable properties.
+**Object.getOwnPropertyNames(obj)** returnt een array van alle properties, of ze enumerable of niet zijn maar niet uit.
+
+Deze twee methodes kijken niet naar de [[Prototype]].
+
+### Iteration
+
+Als je wilt itereren over de waardes van een object, wordt bij indexed-arrays vaak een for-loop gebruikt, dit is echter niet itereren over de waardes, maar over de **indices**.
+
+**forEach()** itereert over alle waardes in een array en negeert iedere callback return waardes.
+**every()** blijft itereren, totdat het einde van de array is bereikt, of de callback een falsy value returnt.
+**some()** blijft itereren, totdat het einde van de array is bereikt, of de callback een truthy value returnt.
+
+Als je direct over de waardes van een array, of object properties wilt itereren, kun je de ES6 **for..of** loop gebruiken.
+
+Deze werkt als volgt:
+
+```js
+var myArray = [ 1, 2, 3 ];
+var it = myArray[Symbol.iterator]();
+
+it.next(); // { value:1, done:false }
+it.next(); // { value:2, done:false }
+it.next(); // { value:3, done:false }
+it.next(); // { done:true }
+```
+
+Waarom je hier Symbol gebruikt: het houdt een speciale naamwaarde, niet een speciale waarde.
+
+Je moet één keer meer it.next() aanroepen, om de done's naar true te zetten.
+
+Gewone objecten hebben geen **@@iterator**. Deze kan je er wel handmatig op zetten.
+
+```js
+var myObject = {
+	a: 2,
+	b: 3
+};
+
+Object.defineProperty( myObject, Symbol.iterator, {
+	enumerable: false,
+	writable: false,
+	configurable: true,
+	value: function() {
+		var o = this;
+		var idx = 0;
+		var ks = Object.keys( o );
+		return {
+			next: function() {
+				return {
+					value: o[ks[idx++]],
+					done: (idx > ks.length)
+				};
+			}
+		};
+	}
+} );
+
+// iterate `myObject` manually
+var it = myObject[Symbol.iterator]();
+it.next(); // { value:2, done:false }
+it.next(); // { value:3, done:false }
+it.next(); // { value:undefined, done:true }
+
+// iterate `myObject` with `for..of`
+for (var v of myObject) {
+	console.log( v );
+}
+// 2
+// 3
+```
+
+
 
 ## You don't know JS - This & Object Prototypes - Hoofdstuk 4 -
 
