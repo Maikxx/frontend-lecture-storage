@@ -3200,9 +3200,114 @@ for (var v of myObject) {
 // 3
 ```
 
+## You don't know JS - This & Object Prototypes - Hoofdstuk 4 - Mixing (Up) "Class" Objects
 
+**OOP** - Object Oriented Programming.
 
-## You don't know JS - This & Object Prototypes - Hoofdstuk 4 -
+### Class theory
 
+**Class/Inheritance**: Een manierom code te organiseren en architectureren. Het is een manier om wereldse problemen te modelleren in onze software.
+
+*OOP* of **class oriented programming** erkent dat data van binnen bepaald gedrag met zich meebrengt, dus is het logisch om de data en het gedrag samen te verpakken of **encapsulating**. Het heet ook wel **data structures**.
+
+In dit mechanisme, maak je een soort van overkoepelende *base class* voor een bepaalde categorie, die gemeenschappelijke waardes bezit, waar weer subcategorieën (die dus ook die properties delen) van af stammen, of wel **inheriting** / **extending**.
+
+**Polymorpism**: Het idee dat het gedrag van een functie in de parent class, kan worden overschreven door dezelfde functie in de child class, om het meer specifieke dingen toe te wijzen.
+
+### "Class" Design Pattern
+
+Vaak zie je discussies over populaire OOP Design Patterns voorbijkomen, over bijvoorbeeld **Iterator**, **Observer**, **Factory**, **Singleton** etc.
+
+**Procedural programming**: Een manier om code te beschrijven, die alleen maar bestaat uit **procedures**, oftewel functies, die andere functies aanroepen.
+
+**Functional Programming** grootste pattern: **Monads**.
+
+### Javascript "Classes"
+
+Javascript heeft geen classes.
+Javascript probeert de grote vraag van developers, om classes in JS te implementeren, te beamen met syntax, die lijkt op classes.
+
+### Class Mechanics
+
+In veel class-oriented talen, is de standaard library een **stack** data structure, waar je dingen aan toe kan pushen, poppen etc., als een Stack class.
+
+In dit soort talen moet je een **instantiatie** doen van de Stack class, voordat je hier iets mee kan doen.
+
+#### Building
+
+**Class** komt voort uit de architectuur, waar je als architect de blueprint legt voor gebouwen, terwijl het niet uitmaakt hoeveel er worden gebouwd, en wat er in de huizen zit.
+
+Als het gebouw klaar is, met internals en alles, is dat een **instantiatie** van de class. Dit is eigenlijk een kopie van de class, aangezien deze kan worden hergebruikt.
+
+Een class wordt geinstantieerd in een object vorm, door een kopie operatie.
+
+#### Constructor
+
+Instantiaties van classes zijn vaak gemaakt vanuit een speciale methode van die class, vaak dezelfde naam als die class, dat is een **constructor**. Deze methode heeft de taak om de benodigde informatie (state) te verkrijgen, die deze instantiatie nodig heeft.
+
+```java
+class CoolGuy {
+	specialTrick = nothing
+
+	CoolGuy( trick ) {
+		specialTrick = trick
+	}
+
+	showOff() {
+		output( "Here's my trick: ", specialTrick )
+	}
+}
+
+Joe = new CoolGuy( "jumping rope" )
+
+Joe.showOff() // Here's my trick: jumping rope
+```
+
+Als je *new CoolGuy()* aanroept in dit geval, roep je eigenlijk de methode CoolGuy( trick ) aan.
+
+Aan de variabele wordt een object teruggegeven, vanuit die constructor.
+
+*note*: De bovenstaande code is geen JS, maar waarschijnlijk Java en is conceptueel.
+
+### Class Inheritance
+
+Een class die is geinherit van de eerste class, de twee class heet dan een **child class** en de eerste een **parent class**.
+
+```java
+class Vehicle {
+	engines = 1
+
+	ignition() {
+		output( "Turning on my engine." )
+	}
+
+	drive() {
+		ignition()
+		output( "Steering and moving forward!" )
+	}
+}
+
+class Car inherits Vehicle {
+	wheels = 4
+
+	drive() {
+		inherited:drive()
+		output( "Rolling on all ", wheels, " wheels!" )
+	}
+}
+
+class SpeedBoat inherits Vehicle {
+	engines = 2
+
+	ignition() {
+		output( "Turning on my ", engines, " engines." )
+	}
+
+	pilot() {
+		inherited:drive()
+		output( "Speeding through the water with ease!" )
+	}
+}
+```
 
 ## You don't know JS - This & Object Prototypes - Hoofdstuk 5 -
