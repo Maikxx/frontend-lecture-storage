@@ -171,7 +171,7 @@ Een andere vorm van een conditional is een conditional operator, beter bekend al
 
 Strict mode versterkt de restricties van sommige regels van gedrag in JavaScript. Dit zorgt ervoor dat de code veiliger is en zich meer aan de richtlijnen houdt. Het zorgt ook voor optimalisatie van de JS engine. Het zorgt ervoor dat er niet meer een globale variabele aangemaakt wordt als je een keyword vergeet. Strict mode wordt ook gezien als de toekomst van de taal.
 
-Function foo() {} is simpelweg een variabele in de globale scope, met een referentie naar zichzelf (een functie). Een functie kan een waarde vertegenwoordigen, die aan andere variabelen of functies kan worden toegewezen.
+Function foo() {} is simpelweg een variabele in de globale scope, met een referentie naar zichzelf (een functie). Een functie kan een waarde vertegenwoordigen, die aan andere variabelen of functies kan worden toegewezens.pec
 
 Anonymous function expression: var funct = function() {}.
 Named function expression: var funct = function func() {}. Dit heeft de voorkeur.
@@ -3309,5 +3309,94 @@ class SpeedBoat inherits Vehicle {
 	}
 }
 ```
+
+### Polymorphism
+
+In het bovenstaande voorbeeld, is te zien dat Car een eigen drive methode aanmaakt, die de inherited methode overschrijft.
+
+Met **inherited:** kan je de methode van de parent class toch gebruiken, ookal heb je deze overschreven.
+
+Deze techniek heet **polymorphism** of **virtual polymorphism**. In het bovenstaande geval is het **relative polymorphism**.
+
+Relatief betekent dat het één level omhoog kijkt.
+In veel talen wordt **inherited:** vervangen door **super()**.
+
+In JS hoort een class tot een constructor, terwijl in andere talen dit andersom is.
+
+In het bovenstaande geval wordt in de Drive() methode de ignition() methode aangeroepen, en degene die deze dan aan roept is die van de SpeedBoat, tenzij Vehicle zelf wordt geinstantieerd tot een class.
+
+Als classes zijn geinherit, is er een manier voor deze classes zelf (niet de instances), om relatief de geinherite class form te rerentieëren, dit wordt vaak gedaan door super().
+
+### Multiple Inheritance
+
+**Diamond Problem** komt voort als er meer dan één parent class zou zijn. In dit geval inherit een class met de naam D van twee parents (B en C) en die inheriten van A. Als a een methode Drive() heeft, en B en C overschrijven die allebei, als D dan drive() aanroept, welke wordt het dan?
+
+### Mixins
+
+JS's object mechanisme zal niet automatisch kopie gedrag uitvoeren, als je iets inherit of instantieert, omdat er geen classes zijn om te instantieren.
+
+Objecten krijgen geen kopieën van elkaar, maar worden aan elkaar gelinkt.
+
+JS faket dit gedrag van andere classes via twee verschillende manieren.
+
+#### Explicit Mixins
+
+Een utility, dat wordt gebruik om een parent class, zoals Vehicle te kopieëren naar een child class, zoals Car, heet **extend()**, volgens vele librarier en frameworks. Het kan ook een mixin heten.
+
+```js
+// vastly simplified `mixin(..)` example:
+function mixin( sourceObj, targetObj ) {
+	for (var key in sourceObj) {
+		// only copy if not already present
+		if (!(key in targetObj)) {
+			targetObj[key] = sourceObj[key];
+		}
+	}
+
+	return targetObj;
+}
+
+var Vehicle = {
+	engines: 1,
+
+	ignition: function() {
+		console.log( "Turning on my engine." );
+	},
+
+	drive: function() {
+		this.ignition();
+		console.log( "Steering and moving forward!" );
+	}
+};
+
+var Car = mixin( Vehicle, {
+	wheels: 4,
+
+	drive: function() {
+		Vehicle.drive.call( this );
+		console.log( "Rolling on all " + this.wheels + " wheels!" );
+	}
+} );
+```
+
+##### Polymorphism revisited
+
+In dit geval worden functies niet gedupliceerd, maar met een referentie meegegeven.
+
+```js
+Vehicle.drive.call(this)
+```
+
+Dit is een voorbeeld van **explicit pseudo-polymorphism**.
+In dit geval wordt een absolute referentie gemaakt naar de bovenstaande drive methode.
+
+Dit systeem zorgt voor heel veel ingewikkelde ideeën met de code en verhoogt de onderhoudstijd.
+
+##### Mixing Copies
+
+**Mixin** komt van een alternatieve manier om een taak uit te leggen: Car heeft de content van Vehicle *mixed-in*.
+Doordat de twee objecten een referentie hebben naar diens gezamenlijke functies, betekent dat ook handmatig kopieëren van functies (mixins), van het ene object naar het ander, niet het echte dupliceren kan emuleren, zoals dat bij class-oriented languages wel zo is.
+
+##### Parasitic Inheritance
 
 ## You don't know JS - This & Object Prototypes - Hoofdstuk 5 -
