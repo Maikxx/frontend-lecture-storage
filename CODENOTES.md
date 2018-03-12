@@ -3399,4 +3399,77 @@ Doordat de twee objecten een referentie hebben naar diens gezamenlijke functies,
 
 ##### Parasitic Inheritance
 
+Een variatie op dit expliciete mixin pattern, die in sommige manieren expliciet is en in andere impliciet, heet **parasitic inheritance**.
+
+```js
+// "Traditional JS Class" `Vehicle`
+function Vehicle() {
+	this.engines = 1;
+}
+Vehicle.prototype.ignition = function() {
+	console.log( "Turning on my engine." );
+};
+Vehicle.prototype.drive = function() {
+	this.ignition();
+	console.log( "Steering and moving forward!" );
+};
+
+// "Parasitic Class" `Car`
+function Car() {
+	// first, `car` is a `Vehicle`
+	var car = new Vehicle();
+
+	// now, let's modify our `car` to specialize it
+	car.wheels = 4;
+
+	// save a privileged reference to `Vehicle::drive()`
+	var vehDrive = car.drive;
+
+	// override `Vehicle::drive()`
+	car.drive = function() {
+		vehDrive.call( this );
+		console.log( "Rolling on all " + this.wheels + " wheels!" );
+	};
+
+	return car;
+}
+
+var myCar = new Car();
+
+myCar.drive();
+// Turning on my engine.
+// Steering and moving forward!
+// Rolling on all 4 wheels!
+```
+
+### Implicit Mixins
+
+Impliciete mixins zijn erg close met **explicit psuedo-polymorphism**.
+
+```js
+var Something = {
+	cool: function() {
+		this.greeting = "Hello World";
+		this.count = this.count ? this.count + 1 : 1;
+	}
+};
+
+Something.cool();
+Something.greeting; // "Hello World"
+Something.count; // 1
+
+var Another = {
+	cool: function() {
+		// implicit mixin of `Something` to `Another`
+		Something.cool.call( this );
+	}
+};
+
+Another.cool();
+Another.greeting; // "Hello World"
+Another.count; // 1 (not shared state with `Something`)
+```
+
+De `Something.cool.call(this)` kan in een constructor voorkomen, of in een methode van een object.
+
 ## You don't know JS - This & Object Prototypes - Hoofdstuk 5 -
