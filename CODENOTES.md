@@ -3472,4 +3472,21 @@ Another.count; // 1 (not shared state with `Something`)
 
 De `Something.cool.call(this)` kan in een constructor voorkomen, of in een methode van een object.
 
-## You don't know JS - This & Object Prototypes - Hoofdstuk 5 -
+## You don't know JS - This & Object Prototypes - Hoofdstuk 5 - Prototypes
+
+### [[Prototype]]
+
+Objecten in JS hebben een interne property, die in de spec als **[[Prototype]]** beschreven staat. Dit is simpelweg een referentie naar een ander object.
+
+```js
+var anotherObject = {
+	a: 2
+};
+
+// create an object linked to `anotherObject`
+var myObject = Object.create( anotherObject );
+
+myObject.a; // 2
+```
+
+De standaard [[GET]] methode van objecten volgt het [[Prototype]] pad, op zoek naar het gevraagde.
