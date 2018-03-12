@@ -3490,3 +3490,167 @@ myObject.a; // 2
 ```
 
 De standaard [[GET]] methode van objecten volgt het [[Prototype]] pad, op zoek naar het gevraagde.
+
+Met de bovenstaande code kan je een object linken aan een ander object, via de [[Prototype]].
+
+Als er aan het einde van de [[Prototype]] chain nog steeds geen variabele is gevonden, wordt er undefined terug gegeven.
+
+```js
+var anotherObject = {
+	a: 2
+};
+
+// create an object linked to `anotherObject`
+var myObject = Object.create( anotherObject );
+
+for (var k in myObject) {
+	console.log("found: " + k);
+}
+// found: a
+
+("a" in myObject); // true
+```
+
+#### Object.prototype
+
+Het einde van de chain is in normale gevallen de Object.prototype.
+
+### Setting & shadowing properties
+
+Als een object al een data accessor property, direct op zich heeft, met bijvoorbeeld de naam *foo*, is een assignment zo simpel als het overschrijven van deze property.
+
+Als deze niet direct op dit object bestaat, wordt de [[Prototype]] chain gevolgd, tot deze wordt gevonden, als deze niet wordt gevonden wordt de waarde toegevoegd op het object gezet.
+
+Als een property op beide het directe object en hoger in de chain bestaat, heet dit **shadowing**.
+
+Als een property assignt, die niet direct op het object is, maar wel hoger in de chain kunnen er enkele dingen gebeuren:
+
+* Als een normale data accessor property, met dezelfde naam als deze property bestaat hoger in de chain, en deze is *niet* **read-only (writable:false)**, zal de assignment direct op het target object worden gezet, wat zorgt voor een **shadowed property**.
+* Als een normale data accessor property, met dezelfde naam als deze property bestaat hoger in de chain, en deze is *wel* **read-only (writable:false)**, dan zijn beide het aanmaken van die nieuwe property en het maken van een **shadowed property** niet toegestaan.
+* Als de property naam hoger in de chain voorkomt en het een **setter** is, wordt deze aangeroepen en wordt deze *niet* opnieuw gedefineerd.
+
+Als je toch wilt shadowen in de laatste twee gevallen, moet je Object.defineProperty() gebruiken.
+
+Vaak is shadowen moeilijker en meer genuanceerd, dan dat het waard is, dus je kan het beter vermijden.
+
+Dit kan ook impliciet gebeuren:
+
+```js
+var anotherObject = {
+	a: 2
+};
+
+var myObject = Object.create( anotherObject );
+
+anotherObject.a; // 2
+myObject.a; // 2
+
+anotherObject.hasOwnProperty( "a" ); // true
+myObject.hasOwnProperty( "a" ); // false
+
+myObject.a++; // oops, implicit shadowing!
+
+anotherObject.a; // 2
+myObject.a; // 3
+
+myObject.hasOwnProperty( "a" ); // true
+```
+
+### "Class"
+
+In JS zijn er geen classes, enkel objecten. Het object bepaalt zijn eigen gedrag direct.
+
+### "Class" Functions
+
+Lange tijd werd er schaamteloos gebruik gemaakt van een soort van *hack*, dat lijkt op classes.
+
+Dit gedrag komt van de karakteristiek, dat iedere functie standaard een **public** en **non-enumerable** property op zich hebben, genaamd prototype. Deze wijst normaal gesproken naar een standaard object.
+
+```js
+function Foo() {
+	// ...
+}
+
+var a = new Foo();
+
+Object.getPrototypeOf( a ) === Foo.prototype; // true
+```
+
+In dit geval, doordat a wordt toegewezen aan de new functie, zal deze een interne **[[Prototype]]** link krijgen, naar het object, waarnaar Foo.prototype linkt.
+
+In dit geval zijn er enkel twee objecten aan elkaar gelinkt, maar er is geen instantiatie of kopieën gemaakt.
+
+#### What's in a name?
+
+In JS maak je geen kopieën van het ene object naar het andere, maar je linkt tussen objecten. Dit heet vaak **Prototypal inheritance**.
+
+**Delegation** is een beter woord voor het JS object-linking mechanisme.
+
+**Differential inheritance**, dit is het beschrijven van het gedrag van een object, wat betreft hetgeen wat anders is, dan een standaarde descriptor.
+Bijvoorbeeld:
+Je verklaart dat een auto een type voertuig is, maar dat deze (auto) precies vier wielen heeft, in plaats van steeds het herschrijven.
+
+Dit is niet per se een goede manier om [[Prototype]] te beschrijven.
+
+#### "Constructors"
+
+In JS doen twee dingen denken dat er classes zijn:
+
+```js
+function Foo() {
+	// ...
+}
+
+var a = new Foo();
+```
+
+* new keyword
+* het lijkt alsof er een constructor functie wordt aangeroepen.
+
+Classes zijn uit conventie benoemd met een hoofdletter aan het begin.
+
+#### Constructor or Call?
+
+Als je ergens new voor zet wordt dat automatisch een **constructor call**.
+
+#### Mechanics
+
+Het bovenstaande is niet het enige wat gebruikt wordt om JS op classes te laten lijken:
+
+```js
+function Foo(name) {
+	this.name = name;
+}
+
+Foo.prototype.myName = function() {
+	return this.name;
+};
+
+var a = new Foo( "a" );
+var b = new Foo( "b" );
+
+a.myName(); // "a"
+b.myName(); // "b"
+```
+
+Hier gebeuren twee class-oriented dingen:
+
+* `this.name = name` voegt een name property op elk object toe.
+* `Foo.prototype.myName = ...` voegt een functie toe aan het Foo.prototype object.
+
+#### Constructor redux
+
+`a.constructor === Foo` betekent niet dat `a` een property constructor op zich heeft.
+
+Deze wordt overgenomen van Foo.
+
+```js
+function Foo() { /* .. */ }
+
+Foo.prototype = { /* .. */ }; // create a new prototype object
+
+var a1 = new Foo();
+a1.constructor === Foo; // false!
+a1.constructor === Object; // true!
+```
+
