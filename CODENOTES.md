@@ -3677,3 +3677,213 @@ bar.something(); // Tell me something good...
 `Object.create()` maakt een nieuw object, die gelinkt is aan het object dat je eraan meegeeft, zonder al het new gebeuren.
 
 **dictionaries** zijn objecten zonder [[Prototype]], gemaakt via `Object.create(null)`. Deze worden voornamelijk gebruikt om data in op te slaan.
+
+## You don't know JS - Async & Performance - Hoofdstuk 1
+
+Een JS programmma wordt vrijwel altijd opgebroken in twee of meer delen, waar het eerste deel *nu* loopt en het volgende *later*, als er een event gebeurt.
+
+Als er events zijn om uit te voeren, zal de **event loop** lopen,totdat de **queue** leeg is.
+Iedere iteratie op die event loop heet een **tick**.
+User interactions, IO en timers zorgen ervoor dat er dingen aan de queue worden toegevoegd.
+
+Er kan maar een event tegelijk worden verwerkt.
+
+**Concurrency** is al twee of meerdere **chains of events** interleave, over time. Dit doet lijken alsof ze *tegelijk* lopen.
+
+Vaak moet je processen die tegelijk lopen, orderen, om **race conditions** te voorkomen.
+
+Een van de meest voorkomende manieren om om te gaan met het later, is een **callback functie**.
+
+Tot ES6 had JS nooit een echte vorm van asynchroniteit in zich.
+
+De **event loop** is een mechanisme van het omgaan met meerdere chunks van een programma gedurende een bepaalde periode.
+
+`setTimeout()` zet niet je callback in de event queue, maar als de timer verstrijkt, wordt de callback pas in de event loop gezet.
+
+**Async** betekent het gat tussen nu en later.
+**Parallel** is dat dingen naast elkaar kunnen gebeuren.
+
+**Run-to-completion**: Het verschijnsel dat als iets begint met uitvoeren, dat een ander iets het niet kan verstoren.
+
+**Race condition**: Als twee of meer dingen tegen elkaar racen om te kijken welke het eerste uitgevoerd wordt. Je kan niet voorspellen wat de veranderingen in een functie zullen doen.
+
+```js
+var a = 1;
+var b = 2;
+
+function foo() {
+	a++;
+	b = b * a;
+	a = b + 3;
+}
+
+function bar() {
+	b--;
+	a = 8 + b;
+	b = a * 2;
+}
+
+// ajax(..) is some arbitrary Ajax function given by a library
+ajax( "http://some.url.1", foo );
+ajax( "http://some.url.2", bar );
+
+// Outcome 1:
+
+var a = 1;
+var b = 2;
+
+// foo()
+a++;
+b = b * a;
+a = b + 3;
+
+// bar()
+b--;
+a = 8 + b;
+b = a * 2;
+
+a; // 11
+b; // 22
+
+// Outcome 2:
+
+var a = 1;
+var b = 2;
+
+// bar()
+b--;
+a = 8 + b;
+b = a * 2;
+
+// foo()
+a++;
+b = b * a;
+a = b + 3;
+
+a; // 183
+b; // 180
+```
+
+```txt
+onscroll, request 1   <--- Process 1 starts
+onscroll, request 2
+response 1            <--- Process 2 starts
+onscroll, request 3
+response 2
+response 3
+onscroll, request 4
+onscroll, request 5
+onscroll, request 6
+response 4
+onscroll, request 7   <--- Process 1 finishes
+response 6
+response 5
+response 7            <--- Process 2 finishes
+```
+
+```js
+// Dit is geen race condition, omdat beide functies correct zullen werken, welke orde dan ook.
+var res = {};
+
+function foo(results) {
+	res.foo = results;
+}
+
+function bar(results) {
+	res.bar = results;
+}
+
+// ajax(..) is some arbitrary Ajax function given by a library
+ajax( "http://some.url.1", foo );
+ajax( "http://some.url.2", bar );
+```
+
+```js
+// Als dingen met de DOM of scope omgaan, is het volgende niet genoeg om race conditions te voorkomen.
+
+var res = [];
+
+function response(data) {
+	res.push( data );
+}
+
+// ajax(..) is some arbitrary Ajax function given by a library
+ajax( "http://some.url.1", response );
+ajax( "http://some.url.2", response );
+
+// Dit lost het op:
+
+function response(data) {
+	if (data.url == "http://some.url.1") {
+		res[0] = data;
+	}
+	else if (data.url == "http://some.url.2") {
+		res[1] = data;
+	}
+}
+
+// ajax(..) is some arbitrary Ajax function given by a library
+ajax( "http://some.url.1", response );
+ajax( "http://some.url.2", response );
+```
+
+Een **gate** is een conditional die een functie tegenhoudt van het uitvoeren, voordat er goede data is.
+
+**Latch / Race**: Als alleen het eerst ontvangen gedrag iets doet.
+
+**Cooperative concurrency**: Een vorm van **concurrency coordination**, waar de focus niet zo zeer ligt op het interacteren via waardes in scopes (terwijl dat nogsteeds mag). Het doel is meer om lange processen op te delen in kleine stukken, zodat andere processen een kans krijgen om tussen dit grote proces snel iets uit te voeren.
+
+Als je heel veel data terug krijgt uit een api bijvoorbeeld, kan je op de volgende manier hier mee omgaan:
+
+```js
+var res = [];
+
+// `response(..)` receives array of results from the Ajax call
+function response(data) {
+	// let's just do 1000 at a time
+	var chunk = data.splice( 0, 1000 );
+
+	// add onto existing `res` array
+	res = res.concat(
+		// make a new transformed array with all `chunk` values doubled
+		chunk.map( function(val){
+			return val * 2;
+		} )
+	);
+
+	// anything left to process?
+	if (data.length > 0) {
+		// async schedule next batch
+		setTimeout( function(){
+			response( data );
+		}, 0 );
+	}
+}
+
+// ajax(..) is some arbitrary Ajax function given by a library
+ajax( "http://some.url.1", response );
+ajax( "http://some.url.2", response );
+```
+
+Om iets asynchroon te voorbereiden, kan je `setTimeout(..., 0)` gebruiken, om een functie aan het einde van de event loop te stoppen.
+
+Een **Job queue** zorgt ervoor dat nadat iets is afgelopen van de event queue, hetgeen in de job queue direct wordt uitgevoerd.
+
+```js
+console.log( "A" );
+
+setTimeout( function(){
+	console.log( "B" );
+}, 0 );
+
+// theoretical "Job API"
+schedule( function(){
+	console.log( "C" );
+
+	schedule( function(){
+		console.log( "D" );
+	} );
+} );
+
+// ACDB
+```
