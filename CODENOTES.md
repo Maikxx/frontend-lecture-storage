@@ -3654,3 +3654,26 @@ a1.constructor === Foo; // false!
 a1.constructor === Object; // true!
 ```
 
+`instanceof` pakt een standaard object als linker argument en een functie, als diens rechter argument. Dit kijkt of er ergens in de hele [[Prototype]] chain van het standaard object, wijst het object naar Functie.prototype dat echt bestaat.
+
+`Foo.prototype.isPrototypeOf(obj)` beantwoord de vraag of ergens in de hele chain van obj een Foo.prototype voorkomt.
+
+Veel browsers kunnen de [[prototype]] bereiken via `obj.__proto__ === obj.prototype`.
+
+Je moet nooit de [[Prototype]] van een bestaand object veranderen. Je kan het het beste behandelen als **read-only**.
+
+```js
+var foo = {
+	something: function() {
+		console.log( "Tell me something good..." );
+	}
+};
+
+var bar = Object.create( foo );
+
+bar.something(); // Tell me something good...
+```
+
+`Object.create()` maakt een nieuw object, die gelinkt is aan het object dat je eraan meegeeft, zonder al het new gebeuren.
+
+**dictionaries** zijn objecten zonder [[Prototype]], gemaakt via `Object.create(null)`. Deze worden voornamelijk gebruikt om data in op te slaan.
