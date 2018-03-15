@@ -3887,3 +3887,67 @@ schedule( function(){
 
 // ACDB
 ```
+
+## You don't know JS - Async & Performance - Hoofdstuk 2
+
+Callbacks zijn een fundamenteel van asynchroniteit in JS, maar ze zijn niet genoeg om het hele spectrum van async programmeren in JS bij te houden.
+
+Callbacks zorgen ervoor dat we harder moeten gaan nadenken over de code die we schrijven, omdat ze een non-lineaire, non-sequentiele flow volgen.
+
+Callbacks hebben last van **inversion of control**, wat betekent dat ze impliciet de controle overgeven aan een andere partij (vaak third party), om jouw programma goed te laten verlopen.
+Dit kan voor meerdere problemen zorgen, waaronder bijvoorbeeld of een callback meer is aangeroepen dan de bedoelde hoeveelheid.
+
+Vaak *fake* je multitasken, in dat je snel van context switcht. We doen dingen alsnog *simultaan* en niet in *parallel*.
+
+De reden dat het moeilijk is om asynchrone code te schrijven,vooral als alles wat we hebben callbacks zijn, is omdat de gedachtestroom van een mens tegelijk denken en plannen niet natuurlijk is voor ons.
+
+**House of cards**: De code werkt, geen idee waarom, niemand kom eraan.
+
+**Nested / Chained Callbacks**
+```js
+listen( "click", function handler(evt){
+	setTimeout( function request(){
+		ajax( "http://some.url.1", function response(text){
+			if (text == "hello") {
+				handler();
+			}
+			else if (text == "world") {
+				request();
+			}
+		} );
+	}, 500) ;
+} );
+```
+
+Dit wordt ook wel **callback hell / pyramid of doom** genoemd.
+Dit draait niet per se om de nesting, maar om alle eventuele paden die je er aan toevoegd (zoals error handling), die ervoor zorgen, dat het onderhouden of updaten onmogelijk wordt.
+
+**Trust issues** gaan over het weggeven van de controle van je code, aan third party code.
+
+```js
+function addNumbers(x,y) {
+	// ensure numerical input
+	x = Number( x );
+	y = Number( y );
+
+	// + will safely do numeric addition
+	return x + y;
+}
+
+addNumbers( 21, 21 );	// 42
+addNumbers( 21, "21" );	// 42
+```
+
+Dit is een voorbeeld van het geopolitische principe **trust but verify**.
+
+Manieren om callbacks toch een soort van te laten werken zijn:
+* **Split Callbacks** (callback en error callback verdeeld over twee parameters).
+* **Error-first style / Node style** (De eerste parameter is de error, als er een error is, wordt de rest van de callbacks niet uitgevoerd).
+
+Trust issues:
+* Nooit worden aangeroepen van de callback.
+* Te vroeg worden aangeroepen.
+
+De fictionele chaos, verbonden met sync/async heet **Zalgo**.
+
+Callbacks kunnen vrijwel alles doen, wat je wilt, maar je moet er hard voor werken om het *goed* voor elkaar te krijgen.
