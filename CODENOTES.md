@@ -3951,3 +3951,184 @@ Trust issues:
 De fictionele chaos, verbonden met sync/async heet **Zalgo**.
 
 Callbacks kunnen vrijwel alles doen, wat je wilt, maar je moet er hard voor werken om het *goed* voor elkaar te krijgen.
+
+## You don't know JS - Async & Performance - Hoofdstuk 3
+
+Callbacks hadden de volgende twee problemen:
+* Het missen van sequentialiteit
+* Het missen van vertrouwen
+
+**Promise**: Een paradigm, dat gaat over het terugnemen van de controle aan onze code, als de taak is volbracht bij de andere partij. In dat geval kan onze code bepalen wat vervolgens te doen.
+
+**Immediately**: Duidt op het voorang krijgen in de Job queue, niet dat iets per direct nu synchroon gebeurt.
+
+Promises lossen het **inversion of control** van het volgende hoofdstuk op.
+
+Promises halen callbacks niet weg, maar ze verplaatsen de **orchestration** van die callbacks naar een *vertrouwelijk* tussen mechanisme, die tussen ons en het andere utility zit.
+
+Promise chains beginnen op een basale manier (maar niet perfect) een betere manier te vormen om asyncrone code in synchrone vorm te schrijven.
+
+**IOU**: I owe you.
+
+Promises maken gebruik van **future values**. (Waardes die later beschikbaar zijn).
+Een belangrijk aspect van future values, is dat ze kunnen slagen of falen.
+
+`Promise.all([...])` neemt een array van promises en returnt een nieuwe promise, die wacht tot alle promises daarbinnen klaar zijn.
+
+Een promise die niet kan resolven, krijgt een **rejection reason / value** mee.
+
+Je kan in een .then een functie mee geven die uitgevoerd moet worden als iets goed gaat, en een als iets fout gaat.
+`.then(resolve, error)`
+
+Als een promise is geresolved, blijft het dat ook, voor altijd. Het wordt dan als het ware een **immutable value**, die wel zo vaak als gewenst, kan worden bekeken.
+
+**Uninversion of control** zorgt voor een beter **separation of concerns**.
+
+**Revealing constructor**: `new Promise( function () {})`
+
+Als je wilt checken of iets een Promise zal zijn, kan je niet `instanceof Promise` doen.
+
+Dit is, omdat:
+Je bijvoorbeeld kan een Promise van een ander browser window krijgen (bijvoorbeeld via een iframe), die een andere promise heeft dan degene in het huidige window/frame.
+
+De term voor **type checks**, die gokken over het type van een waarde, gebaseerd op de vorm (welke properties er beschikbaar zijn) heet **duck typing**.
+
+### De redenen dat promises het vertrouwen terugwinnen
+
+#### Calling too early
+Zelfs een promise die direct wordt geresolved, is niet synchroon, als je er via then een aanroept. Dus een promise .then functie zal nooit te vroeg worden aangeroepen.
+
+#### Calling too late
+resolve en reject callbacks zullen worden gecalld, op het volgende asyncrone moment.
+Er is geen manier om andere promises te vertragen, vanuit andere promises.
+
+```js
+p.then( function(){
+	p.then( function(){
+		console.log( "C" );
+	} );
+	console.log( "A" );
+} );
+p.then( function(){
+	console.log( "B" );
+} );
+// A B C
+```
+
+#### Promise Scheduling Quirks
+
+Soms kan het zijn dat het plannen van promises anders loopt dan je denkt:
+
+```js
+var p3 = new Promise( function(resolve,reject){
+	resolve( "B" );
+} );
+
+var p1 = new Promise( function(resolve,reject){
+	resolve( p3 );
+} );
+
+var p2 = new Promise( function(resolve,reject){
+	resolve( "A" );
+} );
+
+p1.then( function(v){
+	console.log( v );
+} );
+
+p2.then( function(v){
+	console.log( v );
+} );
+
+// A B  <-- not  B A  as you might expect
+```
+
+#### Never calling the callback
+
+Hier weet een promise ook een oplossing voor, dat heet **race**.
+
+Een voorbeeld van zo'n implementatie is:
+
+```js
+// a utility for timing out a Promise
+function timeoutPromise(delay) {
+	return new Promise( function(resolve,reject){
+		setTimeout( function(){
+			reject( "Timeout!" );
+		}, delay );
+	} );
+}
+
+// setup a timeout for `foo()`
+Promise.race( [
+	foo(),					// attempt `foo()`
+	timeoutPromise( 3000 )	// give it 3 seconds
+] )
+.then(
+	function(){
+		// `foo(..)` fulfilled in time!
+	},
+	function(err){
+		// either `foo()` rejected, or it just
+		// didn't finish in time, so inspect
+		// `err` to know which
+	}
+);
+```
+
+#### Calling too few or too many times
+
+Een promise wordt altijd één keer aangeroepen.
+Promises kunnen maar één keer worden geresolved.
+
+#### Failing to pass along any parameters/environment
+
+Als je geen argumenten of iets dergelijks meegeeft, zal deze altijd undefined zijn.
+
+Je kan weten of iets een promise is, met `Promise.resolve()`.
+
+`Promise.resolve()` accepteert alles wat *thenable* is en unwrapt het naar een non-thenable waarde.
+Om vertrouwen te verkrijgen is er niks mis met het filteren door Promise.resolve().
+Je krijgt een echte promise terug van promise.resolve.
+
+Redenen waarom je promises kan chainen:
+* Iedere keer als je then aanroept op een promise, maakt het en returnt het een nieuwe promise.
+
+De tweede parameter in een Promise constructor, is altijd een **rejected**.
+De eerste naam van een Promise constructor kan je het beste resolve noemen.
+
+**Pit of despair**: Fouten worden beboet, en zijn heel moeilijk om goed te krijgen (error first).
+**Pit of success**: In dit geval wordt alles verwacht als goed, en is het moeilijk om in een fout te schieten.
+
+Promises moeten eigenlijk een pit of success worden, waar:
+* Op de volgende Job of event loop tick, er een rejection wordt gegeven in de developer console, als er geen error is geregisteerd voor die Promise.
+* Als je een rejected Promise in die state wilt houden, voordat je het kan observeren, kan je defer() gebruiken.
+
+### Promise.all([...])
+Een **gate** is een mechanisme, die wacht op twee of meer parallele / concurrent taken om te volbrengen, voordat er wordt doorgegegaan. In JS heet dit `Promise.All([])`
+
+### Promise.race([...])
+Een **latch** is een mechanisme, die reageert op de eerste promise die wordt volbracht. In JS heet dit een **race**.
+
+Promises kunnen niet worden uitgezet.
+
+*Niet in ES6*
+* Promise.none([]) hetzelfde als all, behalve dat alle promises moeten worden gereject.
+* Promise.any([]) hetzelfde als all, maar het negeert alle rejections. Er hoeft er slechts een te fulfillen.
+* Promise.first({}) en Promise.last({}) respectivelijk over welke promise moet worden gefulfillt.
+
+Negatief aan promises:
+Er is geen manier om errors te verkrijgen, die misschien gebeuren in de chain.
+
+**SoC** Separation of Concerns / Capabilities.
+
+Een callback-verwachtende functie in een Promise-aware functie wrappen heet ook wel **lifting / Promisifying**.
+Het kan ook **Promisory** heten.
+
+## You don't know JS - Async & Performance - Hoofdstuk 4 - Generators
+
+**Generator** maakt het mogelijk om asynchrone flow uit te drukken in opeenvolgend-uitziende code.
+
+Een pause plek in de code aanduiden, kan met **yield**.
+
+Een generator functie heeft vaak een * voor diens naam, of na het function keyword.
