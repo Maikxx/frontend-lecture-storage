@@ -4128,7 +4128,140 @@ Het kan ook **Promisory** heten.
 ## You don't know JS - Async & Performance - Hoofdstuk 4 - Generators
 
 **Generator** maakt het mogelijk om asynchrone flow uit te drukken in opeenvolgend-uitziende code.
+Het is een functie-type, die niet doet aan **run-to-completion**.
+
+Het pauze / hervat mechanisme is **cooperative**, in plaats van **preemptive**, wat betekent, dat een generator zelf de kracht beschikt om zichzelf te pauzeren, terwijl de **iterator**, die de generator beheerd, slechts de generator kan hervatten.
+
+Het voornaamste voordeel aan generators, is dat het eruit ziet als synchrone code.
 
 Een pause plek in de code aanduiden, kan met **yield**.
 
 Een generator functie heeft vaak een * voor diens naam, of na het function keyword.
+
+```js
+var x = 1;
+
+function *foo() {
+	x++;
+	yield; // pause!
+	console.log( "x:", x );
+}
+
+function bar() {
+	x++;
+}
+
+// construct an iterator `it` to control the generator
+var it = foo();
+
+// start `foo()` here!
+it.next();
+x;						// 2
+bar();
+x;						// 3
+it.next();				// x: 3
+```
+
+`var it = foo()` voert nog niet de functie uit, maar maakt er een **iterator** van.
+
+Op het moment dat foo, na de eerste `it.next()`, bij `yield` aankomt, stopt deze next() call, maar is de functie nog lopende en actief, maar wel in een gepauseerde staat.
+
+De laatste `it.next()` hervat de executie van de functie, van waar deze was gepauseerd.
+
+Een generator kan alsnog input (argumenten) nemen en output geven (returnen).
+
+```js
+function *foo(x) {
+	var y = x * (yield);
+	return y;
+}
+
+var it = foo( 6 );
+
+// start `foo(..)`
+it.next();
+
+var res = it.next( 7 );
+
+res.value;		// 42
+```
+
+In generators zit ook altijd een **assumed/implicit return**.
+**Iterable** is een object die een iterator bevat, die over waardes kan itereren.
+
+**Abnormal completion / Early termination**: Zorgt ervoor dat een generator niet in een bepaalde staat blijft hangen, nadat er uit de loop is ge`break`t.
+
+Heten ook wel **Pausible / iterable functions**.
+JS loopt van rechts naar links de code af.
+
+Generators die Promises yielden is een heel erg krachtig *patroon*, dat het in ES7 `async/await` heet.
+
+Je kan ook Generators *delegaten*, via **yield-delegation**.
+
+```js
+function *foo() {
+	console.log( "`*foo()` starting" );
+	yield 3;
+	yield 4;
+	console.log( "`*foo()` finished" );
+}
+
+function *bar() {
+	yield 1;
+	yield 2;
+	yield *foo();	// `yield`-delegation!
+	yield 5;
+}
+
+var it = bar();
+
+it.next().value;	// 1
+it.next().value;	// 2
+it.next().value;	// `*foo()` starting
+					// 3
+it.next().value;	// 4
+it.next().value;	// `*foo()` finished
+					// 5
+```
+
+Het doel van delegation is het organiseren van code.
+
+Een **thunk** is een JS functie (zonder parameters), die verbonden is met een andere functie.
+
+```js
+function foo(x,y) {
+	return x + y;
+}
+
+function fooThunk() {
+	return foo( 3, 4 );
+}
+
+// later
+
+console.log( fooThunk() );	// 7
+```
+
+```js
+function thunkify(fn) {
+	return function() {
+		var args = [].slice.call( arguments );
+		return function(cb) {
+			args.push( cb );
+			return fn.apply( null, args );
+		};
+	};
+}
+
+var whatIsThis = thunkify( foo );
+
+var fooThunk = whatIsThis( 3, 4 );
+
+// later
+
+fooThunk( function(sum) {
+	console.log( sum );		// 7
+} );
+```
+
+In het bovenstaande geval is `whatIsThis` eigenlijk iets dat thunks maakt, vanuit foo. Het is dus eigenlijk een **factory** voor **thunks**. Een **thunktory**.
