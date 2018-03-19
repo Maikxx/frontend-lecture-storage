@@ -4265,3 +4265,277 @@ fooThunk( function(sum) {
 ```
 
 In het bovenstaande geval is `whatIsThis` eigenlijk iets dat thunks maakt, vanuit foo. Het is dus eigenlijk een **factory** voor **thunks**. Een **thunktory**.
+
+## You don't know JS - Async & Performance - Hoofdstuk 5 - Program Performance
+
+De perceptie die de gebruiker heeft van performance, is net zo, als het niet meer, zo belangrijk, als het echt meetbare.
+
+### Web workers
+
+**Virtual threading**: Het splitsen van een programma in twee delen, waar een deel op de belangrijkste UI thread loopt en het andere deel op een andere threat.
+
+**Web workers** is een feature, sinds HTML5, die er voor kan zorgen dat er meerdere instances van de JS engine worden verzorgd. Elk deel hiervan is dan een Web Worker.
+Dit soort parallelisme heet **task parallelism**.
+
+```js
+var w1 = new Worker( "http://some.url.1/mycoolworker.js" );
+```
+
+Op deze manier worden **dedicated workers** aangemaakt.
+Je kan ook **inline workers** maken, door gebruik te maken van **blob urls** (een nieuwe feature van HTML5). Dit is in feite een inline bestand, opgeslagen in een enkele binaire waarde.
+
+Workers hebben geen gedeelde scope of recourses, maar ze hebben we een basaal evenementen bericht systeem, die ze verbindt.
+
+Je kan luisteren naar events op de volgende manier:
+
+```js
+w1.addEventListener( "message", function(evt){
+	// evt.data
+} );
+```
+
+En je kan berichten sturen naar een andere worker, via:
+
+```js
+w1.postMessage( "something cool to say" );
+```
+
+In dit geval is de dedicated Worker in een 1-1 relatie met het programma, die het heeft gemaakt.
+
+Een Worker kan child Workers (**subworkers**) aanmaken.
+
+Als je een Worker wilt stoppen, zodat het stopt met alles waar hij mee bezig is roep je `terminate()` op die Worker aan.
+
+### Worker Environment
+
+Je kan in een worker ook andere files inladen via:
+
+```js
+importScripts()
+```
+
+Bekende gebruiksscenario's voor Web Workers:
+* Intensieve berekeningen uitvoeren.
+* Grote data sets sorteren.
+* Data operations (zoals comprimeren van bestanden, audio analyseren etc.)
+* Communicatie systemen, met een groot netwerkverkeer.
+
+### Data transfer
+
+Het thema van het bovenstaande rijtje, is dat ze een gedeeld kenmerk mee dragen, dat ze grote hoeveelheden informatie vereisen, om te worden overgedragen aan een andere thread, via het **event mechanisme**.
+
+Je kan tegenwoordig een object mee geven, een **Structured Cloning Algorithm**, om kopieën te maken van het object, aan de andere kant (lees thread).
+
+Een betere optie, vooral voor grotere data sets, is om **Transferable Objects** te gebruiken. Met dit principe geef je het eigendom van het object mee aan de Thread, maar blijft de data op de plek waar het was.
+
+```js
+// `foo` is a `Uint8Array` for instance
+
+postMessage( foo.buffer, [ foo.buffer ] );
+```
+
+Hier is de eerste parameter de *raw buffer* en de tweede, wat er moet worden getransferd.
+
+### Shared Workers
+
+Als je pagina meerdere tabladen, of vensters van dezelfde pagina support, dan wil je de recourse usage van de gebruiker zijn systeem verlagen, door duplicate Workers te voorkomen.
+
+De meest voorkomende manier om dit te doen, is via een **socket network connection**.
+
+In dit geval moet je een enkele gecentraliseerde Worker hebben, die alle instances van je pagina kan delen.
+
+```js
+var w1 = new SharedWorker( "http://some.url.1/mycoolworker.js" );
+```
+
+De unieke identifier voor een bepaalde Worker in dit geval heet een **port**.
+
+```js
+w1.port.addEventListener( "message", handleMessages );
+
+// ..
+
+w1.port.postMessage( "something cool" );
+```
+
+De port moet worden geinitialiseerd als:
+
+```js
+w1.port.start();
+```
+
+In de gedeelde worker moet er nu worden omgegaan met een nieuw event: **connect**.
+
+```js
+// inside the shared Worker
+addEventListener( "connect", function(evt){
+	// the assigned port for this connection
+	var port = evt.ports[0];
+
+	port.addEventListener( "message", function(evt){
+		// ..
+
+		port.postMessage( .. );
+
+		// ..
+	} );
+
+	// initialize the port connection
+	port.start();
+} );
+```
+
+### SIMD
+
+**Single instruction, multiple data** (SIMD) is een vorm van **data parallelisme**, in plaats van **task parallelisme**.
+
+SIMD maakt gebruik van **vectoren** van nummers, dit is een soort gespecialiseerde array.
+
+```js
+var v1 = SIMD.float32x4( 3.14159, 21.0, 32.3, 55.55 );
+var v2 = SIMD.float32x4( 2.1, 3.2, 4.3, 5.4 );
+
+var v3 = SIMD.int32x4( 10, 101, 1001, 10001 );
+var v4 = SIMD.int32x4( 10, 20, 30, 40 );
+
+SIMD.float32x4.mul( v1, v2 );	// [ 6.597339, 67.2, 138.89, 299.97 ]
+SIMD.int32x4.add( v3, v4 );		// [ 20, 121, 1031, 10041 ]
+```
+
+Hier boven staan twee type vector data: 32-bit floating-point nummers en 32-bit integers.
+
+**asm.js** is de naam voor een goed performende subset van de JS taal.
+
+```js
+var a = 42;
+
+// ..
+
+var b = a;
+```
+
+Kan ook zo geschreven worden:
+
+```js
+var a = 42;
+
+// ..
+
+var b = a | 0;
+```
+
+In dit geval gebruik je de **binaire of** (|) met de waarde 0, om er voor te zorgen dat de waarde zeker een 32-bits integer is.
+
+Een **heap** is een naam voor een gereserveerde plek in de memory, waar variabelen kunnen worden opgeslagen.
+
+## You don't know JS - Async & Performance - Hoofdstuk 6 - Benchmarking & Tuning
+
+De duratie van de tijd die je een bepaalde test hethaalt, komt van de accuratie van de timer die je gebruikt om het te testen.
+
+Om de **onzekerheid** (**error rate**) van een test onder de 1% te krijgen, moet je je test cyclus in iteraties van 750ms laten lopen.
+
+Om dit goed te testen moet je veel af weten van wiskunde en kun je **benchmark.js** gebruiken.
+
+```js
+function foo() {
+	// operation(s) to test
+}
+
+var bench = new Benchmark(
+	"foo test",				// test name
+	foo,					// function to test (just contents)
+	{
+		// ..				// optional extra options (see docs)
+	}
+);
+
+bench.hz;					// number of operations per second
+bench.stats.moe;			// margin of error
+bench.stats.variance;		// variance across samples
+// ..
+```
+
+De **setup** en **teardown** opties lopen niet voor de eerste iteratie van de test in de **outer loop**.
+
+In het benchmarking geval is er een **outer loop** (die herhalende cycles doet) en een **inner loop** (die herhalende test iteraties doet).
+
+Het testen van *niet-echte code* geeft je ook *niet-echte resultaten*.
+
+Het schrijven van goede tests, vereist het huiverende analytische denken, tussen de verschillen die bestaan in de twee test cases en of deze **opzettelijk** of **Niet opzettelijk** waren.
+
+**Unrolling recursion**: Een fenomeen waar de engine ziet dat de aangebrachte recursie makkelijk (meer geoptimaliseerd)kan worden uitgevoerd, met een loop.
+
+```js
+function factorial(n) {
+	if (n < 2) return 1;
+	return n * factorial( n - 1 );
+}
+
+factorial( 5 );		// 120
+
+// VS
+
+function factorial(n) {
+	if (n < 2) return 1;
+
+	var res = 1;
+	for (var i=n; i>1; i--) {
+		res *= i;
+	}
+	return res;
+}
+
+factorial( 5 );		// 120
+```
+
+Verschillende JS engines zijn niet gelijk, dus behandel ze ook niet alsof ze gelijk moeten zijn.
+
+### Big Picture
+
+Je moet alleen delen van de code optimaliseren, die ook veel gebruikt gaan worden of echt zichbaar zijn voor de gebruiker.
+
+### Tail Call Optimization (TCO)
+
+Dit is een ES6 feature, die gerelateerd is aan een specifieke vorm van optimalisatie, die kan voorkomen bij functie calls: **tail call optimization**.
+
+Een **tail call** is een functie call, vanuit de 'staart' van een andere functie, zodat het lijkt alsof er na deze call niets meer te doen is in de aanroepende functie.
+
+```js
+function foo(x) {
+	return x;
+}
+
+function bar(y) {
+	return foo( y + 1 );	// tail call
+}
+
+function baz() {
+	return 1 + bar( 40 );	// not tail call
+}
+
+baz();						// 42
+```
+
+Hier is bar geen tail call, omdat nadat foo en bar klaar zijn, er nog 1 moet worden toegevoegd aan de waarde van bar.
+
+Het aanroepen van een nieuwe functie vereist een extra hoeveelheid gereserveerd geheugen, om de **call stack** te onderhouden, genaamd de **stack frame**.
+
+Als TCO wordt uitgevoerd, zal de engine weten dat `foo(y+1)` in de **tail position** zit, wat betekent dat `bar()` vrijwel klaar is en als `foo()` aangeroepen wordt, er dus niet een nieuwe **stack frame** gemaakt hoeft te worden.
+
+Dit principe is voornamelijk nuttig bij **recursion**, zoals het voorbeeld van eerder:
+
+```js
+function factorial(n) {
+	function fact(n,res) {
+		if (n < 2) return res;
+
+		return fact( n - 1, n * res );
+	}
+
+	return fact( n, 1 );
+}
+
+factorial( 5 );		// 120
+```
+
+Deze versie is TCO friendly.
