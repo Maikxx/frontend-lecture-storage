@@ -4539,3 +4539,81 @@ factorial( 5 );		// 120
 ```
 
 Deze versie is TCO friendly.
+
+## You don't know JS - ES6 & Beyond - Hoofdstuk 1 - ES? Now & Future
+
+ES6 heeft op veel plekken een hele hoop nieuwe syntactische vormen.
+
+### Versioning
+
+De standaard voor JS heet officieel **ECMAScript**, of ES.
+ES3 was de eerste op grote schaal gebruikte basis voor JS.
+
+Door politieke redenen, is ES4 nooit uitgekomen.
+ES5 kwam uit in 2009, wat de standaard werd voor de moderne JS revolutie en de enorme explosie in browsers.
+
+Sinds ES6 (ES2015) is ES in jaarlijkse schema's gaan releasen.
+
+De toekomst van het JS versioning systeem, zal waarschijnlijk meer veranderen naar feature-based, in plaats van per jaar.
+
+### Transpiling
+
+**Transpiling** is transformation en compiling in één.
+
+### Shims / Polyfills
+
+Een shim is hetzelfde als een polyfill.
+Syntax can niet worden gepolyfilled, maar API's kunnen dat vaak wel.
+
+## You don't know JS - ES6 & Beyond - Hoofdstuk 2 - Syntax
+
+### Let
+`let` - Nieuwe vorm van variabelen aanmaken.
+
+**Explicit block scoping**
+
+```js
+let (a = 2, b, c) {
+	// ..
+}
+```
+
+Deze bovenstaande code is niet in de ES6 standaard.
+
+Het `let` mechanisme is nieuwe en is **impliciet**, wat ons even doet denken, dat heet **mental tax**.
+
+`let` moet altijd aan de bovenkant van een scope, om problemen te voorkomen.
+
+```js
+var funcs = [];
+
+for (let i = 0; i < 5; i++) {
+	funcs.push( function(){
+		console.log( i );
+	} );
+}
+
+funcs[3]();		// 3
+
+// Is hetzelfde als:
+
+var funcs = [];
+
+for (var i = 0; i < 5; i++) {
+	let j = i;
+	funcs.push( function(){
+		console.log( j );
+	} );
+}
+
+funcs[3]();		// 3
+```
+
+### Const
+
+Const is nog een vorm van block-scoped verklaringen.
+Dit zijn variabelen die **read-only** zijn, nadat je de waarde hebt geset.
+
+Als de waarde van een const een array of object is, kan die alsnog worden veranderd.
+
+#### Const or not
