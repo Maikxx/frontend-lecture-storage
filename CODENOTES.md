@@ -4617,3 +4617,219 @@ Dit zijn variabelen die **read-only** zijn, nadat je de waarde hebt geset.
 Als de waarde van een const een array of object is, kan die alsnog worden veranderd.
 
 #### Const or not
+
+Het is niet echt bescherming, maar eerder dat het je beschermt tegen perongeluk veranderen van de waarde.
+
+### Block-scoped functions
+
+```js
+if (something) {
+	function foo() {
+		console.log( "1" );
+	}
+}
+else {
+	function foo() {
+		console.log( "2" );
+	}
+}
+
+foo();		// Reference Error
+```
+
+### Spread / Rest
+
+`...` is de **spread / rest** operator, afhankelijk van waar het gebruikt wordt.
+Als het voor een array (of andere iterable) wordt geplaatst is het een spread.
+
+```js
+function foo(x,y,z) {
+	console.log( x, y, z );
+}
+
+foo( ...[1,2,3] );				// 1 2 3
+```
+
+De rest operator:
+
+```js
+function foo(x, y, ...z) {
+	console.log( x, y, z );
+}
+
+foo( 1, 2, 3, 4, 5 );
+```
+
+### Default parameter values
+
+```js
+function foo(x = 11, y = 31) {
+	console.log( x + y );
+}
+
+foo();					// 42
+foo( 5, 6 );			// 11
+foo( 0, 42 );			// 42
+
+foo( 5 );				// 36
+foo( 5, undefined );	// 36 <-- `undefined` is missing
+foo( 5, null );			// 5  <-- null coerces to `0`
+
+foo( undefined, 6 );	// 17 <-- `undefined` is missing
+foo( null, 6 );			// 6  <-- null coerces to `0`
+```
+
+### Default value expressions
+
+```js
+function bar(val) {
+	console.log( "bar called!" );
+	return y + val;
+}
+
+function foo(x = y + 3, z = bar( x )) {
+	console.log( x, z );
+}
+
+var y = 5;
+foo();								// "bar called"
+									// 8 13
+foo( 10 );							// "bar called"
+									// 10 15
+y = 6;
+foo( undefined, 10 );				// 9 10
+```
+
+### Destructuring
+
+```js
+var [ a, b, c ] = foo();
+var { x: x, y: y, z: z } = bar();
+
+console.log( a, b, c );				// 1 2 3
+console.log( x, y, z );
+```
+
+#### Object property assignment pattern
+
+Als je, zoals in de vorige snippet `{ x, .. }` doet, haal je het `x:` deel van de code af.
+
+Als je dit kan schrijven, is het enige nut van het ophalen van objecten in de lange vorm uit andere objecten, het om zetten van de namen van de variabelen.
+
+```js
+var { x: bam, y: baz, z: bap } = bar();
+
+console.log( bam, baz, bap );		// 4 5 6
+console.log( x, y, z );				// ReferenceError
+```
+
+In de orginele object notatie volgt het het volgende schema:
+*target: source* en *property-alias: value*.
+```js
+var X = 10, Y = 20;
+
+var o = { a: X, b: Y };
+
+console.log( o.a, o.b );			// 10 20
+```
+
+Bij de nieuwe variant, met destructuring, is dat patroon omgedraaid: *source: target*.
+
+#### Not just declarations
+
+```js
+var a, b, c, x, y, z;
+
+[a,b,c] = foo();
+( { x, y, z } = bar() );
+
+console.log( a, b, c );				// 1 2 3
+console.log( x, y, z );				// 4 5 6
+```
+
+In het bovenstaande geval zie je, dat je ze ook als losse operators kan gebruiken. Echter bij object destructuring, moeten er `()` om heen, anders denkt de engine dat er een block statement wordt gemaakt.
+
+Je kan ook computed properties gebruiken.
+
+```js
+var which = "x",
+	o = {};
+
+( { [which]: o[which] } = bar() );
+
+console.log( o.x );					// 4
+```
+
+```js
+// Omdraaien van twee variabelen.
+var x = 10, y = 20;
+
+[ y, x ] = [ x, y ];
+
+console.log( x, y );				// 20 10
+```
+
+#### Repeated assignments
+
+Je kan met object destructuring een *source property*, meerdere keren destructuren.
+
+```js
+var { a: X, a: Y } = { a: 1 };
+
+X;	// 1
+Y;	// 1
+```
+
+Je kan ook sub-objecten en arrays destructuren:
+
+```js
+var { a: { x: X, x: Y }, a } = { a: { x: 1 } };
+
+X;	// 1
+Y;	// 1
+a;	// { x: 1 }
+
+( { a: X, a: Y, a: [ Z ] } = { a: [ 1 ] } );
+
+X.push( 2 );
+Y[0] = 10;
+
+X;	// [10,2]
+Y;	// [10,2]
+Z;	// 1
+```
+
+De betere vorm om dit te schrijven, voor leesbaarheid:
+
+```js
+var {
+	a: {
+		b: [ c, d ],
+		e: { f }
+	},
+	g
+} = obj;
+```
+
+#### Destructuring assignment expressions
+
+```js
+var o = { a:1, b:2, c:3 },
+	a, b, c, p;
+
+p = { a, b, c } = o;
+
+console.log( a, b, c );			// 1 2 3
+p === o;						// true
+```
+
+#### Too many, too few, just enough
+
+Je hoeft niet alle waardes die beschikbaar zijn te destructuren.
+
+```js
+var [,b] = foo();
+var { x, z } = bar();
+
+console.log( b, x, z );				// 2 4 6
+```
