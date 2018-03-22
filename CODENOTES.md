@@ -4833,3 +4833,163 @@ var { x, z } = bar();
 
 console.log( b, x, z );				// 2 4 6
 ```
+
+#### Default value assignment
+
+```js
+var [ a = 3, b = 6, c = 9, d = 12 ] = foo();
+var { x = 5, y = 10, z = 15, w = 20 } = bar();
+
+console.log( a, b, c, d );			// 1 2 3 12
+console.log( x, y, z, w );			// 4 5 6 20
+```
+
+Je kan dit ook combineren met de **alternative assignment expression**.
+
+```js
+var { x, y, z, w: WW = 20 } = bar();
+
+console.log( x, y, z, WW );			// 4 5 6 20
+```
+
+#### Nested destructuring
+
+```js
+var a1 = [ 1, [2, 3, 4], 5 ];
+var o1 = { x: { y: { z: 6 } } };
+
+var [ a, [ b, c, d ], e ] = a1;
+var { x: { y: { z: w } } } = o1;
+
+console.log( a, b, c, d, e );		// 1 2 3 4 5
+console.log( w );					// 6
+```
+
+#### Destructuring parameters
+
+```js
+function foo( [ x, y ] ) {
+	console.log( x, y );
+}
+
+foo( [ 1, 2 ] );					// 1 2
+foo( [ 1 ] );						// 1 undefined
+foo( [] );							// undefined undefined
+```
+
+#### Destructuring defaults + parameter defaults
+
+```js
+function f6({ x = 10 } = {}, { y } = { y: 10 }) {
+	console.log( x, y );
+}
+
+f6();								// 10 10
+f6( undefined, undefined );			// 10 10
+f6( {}, undefined );				// 10 10
+
+f6( {}, {} );						// 10 undefined
+f6( undefined, {} );				// 10 undefined
+
+f6( { x: 2 }, { y: 3 } );			// 2 3
+```
+
+#### Nested Defaults: Destructured and Restructured
+
+Het setten van properties van geneste objects, via **object destructuring** en **restructuring**.
+
+### Object Literal Extensions
+
+#### Concise Properties
+
+```js
+var x = 2, y = 3,
+	o = {
+		x,
+		y
+	};
+```
+
+#### Concise Methods
+
+```js
+// Oud
+var o = {
+	x: function(){
+		// ..
+	},
+	y: function(){
+		// ..
+	}
+}
+
+// Nieuw
+var o = {
+	x() {
+		// ..
+	},
+	y() {
+		// ..
+	}
+}
+```
+
+### ES5 Getter/Setter
+
+```js
+var o = {
+	__id: 10,
+	get id() { return this.__id++; },
+	set id(v) { this.__id = v; }
+}
+
+o.id;			// 10
+o.id;			// 11
+o.id = 20;
+o.id;			// 20
+
+// and:
+o.__id;			// 21
+o.__id;			// 21 -- still!
+```
+
+### Computed Property Names
+
+```js
+// Oud
+var prefix = "user_";
+
+var o = {
+	baz: function(..){ .. }
+};
+
+o[ prefix + "foo" ] = function(..){ .. };
+o[ prefix + "bar" ] = function(..){ .. };
+
+// Nieuw
+var prefix = "user_";
+
+var o = {
+	baz: function(..){ .. },
+	[ prefix + "foo" ]: function(..){ .. },
+	[ prefix + "bar" ]: function(..){ .. }
+	..
+};
+```
+
+### Setting [[Prototype]]
+
+Soms kan het handig zijn om de [[Prototype]] van een object te assignen, op hetzelfde moment dat je de object literal verklaart.
+
+```js
+var o1 = {
+	// ..
+};
+
+var o2 = {
+	__proto__: o1,
+	// ..
+};
+```
+
+### Object `super`
