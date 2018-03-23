@@ -4993,3 +4993,443 @@ var o2 = {
 ```
 
 ### Object `super`
+
+Super gedraagt zich bijna hetzelfde in standaard objecten, als ik 'classes'.
+
+```js
+var o1 = {
+	foo() {
+		console.log( "o1:foo" );
+	}
+};
+
+var o2 = {
+	foo() {
+		super.foo();
+		console.log( "o2:foo" );
+	}
+};
+
+Object.setPrototypeOf( o2, o1 );
+
+o2.foo();		// o1:foo
+				// o2:foo
+```
+
+### Template Literals
+
+De naam is misleading, omdat het vrij weinig met *templates* te maken heeft.
+Het zou eigenlijk **interpolated string literal** moeten heten of **interpoliterals**.
+
+```js
+var name = "Kyle";
+
+var greeting = `Hello ${name}!`;
+
+console.log( greeting );			// "Hello Kyle!"
+console.log( typeof greeting );		// "string"
+```
+
+Het handige van string literals is dat ze over meerdere lijnen kunnen worden geschreven.
+
+```js
+var text =
+`Now is the time for all good men
+to come to the aid of their
+country!`;
+```
+
+#### Interpolated Expressions
+
+In de `${}` mogen gewoon functie calls gedaan worden, inline function expression gemaakt worden en zelfs andere interpolated string literals gezet worden.
+
+```js
+function upper(s) {
+	return s.toUpperCase();
+}
+
+var who = "reader";
+
+var text =
+`A very ${upper( "warm" )} welcome
+to all of you ${upper( `${who}s` )}!`;
+
+console.log( text );
+// A very WARM welcome
+// to all of you READERS!
+```
+
+#### Expression Scope
+
+```js
+function foo(str) {
+	var name = "foo";
+	console.log( str );
+}
+
+function bar() {
+	var name = "bar";
+	foo( `Hello from ${name}!` );
+}
+
+var name = "global";
+
+bar();					// "Hello from bar!"
+```
+
+#### Tagged Template Literals
+
+```js
+function foo(strings, ...values) {
+	console.log( strings );
+	console.log( values );
+}
+
+var desc = "awesome";
+
+foo`Everything is ${desc}!`;
+// [ "Everything is ", "!"]
+// [ "awesome" ]
+```
+
+Dit is een speciaal soort functie call, die niet de `()` nodig heeft.
+
+De **tag** is het deel voor de string literal en is een functie waarde die aangeroepen moet worden.
+
+Het eerste argument is een array van alle standaard strings in een literal.
+Het tweede argument is een array van alle waardes in zo'n literal.
+
+#### Raw Strings
+
+```js
+function showraw(strings, ...values) {
+	console.log( strings );
+	console.log( strings.raw );
+}
+
+showraw`Hello\nWorld`;
+// [ "Hello
+// World" ]
+// [ "Hello\nWorld" ]
+```
+
+Op deze manier blijven de `\n` karakters bijvoorbeeld zo, in plaats van een echte newline te worden.
+
+ES6 heeft een speciale functie voor **raw strings**.
+
+```js
+console.log( `Hello\nWorld` );
+// Hello
+// World
+
+console.log( String.raw`Hello\nWorld` );
+// Hello\nWorld
+
+String.raw`Hello\nWorld`.length;
+// 12
+```
+
+### Arrow functions
+
+```js
+function foo(x,y) {
+	return x + y;
+}
+
+// versus
+
+var foo = (x,y) => x + y;
+```
+
+Arrow functions zijn altijd **function expressions**, er is geen **function declaration** vorm van.
+
+Arrow functions zijn voornamelijk ontworpen om het `this` gedrag in een bepaalde manier te veranderen.
+
+```js
+// Oud
+var controller = {
+	makeRequest: function(..){
+		var self = this;
+
+		btn.addEventListener( "click", function(){
+			// ..
+			self.makeRequest(..);
+		}, false );
+	}
+};
+
+// Nieuw
+var controller = {
+	makeRequest: function(..){
+		btn.addEventListener( "click", () => {
+			// ..
+			this.makeRequest(..);
+		}, false );
+	}
+};
+```
+
+![Arrow function decision chart](https://raw.githubusercontent.com/getify/You-Dont-Know-JS/master/es6%20%26%20beyond/fig1.png)
+
+### For..of loops
+
+**For..of** loopt over een set van waardes, die gemaakt zijn door een **iterator**.
+
+Een **iterable** is een object, die een iterator kan maken, die gebruikt kan worden door een loop.
+
+```js
+var a = ["a","b","c","d","e"];
+
+for (var idx in a) {
+	console.log( idx );
+}
+// 0 1 2 3 4
+
+for (var val of a) {
+	console.log( val );
+}
+// "a" "b" "c" "d" "e"
+```
+
+Standaard iterables:
+* Arrays
+* Strings
+* Generators
+* Collections / TypedArrays
+
+Objecten hebben niet standaard een for..of manier.
+
+Je kan dit soort loops stoppen met break, continue, returns (in functies) en thrown exceptions.
+
+### Regular Expressions
+
+#### Unicode flag
+
+De **u flag** voor ES6+ regex zorgt ervoor dat een regex unicodes kan vinden.
+
+Standaard worden JS strings gezien als 16-bits karakters, die overeen komen met **basic multilingual plane (BMP)**.
+
+Veel UTF-16 karakters vallen hier niet onder. Sinds ES6 kan je hier dus wel voor zorgen.
+
+Deze flag zet je aan met `/u`
+
+#### Sticky Flag
+
+De **y flag**, ofwel **sticky mode**. Deze mode betekent dat de regex een virtuele **anchor** heeft aan het begin, die ervoor zorgt dat er alleen gematcht wordt op basis van de regex's *lastIndex* property.
+
+```js
+// Non Sticky
+var re1 = /foo/,
+	str = "++foo++";
+
+re1.lastIndex;			// 0
+re1.test( str );		// true
+re1.lastIndex;			// 0 -- not updated
+
+re1.lastIndex = 4;
+re1.test( str );		// true -- ignored `lastIndex`
+re1.lastIndex;			// 4 -- not updated
+
+// Sticky
+var re2 = /foo/y,		// <-- notice the `y` sticky flag
+	str = "++foo++";
+
+re2.lastIndex;			// 0
+re2.test( str );		// false -- "foo" not found at `0`
+re2.lastIndex;			// 0
+
+re2.lastIndex = 2;
+re2.test( str );		// true
+re2.lastIndex;			// 5 -- updated to after previous match
+
+re2.test( str );		// false
+re2.lastIndex;			// 0 -- reset after previous match failure
+```
+
+### Number Literal Extensions
+
+Vroeger zagen nummers er als volgt uit:
+
+```js
+var dec = 42,
+	oct = 052,
+	hex = 0x2a;
+
+// De octal vorm zorgde nog al eens voor problemen.
+Number( "42" );				// 42
+Number( "052" );			// 52
+Number( "0x2a" );			// 42
+```
+
+Er is nu een nieuwe **octal** vorm nummer.
+
+```js
+var dec = 42,
+	oct = 0o52,			// or `0O52` :(
+	hex = 0x2a,			// or `0X2a` :/
+	bin = 0b101010;		// or `0B101010` :/
+```
+
+Deze kunnen allemaal gecoerced worden naar nummers.
+
+```js
+Number( "42" );			// 42
+Number( "0o52" );		// 42
+Number( "0x2a" );		// 42
+Number( "0b101010" );	// 42
+```
+
+Je kan ook nummers omzetten in hun string variant, met verschillende types (niet nieuw in ES6).
+
+```js
+var a = 42;
+
+a.toString();			// "42" -- also `a.toString( 10 )`
+a.toString( 8 );		// "52"
+a.toString( 16 );		// "2a"
+a.toString( 2 );		// "101010"
+```
+
+### Unicode
+
+Unicode karakters (zoals in veel verschillende talen) liggen tussen `0x0000` en `0xFFFF`. Deze heten **Basic Multilingual Plane (BMP)**.
+
+Er lopen nog veel meer unicode karakters buiten deze BMP, tot `0x10FFFF`. Deze heten ook wel **astral symbols**.
+
+Vroeger kon je unicode gebruiken in JS met:
+
+```js
+var snowman = "\u2603";
+console.log( snowman );			// "☃"
+```
+
+Om **astral symbols** te krijgen moest je een **surrogate pair** gebruiken.
+
+```js
+var gclef = "\uD834\uDD1E";
+console.log( gclef );			// "𝄞"
+```
+
+Sinds ES6 kan dit op de volgende manier:
+
+```js
+var gclef = "\u{1D11E}";
+console.log( gclef );			// "𝄞"
+```
+
+#### Unicode-Aware String Operations
+
+```js
+var snowman = "☃";
+snowman.length;					// 1
+
+var gclef = "𝄞";
+gclef.length;					// 2
+```
+
+Dit kan opgelost worden op de volgende manier:
+
+```js
+var gclef = "𝄞";
+
+[...gclef].length;				// 1
+Array.from( gclef ).length;		// 1
+```
+
+### Symbols
+
+Symbols zijn sinds ES6 een nieuw primitive type.
+Symbols hebben geen literal form.
+
+```js
+var sym = Symbol( "some optional description" );
+
+typeof sym;		// "symbol"
+```
+
+De parameter in de `Symbol()` is optioneel, maar wordt gebruikt als een beschrijving van het doel van deze symbol.
+
+```js
+sym.toString();		// "Symbol(some optional description)"
+```
+
+```js
+sym instanceof Symbol;		// false
+
+var symObj = Object( sym );
+symObj instanceof Symbol;	// true
+
+symObj.valueOf() === sym;	// true
+```
+
+Het doel van een symbol is om een string-achtige waarde te maken, die niet met een andere waarde kan botsen.
+
+```js
+const EVT_LOGIN = Symbol( "event.login" );
+```
+
+Je kan het dan gebruiken in plaats van `event.login`.
+
+```js
+evthub.listen( EVT_LOGIN, function(data){
+	// ..
+} );
+```
+
+In een object zijn symbols niet verborgen of onveranderbaar.
+
+```js
+const INSTANCE = Symbol( "instance" );
+
+function HappyFace() {
+	if (HappyFace[INSTANCE]) return HappyFace[INSTANCE];
+
+	function smile() { .. }
+
+	return HappyFace[INSTANCE] = {
+		smile: smile
+	};
+}
+
+var me = HappyFace(),
+	you = HappyFace();
+
+me === you;			// true
+```
+
+#### Symbol Registry
+
+Je kan Symbols georganiseerd opslaan als volgt.
+
+```js
+const EVT_LOGIN = Symbol.for( "event.login" );
+
+console.log( EVT_LOGIN );		// Symbol(event.login)
+```
+
+#### Symbols as Object Properties
+
+```js
+var o = {
+	foo: 42,
+	[ Symbol( "bar" ) ]: "hello world",
+	baz: true
+};
+
+Object.getOwnPropertyNames( o );	// [ "foo","baz" ]
+
+// Om deze wel op te halen gebruik je:
+Object.getOwnPropertySymbols( o );	// [ Symbol(bar) ]
+```
+
+#### Built-In Symbols
+
+Deze zijn niet in de globale symbol registry.
+
+```js
+var a = [1,2,3];
+
+a[Symbol.iterator];			// native function
+```
+
+## You don't know JS - ES6 & Beyond - Hoofdstuk 3 - Organization
