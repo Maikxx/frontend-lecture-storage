@@ -5433,3 +5433,11 @@ a[Symbol.iterator];			// native function
 ```
 
 ## You don't know JS - ES6 & Beyond - Hoofdstuk 3 - Organization
+
+**Iterators** geven synchrone toegang tot data of taken. Deze worden gebruikt door bijvoorbeeld `for..of` en `...`.
+
+**Generators** kunnen lokaal gepauseerd en hervat worden. Het zijn functies die worden beheerd door een iterator. Het kan gebruikt worden om *programmatisch* waardes te **genereren**, die kunnen worden gebruikt via iteratie.
+
+**Modules** zorgen er voor dat je privé implementatie details kan afzonderen via de **export API**. Modules zijn *file based*, *singleton instances* en worden verbonden tijdens het compilen.
+
+**Classes** zorgen voor een mooiere syntax om het **prototype-based coding**. Super haalt ook verschillende problemen weg met de [[Prototype chain]].
