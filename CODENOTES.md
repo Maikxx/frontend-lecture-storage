@@ -5436,8 +5436,238 @@ a[Symbol.iterator];			// native function
 
 **Iterators** geven synchrone toegang tot data of taken. Deze worden gebruikt door bijvoorbeeld `for..of` en `...`.
 
+Dit is een gestructureerd patroon voor het ophalen van data één voor één.
+
+JS bevat van zichzelf geen Interfaces.
+
+```js
+var arr = [1,2,3];
+
+var it = arr[Symbol.iterator]();
+
+it.next();		// { value: 1, done: false }
+it.next();		// { value: 2, done: false }
+it.next();		// { value: 3, done: false }
+
+it.next();		// { value: undefined, done: true }
+```
+
+In een iterator kan je returnen en throwen, verder niks.
+
+De spread operator kan gedeeltelijk of geheel een iterator verbruiken.
+
 **Generators** kunnen lokaal gepauseerd en hervat worden. Het zijn functies die worden beheerd door een iterator. Het kan gebruikt worden om *programmatisch* waardes te **genereren**, die kunnen worden gebruikt via iteratie.
 
+```js
+function *foo() {
+	// ..
+}
+```
+
+```js
+function *foo(x,y) {
+	// ..
+}
+
+foo( 5, 10 );
+```
+
+In het laatste geval is het verschil met normale functies dat een generator niet wordt aangeroepen met `foo(5,10)`, maar dat dit een iterator maakt, die de controle heeft over hoe de generator zijn code zal uitvoeren.
+
+```js
+function *foo() {
+	// ..
+}
+
+var it = foo();
+
+// to start/advanced `*foo()`, call
+// `it.next(..)`
+```
+
+Een `yield` keyword in een generator geeft een pause moment aan.
+```js
+function *foo() {
+	var x = 10;
+	var y = 20;
+
+	yield;
+
+	var z = x + y;
+}
+```
+
+`yield` is niet alleen een punt waarop de functie gepauseerd wordt, maar ook waarop er een waarde verstuurd kan worden.
+
+```js
+function *foo() {
+	while (true) {
+		yield Math.random();
+	}
+}
+```
+
+`yield` kan ook vervangen worden door waardes.
+
+```js
+function *foo() {
+	var x = yield 10;
+	console.log( x );
+}
+```
+
+```js
+var a, b;
+
+a = 3;					// valid
+b = 2 + a = 3;			// invalid
+b = 2 + (a = 3);		// valid
+
+yield 3;				// valid
+a = 2 + yield 3;		// invalid
+a = 2 + (yield 3);		// valid
+```
+
+**Yield delegation**: `yield *` gedraagt zich volledig anders dan de gewone `yield`.
+
+`yield *` vereist een iterable, die vervolgens de iterator van die iterable aanroept en vervolgens doorgeeft aan de host generator control, naar diens iterator, totdat die uitgeput is.
+
+```js
+function *foo() {
+	yield *[1,2,3];
+}
+
+// Is gelijk aan
+
+function *foo() {
+	yield 1;
+	yield 2;
+	yield 3;
+}
+
+function *bar() {
+	yield *foo();
+}
+```
+
+```js
+function *foo() {
+	yield 1;
+	yield 2;
+	yield 3;
+	return 4;
+}
+
+function *bar() {
+	var x = yield *foo();
+	console.log( "x:", x );
+}
+
+for (var v of bar()) {
+	console.log( v );
+}
+// 1 2 3
+// x: 4
+```
+
+Je kan een soort generator recursion krijgen, als je met `yield *` een andere generator aanroept.
+
+```js
+function *foo(x) {
+	if (x < 3) {
+		x = yield *foo( x + 1 );
+	}
+	return x * 2;
+}
+
+foo( 1 );
+```
+
+Zet geen yield statements in een `finally` clause.
+
+Met `it.throw` kan je een generator vroegtijdig stoppen.
+
+Errors kunnen worden afgehandeld met `try...catch`.
+
+```js
+function *foo() {
+	try {
+		yield 1;
+	}
+	catch (err) {
+		console.log( err );
+	}
+
+	yield 2;
+
+	throw "Hello!";
+}
+
+var it = foo();
+
+it.next();				// { value: 1, done: false }
+
+try {
+	it.throw( "Hi!" );	// Hi!
+						// { value: 2, done: false }
+	it.next();
+
+	console.log( "never gets here" );
+}
+catch (err) {
+	console.log( err );	// Hello!
+}
+```
+
+Generators worden voornamelijk gebruikt om:
+* Een reeks waardes te produceren, zoals willekeurige strings of nummers, of wat ingewikkelder, zoals het itereren over de rijen die uit een DB query terugkomen.
+* Een reeks taken op stellen, die synchroon moeten gebeuren, waar data van een externe bron moet komen.
+
 **Modules** zorgen er voor dat je privé implementatie details kan afzonderen via de **export API**. Modules zijn *file based*, *singleton instances* en worden verbonden tijdens het compilen.
+
+Oude modules werden voornamelijk zo gemaakt:
+
+```js
+function Hello(name) {
+	function greeting() {
+		console.log( "Hello " + name + "!" );
+	}
+
+	// public API
+	return {
+		greeting: greeting
+	};
+}
+
+var me = Hello( "Kyle" );
+me.greeting();			// Hello Kyle!
+```
+
+Deze variant kan veel worden herbruikt, als je een module slechts één keer nodig hebt kun je gebruik maken van een singleton.
+
+```js
+var me = (function Hello(name){
+	function greeting() {
+		console.log( "Hello " + name + "!" );
+	}
+
+	// public API
+	return {
+		greeting: greeting
+	};
+})( "Kyle" );
+
+me.greeting();			// Hello Kyle!
+```
+
+Module types:
+* Asynchronous Module Definition (AMD)
+* Universal Module Definition (UMD)
+
+Verschillen modules met hoe je ze tot nu toe hebt gebruikt:
+* ES6 Modules zijn file-based.
+* Als je een module aanmaakt, is deze *static*, wat betekent dat er niks kan worden veranderd aan de exports die je maakt vanuit die module.
+* ES6 modules zijn singletons.
+* De properties en methods, die je publiek beschikbaar maakt, zijn geen normale assignments van waardes of referenties.
 
 **Classes** zorgen voor een mooiere syntax om het **prototype-based coding**. Super haalt ook verschillende problemen weg met de [[Prototype chain]].
