@@ -25,18 +25,18 @@ JS engine compiles tegelijkertijd met dat het uitgevoerd wordt.
 
 Om input te krijgen kan je forms gebruiken of de prompt() functie.
 
-Als je een waarde aan een variabele assignt, berekent JS eerst de source value (rechterzijde van de statement).
+Als je een waarde aan een variabele assignt, berekent JS eerst de **source value** (rechterzijde van de statement).
 
-Variabelen verklaren doe je met het keyword var.
+Variabelen verklaren doe je met het keyword `var`.
 
-Compound assignment: +=, -=, *=, /=.
-Object property access: .
-Loose-equals: ==
-Strict-equals: ===
-Loose-not-equals: !=
-Strict-not-equals: !==
-Less than or loose-equals: <=
-Greater than or loose-equals: >=
+* Compound assignment: `+=`, `-=`, `*=`, `/=`.
+* Object property access: `.`
+* Loose-equals: `==`
+* Strict-equals: `===`
+* Loose-not-equals: `!=`
+* Strict-not-equals: `!==`
+* Less than or loose-equals: `<=`
+* Greater than or loose-equals: `>=`
 
 Verschillende representaties van waardes heten types.
 Waardes die direct in de source code worden opgenomen heten literals.
