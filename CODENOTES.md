@@ -5431,7 +5431,7 @@ var a = [1,2,3];
 
 a[Symbol.iterator];			// native function
 ```
-
+<!--
 ## You don't know JS - ES6 & Beyond - Hoofdstuk 3 - Organization
 
 **Iterators** geven synchrone toegang tot data of taken. Deze worden gebruikt door bijvoorbeeld `for..of` en `...`.
@@ -5668,6 +5668,139 @@ Verschillen modules met hoe je ze tot nu toe hebt gebruikt:
 * ES6 Modules zijn file-based.
 * Als je een module aanmaakt, is deze *static*, wat betekent dat er niks kan worden veranderd aan de exports die je maakt vanuit die module.
 * ES6 modules zijn singletons.
-* De properties en methods, die je publiek beschikbaar maakt, zijn geen normale assignments van waardes of referenties.
+* De properties en methods, die je publiek beschikbaar maakt, zijn geen normale assignments van waardes of referenties. Het zijn echt **bindings** (zoals bijna pointers naar die identifiërs in de definitie van je module.
+* Het importeren van een module is hetzelfde alshet statisch opvragen dat deze laadt. Het is dus **blocking**.
+
+
+ES6 kent nieuwe keywords, om te laten zien dat het om modules gaat:
+* `import`
+* `export`
+
+Import en export moeten in de top level scope voorkomen van diens gebruik.
+
+```js
+export function foo() {
+	// ..
+}
+
+export var awesome = 42;
+
+var bar = [1,2,3];
+export { bar };
+
+// Hetzelfde als
+function foo() {
+	// ..
+}
+
+var awesome = 42;
+var bar = [1,2,3];
+
+export { foo, awesome, bar };
+```
+
+Dit zijn zogenaamde **named exports**.
+Er is geen globale scope in modules.
+
+Je kan ook dingen hernoemen (**alias**) als je ze export.
+
+```js
+function foo() { .. }
+
+export { foo as bar };
+```
+
+```js
+var awesome = 42;
+export { awesome };
+
+// later
+awesome = 100;
+```
+
+Hier wordt `100` geïmporteerd, in plaats van 42.
+ES6 wilt dat je slechts één export maakt, de **default export**.
+
+```js
+function foo(..) {
+	// ..
+}
+
+export default foo;
+
+//
+
+
+function foo(..) {
+	// ..
+}
+
+export { foo as default };
+```
+
+De eerste snippet zal de waarde op het moment van export importeren, in de tweede kan de waarde nog worden veranderd.
+
+Je mag maar één `default` keyword hebben per module.
+
+Als je specifieke items (die je hebt geëxporteerd) wilt importeren in een andere file gebruik je:
+
+```js
+import { foo, bar, baz } from "foo";
+```
+
+Je kan de geïmporteerde naam veranderen via:
+
+```js
+import { foo as theFooFunc } from "foo";
+```
+
+Als je de default wilt importeren:
+
+```js
+import foo from "foo";
+
+// or:
+import { default as foo } from "foo";
+```
+
+Je kan modules hebben die elkaar importen:
+
+```js
+import bar from "B";
+
+export default function foo(x) {
+	if (x > 10) return bar( x - 1 );
+	return x * 2;
+}
+
+//
+
+import foo from "A";
+
+export default function bar(y) {
+	if (y > 5) return foo( y / 2 );
+	return y * 3;
+}
+```
 
 **Classes** zorgen voor een mooiere syntax om het **prototype-based coding**. Super haalt ook verschillende problemen weg met de [[Prototype chain]].
+
+Het `class` keyword staat aan de basis van het ES6 class mechanisme. Deze toont een block code aan, waar de content de onderdelen van een **functie's prototype** zijn.
+
+```js
+class Foo {
+	constructor(a,b) {
+		this.x = a;
+		this.y = b;
+	}
+
+	gimmeXY() {
+		return this.x * this.y;
+	}
+}
+```
+
+* Het maakt een speciale functie aan.
+* `constructor()` geeft de blauwdruk van die functie aan, net als de content.
+* Ze gebruiken dezelfde **concise method** syntax als object literals.
+* -->
