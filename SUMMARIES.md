@@ -19,9 +19,9 @@ Er zijn verschillende soorten expressions:
 Een programma moet worden uitgevoerd. Voordat dit kan moet het eerst worden geïnterpret en gecompiled naar computer leesbare code.
 
 Het lezen van code regel voor regel heet **interpreteren**.
-Soms werken talen zo, dat ze dingen van te voren af al vertalen naar computer leesbare code, dit heet compiling.
+Soms werken talen zo, dat ze dingen van te voren af al vertalen naar computer leesbare code, dit heet **compiling**.
 
-JS enginge compiles tegelijkertijd met dat het uitgevoerd wordt.
+JS engine compiles tegelijkertijd met dat het uitgevoerd wordt.
 
 Om input te krijgen kan je forms gebruiken of de prompt() functie.
 
