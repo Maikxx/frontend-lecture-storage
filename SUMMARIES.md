@@ -926,12 +926,12 @@ Ook kan het nooit naar een nummer gecoerced worden, maar wel naar een boolean (d
 
 ### Loose equals vs. Strict equals
 
-*==* : Sta coercion toe in de vergelijking.
-*===* : Sta geen coercion toe in de vergelijking.
+`==` : Sta coercion toe in de vergelijking.
+`===` : Sta geen coercion toe in de vergelijking.
 
 ### Abstract equality
 
-*==* heet eigenlijk de abstract equality comparison algorithm.
+`==` heet eigenlijk de abstract equality comparison algorithm.
 
 +0 en -0 zijn gelijk aan elkaar.
 Objecten (ook functies en arrays) zijn alleen gelijk aan elkaar als ze beide een referentie hebben met exact dezelfde waarde. Hier gebeurt geen coercion.
