@@ -2,19 +2,19 @@
 
 ## You don't know JS - Up and Going - Hoofdstuk 1
 
-Synoniemen voor programma: source code en code. Een set instructies die de computer vertellen welke taak deze moet uitvoeren.
+Synoniemen voor programma: **source code** en **code**. Een set **instructies** die de computer vertellen welke taak deze moet uitvoeren.
 
-De regels voor een valide format en gecombineerde instructies heet een computer taal of syntax.
+De regels voor een valide format en gecombineerde instructies heet een **computer taal** of **syntax**.
 
-Een groep woorden, nummers en operatoren die een bepaalde taak uitvoeren heten een statement. Statements eindigen op een semicolon.
+Een *groep woorden, nummers en operatoren* die een bepaalde taak uitvoeren heten een **statement**. Statements eindigen met een semicolon (vaak).
 
-Een statement bestaat uit één of meerdere expressions. Dit zijn referenties naar variabelen of waardes, of een set van variabelen of waardes, gecombineerd met operators.
+Een *statement* bestaat uit één of meerdere **expressions**. Dit zijn referenties naar variabelen of waardes, of een set van variabelen of waardes, gecombineerd met operators.
 Er zijn verschillende soorten expressions:
-Literal value expression: 2
-Variable expression: b
-Arithmic expression / expression statement: b * 2
-Assignment expression: a = b * 2
-Call expression statement: alert(a)
+**Literal value expression**: 2
+**Variable expression**: b
+**Arithmic expression / expression statement**: b * 2
+**Assignment expression**: a = b * 2
+**Call expression statement**: alert(a)
 
 Een programma moet worden uitgevoerd. Voordat dit kan moet het eerst worden geïnterpret en gecompiled naar computer leesbare code.
 
