@@ -521,7 +521,7 @@ foo(a);
 a; // [1,2,3,4]  not  [4,5,6,7]
 ```
 
-Als je dit gedrag (**manual object wrapper**) niet wilt hebben moet je x leegmaken met x.length = 0 en vervolgens je gewenste variabelen hierin pushen.
+Als je dit gedrag (**manual object wrapper**) niet wilt hebben moet je `x` leegmaken met `x.length = 0` en vervolgens je gewenste variabelen hierin pushen.
 
 Slice() zonder parameters maakt een (shallow) kopie van een array. Hierdoor kan de kopie niet de oorspronkelijke array aanpassen.
 
@@ -561,17 +561,17 @@ Symbol()
 
 Natives zijn eigenlijk ingebouwde functies.
 
-Als je ze aanroept als constructor functie, dan zal typeof een object teruggeven, maar instanceof geeft wel de juiste native.
+Als je ze aanroept als constructor functie, dan zal `typeof` een object teruggeven, maar `instanceof` geeft wel de juiste native.
 
-Via de constructor functie instanties aanmaken levert een wrapper object op van dat type, niet de primitieve waarde, die je wellicht bedoelde.
+Via de **constructor functie** instanties aanmaken levert een **wrapper object** op van dat type, niet de primitieve waarde, die je wellicht bedoelde.
 
 Er zijn geen `null` en `undefined` native constructors.
 
-Voor de andere primitieve waarde, zoals strings, booleans en numbers, gebeurt er iets dat boxing heet.
+Voor de andere primitieve waarde, zoals strings, booleans en numbers, gebeurt er iets dat **boxing** heet.
 
 Primitieve waardes hebben geen methodes of properties, hiervoor heb je een object wrapper nodig. JavaScript doet dit automatisch.
 
-Als je bijvoorbeeld var a = new Boolean (false) doet, zal dit alsnog true returnen in een vergelijking, omdat er een object omheen zit.
+Als je bijvoorbeeld `var a = new Boolean(false)` doet, zal dit alsnog `true` returnen in een vergelijking, omdat er een object omheen zit.
 
 Als je wel een object wrapper hebt en je wilt de onderliggende waarde hebben, kun je gebruik maken van:
 
@@ -585,14 +585,14 @@ Een array met minstens één lege slot, heet een sparse array.
 `.apply()` is een utlity beschikbaar op alle functies, deze roept de functie op, waarmee het gebruikt wordt, maar op een speciale manier.
 
 ```js
-Var a = Array.apply(`null`, {length: 3});
+var a = Array.apply(`null`, {length: 3});
 ```
 
-Bovenstaande maakt een array handmatig aan met drie x `undefined`.
+Bovenstaande maakt een array handmatig aan met drie keer `undefined`.
 
-Functie constructor is alleen hulpvol op sommige momenten, waar je dynamisch de functie parameters / diens functiebody moet bepalen.
+De functie constructor is alleen hulpvol op sommige momenten, waar je dynamisch de functie parameters / diens **functiebody** moet bepalen.
 
-Ook RegExps kun je beter in de literal form maken, in verband met performance.
+Ook **RegExps** kun je beter in de literal form maken, in verband met performance.
 Het is wel handig om dynamisch het patroon voor een regex te bepalen.
 
 De Date en Error constructors zijn veel nuttiger dan de andere, omdat er geen literal form van is.
@@ -601,7 +601,7 @@ De Date en Error constructors zijn veel nuttiger dan de andere, omdat er geen li
 new Date().getTime();
 ```
 
-Het bovenstaande geeft een integer terug, wat het aantal miliseconde vertegenwoordigd sinds 1 januari 1970. Sinds ES6 kan je Date.now() gebruiken.
+Het bovenstaande geeft een integer terug, wat het aantal miliseconde vertegenwoordigd sinds **1 januari 1970**. Sinds ES6 kan je `Date.now()` gebruiken.
 
 De `Error()` constructor gedraagt zich hetzelfde met het new keyword, als zonder.
 Dit object gebruik je vaak in combinatie met de throw operator.
