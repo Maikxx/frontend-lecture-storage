@@ -51,8 +51,8 @@ Binaire code komt vanuit compiling.
 
 Het is belangrijk om namen van variabelen en functies duidelijk te formuleren. Ook zijn comments belangrijk. Schrijf hier niet te veel, maar ook niet te weinig van. Comments moeten uitleggen waarom en niet wat, maar soms ook hoe.
 
-Een symbolische container om waardes in op te slaan: een variabele.
-Als je een waarde vastzet in een type (string, number) heet dit static typing of type enforcement. Dit zorgt voor correctheid in de code.
+Een symbolische container om waardes in op te slaan: een **variabele**.
+Als je een waarde vastzet in een type (string, number) heet dit **static typing** of **type enforcement**. Dit zorgt voor correctheid in de code.
 Als je dat niet doet, krijg je weak typing, of dynamic typing. Dit zorgt voor flexibiliteit.
 Het primaire doel van variabelen: de state van een programma onderhouden. State volgt dus de veranderingen die je programma doorlopen.
 
