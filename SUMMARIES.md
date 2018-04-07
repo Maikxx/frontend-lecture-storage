@@ -312,11 +312,11 @@ Bekendste non-JS JS: DOM API. Deze API is alleen beschikbaar in de browser. Hier
 
 ## You don't know JS - Up and Going - Hoofdstuk 3
 
-JavaScript is geen interpreted language, wat betekent dat het niet gecompiled wordt. Het wordt wel degelijk gecompiled, maar bijna instant daarna wordt het geëxecute.
+JavaScript is *geen* **interpreted language**, wat betekent dat het niet gecompiled wordt. Het wordt namelijk wel degelijk gecompiled, maar bijna instant daarna wordt het geëxecute.
 
 Een belangrijke uitwerking van closures wordt gedaan in het module pattern.
 
-Delegation zorgt ervoor dat je weinig meer met classes en inheritance te doen hebt.
+**Delegation** zorgt ervoor dat je weinig meer met classes en inheritance te doen hebt.
 
 ## You don't know JS - Scopes & Closures - Hoofdstuk 1
 
