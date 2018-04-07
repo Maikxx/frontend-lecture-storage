@@ -56,16 +56,16 @@ Als je een waarde vastzet in een type (string, number) heet dit **static typing*
 Als je dat niet doet, krijg je **weak typing**, of **dynamic typing**. Dit zorgt voor **flexibiliteit**.
 Het primaire doel van variabelen: de state van een programma onderhouden. **State** volgt dus de veranderingen die je programma doorlopen.
 
-Het centraliseren van waardes heet constants. Deze variabelen mogen niet meer veranderen.
-JS constant namen zijn geschreven met hoofdletters en _ tussen de woorden in. De nieuwe versie gebruikt het keyword const.
+Het centraliseren van waardes heet **constants**. Deze variabelen mogen niet meer veranderen.
+JS constant namen zijn geschreven met hoofdletters en _ tussen de woorden in. De nieuwe versie gebruikt het keyword `const`.
 
-Een set samengevoegde statements heet een block. Deze zijn gewrapt in {}. Block statements hebben geen semicolons nodig.
+Een set samengevoegde statements heet een **block**. Deze zijn gewrapt in {}. Block statements hebben geen semicolons nodig.
 
-Besluiten in programma’s worden genomen door conditionals.
-If statement.
-Else voorwaarde.
-Switch statement.
-Loops zijn ook in zekere zin een conditional, ze kijken namelijk of ze moeten lopen.
+Besluiten in programma’s worden genomen door **conditionals**.
+* If statement.
+* Else voorwaarde.
+* Switch statement.
+* Loops zijn ook in zekere zin een conditional, ze kijken namelijk of ze moeten lopen.
 
 Een lege string en de waarde 0 zullen in een conditional false worden.
 
