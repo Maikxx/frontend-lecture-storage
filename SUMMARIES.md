@@ -320,24 +320,24 @@ Een belangrijke uitwerking van closures wordt gedaan in het module pattern.
 
 ## You don't know JS - Scopes & Closures - Hoofdstuk 1
 
-Belangrijkste mogelijkheid in iedere programmeertaal: de mogelijkheid om waardes op te kunnen slaan in variabelen en deze vervolgens later op te halen of te veranderen. Dit zorgt voor state in een programma.
+De belangrijkste mogelijkheid in iedere programmeertaal: de mogelijkheid om waardes op te kunnen slaan in variabelen en deze vervolgens later op te halen of te veranderen. Dit zorgt voor state in een programma.
 
-De set regels, die gaan ver het opslaan van variabele in een bepaalde locatie en het vinden van deze variabele later heet scope.
+De set regels, die gaan over het opslaan van variabele in een bepaalde locatie en het vinden van deze variabele later heet **scope**.
 
-In traditionele compiled-languages gaat een programma drie stappen door, voordat het kan worden uitgevoerd: compilation:
+In traditionele **compiled-languages** gaat een programma drie stappen door, voordat het kan worden uitgevoerd: compilation:
 
-Tokenizing / Lexing: Het opdelen van strings karakters in betekenisvolle (voor de taal) delen, genaamd tokens. Witruimte kan soms worden meegenomen als een token. Het verschil tussen tokenizing en lexing, zit hem in het feit of de tokens stateless of stateful zijn. Als een token onderdeel is van een ander token, heet dat lexing.
+* **Tokenizing / Lexing**: Het opdelen van strings karakters in betekenisvolle (voor de taal) delen, genaamd **tokens**. Witruimte kan soms worden meegenomen als een token. Het verschil tussen tokenizing en lexing, zit hem in het feit of de tokens **stateless** of **stateful** zijn. Als een token onderdeel is van een ander token, heet dat **lexing**.
 
-Parsing: Een array van tokens wordt omgezet in een boom van geneste elementen, die collectief de grammatische structuur van het programma omvatten.
-Deze boom heet AST: Abstract Syntax Tree.
+* **Parsing**: Een **array van tokens** wordt omgezet in een **boom** van **geneste elementen**, die collectief de **grammatische structuur** van het programma omvatten.
+Deze boom heet **AST**: **Abstract Syntax Tree**.
 
-Code-Generation: Het proces van het pakken van de AST en deze omvormen tot uitvoerbare code. Dit deel varieert per taal, platform enzovoorts. Dit proces zorgt er ook echt voor dat er een variabele wordt aangemaakt, dat opgeslagen wordt op het lokale geheugen en vervolgens dat daar een waarde aan wordt toegevoegd.
+* **Code-Generation**: Het proces van het pakken van de AST en deze omvormen tot uitvoerbare code. Dit deel varieert per taal, platform enzovoorts. Dit proces zorgt er ook echt voor dat er een variabele wordt aangemaakt, dat opgeslagen wordt op het lokale geheugen en vervolgens dat daar een waarde aan wordt toegevoegd.
 
 JavaScript engines hebben geen luxe, om er lang over te doen om te optimizen, omdat het niet een stap van te voren gebeurt.
 
-JIT: Een truc van JS, om te lazy-compilen en hot-recompilen.
+**JIT**: Een truc van JS, om te **lazy-compilen** en **hot-recompilen**.
 
-Een engine is verantwoordelijk voor de compilatie en uitvoering van een JS programma, vanaf het begin tot het einde.
+Een **engine** is verantwoordelijk voor de compilatie en uitvoering van een JS programma, vanaf het begin tot het einde.
 Compiler: Parset en genereert de code.
 Scope: Een lijst van alle variabele, met daarbij een set van strikte regels, die gaan over hoe deze toegankelijk zijn voor de huidig lopende code.
 
