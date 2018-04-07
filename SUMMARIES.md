@@ -173,16 +173,16 @@ Een andere vorm van een conditional is een **conditional operator**, beter beken
 
 `Function foo() {}` is simpelweg een variabele in de globale scope, met een referentie naar zichzelf (een functie). Een functie kan een waarde vertegenwoordigen, die aan andere variabelen of functies kan worden toegewezen.
 
-Anonymous function expression: var funct = function() {}.
-Named function expression: var funct = function func() {}. Dit heeft de voorkeur.
+**Anonymous function expression**: `var funct = function() {}`.
+**Named function expression**: `var funct = function func() {}`. Dit heeft de voorkeur.
 
-Immediately Invoked Function Expressions (IIFEs)
-(function IIFE () {console.log(“Hello World”)})();
-De omringende ( ) heeft JS nodig om het onderscheid te kunnen maken met een normale function call.
-IIFEs creëren een eigen variabele scope, waardoor dezelfde namen binnen en buiten de functie gebruikt kunnen worden.
+### Immediately Invoked Function Expressions (IIFEs)
+`(function IIFE () {console.log(“Hello World”)})();`
+De omringende `( )` heeft JS nodig om het onderscheid te kunnen maken met een normale function call.
+**IIFEs** creëren een eigen variabele scope, waardoor dezelfde namen binnen en buiten de functie gebruikt kunnen worden.
 IIFEs kunnen ook dingen returnen.
 
-Closure
+### Closure
 Dit is een manier om te onthouden en toegang te kunnen blijven houden tot de variabelen van de scope van een bepaalde functie, als de functie klaar is met uitvoeren.
 
 ```js
@@ -214,8 +214,8 @@ plusOne( 41 );		// 42 <-- 1 + 41
 plusTen( 13 );		// 23 <-- 10 + 13
 ```
 
-De meest bekende plek om closures te gebruiken is via het module pattern.
-Modules laten je privé implementatie details (zoals variabelen en functies) aanmaken, die van de buitenwereld zijn afgesloten, maar ook een public api, die toegankelijk is vanaf de buitenkant.
+De meest bekende plek om closures te gebruiken is via het **module pattern**.
+Modules laten je privé implementatie details (zoals variabelen en functies) aanmaken, die van de buitenwereld zijn afgesloten, maar ook een **public api**, die toegankelijk is vanaf de buitenkant.
 
 ```js
 function User(){
