@@ -288,23 +288,24 @@ bar.a;        // 42 <-- delegated to `foo`
 ```
 
 Dit systeem wordt vaak gebruikt en misbruikt om het te laten lijken op een class met inheritance.
-Het beste patroon waarvoor dit gebruikt kan worden is behaviour delegation. In deze situatie bouw je je objecten, zodat ze opzettelijk worden afgevaardigd van het hoofdobject.
+Het beste patroon waarvoor dit gebruikt kan worden is **behaviour delegation**. In deze situatie bouw je je objecten, zodat ze opzettelijk worden afgevaardigd van het hoofdobject.
 
-Er zijn twee dingen die je kunt doen om nieuwe features begrijpbaar te maken voor oudere browsers: polyfilling en transpiling.
+Er zijn twee dingen die je kunt doen om nieuwe features begrijpbaar te maken voor oudere browsers: **polyfilling** en **transpiling**.
 
-Een polyfill refereert naar het pakken van een stuk nieuwe JS code en dat omzetten tot code met hetzelfde gedrag, dat beschikbaar is in de oudere JS omgevingen.
+Een **polyfill** refereert naar het pakken van een stuk nieuwe JS code en dat omzetten tot code met hetzelfde gedrag, dat beschikbaar is in de oudere JS omgevingen.
 
-NaN waardes zijn de enige waardes die nooit gelijk zijn aan zichzelf.
+`NaN` waardes zijn de enige waardes die nooit gelijk zijn aan zichzelf.
 
-Transpiling: een proces dat nieuwe code omzet naar oudere varianten van die code. Het transformeert de code en compiled deze. Transpiling gebeurt in het build-proces.
+**Transpiling**: een proces dat nieuwe code omzet naar oudere varianten van die code. Het transformeert de code en compiled deze. Transpiling gebeurt in het **build-proces**.
 
-Waarom zouden we transpilen?:
+Waarom zouden we transpilen?
 
-* Nieuwe syntax maakt je code leesbaarder en onderhoudsarmer.
-* Als je de getranspilede code alleen gebruikt voor oudere browsers en de nieuwe serveert aan de nieuwere browsers, kun je gebruik maken van de performance optimalizations, die met de nieuwe syntax zijn meegebracht. Zorgt er ook voor dat browser makers meer echte code hebben om mee te testen.
-* Geeft feedback aan het JS comité (TC39).
+* Nieuwe syntax maakt je code *leesbaarder* en *onderhoudsarmer*.
+* Als je de getranspilede code alleen gebruikt voor oudere browsers en de nieuwe serveert aan de nieuwere browsers, kun je gebruik maken van de *performance optimalizations*, die met de nieuwe syntax zijn meegebracht. Zorgt er ook voor dat browser makers meer echte code hebben om mee te testen.
+* Geeft *feedback* aan het JS comité (**TC39**).
 
-Undefined is de enige waarde die niet in een standaard parameter kan worden meegegeven.
+`undefined` is de enige waarde die niet in een standaard parameter kan worden meegegeven.
+
 Je moet altijd transpilen.
 
 Bekendste non-JS JS: DOM API. Deze API is alleen beschikbaar in de browser. Hierin is document een belangrijk host object.
