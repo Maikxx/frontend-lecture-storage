@@ -457,9 +457,9 @@ Integers hebben dit probleem niet.
 
 De meest geaccepteerde manier om met deze rounding error om te gaan, is door een kleine waarde te gebruiken als tolerantie voor deze vergelijking. Deze waarde heet **machine epsilon**, `2^-52`. In ES6 is dit nummer ingebouwd als property op het Number object, `.EPSILON`.
 
-De maximale floating-point waarde is `Number.MAX\_VALUE` en de minimale floating-point waarde is `Number.MIN\_VALUE`.
+De maximale floating-point waarde is `Number.MAX_VALUE` en de minimale floating-point waarde is `Number.MIN_VALUE`.
 
-Het hoogst veilig te gebruiken integer getal is: `2^53 -1`. In ES6: `Number.MAX\_SAFE\_INTEGER` en `Number.MIN\_SAFE\_INTEGER`.
+Het hoogst veilig te gebruiken integer getal is: `2^53 -1`. In ES6: `Number.MAX_SAFE_INTEGER` en `Number.MIN_SAFE_INTEGER`.
 Deze waardes worden vaak alleen geraakt als je werkt met 64-bit ID’s van databases. Deze kunnen dus niet als getal worden opgeslagen, maar wel als string.
 
 Sinds ES6 kan je checken of een variabele een integer is, met Number.isInteger( ).
@@ -470,18 +470,18 @@ Om een nummer te forceren, dat het een 32-bit integer waarde wordt, gebruik je `
 `null` is een lege waarde. Had een waarde, maar nu niet meer. Dit is een **special keyword**.
 `undefined` is een missende waarde. Heeft geen waarde gehad nog. `undefined` is een **identifier**.
 
-Een andere manier om de `undefined` waarde te krijgen is, met behulp van de void operator.
+Een andere manier om de `undefined` waarde te krijgen is, met behulp van de **void operator**.
 Als je ergens een waarde graag `undefined` wilt hebben, kun je dus de void operator gebruiken.
 
-Als je twee niet nummers aan elkaar probeert te koppelen in een operation, krijg je een NaN. Not a Number. NaN is nooit gelijk aan een andere NaN. Je kan testen of een waarde NaN is met isNaN( ). Dit heeft echter een probleem, dat het ook true returnt als je string eraan meegeeft.
-Je kan ook checken of een waarde niet gelijk is aan zichzelf, aangezien NaN de enige variant binnen JavaScript is, waar dat het geval is.
+Als je twee niet nummers aan elkaar probeert te koppelen in een operation, krijg je een `NaN`. Not a Number. `NaN` is nooit gelijk aan een andere `NaN`. Je kan testen of een waarde `NaN` is met `isNaN()`. Dit heeft echter een probleem, dat het ook true returnt als je string eraan meegeeft.
+Je kan ook checken of een waarde niet gelijk is aan zichzelf, aangezien `NaN` de enige variant binnen JavaScript is, waar dat het geval is.
 
-Als je var a = 1 / 0 doet, krijg je Infinity. Hier is een positieve (POSITIVE\_INFINITY) en een negatieve (NEGATIVE_INFINITY) variant van.
+Als je `var a = 1 / 0` doet, krijg je **Infinity**. Hier is een positieve (`POSITIVE_INFINITY`) en een negatieve (`NEGATIVE_INFINITY`) variant van.
 
-Een negatieve 0 waarde kan je alleen vinden als 0 deelt door of vermenigvuldigt met een negatieve waarde. Als je dit om zet naar een string werkt het niet, dan wordt er gewoon een string met 0 en geen min gegeven. Als je het reversed (vanuit een string naar number) werkt het wel.
-Ook als je vergelijkingen doet met 0 en -0, zal dit true teruggeven.
+Een negatieve `0` waarde kan je alleen vinden als `0` deelt door of vermenigvuldigt met een negatieve waarde. Als je dit om zet naar een string werkt het niet, dan wordt er gewoon een string met `0` en geen min gegeven. Als je het reversed (vanuit een string naar number) werkt het wel.
+Ook als je vergelijkingen doet met `0` en `-0`, zal dit `true` teruggeven.
 
-Om de speciale gelijkheid van -0 en NaN te vergelijken kan je sinds ES6 gebruik maken van object.is( ). Gebruik dit alleen bij deze twee cases.
+Om de speciale gelijkheid van `-0` en `NaN` te vergelijken kan je sinds ES6 gebruik maken van `object.is()`. Gebruik dit alleen bij deze twee cases.
 
 In JavaScript kan je geen referentie hebben van een variabele in een andere variabele. Een referentie richt zich op een (gedeelde) waarde.
 
