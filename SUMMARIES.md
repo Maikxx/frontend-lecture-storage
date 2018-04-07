@@ -77,8 +77,8 @@ Een for-loop heeft drie voorwaardes: initialization voorwaarde; conditional test
 
 Functies zijn in het leven geroepen om herhaling tegen te gaan. Functies kunnen parameters of argumenten met zich mee gepasst krijgen.
 
-Een scope of lexical scope staat voor een collectie van variabelen, samen met de regels over hoe deze variabelen toegankelijk zijn, via hun naam. Er mogen geen twee dezelfde namen in een functie zitten. Scopes kunnen worden genest.
-Lexical scope betekent dat de code in één scope toegang heeft tot variabelen binnen die scope, of die daarbuiten.
+Een **scope** of **lexical scope** staat voor een collectie van variabelen, samen met de regels over hoe deze variabelen toegankelijk zijn, via hun naam. Er mogen geen twee dezelfde namen in een functie zitten. Scopes kunnen worden genest.
+**Lexical scope** betekent dat de code in één scope toegang heeft tot variabelen binnen die scope, of die daarbuiten.
 
 Recap:
 Je hebt operatoren nodig om acties uit te voeren met waardes.
