@@ -131,16 +131,16 @@ Als je twee non-primitieve waardes vergelijkt, zoals objecten, moet je heel goed
 Arrays worden standaard gecoerced naar strings, gescheiden met komma’s, zonder spaties. Twee arrays met dezelfde waarde aan elkaar vergelijken, levert geen true op.
 
 Inequality:
-`<`, `>`, `<=`, `>=` - Relational comparison.
+`<`, `>`, `<=`, `>=` - **Relational comparison**.
 Als je de waardes `32 < “42”` met elkaar vergelijkt komt hier true uit, omdat een van de waardes geen string is, worden beide waardes naar nummers omgezet.
-Als je “42” < “43” vergelijkt komt hier true uit, omdat de waardes lexicografisch met elkaar worden vergelijken (op alfabetische waarde).
+Als je `“42” < “43”` vergelijkt komt hier true uit, omdat de waardes **lexicografisch** met elkaar worden vergelijken (op alfabetische waarde).
 
 Strings die worden omgezet naar nummers worden NaN. Een NaN waarde is altijd groter dan of kleiner dan iedere andere waarde. Je kan hier dus niet mee vergelijken.
 
 Variabele namen moeten valide identifiers zijn. Naam moet beginnen met a-z, A-Z, $, _. Het kan verder al deze dingen bevatten, plus de nummers 0-9.
-Sommige woorden kunnen niet gebruikt worden als variabelen, maar wel als property namen. Dit zijn reverved words.
+Sommige woorden kunnen niet gebruikt worden als variabelen, maar wel als property namen. Dit zijn **reverved words**.
 
-Als een variabele in een scope voorkomt, wordt deze verklaring gelijkgesteld aan de gehele scope en is ook toegankelijk overal in die scope. Dit heet hoisting. Een variabele die aangemaakt is, wordt naar de bovenkant van zijn scope verplaatst. Hoisted variabelen gebruiken is niet verstandig, maar met functies kan het wel.
+Als een variabele in een scope voorkomt, wordt deze verklaring gelijkgesteld aan de gehele scope en is ook toegankelijk overal in die scope. Dit heet **hoisting**. Een variabele die aangemaakt is, wordt naar de bovenkant van zijn scope verplaatst. Hoisted variabelen gebruiken is niet verstandig, maar met functies kan het wel.
 
 Een variabele is toegankelijk in zijn scope en elke geneste scope.
 
@@ -163,15 +163,15 @@ function foo() {
 }
 ```
 
-Hierin is b alleen beschikbaar in de if statement. Dit soort scoping heet block scoping.
+Hierin is b alleen beschikbaar in de if statement. Dit soort scoping heet **block scoping**.
 
-Als je in een switch statement geen breaks gebruikt, terwijl die case matcht, zal de volgende case ook aangeroepen worden, ook al is de case niet waar. Dit heet falling through. Dit is soms gewenst.
+Als je in een `switch` statement geen `breaks` gebruikt, terwijl die case matcht, zal de volgende case ook aangeroepen worden, ook al is de case niet waar. Dit heet **falling through**. Dit is soms gewenst.
 
-Een andere vorm van een conditional is een conditional operator, beter bekend als de ternary operator. Het is korter dan een enkele if…else.
+Een andere vorm van een conditional is een **conditional operator**, beter bekend als de **ternary operator**. Het is korter dan een enkele if…else.
 
-Strict mode versterkt de restricties van sommige regels van gedrag in JavaScript. Dit zorgt ervoor dat de code veiliger is en zich meer aan de richtlijnen houdt. Het zorgt ook voor optimalisatie van de JS engine. Het zorgt ervoor dat er niet meer een globale variabele aangemaakt wordt als je een keyword vergeet. Strict mode wordt ook gezien als de toekomst van de taal.
+**Strict mode** versterkt de restricties van sommige regels van gedrag in JavaScript. Dit zorgt ervoor dat de code veiliger is en zich meer aan de richtlijnen houdt. Het zorgt ook voor **optimalisatie van de JS engine**. Het zorgt ervoor dat er niet meer een globale variabele aangemaakt wordt als je een keyword vergeet. Strict mode wordt ook gezien als de toekomst van de taal.
 
-Function foo() {} is simpelweg een variabele in de globale scope, met een referentie naar zichzelf (een functie). Een functie kan een waarde vertegenwoordigen, die aan andere variabelen of functies kan worden toegewezens.pec
+`Function foo() {}` is simpelweg een variabele in de globale scope, met een referentie naar zichzelf (een functie). Een functie kan een waarde vertegenwoordigen, die aan andere variabelen of functies kan worden toegewezen.
 
 Anonymous function expression: var funct = function() {}.
 Named function expression: var funct = function func() {}. Dit heeft de voorkeur.
