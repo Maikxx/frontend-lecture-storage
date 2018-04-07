@@ -157,7 +157,7 @@ function foo() {
 			let c = b * 2;
 			b++;
 
-			console.log( a + c );
+			console.log(a + c);
 		}
 	}
 }
@@ -178,7 +178,7 @@ Een andere vorm van een conditional is een **conditional operator**, beter beken
 
 ### Immediately Invoked Function Expressions (IIFEs)
 `(function IIFE () {console.log(“Hello World”)})();`
-De omringende `( )` heeft JavaScript nodig om het onderscheid te kunnen maken met een normale function call.
+De omringende `()` heeft JavaScript nodig om het onderscheid te kunnen maken met een normale function call.
 **IIFEs** creëren een eigen variabele scope, waardoor dezelfde namen binnen en buiten de functie gebruikt kunnen worden.
 IIFEs kunnen ook dingen returnen.
 
@@ -201,17 +201,17 @@ function makeAdder(x) {
 // `plusOne` gets a reference to the inner `add(..)`
 // function with closure over the `x` parameter of
 // the outer `makeAdder(..)`
-var plusOne = makeAdder( 1 );
+var plusOne = makeAdder(1);
 
 // `plusTen` gets a reference to the inner `add(..)`
 // function with closure over the `x` parameter of
 // the outer `makeAdder(..)`
-var plusTen = makeAdder( 10 );
+var plusTen = makeAdder(10);
 
-plusOne( 3 );		// 4  <-- 1 + 3
-plusOne( 41 );		// 42 <-- 1 + 41
+plusOne(3);		// 4  <-- 1 + 3
+plusOne(41);		// 42 <-- 1 + 41
 
-plusTen( 13 );		// 23 <-- 10 + 13
+plusTen(13);		// 23 <-- 10 + 13
 ```
 
 De meest bekende plek om closures te gebruiken is via het **module pattern**.
@@ -239,17 +239,17 @@ function User(){
 
 var fred = User();
 
-fred.login( "fred", "12Battery34!" );
+fred.login("fred", "12Battery34!");
 ```
 
-Als je `User( )` doet, creëer je een instance van de User module. Dit is in feite een kopie, met een nieuwe scope.
+Als je `User()` doet, creëer je een instance van de User module. Dit is in feite een kopie, met een nieuwe scope.
 Doordat via de publicAPI login is geëxporteerd, zijn de variabelen username en password niet verloren geraakt, nadat de functie klaar was.
 
 `this` is niet altijd gerelateerd aan object-oriented patterns. Als een functie een `this` bevat, slaat deze vaak op een object. *`this` refereert niet naar de functie zelf.*
 
 ```js
 function foo() {
-	console.log( this.bar );
+	console.log(this.bar);
 }
 
 var bar = "global";
@@ -267,7 +267,7 @@ var obj2 = {
 
 foo();                // “global” // In strict mode geeft dit een `undefined` error.
 obj1.foo();            // "obj1"
-foo.call( obj2 );        // "obj2"
+foo.call(obj2);        // "obj2"
 new foo();            // `undefined`
 ```
 
@@ -279,7 +279,7 @@ var foo = {
 };
 
 // create `bar` and link it to `foo`
-var bar = Object.create( foo );
+var bar = Object.create(foo);
 
 bar.b = "hello world";
 
@@ -462,8 +462,8 @@ De maximale floating-point waarde is `Number.MAX_VALUE` en de minimale floating-
 Het hoogst veilig te gebruiken integer getal is: `2^53 -1`. In ES6: `Number.MAX_SAFE_INTEGER` en `Number.MIN_SAFE_INTEGER`.
 Deze waardes worden vaak alleen geraakt als je werkt met 64-bit ID’s van databases. Deze kunnen dus niet als getal worden opgeslagen, maar wel als string.
 
-Sinds ES6 kan je checken of een variabele een integer is, met Number.isInteger( ).
-Je kan ook testen of een nummer een safe integer is, met Number.isSafeInteger( ).
+Sinds ES6 kan je checken of een variabele een integer is, met Number.isInteger().
+Je kan ook testen of een nummer een safe integer is, met Number.isSafeInteger().
 
 Om een nummer te forceren, dat het een 32-bit integer waarde wordt, gebruik je `a | 0`. Dit werkt, omdat de `|` **bitwise operator** alleen werkt voor 32-bits getallen.
 
@@ -494,35 +494,36 @@ b; // 3
 
 var c = [1,2,3];
 var d = c; // `d` is a reference to the shared `[1,2,3]` value
-d.push( 4 );
+d.push(4);
 c; // [1,2,3,4]
 d; // [1,2,3,4]
 ```
 
-Simpele waardes (scalar primitives) zijn altijd kopieën. (`null`, `undefined`, string, number, boolean, symbol).
-Compound values (samengestelde waardes) maken altijd een kopie, met een referentie naar het oorspronkelijke object. (objects, functions en arrays)
+Simpele waardes (**scalar primitives**) zijn altijd kopieën. (`null`, `undefined`, string, number, boolean, symbol).
+
+**Compound values** (samengestelde waardes) maken altijd een kopie, met een referentie naar het oorspronkelijke object. (objects, functions en arrays)
 
 ```js
 function foo(x) {
-    x.push( 4 );
+    x.push(4);
     x; // [1,2,3,4]
 
     // later
     x = [4,5,6];
-    x.push( 7 );
+    x.push(7);
     x; // [4,5,6,7]
 }
 
 var a = [1,2,3];
 
-foo( a );
+foo(a);
 
 a; // [1,2,3,4]  not  [4,5,6,7]
 ```
 
-Als je dit gedrag (manual object wrapper) niet wilt hebben moet je x leegmaken met x.length = 0 en vervolgens je gewenste variabelen hierin pushen.
+Als je dit gedrag (**manual object wrapper**) niet wilt hebben moet je x leegmaken met x.length = 0 en vervolgens je gewenste variabelen hierin pushen.
 
-Slice( ) zonder parameters maakt een (shallow) kopie van een array. Hierdoor kan de kopie niet de oorspronkelijke array aanpassen.
+Slice() zonder parameters maakt een (shallow) kopie van een array. Hierdoor kan de kopie niet de oorspronkelijke array aanpassen.
 
 ```js
 function foo(x) {
@@ -531,31 +532,31 @@ function foo(x) {
 }
 
 var a = 2;
-var b = new Number( a ); // or equivalently `Object(a)`
+var b = new Number(a); // or equivalently `Object(a)`
 
-foo( b );
-console.log( b ); // 2, not 3
+foo(b);
+console.log(b); // 2, not 3
 ```
 
-Het probleem hiermee (boxed object wrappers) is, dat de onderliggende scalar primitive waarde niet mutable is.
+Het probleem hiermee (**boxed object wrappers**) is, dat de onderliggende scalar primitive waarde niet mutable is.
 
 ## You don't know JavaScript - Types & Grammar - H3
 
-Ingebouwde types heten natives.
+Ingebouwde types heten **natives**.
 
 De meest bekende natives:
 
 ```js
-String( )
-Number( )
-Boolean( )
-Array( )
-Object( )
-Function( )
-RegExp( )
-Date( )
-Error( )
-Symbol( )
+String()
+Number()
+Boolean()
+Array()
+Object()
+Function()
+RegExp()
+Date()
+Error()
+Symbol()
 ```
 
 Natives zijn eigenlijk ingebouwde functies.
@@ -575,7 +576,7 @@ Als je bijvoorbeeld var a = new Boolean (false) doet, zal dit alsnog true return
 Als je wel een object wrapper hebt en je wilt de onderliggende waarde hebben, kun je gebruik maken van:
 
 ```js
-.valueOf( )
+.valueOf()
 ```
 
 Als je aan `Array()`, slechts een waarde meegeeft, wordt dat gezien als de lengte van de array.
@@ -597,10 +598,10 @@ Het is wel handig om dynamisch het patroon voor een regex te bepalen.
 De Date en Error constructors zijn veel nuttiger dan de andere, omdat er geen literal form van is.
 
 ```js
-new Date( ).getTime();
+new Date().getTime();
 ```
 
-Het bovenstaande geeft een integer terug, wat het aantal miliseconde vertegenwoordigd sinds 1 januari 1970. Sinds ES6 kan je Date.now( ) gebruiken.
+Het bovenstaande geeft een integer terug, wat het aantal miliseconde vertegenwoordigd sinds 1 januari 1970. Sinds ES6 kan je Date.now() gebruiken.
 
 De `Error()` constructor gedraagt zich hetzelfde met het new keyword, als zonder.
 Dit object gebruik je vaak in combinatie met de throw operator.
@@ -620,8 +621,8 @@ function isThisCool(vals,fn,rx) {
     rx = rx || RegExp.prototype;
 
     return rx.test(
-        vals.map( fn ).join( "" )
-    );
+        vals.map(fn).join("")
+   	);
 }
 
 isThisCool();        // true
@@ -659,7 +660,7 @@ array.toString geeft een string vertegenwoordiging van de array terug, waar de w
 
 ### JSON
 
-JSON.stringify( ) zorgt ervoor dat waardes geschikt zijn, als JSON string waarde.
+JSON.stringify() zorgt ervoor dat waardes geschikt zijn, als JSON string waarde.
 JSON-safe: Iedere waarde die op een correcte manier kan worden vertegenwoordigd in een JSON representatie.
 JSON.stringify is geen directe vorm van coercion.
 
@@ -702,15 +703,15 @@ var b = {
 
 var c = [4,2];
 c.toString = function(){
-    return this.join( "" );// "42"
+    return this.join("");// "42"
 };
 
-Number( a );// 42
-Number( b );// 42
-Number( c );// 42
-Number( "" );// 0
-Number( [] );// 0
-Number( [ "abc" ] );// NaN
+Number(a);// 42
+Number(b);// 42
+Number(c);// 42
+Number("");// 0
+Number([]);// 0
+Number([ "abc" ]);// NaN
 ```
 
 ### toBoolean
@@ -748,11 +749,11 @@ Hiervoor gebruik je de ingebouwde String en Number functies. Hierbij gebruik je 
 Het meest gebruikte hiervoor is:
 
 ```js
-Var timestamp = +new Date( );
+Var timestamp = +new Date();
 ```
 
 Dit geeft het directe ‘nu’ moment terug in ms sinds 1970.
-Je kan echter beter Date.now( ) gebruiken tegenwoordig.
+Je kan echter beter Date.now() gebruiken tegenwoordig.
 
 ### ~
 
@@ -767,21 +768,21 @@ Soms als je bitwise operators gebruikt, met bepaalde nummers, zullen de waardes 
 
 -1 heet een sentinel value, wat betekent: een waarde, die een arbitraire semantische betekenis heeft gekregen, binnen een set van soortgelijke waardes (nummers).
 
-Deze waarde wordt bijvoorbeeld gebruikt bij het checken of een string een andere substring heeft, met indexOf( ). Deze geeft -1 terug, als er niks is gevonden en anders een 0-based index waar de substring begint.
+Deze waarde wordt bijvoorbeeld gebruikt bij het checken of een string een andere substring heeft, met indexOf(). Deze geeft -1 terug, als er niks is gevonden en anders een 0-based index waar de substring begint.
 
 ```js
 var a = "Hello World";
 
-~a.indexOf( "lo" );            // -4   <-- truthy!
+~a.indexOf("lo");            // -4   <-- truthy!
 
-if (~a.indexOf( "lo" )) {	// true
+if (~a.indexOf("lo")) {	// true
     // found it!
 }
 
-~a.indexOf( "ol" );            // 0    <-- falsy!
-!~a.indexOf( "ol" );        // true
+~a.indexOf("ol");            // 0    <-- falsy!
+!~a.indexOf("ol");        // true
 
-if (!~a.indexOf( "ol" )) {    // true
+if (!~a.indexOf("ol")) {    // true
     // not found!
 }
 ```
@@ -793,7 +794,7 @@ Het lijkt op, maar is niet hetzelfde als Math.floor.
 Eerst maakt deze operator van een getal een int32 en doet vervolgens een bitwise flip, waarna het nog een keer geflipt wordt. In principe voert deze operatie dus alleen ToInt32 uit.
 
 ```js
-Math.floor( -49.6 );    // -50
+Math.floor(-49.6);    // -50
 ~~-49.6;				// -49
 ```
 
@@ -804,16 +805,16 @@ Er is ook parseFloat.
 Gebruik dit alleen met string waardes.
 
 ```js
-parseInt( 0.000008 );		// 0   ("0" from "0.000008")
-parseInt( 0.0000008 );		// 8   ("8" from "8e-7")
-parseInt( false, 16 );		// 250 ("fa" from "false")
-parseInt( parseInt, 16 );	// 15  ("f" from "function..")
+parseInt(0.000008);		// 0   ("0" from "0.000008")
+parseInt(0.0000008);		// 8   ("8" from "8e-7")
+parseInt(false, 16);		// 250 ("fa" from "false")
+parseInt(parseInt, 16);	// 15  ("f" from "function..")
 
-parseInt( "0x10" );			// 16
-parseInt( "103", 2 );		// 2
+parseInt("0x10");			// 16
+parseInt("103", 2);		// 2
 
 *—> Boolean
-Boolean( ) is een manier om een waarde in een boolean om te zetten.
+Boolean() is een manier om een waarde in een boolean om te zetten.
 
 var a = "0";
 var b = [];
@@ -824,14 +825,14 @@ var e = 0;
 var f = `null`;
 var g;
 
-Boolean( a ); // true
-Boolean( b ); // true
-Boolean( c ); // true
+Boolean(a); // true
+Boolean(b); // true
+Boolean(c); // true
 
-Boolean( d ); // false
-Boolean( e ); // false
-Boolean( f ); // false
-Boolean( g ); // false
+Boolean(d); // false
+Boolean(e); // false
+Boolean(f); // false
+Boolean(g); // false
 
 var a = "0";
 var b = [];
@@ -886,11 +887,11 @@ function onlyOne() {
 var a = true;
 var b = false;
 
-onlyOne( b, a );        // true
-onlyOne( b, a, b, b, b );    // true
+onlyOne(b, a);        // true
+onlyOne(b, a, b, b, b);    // true
 
-onlyOne( b, b );        // false
-onlyOne( b, a, b, b, b, a );    // false
+onlyOne(b, b);        // false
+onlyOne(b, a, b, b, b, a);    // false
 ```
 
 ### Alles —> Boolean
@@ -907,7 +908,7 @@ Guard operator: De eerste expressie test beschermt de tweede expressie:
 
 ```js
 function foo() {
-    console.log( a );
+    console.log(a);
 }
 
 var a = 42;
@@ -977,7 +978,7 @@ if (!!a) {
 }
 
 // also great (works explicitly):
-if (Boolean( a )) {
+if (Boolean(a)) {
 	// ..
 }
 
@@ -994,7 +995,7 @@ In een array worden nummers omgezet in strings en dan als er vergeleken wordt me
 
 ```js
 var a = "abc";
-var b = Object( a );	// same as `new String( a )`
+var b = Object(a);	// same as `new String(a)`
 
 a === b;				// false
 a == b;					// true
@@ -1004,15 +1005,15 @@ Gevallen waar dit niet zo is:
 
 ```js
 var a = `null`;
-var b = Object( a );	// same as `Object()`
+var b = Object(a);	// same as `Object()`
 a == b;					// false
 
 var c = `undefined`;
-var d = Object( c );	// same as `Object()`
+var d = Object(c);	// same as `Object()`
 c == d;					// false
 
 var e = NaN;
-var f = Object( e );	// same as `new Number( e )`
+var f = Object(e);	// same as `new Number(e)`
 e == f;					// false
 ```
 
@@ -1138,13 +1139,13 @@ b;	// 42
 
 ++ en - - kunnen beide worden gebruikt als **postfix** (na) en **prefix** (voor).
 Als het in de prefix versie wordt gebruikt, gebeurt het side effect voordat de waarde is gereturned.
-Het side effect verdwijnt niet als je het in ( ) wrapt.
+Het side effect verdwijnt niet als je het in () wrapt.
 
 , = **Statement-series comma operator**.
 
 ```js
 var a = 42, b;
-b = ( a++, a );
+b = (a++, a);
 
 a;	// 43
 b;	// 43
@@ -1170,7 +1171,7 @@ Let op dat je niet var a = b = c = 42 doet, want dat kan niet.
 
 ```js
 Var a = {
-	foo: bar( )
+	foo: bar()
 };
 ```
 
@@ -1179,11 +1180,11 @@ De curly braces is de **r-value**.
 
 ```js
 {
-	foo: bar( )
+	foo: bar()
 } // Dit is een standalone block.
 ```
 
-Het is valide JavaScript. En foo: bar( ) is een **labeled statement**. Dit is een soort van **goto**, wat volgens vele een hele slechte manier van coden is.
+Het is valide JavaScript. En foo: bar() is een **labeled statement**. Dit is een soort van **goto**, wat volgens vele een hele slechte manier van coden is.
 JavaScript heeft **labeled jumps**. Het betekent niet letterlijk ga hierheen, maar meer dat het hier iets mee moet doen.
 
 ```js
@@ -1191,12 +1192,12 @@ JavaScript heeft **labeled jumps**. Het betekent niet letterlijk ga hierheen, ma
 foo: for (var i=0; i<4; i++) {
 	for (var j=0; j<4; j++) {
 		if ((i * j) >= 3) {
-			console.log( "stopping!", i, j );
+			console.log("stopping!", i, j);
 			// break out of the `foo` labeled loop
 			break foo;
 		}
 
-		console.log( i, j );
+		console.log(i, j);
 	}
 }
 // 0 0
@@ -1234,7 +1235,7 @@ function getData() {
 
 var { a, b } = getData();
 
-console.log( a, b ); // 42 “foo"
+console.log(a, b); // 42 “foo"
 ```
 
 Het kan ook gebruikt worden voor het direct deconstructen van objecten als parameters in functies:
@@ -1243,14 +1244,14 @@ Het kan ook gebruikt worden voor het direct deconstructen van objecten als param
 function foo({ a, b, c }) {
 	// no need for:
 	// var a = obj.a, b = obj.b, c = obj.c
-	console.log( a, b, c );
+	console.log(a, b, c);
 }
 
-foo( {
+foo({
 	c: [1,2,3],
 	a: 42,
 	b: "foo"
-} );	// 42 "foo" [1, 2, 3]
+});	// 42 "foo" [1, 2, 3]
 ```
 
 ### Else if and optional blocks
@@ -1294,7 +1295,7 @@ a = b = c = 42;
 
 ### Disambiguation
 
-Je moet beide operator presedence en handmatig groeperen ( ) in je programma’s mixen. Gebruik handmatig groeperen als je verwarring moet verminderen en duidelijkheid moet scheppen.
+Je moet beide operator presedence en handmatig groeperen () in je programma’s mixen. Gebruik handmatig groeperen als je verwarring moet verminderen en duidelijkheid moet scheppen.
 
 ### Automatic semicolons
 
@@ -1307,7 +1308,7 @@ ASI komt ook voor:
 * Na do … while (a)
 * Break
 * Continue
-* Return -> Als je multiline wilt returnen, moet je het wrappen in ( ).
+* Return -> Als je multiline wilt returnen, moet je het wrappen in ().
 * ES6 yield
 
 ### Error correction
@@ -1351,15 +1352,15 @@ Er zit een duidelijk verschil in een variabele die helemaal niet in een block is
 Je kan ook de TDZ fout krijgen, als je in een functie in de default parameters een variabele van buiten aan een parameter assignt.
 
 ```js
-function foo( a = 42, b = a + 1 ) {
-	console.log( a, b );
+function foo(a = 42, b = a + 1) {
+	console.log(a, b);
 }
 
 foo();					// 42 43
-foo( `undefined` );		// 42 43
-foo( 5 );				// 5 6
-foo( void 0, 7 );		// 42 7
-foo( `null` );			// `null` 1
+foo(`undefined`);		// 42 43
+foo(5);				// 5 6
+foo(void 0, 7);		// 42 7
+foo(`null`);			// `null` 1
 ```
 
 `null` wordt omgezet in het cijfer 0 als je `null` + 1 doet.
@@ -1369,10 +1370,10 @@ Je kan wel zien of er een `undefined` wordt meegegeven door te checken via argum
 ```js
 function foo(a) {
 	a = 42;
-	console.log( arguments[0] );
+	console.log(arguments[0]);
 }
 
-foo( 2 );	// 42 (linked)
+foo(2);	// 42 (linked)
 foo();		// `undefined` (not linked)
 ```
 
@@ -1388,13 +1389,13 @@ function foo() {
 		return 42;
 	}
 	finally {
-		console.log( "Hello" );
+		console.log("Hello");
 	}
 
-	console.log( "never runs" );
+	console.log("never runs");
 }
 
-console.log( foo() );
+console.log(foo());
 // Hello
 // 42
 
@@ -1406,10 +1407,10 @@ function foo() {
 		throw "Oops!";
 	}
 
-	console.log( "never runs" );
+	console.log("never runs");
 }
 
-console.log( foo() );
+console.log(foo());
 // Uncaught Exception: Oops!
 ```
 
@@ -1426,10 +1427,10 @@ var a = "42";
 
 switch (true) {
 	case a == 10:
-		console.log( "10 or '10'" );
+		console.log("10 or '10'");
 		break;
 	case a == 42:
-		console.log( "42 or '42'" );
+		console.log("42 or '42'");
 		break;
 	default:
 		// never gets here
@@ -1448,7 +1449,7 @@ switch (true) {
 		// never gets here
 		break;
 	default:
-		console.log( "Oops" );
+		console.log("Oops");
 }
 // Oops
 ```
@@ -1461,12 +1462,12 @@ switch (a) {
 	case 2:
 		// never gets here
 	default:
-		console.log( "default" );
+		console.log("default");
 	case 3:
-		console.log( "3" );
+		console.log("3");
 		break;
 	case 4:
-		console.log( "4" );
+		console.log("4");
 }
 // default
 // 3
@@ -1495,13 +1496,13 @@ function foo(a) {
 	var b = a * 2;
 
 	function bar(c) {
-		console.log( a, b, c );
+		console.log(a, b, c);
 	}
 
 	bar(b * 3);
 }
 
-foo( 2 ); // 2 4 12
+foo(2); // 2 4 12
 ```
 
 In dit voorbeeld zitten drie scopes, globale scope, foo’s inner scope met de waarde a meegenomen, en bar’s inner scope met de waarde c meegenomen. Deze scopes kunnen worden gezien als scope bubbles.
@@ -1526,13 +1527,13 @@ Deze functie neemt een string als argument en behandeld vervolgens de content va
 
 ```js
 function foo(str, a) {
-	eval( str ); // cheating!
-	console.log( a, b );
+	eval(str); // cheating!
+	console.log(a, b);
 }
 
 var b = 2;
 
-foo( "var b = 3;", 1 ); // 1 3
+foo("var b = 3;", 1); // 1 3
 ```
 
 In dit geval zal er in foo een nieuwe variabele b worden aangemaakt, die de globale b overshadowt.
@@ -1586,12 +1587,12 @@ var o2 = {
 	b: 3
 };
 
-foo( o1 );
-console.log( o1.a ); // 2
+foo(o1);
+console.log(o1.a); // 2
 
-foo( o2 );
-console.log( o2.a ); // `undefined`
-console.log( a ); // 2 -- Oops, leaked global!
+foo(o2);
+console.log(o2.a); // `undefined`
+console.log(a); // 2 -- Oops, leaked global!
 ```
 
 With maakt een hele nieuwe lexicale scope uit het niets.
@@ -1637,14 +1638,14 @@ Het hebben van functies als scopes is vaak niet ideaal, omdat je ze moet aanroep
 
 Als function het eerste woord is in een statement heet het een function declaration en anders een function expression.
 
-In een IIFE is de naam van de functie niet buiten de omringende ( ) beschikbaar.
+In een IIFE is de naam van de functie niet buiten de omringende () beschikbaar.
 
 ### Anonymous vs. named
 
 ```js
-setTimeout( function(){
+setTimeout(function(){
 	console.log("I waited 1 second!");
-}, 1000 );
+}, 1000);
 ```
 
 Het bovenstaande is een anonieme functie expressie. Functie expressies kunnen anoniem zijn, maar functie declarations niet.
@@ -1661,7 +1662,7 @@ Inline function expressions zijn krachtig en bruikbaar, het maakt niet uit of ze
 
 Immediately Invoked Function Expression: IIFE. Gebruik ook hier gewoon een naam.
 
-(function { } ( )) is hetzelfde als (function { })( )
+(function { } ()) is hetzelfde als (function { })()
 
 Je kan ook parameters meegeven aan een IIFE.
 
@@ -1672,13 +1673,13 @@ Een ander gebruik van een IIFE is om de volgorde van dingen te veranderen, met h
 ```js
 var a = 2;
 
-(function IIFE( def ){
-	def( window );
-})(function def( global ){
+(function IIFE(def){
+	def(window);
+})(function def(global){
 
 	var a = 3;
-	console.log( a ); // 3
-	console.log( global.a ); // 2
+	console.log(a); // 3
+	console.log(global.a); // 2
 
 });
 ```
@@ -1709,14 +1710,14 @@ function process(data) {
 {
 	let someReallyBigData = { .. };
 
-	process( someReallyBigData );
+	process(someReallyBigData);
 }
 
-var btn = document.getElementById( "my_button" );
+var btn = document.getElementById("my_button");
 
-btn.addEventListener( "click", function click(evt){
+btn.addEventListener("click", function click(evt){
 	console.log("button clicked");
-}, /*capturingPhase=*/false );
+}, /*capturingPhase=*/false);
 ```
 
 ### Let loops
@@ -1743,11 +1744,11 @@ a = 2;
 
 var a;
 
-console.log( a ); // 2
+console.log(a); // 2
 
 //////////////////////
 
-console.log( a );
+console.log(a);
 
 var a = 2; // `undefined`
 ```
@@ -1765,7 +1766,7 @@ Het eerste deel van de statement (declaration) wordt verwerkt tijdens de compila
 Het tweede voorbeeld is dus eigenlijk:
 
 ```js
-console.log( a );
+console.log(a);
 
 a = 2;
 ```
@@ -1799,23 +1800,23 @@ foo(); // 1
 var foo;
 
 function foo() {
-	console.log( 1 );
+	console.log(1);
 }
 
 foo = function() {
-	console.log( 2 );
+	console.log(2);
 };
 
 //////////////////////////
 
 function foo() {
-	console.log( 1 );
+	console.log(1);
 }
 
 foo(); // 1
 
 foo = function() {
-	console.log( 2 );
+	console.log(2);
 };
 ```
 
@@ -1828,10 +1829,10 @@ foo(); // "b"
 
 var a = true;
 if (a) {
-   function foo() { console.log( "a" ); }
+   function foo() { console.log("a"); }
 }
 else {
-   function foo() { console.log( "b" ); }
+   function foo() { console.log("b"); }
 }
 ```
 
@@ -1854,7 +1855,7 @@ function foo() {
 	var a = 2;
 
 	function bar() {
-		console.log( a );
+		console.log(a);
 	}
 
 	return bar;
@@ -1879,9 +1880,9 @@ Een **IIFE** wordt niet uitgevoerd buiten zijn lexicale scope, waardoor er vaak 
 
 ```js
 for (var i=1; i<=5; i++) {
-	setTimeout( function timer(){
-		console.log( i );
-	}, i*1000 );
+	setTimeout(function timer(){
+		console.log(i);
+	}, i*1000);
 }
 ```
 
@@ -1901,9 +1902,9 @@ Let veranderd als het ware een block in een scope waar we closure over hebben. O
 ```js
 for (var i=1; i<=5; i++) {
 	let j = i; // yay, block-scope for closure!
-	setTimeout( function timer(){
-		console.log( j );
-	}, j*1000 );
+	setTimeout(function timer(){
+		console.log(j);
+	}, j*1000);
 }
 ```
 
@@ -1911,9 +1912,9 @@ Het kan zelfs nog makkelijk worden gemaakt met JavaScript, doordat er speciaal g
 
 ```js
 for (let i=1; i<=5; i++) {
-	setTimeout( function timer(){
-		console.log( i );
-	}, i*1000 );
+	setTimeout(function timer(){
+		console.log(i);
+	}, i*1000);
 }
 ```
 
@@ -1926,11 +1927,11 @@ function CoolModule() {
 	var another = [1, 2, 3];
 
 	function doSomething() {
-		console.log( something );
+		console.log(something);
 	}
 
 	function doAnother() {
-		console.log( another.join( " ! " ) );
+		console.log(another.join(" ! "));
 	}
 
 	return {
@@ -1945,7 +1946,7 @@ foo.doSomething(); // cool
 foo.doAnother(); // 1 ! 2 ! 3
 ```
 
-De bovenstaande CoolModule( ) is slechts een functie, die moet worden aangeroepen, zodat er een module instance wordt gemaakt.
+De bovenstaande CoolModule() is slechts een functie, die moet worden aangeroepen, zodat er een module instance wordt gemaakt.
 
 Hetgeen wat hierboven wordt gereturnt kan worden gezien als de public API van de module, aangezien deze gereturnde waardes geen toegang geven tot de privé variabelen.
 
@@ -1963,11 +1964,11 @@ var foo = (function CoolModule() {
 	var another = [1, 2, 3];
 
 	function doSomething() {
-		console.log( something );
+		console.log(something);
 	}
 
 	function doAnother() {
-		console.log( another.join( " ! " ) );
+		console.log(another.join(" ! "));
 	}
 
 	return {
@@ -1994,11 +1995,11 @@ var foo = (function CoolModule(id) {
 	}
 
 	function identify1() {
-		console.log( id );
+		console.log(id);
 	}
 
 	function identify2() {
-		console.log( id.toUpperCase() );
+		console.log(id.toUpperCase());
 	}
 
 	var publicAPI = {
@@ -2007,7 +2008,7 @@ var foo = (function CoolModule(id) {
 	};
 
 	return publicAPI;
-})( "foo module" );
+})("foo module");
 
 foo.identify(); // foo module
 foo.change();
@@ -2027,7 +2028,7 @@ var MyModules = (function Manager() {
 		for (var i=0; i<deps.length; i++) {
 			deps[i] = modules[deps[i]];
 		}
-		modules[name] = impl.apply( impl, deps );
+		modules[name] = impl.apply(impl, deps);
 	}
 
 	function get(name) {
@@ -2052,7 +2053,7 @@ Dit voert de functie (die meegegeven wordt) uit, met de dependencies als paramet
 Vervolgens kunnen er dingen mee gedaan worden op de volgende manier:
 
 ```js
-MyModules.define( "bar", [], function(){
+MyModules.define("bar", [], function(){
 	function hello(who) {
 		return "Let me introduce: " + who;
 	}
@@ -2060,25 +2061,25 @@ MyModules.define( "bar", [], function(){
 	return {
 		hello: hello
 	};
-} );
+});
 
-MyModules.define( "foo", ["bar"], function(bar){
+MyModules.define("foo", ["bar"], function(bar){
 	var hungry = "hippo";
 
 	function awesome() {
-		console.log( bar.hello( hungry ).toUpperCase() );
+		console.log(bar.hello(hungry).toUpperCase());
 	}
 
 	return {
 		awesome: awesome
 	};
-} );
+});
 
-var bar = MyModules.get( "bar" );
-var foo = MyModules.get( "foo" );
+var bar = MyModules.get("bar");
+var foo = MyModules.get("foo");
 
 console.log(
-	bar.hello( "hippo" )
+	bar.hello("hippo")
 ); // Let me introduce: hippo
 
 foo.awesome(); // LET ME INTRODUCE: HIPPO
@@ -2109,8 +2110,8 @@ function identify() {
 }
 
 function speak() {
-	var greeting = "Hello, I'm " + identify.call( this );
-	console.log( greeting );
+	var greeting = "Hello, I'm " + identify.call(this);
+	console.log(greeting);
 }
 
 var me = {
@@ -2121,11 +2122,11 @@ var you = {
 	name: "Reader"
 };
 
-identify.call( me ); // KYLE
-identify.call( you ); // READER
+identify.call(me); // KYLE
+identify.call(you); // READER
 
-speak.call( me ); // Hello, I'm KYLE
-speak.call( you ); // Hello, I'm READER
+speak.call(me); // Hello, I'm KYLE
+speak.call(you); // Hello, I'm READER
 ```
 
 Zonder `this`:
@@ -2136,12 +2137,12 @@ function identify(context) {
 }
 
 function speak(context) {
-	var greeting = "Hello, I'm " + identify( context );
-	console.log( greeting );
+	var greeting = "Hello, I'm " + identify(context);
+	console.log(greeting);
 }
 
-identify( you ); // READER
-speak( me ); // Hello, I'm KYLE
+identify(you); // READER
+speak(me); // Hello, I'm KYLE
 ```
 
 This zorgt voor een elegantere manier van het doorgeven van referenties naar objecten. Dit leidt weer tot een schonere API en het makkelijker hergebruiken van functies.
@@ -2155,7 +2156,7 @@ Veel developers vallen terug op een ander mechanisme als ze niet snappen waarom 
 
 ```js
 function foo(num) {
-	console.log( "foo: " + num );
+	console.log("foo: " + num);
 
 	// keep track of how many times `foo` is called
 	this.count++;
@@ -2167,7 +2168,7 @@ var i;
 
 for (i=0; i<10; i++) {
 	if (i > 5) {
-		foo( i );
+		foo(i);
 	}
 }
 // foo: 6
@@ -2176,7 +2177,7 @@ for (i=0; i<10; i++) {
 // foo: 9
 
 // how many times was `foo` called?
-console.log( foo.count ); // 0 -- WTF?
+console.log(foo.count); // 0 -- WTF?
 ```
 
 De oplossing is ook niet per se, om de naam van de functie te gebruiken als this (het kan wel, maar dan moet je functie wel altijd een naam hebben):
@@ -2186,17 +2187,17 @@ function foo() {
 	foo.count = 4; // `foo` refers to itself
 }
 
-setTimeout( function(){
+setTimeout(function(){
 	// anonymous function (no name), cannot
 	// refer to itself
-}, 10 );
+}, 10);
 ```
 
 Wat wel werkt, is .call() te gebruiken:
 
 ```js
 function foo(num) {
-	console.log( "foo: " + num );
+	console.log("foo: " + num);
 
 	// keep track of how many times `foo` is called
 	// Note: `this` IS actually `foo` now, based on
@@ -2212,7 +2213,7 @@ for (i=0; i<10; i++) {
 	if (i > 5) {
 		// using `call(..)`, we ensure the `this`
 		// points at the function object (`foo`) itself
-		foo.call( foo, i );
+		foo.call(foo, i);
 	}
 }
 // foo: 6
@@ -2221,7 +2222,7 @@ for (i=0; i<10; i++) {
 // foo: 9
 
 // how many times was `foo` called?
-console.log( foo.count ); // 4
+console.log(foo.count); // 4
 ```
 
 ### Its scope
@@ -2237,7 +2238,7 @@ function foo() {
 }
 
 function bar() {
-	console.log( this.a );
+	console.log(this.a);
 }
 
 foo(); //`undefined`
@@ -2277,7 +2278,7 @@ function baz() {
     // call-stack is: `baz`
     // so, our call-site is in the global scope
 
-    console.log( "baz" );
+    console.log("baz");
     bar(); // <-- call-site for `bar`
 }
 
@@ -2285,7 +2286,7 @@ function bar() {
     // call-stack is: `baz` -> `bar`
     // so, our call-site is in `baz`
 
-    console.log( "bar" );
+    console.log("bar");
     foo(); // <-- call-site for `foo`
 }
 
@@ -2293,7 +2294,7 @@ function foo() {
     // call-stack is: `baz` -> `bar` -> `foo`
     // so, our call-site is in `bar`
 
-    console.log( "foo" );
+    console.log("foo");
 }
 
 baz(); // <-- call-site for `baz`
@@ -2309,7 +2310,7 @@ De standaard versie van this binding, komt van standaard alleenstaande functie c
 
 ```js
 function foo() {
-	console.log( this.a );
+	console.log(this.a);
 }
 
 var a = 2;
@@ -2323,7 +2324,7 @@ Als 'strict mode' aan staat breekt de bovenstaande code, omdat het globale objec
 function foo() {
 	"use strict";
 
-	console.log( this.a );
+	console.log(this.a);
 }
 
 var a = 2;
@@ -2341,7 +2342,7 @@ Heeft de call-site een **context object** of **owning / containing object**.
 
 ```js
 function foo() {
-	console.log( this.a );
+	console.log(this.a);
 }
 
 var obj = {
@@ -2360,7 +2361,7 @@ Alleen het laatste / hoogste level van een object property reference chain geldt
 
 ```js
 function foo() {
-	console.log( this.a );
+	console.log(this.a);
 }
 
 var obj2 = {
@@ -2382,7 +2383,7 @@ Als een implicitly bound function de binding met **this** verliest, om vervolgen
 
 ```js
 function foo() {
-	console.log( this.a );
+	console.log(this.a);
 }
 
 var obj = {
@@ -2403,7 +2404,7 @@ Ook als je functies meegeeft via de parameters, geldt het bovenstaande fenomeen:
 
 ```js
 function foo() {
-	console.log( this.a );
+	console.log(this.a);
 }
 
 function doFoo(fn) {
@@ -2419,7 +2420,7 @@ var obj = {
 
 var a = "oops, global"; // `a` also property on global object
 
-doFoo( obj.foo ); // "oops, global"
+doFoo(obj.foo); // "oops, global"
 ```
 
 Zelfs als de functie een ingebouwde JavaScript functie is, zoals setTimeout(), geldt dit.
@@ -2434,14 +2435,14 @@ Deze functies werken, door beide als eerste argument een object mee te krijgen, 
 
 ```js
 function foo() {
-	console.log( this.a );
+	console.log(this.a);
 }
 
 var obj = {
 	a: 2
 };
 
-foo.call( obj ); // 2
+foo.call(obj); // 2
 ```
 
 Als je een string meegeeft als this, wordt deze gewrapt in diens Object vorm (new String etc.).
@@ -2454,7 +2455,7 @@ Dit zorgt er nog niet voor dat een functie diens bedoelde this binding verliest.
 
 ```js
 function foo() {
-	console.log( this.a );
+	console.log(this.a);
 }
 
 var obj = {
@@ -2462,15 +2463,15 @@ var obj = {
 };
 
 var bar = function() {
-	foo.call( obj );
+	foo.call(obj);
 };
 
 bar(); // 2
-setTimeout( bar, 100 ); // 2
+setTimeout(bar, 100); // 2
 
 // `bar` hard binds `foo`'s `this` to `obj`
 // so that it cannot be overriden
-bar.call( window ); // 2
+bar.call(window); // 2
 ```
 
 Het type binding, dat hierboven wordt gebruikt, is beide **sterk en expliciet**, dus vandaar dat het **hard binding** heet.
@@ -2481,7 +2482,7 @@ Door **arguments** te gebruiken kan je alsnog parameters meegeven aan de inner f
 
 ```js
 function foo(something) {
-	console.log( this.a, something );
+	console.log(this.a, something);
 	return this.a + something;
 }
 
@@ -2490,25 +2491,25 @@ var obj = {
 };
 
 var bar = function() {
-	return foo.apply( obj, arguments );
+	return foo.apply(obj, arguments);
 };
 
-var b = bar( 3 ); // 2 3
-console.log( b ); // 5
+var b = bar(3); // 2 3
+console.log(b); // 5
 ```
 
 Je kan ook een **bind helper** maken.
 
 ```js
 function foo(something) {
-	console.log( this.a, something );
+	console.log(this.a, something);
 	return this.a + something;
 }
 
 // simple `bind` helper
 function bind(fn, obj) {
 	return function() {
-		return fn.apply( obj, arguments );
+		return fn.apply(obj, arguments);
 	};
 }
 
@@ -2516,17 +2517,17 @@ var obj = {
 	a: 2
 };
 
-var bar = bind( foo, obj );
+var bar = bind(foo, obj);
 
-var b = bar( 3 ); // 2 3
-console.log( b ); // 5
+var b = bar(3); // 2 3
+console.log(b); // 5
 ```
 
 Dit patroon is zo standaard geworden dat sinds ES5 er een ingebouwde functie in is gebouwd: **Function.prototype.bind**.
 
 ```js
 function foo(something) {
-	console.log( this.a, something );
+	console.log(this.a, something);
 	return this.a + something;
 }
 
@@ -2534,10 +2535,10 @@ var obj = {
 	a: 2
 };
 
-var bar = foo.bind( obj );
+var bar = foo.bind(obj);
 
-var b = bar( 3 ); // 2 3
-console.log( b ); // 5
+var b = bar(3); // 2 3
+console.log(b); // 5
 ```
 
 ##### API Call 'Contexts'
@@ -2546,7 +2547,7 @@ Veel API's hebben een optionele parameter, met de **context** van this, zodat bi
 
 ```js
 function foo(el) {
-	console.log( el, this.id );
+	console.log(el, this.id);
 }
 
 var obj = {
@@ -2554,7 +2555,7 @@ var obj = {
 };
 
 // use `obj` as `this` for `foo(..)` calls
-[1, 2, 3].forEach( foo, obj ); // 1 awesome  2 awesome  3 awesome
+[1, 2, 3].forEach(foo, obj); // 1 awesome  2 awesome  3 awesome
 ```
 
 ### new Binding
@@ -2580,8 +2581,8 @@ function foo(a) {
 	this.a = a;
 }
 
-var bar = new foo( 2 );
-console.log( bar.a ); // 2
+var bar = new foo(2);
+console.log(bar.a); // 2
 ```
 
 ### Everything in order
@@ -2590,7 +2591,7 @@ Als meerdere van de bovenstaande regels gelden voor function binding, heeft **de
 
 ```js
 function foo() {
-	console.log( this.a );
+	console.log(this.a);
 }
 
 var obj1 = {
@@ -2606,8 +2607,8 @@ var obj2 = {
 obj1.foo(); // 2
 obj2.foo(); // 3
 
-obj1.foo.call( obj2 ); // 3
-obj2.foo.call( obj1 ); // 2
+obj1.foo.call(obj2); // 3
+obj2.foo.call(obj1); // 2
 ```
 
 Zoals hier te zien is, heeft **explicit binding** meer voorang dan **implicit binding**.
@@ -2623,15 +2624,15 @@ var obj1 = {
 
 var obj2 = {};
 
-obj1.foo( 2 );
-console.log( obj1.a ); // 2
+obj1.foo(2);
+console.log(obj1.a); // 2
 
-obj1.foo.call( obj2, 3 );
-console.log( obj2.a ); // 3
+obj1.foo.call(obj2, 3);
+console.log(obj2.a); // 3
 
-var bar = new obj1.foo( 4 );
-console.log( obj1.a ); // 2
-console.log( bar.a ); // 4
+var bar = new obj1.foo(4);
+console.log(obj1.a); // 2
+console.log(bar.a); // 4
 ```
 
 Zoals hier te zien heeft **new binding** meer voorang dan **implicit binding**.
@@ -2651,9 +2652,9 @@ function foo(p1,p2) {
 // using `null` here because we don't care about
 // the `this` hard-binding in this scenario, and
 // it will be overridden by the `new` call anyway!
-var bar = foo.bind( `null`, "p1" );
+var bar = foo.bind(`null`, "p1");
 
-var baz = new bar( "p2" );
+var baz = new bar("p2");
 
 baz.val; // p1p2
 ```
@@ -2676,15 +2677,15 @@ Als je `null` of `undefined` mee geeft aan een expliciete binding, zijn die waar
 
 ```js
 function foo(a,b) {
-	console.log( "a:" + a + ", b:" + b );
+	console.log("a:" + a + ", b:" + b);
 }
 
 // spreading out array as parameters
-foo.apply( `null`, [2, 3] ); // a:2, b:3
+foo.apply(`null`, [2, 3]); // a:2, b:3
 
 // currying with `bind(..)`
-var bar = foo.bind( `null`, 2 );
-bar( 3 ); // a:2, b:3
+var bar = foo.bind(`null`, 2);
+bar(3); // a:2, b:3
 ```
 
 Er zit echter een gevaar in het altijd gebruiken van `undefined` of `null` bij deze methodes, omdat als je het doet bij een library waar je geen controle over hebt, er wellicht 'per ongeluk' veranderingen aan het globale object worden gedaan.
@@ -2713,16 +2714,16 @@ var obj = { name: "obj" },
     obj2 = { name: "obj2" },
     obj3 = { name: "obj3" };
 
-var fooOBJ = foo.softBind( obj );
+var fooOBJ = foo.softBind(obj);
 
 fooOBJ(); // name: obj
 
 obj2.foo = foo.softBind(obj);
 obj2.foo(); // name: obj2   <---- look!!!
 
-fooOBJ.call( obj3 ); // name: obj3   <---- look!
+fooOBJ.call(obj3); // name: obj3   <---- look!
 
-setTimeout( obj2.foo, 10 ); // name: obj   <---- falls back to soft-binding
+setTimeout(obj2.foo, 10); // name: obj   <---- falls back to soft-binding
 ```
 
 #### Lexical this
@@ -2738,7 +2739,7 @@ function foo() {
 	// return an arrow function
 	return (a) => {
 		// `this` here is lexically adopted from `foo()`
-		console.log( this.a );
+		console.log(this.a);
 	};
 }
 
@@ -2750,8 +2751,8 @@ var obj2 = {
 	a: 3
 };
 
-var bar = foo.call( obj1 );
-bar.call( obj2 ); // 2, not 3!
+var bar = foo.call(obj1);
+bar.call(obj2); // 2, not 3!
 ```
 
 In dit geval is foo bound aan obj1. bar zal dan ook this-bound zijn aan obj1, deze kan niet worden overschreven, zoals te zien is bij de laatste call, zelfs niet met new.
@@ -2809,12 +2810,12 @@ var strPrimitive = "I am a string";
 typeof strPrimitive;							// "string"
 strPrimitive instanceof String;					// false
 
-var strObject = new String( "I am a string" );
+var strObject = new String("I am a string");
 typeof strObject; 								// "object"
 strObject instanceof String;					// true
 
 // inspect the object sub-type
-Object.prototype.toString.call( strObject );	// [object String]
+Object.prototype.toString.call(strObject);	// [object String]
 ```
 
 Om dingen met de waarde te doen van bijvoorbeeld een string moet het naar een String object vorm worden omgezet, gelukkig gebeurt dat automatisch, dus hoef je bijna nooit de constructed vorm te gebruiken.
@@ -2852,7 +2853,7 @@ if (wantA) {
 
 // later
 
-console.log( myObject[idx] ); // 2
+console.log(myObject[idx]); // 2
 ```
 
 Alle property namen worden naar strings omgezet.
@@ -2905,7 +2906,7 @@ Je kan het beste een shallow copy maken, in ES6 zit nu Object.assign() voor deze
 Deze zal over alle **enumerable**, **owned keys** (die direct aanwezig zijn), van de source objects loopen en die kopieëren via '=' naar het *target object*, het returnt vervolgs het *target object*.
 
 ```js
-var newObj = Object.assign( {}, myObject );
+var newObj = Object.assign({}, myObject);
 
 newObj.a;						// 2
 newObj.b === anotherObject;		// true
@@ -2922,7 +2923,7 @@ var myObject = {
 	a: 2
 };
 
-Object.getOwnPropertyDescriptor( myObject, "a" );
+Object.getOwnPropertyDescriptor(myObject, "a");
 // {
 //    value: 2,
 //    writable: true,
@@ -2938,12 +2939,12 @@ Als een object **configurable** is, dan kan je via de **Object.defineProperty()*
 ```js
 var myObject = {};
 
-Object.defineProperty( myObject, "a", {
+Object.defineProperty(myObject, "a", {
 	value: 2,
 	writable: true,
 	configurable: true,
 	enumerable: true
-} );
+});
 
 myObject.a; // 2
 ```
@@ -2976,11 +2977,11 @@ Als je *writable: false* en *configurable:false* combineert, creëer je als het 
 ```js
 var myObject = {};
 
-Object.defineProperty( myObject, "FAVORITE_NUMBER", {
+Object.defineProperty(myObject, "FAVORITE_NUMBER", {
 	value: 42,
 	writable: false,
 	configurable: false
-} );
+});
 ```
 
 ##### Prevent extensions
@@ -2992,7 +2993,7 @@ var myObject = {
 	a: 2
 };
 
-Object.preventExtensions( myObject );
+Object.preventExtensions(myObject);
 
 myObject.b = 3;
 myObject.b; // `undefined`
@@ -3115,8 +3116,8 @@ var myObject = {
 ("a" in myObject);				// true
 ("b" in myObject);				// false
 
-myObject.hasOwnProperty( "a" );	// true
-myObject.hasOwnProperty( "b" );	// false
+myObject.hasOwnProperty("a");	// true
+myObject.hasOwnProperty("b");	// false
 ```
 
 Je kan een van deze twee manieren gebruiken, om erachter te komen of een property bestaat op een object, of dat er gewoon `undefined` aan deze property is toegewezen.
@@ -3166,14 +3167,14 @@ var myObject = {
 	b: 3
 };
 
-Object.defineProperty( myObject, Symbol.iterator, {
+Object.defineProperty(myObject, Symbol.iterator, {
 	enumerable: false,
 	writable: false,
 	configurable: true,
 	value: function() {
 		var o = this;
 		var idx = 0;
-		var ks = Object.keys( o );
+		var ks = Object.keys(o);
 		return {
 			next: function() {
 				return {
@@ -3183,7 +3184,7 @@ Object.defineProperty( myObject, Symbol.iterator, {
 			}
 		};
 	}
-} );
+});
 
 // iterate `myObject` manually
 var it = myObject[Symbol.iterator]();
@@ -3193,7 +3194,7 @@ it.next(); // { value:`undefined`, done:true }
 
 // iterate `myObject` with `for..of`
 for (var v of myObject) {
-	console.log( v );
+	console.log(v);
 }
 // 2
 // 3
@@ -3248,21 +3249,21 @@ Instantiaties van classes zijn vaak gemaakt vanuit een speciale methode van die 
 class CoolGuy {
 	specialTrick = nothing
 
-	CoolGuy( trick ) {
+	CoolGuy(trick) {
 		specialTrick = trick
 	}
 
 	showOff() {
-		output( "Here's my trick: ", specialTrick )
+		output("Here's my trick: ", specialTrick)
 	}
 }
 
-Joe = new CoolGuy( "jumping rope" )
+Joe = new CoolGuy("jumping rope")
 
 Joe.showOff() // Here's my trick: jumping rope
 ```
 
-Als je *new CoolGuy()* aanroept in dit geval, roep je eigenlijk de methode CoolGuy( trick ) aan.
+Als je *new CoolGuy()* aanroept in dit geval, roep je eigenlijk de methode CoolGuy(trick) aan.
 
 Aan de variabele wordt een object teruggegeven, vanuit die constructor.
 
@@ -3277,12 +3278,12 @@ class Vehicle {
 	engines = 1
 
 	ignition() {
-		output( "Turning on my engine." )
+		output("Turning on my engine.")
 	}
 
 	drive() {
 		ignition()
-		output( "Steering and moving forward!" )
+		output("Steering and moving forward!")
 	}
 }
 
@@ -3291,7 +3292,7 @@ class Car inherits Vehicle {
 
 	drive() {
 		inherited:drive()
-		output( "Rolling on all ", wheels, " wheels!" )
+		output("Rolling on all ", wheels, " wheels!")
 	}
 }
 
@@ -3299,12 +3300,12 @@ class SpeedBoat inherits Vehicle {
 	engines = 2
 
 	ignition() {
-		output( "Turning on my ", engines, " engines." )
+		output("Turning on my ", engines, " engines.")
 	}
 
 	pilot() {
 		inherited:drive()
-		output( "Speeding through the water with ease!" )
+		output("Speeding through the water with ease!")
 	}
 }
 ```
@@ -3344,7 +3345,7 @@ Een utility, dat wordt gebruik om een parent class, zoals Vehicle te kopieëren 
 
 ```js
 // vastly simplified `mixin(..)` example:
-function mixin( sourceObj, targetObj ) {
+function mixin(sourceObj, targetObj) {
 	for (var key in sourceObj) {
 		// only copy if not already present
 		if (!(key in targetObj)) {
@@ -3359,23 +3360,23 @@ var Vehicle = {
 	engines: 1,
 
 	ignition: function() {
-		console.log( "Turning on my engine." );
+		console.log("Turning on my engine.");
 	},
 
 	drive: function() {
 		this.ignition();
-		console.log( "Steering and moving forward!" );
+		console.log("Steering and moving forward!");
 	}
 };
 
-var Car = mixin( Vehicle, {
+var Car = mixin(Vehicle, {
 	wheels: 4,
 
 	drive: function() {
-		Vehicle.drive.call( this );
-		console.log( "Rolling on all " + this.wheels + " wheels!" );
+		Vehicle.drive.call(this);
+		console.log("Rolling on all " + this.wheels + " wheels!");
 	}
-} );
+});
 ```
 
 ##### Polymorphism revisited
@@ -3406,11 +3407,11 @@ function Vehicle() {
 	this.engines = 1;
 }
 Vehicle.prototype.ignition = function() {
-	console.log( "Turning on my engine." );
+	console.log("Turning on my engine.");
 };
 Vehicle.prototype.drive = function() {
 	this.ignition();
-	console.log( "Steering and moving forward!" );
+	console.log("Steering and moving forward!");
 };
 
 // "Parasitic Class" `Car`
@@ -3426,8 +3427,8 @@ function Car() {
 
 	// override `Vehicle::drive()`
 	car.drive = function() {
-		vehDrive.call( this );
-		console.log( "Rolling on all " + this.wheels + " wheels!" );
+		vehDrive.call(this);
+		console.log("Rolling on all " + this.wheels + " wheels!");
 	};
 
 	return car;
@@ -3460,7 +3461,7 @@ Something.count; // 1
 var Another = {
 	cool: function() {
 		// implicit mixin of `Something` to `Another`
-		Something.cool.call( this );
+		Something.cool.call(this);
 	}
 };
 
@@ -3483,7 +3484,7 @@ var anotherObject = {
 };
 
 // create an object linked to `anotherObject`
-var myObject = Object.create( anotherObject );
+var myObject = Object.create(anotherObject);
 
 myObject.a; // 2
 ```
@@ -3500,7 +3501,7 @@ var anotherObject = {
 };
 
 // create an object linked to `anotherObject`
-var myObject = Object.create( anotherObject );
+var myObject = Object.create(anotherObject);
 
 for (var k in myObject) {
 	console.log("found: " + k);
@@ -3539,20 +3540,20 @@ var anotherObject = {
 	a: 2
 };
 
-var myObject = Object.create( anotherObject );
+var myObject = Object.create(anotherObject);
 
 anotherObject.a; // 2
 myObject.a; // 2
 
-anotherObject.hasOwnProperty( "a" ); // true
-myObject.hasOwnProperty( "a" ); // false
+anotherObject.hasOwnProperty("a"); // true
+myObject.hasOwnProperty("a"); // false
 
 myObject.a++; // oops, implicit shadowing!
 
 anotherObject.a; // 2
 myObject.a; // 3
 
-myObject.hasOwnProperty( "a" ); // true
+myObject.hasOwnProperty("a"); // true
 ```
 
 ### "Class"
@@ -3572,7 +3573,7 @@ function Foo() {
 
 var a = new Foo();
 
-Object.getPrototypeOf( a ) === Foo.prototype; // true
+Object.getPrototypeOf(a) === Foo.prototype; // true
 ```
 
 In dit geval, doordat a wordt toegewezen aan de new functie, zal deze een interne **[[Prototype]]** link krijgen, naar het object, waarnaar Foo.prototype linkt.
@@ -3625,8 +3626,8 @@ Foo.prototype.myName = function() {
 	return this.name;
 };
 
-var a = new Foo( "a" );
-var b = new Foo( "b" );
+var a = new Foo("a");
+var b = new Foo("b");
 
 a.myName(); // "a"
 b.myName(); // "b"
@@ -3664,11 +3665,11 @@ Je moet nooit de [[Prototype]] van een bestaand object veranderen. Je kan het he
 ```js
 var foo = {
 	something: function() {
-		console.log( "Tell me something good..." );
+		console.log("Tell me something good...");
 	}
 };
 
-var bar = Object.create( foo );
+var bar = Object.create(foo);
 
 bar.something(); // Tell me something good...
 ```
@@ -3723,8 +3724,8 @@ function bar() {
 }
 
 // ajax(..) is some arbitrary Ajax function given by a library
-ajax( "http://some.url.1", foo );
-ajax( "http://some.url.2", bar );
+ajax("http://some.url.1", foo);
+ajax("http://some.url.2", bar);
 
 // Outcome 1:
 
@@ -3793,8 +3794,8 @@ function bar(results) {
 }
 
 // ajax(..) is some arbitrary Ajax function given by a library
-ajax( "http://some.url.1", foo );
-ajax( "http://some.url.2", bar );
+ajax("http://some.url.1", foo);
+ajax("http://some.url.2", bar);
 ```
 
 ```js
@@ -3803,12 +3804,12 @@ ajax( "http://some.url.2", bar );
 var res = [];
 
 function response(data) {
-	res.push( data );
+	res.push(data);
 }
 
 // ajax(..) is some arbitrary Ajax function given by a library
-ajax( "http://some.url.1", response );
-ajax( "http://some.url.2", response );
+ajax("http://some.url.1", response);
+ajax("http://some.url.2", response);
 
 // Dit lost het op:
 
@@ -3822,8 +3823,8 @@ function response(data) {
 }
 
 // ajax(..) is some arbitrary Ajax function given by a library
-ajax( "http://some.url.1", response );
-ajax( "http://some.url.2", response );
+ajax("http://some.url.1", response);
+ajax("http://some.url.2", response);
 ```
 
 Een **gate** is een conditional die een functie tegenhoudt van het uitvoeren, voordat er goede data is.
@@ -3840,28 +3841,28 @@ var res = [];
 // `response(..)` receives array of results from the Ajax call
 function response(data) {
 	// let's just do 1000 at a time
-	var chunk = data.splice( 0, 1000 );
+	var chunk = data.splice(0, 1000);
 
 	// add onto existing `res` array
 	res = res.concat(
 		// make a new transformed array with all `chunk` values doubled
-		chunk.map( function(val){
+		chunk.map(function(val){
 			return val * 2;
-		} )
+		})
 	);
 
 	// anything left to process?
 	if (data.length > 0) {
 		// async schedule next batch
-		setTimeout( function(){
-			response( data );
-		}, 0 );
+		setTimeout(function(){
+			response(data);
+		}, 0);
 	}
 }
 
 // ajax(..) is some arbitrary Ajax function given by a library
-ajax( "http://some.url.1", response );
-ajax( "http://some.url.2", response );
+ajax("http://some.url.1", response);
+ajax("http://some.url.2", response);
 ```
 
 Om iets asynchroon te voorbereiden, kan je `setTimeout(..., 0)` gebruiken, om een functie aan het einde van de event loop te stoppen.
@@ -3869,20 +3870,20 @@ Om iets asynchroon te voorbereiden, kan je `setTimeout(..., 0)` gebruiken, om ee
 Een **Job queue** zorgt ervoor dat nadat iets is afgelopen van de event queue, hetgeen in de job queue direct wordt uitgevoerd.
 
 ```js
-console.log( "A" );
+console.log("A");
 
-setTimeout( function(){
-	console.log( "B" );
-}, 0 );
+setTimeout(function(){
+	console.log("B");
+}, 0);
 
 // theoretical "Job API"
-schedule( function(){
-	console.log( "C" );
+schedule(function(){
+	console.log("C");
 
-	schedule( function(){
-		console.log( "D" );
-	} );
-} );
+	schedule(function(){
+		console.log("D");
+	});
+});
 
 // ACDB
 ```
@@ -3904,18 +3905,18 @@ De reden dat het moeilijk is om asynchrone code te schrijven,vooral als alles wa
 
 **Nested / Chained Callbacks**
 ```js
-listen( "click", function handler(evt){
-	setTimeout( function request(){
-		ajax( "http://some.url.1", function response(text){
+listen("click", function handler(evt){
+	setTimeout(function request(){
+		ajax("http://some.url.1", function response(text){
 			if (text == "hello") {
 				handler();
 			}
 			else if (text == "world") {
 				request();
 			}
-		} );
+		});
 	}, 500) ;
-} );
+});
 ```
 
 Dit wordt ook wel **callback hell / pyramid of doom** genoemd.
@@ -3926,15 +3927,15 @@ Dit draait niet per se om de nesting, maar om alle eventuele paden die je er aan
 ```js
 function addNumbers(x,y) {
 	// ensure numerical input
-	x = Number( x );
-	y = Number( y );
+	x = Number(x);
+	y = Number(y);
 
 	// + will safely do numeric addition
 	return x + y;
 }
 
-addNumbers( 21, 21 );	// 42
-addNumbers( 21, "21" );	// 42
+addNumbers(21, 21);	// 42
+addNumbers(21, "21");	// 42
 ```
 
 Dit is een voorbeeld van het geopolitische principe **trust but verify**.
@@ -3983,7 +3984,7 @@ Als een promise is geresolved, blijft het dat ook, voor altijd. Het wordt dan al
 
 **Uninversion of control** zorgt voor een beter **separation of concerns**.
 
-**Revealing constructor**: `new Promise( function () {})`
+**Revealing constructor**: `new Promise(function () {})`
 
 Als je wilt checken of iets een Promise zal zijn, kan je niet `instanceof Promise` doen.
 
@@ -4002,15 +4003,15 @@ resolve en reject callbacks zullen worden gecalld, op het volgende asyncrone mom
 Er is geen manier om andere promises te vertragen, vanuit andere promises.
 
 ```js
-p.then( function(){
-	p.then( function(){
-		console.log( "C" );
-	} );
-	console.log( "A" );
-} );
-p.then( function(){
-	console.log( "B" );
-} );
+p.then(function(){
+	p.then(function(){
+		console.log("C");
+	});
+	console.log("A");
+});
+p.then(function(){
+	console.log("B");
+});
 // A B C
 ```
 
@@ -4019,25 +4020,25 @@ p.then( function(){
 Soms kan het zijn dat het plannen van promises anders loopt dan je denkt:
 
 ```js
-var p3 = new Promise( function(resolve,reject){
-	resolve( "B" );
-} );
+var p3 = new Promise(function(resolve,reject){
+	resolve("B");
+});
 
-var p1 = new Promise( function(resolve,reject){
-	resolve( p3 );
-} );
+var p1 = new Promise(function(resolve,reject){
+	resolve(p3);
+});
 
-var p2 = new Promise( function(resolve,reject){
-	resolve( "A" );
-} );
+var p2 = new Promise(function(resolve,reject){
+	resolve("A");
+});
 
-p1.then( function(v){
-	console.log( v );
-} );
+p1.then(function(v){
+	console.log(v);
+});
 
-p2.then( function(v){
-	console.log( v );
-} );
+p2.then(function(v){
+	console.log(v);
+});
 
 // A B  <-- not  B A  as you might expect
 ```
@@ -4051,18 +4052,18 @@ Een voorbeeld van zo'n implementatie is:
 ```js
 // a utility for timing out a Promise
 function timeoutPromise(delay) {
-	return new Promise( function(resolve,reject){
-		setTimeout( function(){
-			reject( "Timeout!" );
-		}, delay );
-	} );
+	return new Promise(function(resolve,reject){
+		setTimeout(function(){
+			reject("Timeout!");
+		}, delay);
+	});
 }
 
 // setup a timeout for `foo()`
-Promise.race( [
+Promise.race([
 	foo(),					// attempt `foo()`
-	timeoutPromise( 3000 )	// give it 3 seconds
-] )
+	timeoutPromise(3000)	// give it 3 seconds
+])
 .then(
 	function(){
 		// `foo(..)` fulfilled in time!
@@ -4143,7 +4144,7 @@ var x = 1;
 function *foo() {
 	x++;
 	yield; // pause!
-	console.log( "x:", x );
+	console.log("x:", x);
 }
 
 function bar() {
@@ -4175,12 +4176,12 @@ function *foo(x) {
 	return y;
 }
 
-var it = foo( 6 );
+var it = foo(6);
 
 // start `foo(..)`
 it.next();
 
-var res = it.next( 7 );
+var res = it.next(7);
 
 res.value;		// 42
 ```
@@ -4199,10 +4200,10 @@ Je kan ook Generators *delegaten*, via **yield-delegation**.
 
 ```js
 function *foo() {
-	console.log( "`*foo()` starting" );
+	console.log("`*foo()` starting");
 	yield 3;
 	yield 4;
-	console.log( "`*foo()` finished" );
+	console.log("`*foo()` finished");
 }
 
 function *bar() {
@@ -4233,34 +4234,34 @@ function foo(x,y) {
 }
 
 function fooThunk() {
-	return foo( 3, 4 );
+	return foo(3, 4);
 }
 
 // later
 
-console.log( fooThunk() );	// 7
+console.log(fooThunk());	// 7
 ```
 
 ```js
 function thunkify(fn) {
 	return function() {
-		var args = [].slice.call( arguments );
+		var args = [].slice.call(arguments);
 		return function(cb) {
-			args.push( cb );
-			return fn.apply( `null`, args );
+			args.push(cb);
+			return fn.apply(`null`, args);
 		};
 	};
 }
 
-var whatIsThis = thunkify( foo );
+var whatIsThis = thunkify(foo);
 
-var fooThunk = whatIsThis( 3, 4 );
+var fooThunk = whatIsThis(3, 4);
 
 // later
 
-fooThunk( function(sum) {
-	console.log( sum );		// 7
-} );
+fooThunk(function(sum) {
+	console.log(sum);		// 7
+});
 ```
 
 In het bovenstaande geval is `whatIsThis` eigenlijk iets dat thunks maakt, vanuit foo. Het is dus eigenlijk een **factory** voor **thunks**. Een **thunktory**.
@@ -4277,7 +4278,7 @@ De perceptie die de gebruiker heeft van performance, is net zo, als het niet mee
 Dit soort parallelisme heet **task parallelism**.
 
 ```js
-var w1 = new Worker( "http://some.url.1/mycoolworker.js" );
+var w1 = new Worker("http://some.url.1/mycoolworker.js");
 ```
 
 Op deze manier worden **dedicated workers** aangemaakt.
@@ -4288,15 +4289,15 @@ Workers hebben geen gedeelde scope of recourses, maar ze hebben we een basaal ev
 Je kan luisteren naar events op de volgende manier:
 
 ```js
-w1.addEventListener( "message", function(evt){
+w1.addEventListener("message", function(evt){
 	// evt.data
-} );
+});
 ```
 
 En je kan berichten sturen naar een andere worker, via:
 
 ```js
-w1.postMessage( "something cool to say" );
+w1.postMessage("something cool to say");
 ```
 
 In dit geval is de dedicated Worker in een 1-1 relatie met het programma, die het heeft gemaakt.
@@ -4330,7 +4331,7 @@ Een betere optie, vooral voor grotere data sets, is om **Transferable Objects** 
 ```js
 // `foo` is a `Uint8Array` for instance
 
-postMessage( foo.buffer, [ foo.buffer ] );
+postMessage(foo.buffer, [ foo.buffer ]);
 ```
 
 Hier is de eerste parameter de *raw buffer* en de tweede, wat er moet worden getransferd.
@@ -4344,17 +4345,17 @@ De meest voorkomende manier om dit te doen, is via een **socket network connecti
 In dit geval moet je een enkele gecentraliseerde Worker hebben, die alle instances van je pagina kan delen.
 
 ```js
-var w1 = new SharedWorker( "http://some.url.1/mycoolworker.js" );
+var w1 = new SharedWorker("http://some.url.1/mycoolworker.js");
 ```
 
 De unieke identifier voor een bepaalde Worker in dit geval heet een **port**.
 
 ```js
-w1.port.addEventListener( "message", handleMessages );
+w1.port.addEventListener("message", handleMessages);
 
 // ..
 
-w1.port.postMessage( "something cool" );
+w1.port.postMessage("something cool");
 ```
 
 De port moet worden geinitialiseerd als:
@@ -4367,21 +4368,21 @@ In de gedeelde worker moet er nu worden omgegaan met een nieuw event: **connect*
 
 ```js
 // inside the shared Worker
-addEventListener( "connect", function(evt){
+addEventListener("connect", function(evt){
 	// the assigned port for this connection
 	var port = evt.ports[0];
 
-	port.addEventListener( "message", function(evt){
+	port.addEventListener("message", function(evt){
 		// ..
 
-		port.postMessage( .. );
+		port.postMessage(..);
 
 		// ..
-	} );
+	});
 
 	// initialize the port connection
 	port.start();
-} );
+});
 ```
 
 ### SIMD
@@ -4391,14 +4392,14 @@ addEventListener( "connect", function(evt){
 SIMD maakt gebruik van **vectoren** van nummers, dit is een soort gespecialiseerde array.
 
 ```js
-var v1 = SIMD.float32x4( 3.14159, 21.0, 32.3, 55.55 );
-var v2 = SIMD.float32x4( 2.1, 3.2, 4.3, 5.4 );
+var v1 = SIMD.float32x4(3.14159, 21.0, 32.3, 55.55);
+var v2 = SIMD.float32x4(2.1, 3.2, 4.3, 5.4);
 
-var v3 = SIMD.int32x4( 10, 101, 1001, 10001 );
-var v4 = SIMD.int32x4( 10, 20, 30, 40 );
+var v3 = SIMD.int32x4(10, 101, 1001, 10001);
+var v4 = SIMD.int32x4(10, 20, 30, 40);
 
-SIMD.float32x4.mul( v1, v2 );	// [ 6.597339, 67.2, 138.89, 299.97 ]
-SIMD.int32x4.add( v3, v4 );		// [ 20, 121, 1031, 10041 ]
+SIMD.float32x4.mul(v1, v2);	// [ 6.597339, 67.2, 138.89, 299.97 ]
+SIMD.int32x4.add(v3, v4);		// [ 20, 121, 1031, 10041 ]
 ```
 
 Hier boven staan twee type vector data: 32-bit floating-point nummers en 32-bit integers.
@@ -4467,10 +4468,10 @@ Het schrijven van goede tests, vereist het huiverende analytische denken, tussen
 ```js
 function factorial(n) {
 	if (n < 2) return 1;
-	return n * factorial( n - 1 );
+	return n * factorial(n - 1);
 }
 
-factorial( 5 );		// 120
+factorial(5);		// 120
 
 // VS
 
@@ -4484,7 +4485,7 @@ function factorial(n) {
 	return res;
 }
 
-factorial( 5 );		// 120
+factorial(5);		// 120
 ```
 
 Verschillende JavaScript engines zijn niet gelijk, dus behandel ze ook niet alsof ze gelijk moeten zijn.
@@ -4505,11 +4506,11 @@ function foo(x) {
 }
 
 function bar(y) {
-	return foo( y + 1 );	// tail call
+	return foo(y + 1);	// tail call
 }
 
 function baz() {
-	return 1 + bar( 40 );	// not tail call
+	return 1 + bar(40);	// not tail call
 }
 
 baz();						// 42
@@ -4528,13 +4529,13 @@ function factorial(n) {
 	function fact(n,res) {
 		if (n < 2) return res;
 
-		return fact( n - 1, n * res );
+		return fact(n - 1, n * res);
 	}
 
-	return fact( n, 1 );
+	return fact(n, 1);
 }
 
-factorial( 5 );		// 120
+factorial(5);		// 120
 ```
 
 Deze versie is TCO friendly.
@@ -4587,9 +4588,9 @@ Het `let` mechanisme is nieuwe en is **impliciet**, wat ons even doet denken, da
 var funcs = [];
 
 for (let i = 0; i < 5; i++) {
-	funcs.push( function(){
-		console.log( i );
-	} );
+	funcs.push(function(){
+		console.log(i);
+	});
 }
 
 funcs[3]();		// 3
@@ -4600,9 +4601,9 @@ var funcs = [];
 
 for (var i = 0; i < 5; i++) {
 	let j = i;
-	funcs.push( function(){
-		console.log( j );
-	} );
+	funcs.push(function(){
+		console.log(j);
+	});
 }
 
 funcs[3]();		// 3
@@ -4624,12 +4625,12 @@ Het is niet echt bescherming, maar eerder dat het je beschermt tegen perongeluk 
 ```js
 if (something) {
 	function foo() {
-		console.log( "1" );
+		console.log("1");
 	}
 }
 else {
 	function foo() {
-		console.log( "2" );
+		console.log("2");
 	}
 }
 
@@ -4643,60 +4644,60 @@ Als het voor een array (of andere iterable) wordt geplaatst is het een spread.
 
 ```js
 function foo(x,y,z) {
-	console.log( x, y, z );
+	console.log(x, y, z);
 }
 
-foo( ...[1,2,3] );				// 1 2 3
+foo(...[1,2,3]);				// 1 2 3
 ```
 
 De rest operator:
 
 ```js
 function foo(x, y, ...z) {
-	console.log( x, y, z );
+	console.log(x, y, z);
 }
 
-foo( 1, 2, 3, 4, 5 );
+foo(1, 2, 3, 4, 5);
 ```
 
 ### Default parameter values
 
 ```js
 function foo(x = 11, y = 31) {
-	console.log( x + y );
+	console.log(x + y);
 }
 
 foo();					// 42
-foo( 5, 6 );			// 11
-foo( 0, 42 );			// 42
+foo(5, 6);			// 11
+foo(0, 42);			// 42
 
-foo( 5 );				// 36
-foo( 5, `undefined` );	// 36 <-- `undefined` is missing
-foo( 5, `null` );			// 5  <-- `null` coerces to `0`
+foo(5);				// 36
+foo(5, `undefined`);	// 36 <-- `undefined` is missing
+foo(5, `null`);			// 5  <-- `null` coerces to `0`
 
-foo( `undefined`, 6 );	// 17 <-- `undefined` is missing
-foo( `null`, 6 );			// 6  <-- `null` coerces to `0`
+foo(`undefined`, 6);	// 17 <-- `undefined` is missing
+foo(`null`, 6);			// 6  <-- `null` coerces to `0`
 ```
 
 ### Default value expressions
 
 ```js
 function bar(val) {
-	console.log( "bar called!" );
+	console.log("bar called!");
 	return y + val;
 }
 
-function foo(x = y + 3, z = bar( x )) {
-	console.log( x, z );
+function foo(x = y + 3, z = bar(x)) {
+	console.log(x, z);
 }
 
 var y = 5;
 foo();								// "bar called"
 									// 8 13
-foo( 10 );							// "bar called"
+foo(10);							// "bar called"
 									// 10 15
 y = 6;
-foo( `undefined`, 10 );				// 9 10
+foo(`undefined`, 10);				// 9 10
 ```
 
 ### Destructuring
@@ -4705,8 +4706,8 @@ foo( `undefined`, 10 );				// 9 10
 var [ a, b, c ] = foo();
 var { x: x, y: y, z: z } = bar();
 
-console.log( a, b, c );				// 1 2 3
-console.log( x, y, z );
+console.log(a, b, c);				// 1 2 3
+console.log(x, y, z);
 ```
 
 #### Object property assignment pattern
@@ -4718,8 +4719,8 @@ Als je dit kan schrijven, is het enige nut van het ophalen van objecten in de la
 ```js
 var { x: bam, y: baz, z: bap } = bar();
 
-console.log( bam, baz, bap );		// 4 5 6
-console.log( x, y, z );				// ReferenceError
+console.log(bam, baz, bap);		// 4 5 6
+console.log(x, y, z);				// ReferenceError
 ```
 
 In de orginele object notatie volgt het het volgende schema:
@@ -4729,7 +4730,7 @@ var X = 10, Y = 20;
 
 var o = { a: X, b: Y };
 
-console.log( o.a, o.b );			// 10 20
+console.log(o.a, o.b);			// 10 20
 ```
 
 Bij de nieuwe variant, met destructuring, is dat patroon omgedraaid: *source: target*.
@@ -4740,10 +4741,10 @@ Bij de nieuwe variant, met destructuring, is dat patroon omgedraaid: *source: ta
 var a, b, c, x, y, z;
 
 [a,b,c] = foo();
-( { x, y, z } = bar() );
+({ x, y, z } = bar());
 
-console.log( a, b, c );				// 1 2 3
-console.log( x, y, z );				// 4 5 6
+console.log(a, b, c);				// 1 2 3
+console.log(x, y, z);				// 4 5 6
 ```
 
 In het bovenstaande geval zie je, dat je ze ook als losse operators kan gebruiken. Echter bij object destructuring, moeten er `()` om heen, anders denkt de engine dat er een block statement wordt gemaakt.
@@ -4754,9 +4755,9 @@ Je kan ook computed properties gebruiken.
 var which = "x",
 	o = {};
 
-( { [which]: o[which] } = bar() );
+({ [which]: o[which] } = bar());
 
-console.log( o.x );					// 4
+console.log(o.x);					// 4
 ```
 
 ```js
@@ -4765,7 +4766,7 @@ var x = 10, y = 20;
 
 [ y, x ] = [ x, y ];
 
-console.log( x, y );				// 20 10
+console.log(x, y);				// 20 10
 ```
 
 #### Repeated assignments
@@ -4788,9 +4789,9 @@ X;	// 1
 Y;	// 1
 a;	// { x: 1 }
 
-( { a: X, a: Y, a: [ Z ] } = { a: [ 1 ] } );
+({ a: X, a: Y, a: [ Z ] } = { a: [ 1 ] });
 
-X.push( 2 );
+X.push(2);
 Y[0] = 10;
 
 X;	// [10,2]
@@ -4818,7 +4819,7 @@ var o = { a:1, b:2, c:3 },
 
 p = { a, b, c } = o;
 
-console.log( a, b, c );			// 1 2 3
+console.log(a, b, c);			// 1 2 3
 p === o;						// true
 ```
 
@@ -4830,7 +4831,7 @@ Je hoeft niet alle waardes die beschikbaar zijn te destructuren.
 var [,b] = foo();
 var { x, z } = bar();
 
-console.log( b, x, z );				// 2 4 6
+console.log(b, x, z);				// 2 4 6
 ```
 
 #### Default value assignment
@@ -4839,8 +4840,8 @@ console.log( b, x, z );				// 2 4 6
 var [ a = 3, b = 6, c = 9, d = 12 ] = foo();
 var { x = 5, y = 10, z = 15, w = 20 } = bar();
 
-console.log( a, b, c, d );			// 1 2 3 12
-console.log( x, y, z, w );			// 4 5 6 20
+console.log(a, b, c, d);			// 1 2 3 12
+console.log(x, y, z, w);			// 4 5 6 20
 ```
 
 Je kan dit ook combineren met de **alternative assignment expression**.
@@ -4848,7 +4849,7 @@ Je kan dit ook combineren met de **alternative assignment expression**.
 ```js
 var { x, y, z, w: WW = 20 } = bar();
 
-console.log( x, y, z, WW );			// 4 5 6 20
+console.log(x, y, z, WW);			// 4 5 6 20
 ```
 
 #### Nested destructuring
@@ -4860,37 +4861,37 @@ var o1 = { x: { y: { z: 6 } } };
 var [ a, [ b, c, d ], e ] = a1;
 var { x: { y: { z: w } } } = o1;
 
-console.log( a, b, c, d, e );		// 1 2 3 4 5
-console.log( w );					// 6
+console.log(a, b, c, d, e);		// 1 2 3 4 5
+console.log(w);					// 6
 ```
 
 #### Destructuring parameters
 
 ```js
-function foo( [ x, y ] ) {
-	console.log( x, y );
+function foo([ x, y ]) {
+	console.log(x, y);
 }
 
-foo( [ 1, 2 ] );					// 1 2
-foo( [ 1 ] );						// 1 `undefined`
-foo( [] );							// `undefined` `undefined`
+foo([ 1, 2 ]);					// 1 2
+foo([ 1 ]);						// 1 `undefined`
+foo([]);							// `undefined` `undefined`
 ```
 
 #### Destructuring defaults + parameter defaults
 
 ```js
 function f6({ x = 10 } = {}, { y } = { y: 10 }) {
-	console.log( x, y );
+	console.log(x, y);
 }
 
 f6();								// 10 10
-f6( `undefined`, `undefined` );			// 10 10
-f6( {}, `undefined` );				// 10 10
+f6(`undefined`, `undefined`);			// 10 10
+f6({}, `undefined`);				// 10 10
 
-f6( {}, {} );						// 10 `undefined`
-f6( `undefined`, {} );				// 10 `undefined`
+f6({}, {});						// 10 `undefined`
+f6(`undefined`, {});				// 10 `undefined`
 
-f6( { x: 2 }, { y: 3 } );			// 2 3
+f6({ x: 2 }, { y: 3 });			// 2 3
 ```
 
 #### Nested Defaults: Destructured and Restructured
@@ -4998,18 +4999,18 @@ Super gedraagt zich bijna hetzelfde in standaard objecten, als ik 'classes'.
 ```js
 var o1 = {
 	foo() {
-		console.log( "o1:foo" );
+		console.log("o1:foo");
 	}
 };
 
 var o2 = {
 	foo() {
 		super.foo();
-		console.log( "o2:foo" );
+		console.log("o2:foo");
 	}
 };
 
-Object.setPrototypeOf( o2, o1 );
+Object.setPrototypeOf(o2, o1);
 
 o2.foo();		// o1:foo
 				// o2:foo
@@ -5025,8 +5026,8 @@ var name = "Kyle";
 
 var greeting = `Hello ${name}!`;
 
-console.log( greeting );			// "Hello Kyle!"
-console.log( typeof greeting );		// "string"
+console.log(greeting);			// "Hello Kyle!"
+console.log(typeof greeting);		// "string"
 ```
 
 Het handige van string literals is dat ze over meerdere lijnen kunnen worden geschreven.
@@ -5050,10 +5051,10 @@ function upper(s) {
 var who = "reader";
 
 var text =
-`A very ${upper( "warm" )} welcome
-to all of you ${upper( `${who}s` )}!`;
+`A very ${upper("warm")} welcome
+to all of you ${upper(`${who}s`)}!`;
 
-console.log( text );
+console.log(text);
 // A very WARM welcome
 // to all of you READERS!
 ```
@@ -5063,12 +5064,12 @@ console.log( text );
 ```js
 function foo(str) {
 	var name = "foo";
-	console.log( str );
+	console.log(str);
 }
 
 function bar() {
 	var name = "bar";
-	foo( `Hello from ${name}!` );
+	foo(`Hello from ${name}!`);
 }
 
 var name = "global";
@@ -5080,8 +5081,8 @@ bar();					// "Hello from bar!"
 
 ```js
 function foo(strings, ...values) {
-	console.log( strings );
-	console.log( values );
+	console.log(strings);
+	console.log(values);
 }
 
 var desc = "awesome";
@@ -5102,8 +5103,8 @@ Het tweede argument is een array van alle waardes in zo'n literal.
 
 ```js
 function showraw(strings, ...values) {
-	console.log( strings );
-	console.log( strings.raw );
+	console.log(strings);
+	console.log(strings.raw);
 }
 
 showraw`Hello\nWorld`;
@@ -5117,11 +5118,11 @@ Op deze manier blijven de `\n` karakters bijvoorbeeld zo, in plaats van een echt
 ES6 heeft een speciale functie voor **raw strings**.
 
 ```js
-console.log( `Hello\nWorld` );
+console.log(`Hello\nWorld`);
 // Hello
 // World
 
-console.log( String.raw`Hello\nWorld` );
+console.log(String.raw`Hello\nWorld`);
 // Hello\nWorld
 
 String.raw`Hello\nWorld`.length;
@@ -5150,20 +5151,20 @@ var controller = {
 	makeRequest: function(..){
 		var self = this;
 
-		btn.addEventListener( "click", function(){
+		btn.addEventListener("click", function(){
 			// ..
 			self.makeRequest(..);
-		}, false );
+		}, false);
 	}
 };
 
 // Nieuw
 var controller = {
 	makeRequest: function(..){
-		btn.addEventListener( "click", () => {
+		btn.addEventListener("click", () => {
 			// ..
 			this.makeRequest(..);
-		}, false );
+		}, false);
 	}
 };
 ```
@@ -5180,12 +5181,12 @@ Een **iterable** is een object, die een iterator kan maken, die gebruikt kan wor
 var a = ["a","b","c","d","e"];
 
 for (var idx in a) {
-	console.log( idx );
+	console.log(idx);
 }
 // 0 1 2 3 4
 
 for (var val of a) {
-	console.log( val );
+	console.log(val);
 }
 // "a" "b" "c" "d" "e"
 ```
@@ -5222,11 +5223,11 @@ var re1 = /foo/,
 	str = "++foo++";
 
 re1.lastIndex;			// 0
-re1.test( str );		// true
+re1.test(str);		// true
 re1.lastIndex;			// 0 -- not updated
 
 re1.lastIndex = 4;
-re1.test( str );		// true -- ignored `lastIndex`
+re1.test(str);		// true -- ignored `lastIndex`
 re1.lastIndex;			// 4 -- not updated
 
 // Sticky
@@ -5234,14 +5235,14 @@ var re2 = /foo/y,		// <-- notice the `y` sticky flag
 	str = "++foo++";
 
 re2.lastIndex;			// 0
-re2.test( str );		// false -- "foo" not found at `0`
+re2.test(str);		// false -- "foo" not found at `0`
 re2.lastIndex;			// 0
 
 re2.lastIndex = 2;
-re2.test( str );		// true
+re2.test(str);		// true
 re2.lastIndex;			// 5 -- updated to after previous match
 
-re2.test( str );		// false
+re2.test(str);		// false
 re2.lastIndex;			// 0 -- reset after previous match failure
 ```
 
@@ -5255,9 +5256,9 @@ var dec = 42,
 	hex = 0x2a;
 
 // De octal vorm zorgde nog al eens voor problemen.
-Number( "42" );				// 42
-Number( "052" );			// 52
-Number( "0x2a" );			// 42
+Number("42");				// 42
+Number("052");			// 52
+Number("0x2a");			// 42
 ```
 
 Er is nu een nieuwe **octal** vorm nummer.
@@ -5272,10 +5273,10 @@ var dec = 42,
 Deze kunnen allemaal gecoerced worden naar nummers.
 
 ```js
-Number( "42" );			// 42
-Number( "0o52" );		// 42
-Number( "0x2a" );		// 42
-Number( "0b101010" );	// 42
+Number("42");			// 42
+Number("0o52");		// 42
+Number("0x2a");		// 42
+Number("0b101010");	// 42
 ```
 
 Je kan ook nummers omzetten in hun string variant, met verschillende types (niet nieuw in ES6).
@@ -5283,10 +5284,10 @@ Je kan ook nummers omzetten in hun string variant, met verschillende types (niet
 ```js
 var a = 42;
 
-a.toString();			// "42" -- also `a.toString( 10 )`
-a.toString( 8 );		// "52"
-a.toString( 16 );		// "2a"
-a.toString( 2 );		// "101010"
+a.toString();			// "42" -- also `a.toString(10)`
+a.toString(8);		// "52"
+a.toString(16);		// "2a"
+a.toString(2);		// "101010"
 ```
 
 ### Unicode
@@ -5299,21 +5300,21 @@ Vroeger kon je unicode gebruiken in JavaScript met:
 
 ```js
 var snowman = "\u2603";
-console.log( snowman );			// "☃"
+console.log(snowman);			// "☃"
 ```
 
 Om **astral symbols** te krijgen moest je een **surrogate pair** gebruiken.
 
 ```js
 var gclef = "\uD834\uDD1E";
-console.log( gclef );			// "𝄞"
+console.log(gclef);			// "𝄞"
 ```
 
 Sinds ES6 kan dit op de volgende manier:
 
 ```js
 var gclef = "\u{1D11E}";
-console.log( gclef );			// "𝄞"
+console.log(gclef);			// "𝄞"
 ```
 
 #### Unicode-Aware String Operations
@@ -5332,7 +5333,7 @@ Dit kan opgelost worden op de volgende manier:
 var gclef = "𝄞";
 
 [...gclef].length;				// 1
-Array.from( gclef ).length;		// 1
+Array.from(gclef).length;		// 1
 ```
 
 ### Symbols
@@ -5341,7 +5342,7 @@ Symbols zijn sinds ES6 een nieuw primitive type.
 Symbols hebben geen literal form.
 
 ```js
-var sym = Symbol( "some optional description" );
+var sym = Symbol("some optional description");
 
 typeof sym;		// "symbol"
 ```
@@ -5355,7 +5356,7 @@ sym.toString();		// "Symbol(some optional description)"
 ```js
 sym instanceof Symbol;		// false
 
-var symObj = Object( sym );
+var symObj = Object(sym);
 symObj instanceof Symbol;	// true
 
 symObj.valueOf() === sym;	// true
@@ -5364,21 +5365,21 @@ symObj.valueOf() === sym;	// true
 Het doel van een symbol is om een string-achtige waarde te maken, die niet met een andere waarde kan botsen.
 
 ```js
-const EVT_LOGIN = Symbol( "event.login" );
+const EVT_LOGIN = Symbol("event.login");
 ```
 
 Je kan het dan gebruiken in plaats van `event.login`.
 
 ```js
-evthub.listen( EVT_LOGIN, function(data){
+evthub.listen(EVT_LOGIN, function(data){
 	// ..
-} );
+});
 ```
 
 In een object zijn symbols niet verborgen of onveranderbaar.
 
 ```js
-const INSTANCE = Symbol( "instance" );
+const INSTANCE = Symbol("instance");
 
 function HappyFace() {
 	if (HappyFace[INSTANCE]) return HappyFace[INSTANCE];
@@ -5401,9 +5402,9 @@ me === you;			// true
 Je kan Symbols georganiseerd opslaan als volgt.
 
 ```js
-const EVT_LOGIN = Symbol.for( "event.login" );
+const EVT_LOGIN = Symbol.for("event.login");
 
-console.log( EVT_LOGIN );		// Symbol(event.login)
+console.log(EVT_LOGIN);		// Symbol(event.login)
 ```
 
 #### Symbols as Object Properties
@@ -5411,14 +5412,14 @@ console.log( EVT_LOGIN );		// Symbol(event.login)
 ```js
 var o = {
 	foo: 42,
-	[ Symbol( "bar" ) ]: "hello world",
+	[ Symbol("bar") ]: "hello world",
 	baz: true
 };
 
-Object.getOwnPropertyNames( o );	// [ "foo","baz" ]
+Object.getOwnPropertyNames(o);	// [ "foo","baz" ]
 
 // Om deze wel op te halen gebruik je:
-Object.getOwnPropertySymbols( o );	// [ Symbol(bar) ]
+Object.getOwnPropertySymbols(o);	// [ Symbol(bar) ]
 ```
 
 #### Built-In Symbols
@@ -5468,7 +5469,7 @@ function *foo(x,y) {
 	// ..
 }
 
-foo( 5, 10 );
+foo(5, 10);
 ```
 
 In het laatste geval is het verschil met normale functies dat een generator niet wordt aangeroepen met `foo(5,10)`, maar dat dit een iterator maakt, die de controle heeft over hoe de generator zijn code zal uitvoeren.
@@ -5511,7 +5512,7 @@ function *foo() {
 ```js
 function *foo() {
 	var x = yield 10;
-	console.log( x );
+	console.log(x);
 }
 ```
 
@@ -5559,11 +5560,11 @@ function *foo() {
 
 function *bar() {
 	var x = yield *foo();
-	console.log( "x:", x );
+	console.log("x:", x);
 }
 
 for (var v of bar()) {
-	console.log( v );
+	console.log(v);
 }
 // 1 2 3
 // x: 4
@@ -5574,12 +5575,12 @@ Je kan een soort generator recursion krijgen, als je met `yield *` een andere ge
 ```js
 function *foo(x) {
 	if (x < 3) {
-		x = yield *foo( x + 1 );
+		x = yield *foo(x + 1);
 	}
 	return x * 2;
 }
 
-foo( 1 );
+foo(1);
 ```
 
 Zet geen yield statements in een `finally` clause.
@@ -5594,7 +5595,7 @@ function *foo() {
 		yield 1;
 	}
 	catch (err) {
-		console.log( err );
+		console.log(err);
 	}
 
 	yield 2;
@@ -5607,14 +5608,14 @@ var it = foo();
 it.next();				// { value: 1, done: false }
 
 try {
-	it.throw( "Hi!" );	// Hi!
+	it.throw("Hi!");	// Hi!
 						// { value: 2, done: false }
 	it.next();
 
-	console.log( "never gets here" );
+	console.log("never gets here");
 }
 catch (err) {
-	console.log( err );	// Hello!
+	console.log(err);	// Hello!
 }
 ```
 
@@ -5629,7 +5630,7 @@ Oude modules werden voornamelijk zo gemaakt:
 ```js
 function Hello(name) {
 	function greeting() {
-		console.log( "Hello " + name + "!" );
+		console.log("Hello " + name + "!");
 	}
 
 	// public API
@@ -5638,7 +5639,7 @@ function Hello(name) {
 	};
 }
 
-var me = Hello( "Kyle" );
+var me = Hello("Kyle");
 me.greeting();			// Hello Kyle!
 ```
 
@@ -5647,14 +5648,14 @@ Deze variant kan veel worden herbruikt, als je een module slechts één keer nod
 ```js
 var me = (function Hello(name){
 	function greeting() {
-		console.log( "Hello " + name + "!" );
+		console.log("Hello " + name + "!");
 	}
 
 	// public API
 	return {
 		greeting: greeting
 	};
-})( "Kyle" );
+})("Kyle");
 
 me.greeting();			// Hello Kyle!
 ```
@@ -5768,7 +5769,7 @@ Je kan modules hebben die elkaar importen:
 import bar from "B";
 
 export default function foo(x) {
-	if (x > 10) return bar( x - 1 );
+	if (x > 10) return bar(x - 1);
 	return x * 2;
 }
 
@@ -5777,7 +5778,7 @@ export default function foo(x) {
 import foo from "A";
 
 export default function bar(y) {
-	if (y > 5) return foo( y / 2 );
+	if (y > 5) return foo(y / 2);
 	return y * 3;
 }
 ```
