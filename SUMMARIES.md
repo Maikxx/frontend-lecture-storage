@@ -383,17 +383,17 @@ Ook arrays zijn subtypes van objecten.
 In JS hebben de variabelen geen types, maar juist de waardes.
 JS heeft dus *geen* **type enforcement**.
 
-typeof over een variabele aanroepen geeft de waarde van die variabele terug.
+`typeof` over een variabele aanroepen geeft de waarde van die variabele terug.
 
 Variabelen die op dit moment geen waarde hebben, returnen undefined.
 
-Undeclared en undefined zijn twee verschillende dingen. Undeclared betekent dat er geen variabele is aangemaakt in de toegankelijke scope.
+Undeclared en `undefined` zijn twee verschillende dingen. **Undeclared** betekent dat er geen variabele is aangemaakt in de toegankelijke scope.
 
-typeof returnt undefined, ook als er iets undeclared is.
+`typeof` returnt `undefined`, ook als er iets undeclared is.
 
-Als je een property van een object probeert te refereren, terwijl deze onverklaard is, zal er geen ReferecError worden gegooid.
+Als je een property van een object probeert te refereren, terwijl deze onverklaard is, zal er geen RefferenceError worden gegooid.
 
-Dependency injection:
+### Dependency injection
 In plaats van gokken of er iets globaal is verklaard, kan je er voor zorgen dat mensen per se een variabele meegeven aan je functie:
 
 ```js
