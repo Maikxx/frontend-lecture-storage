@@ -92,7 +92,7 @@ Een **scope** of **lexical scope** staat voor een collectie van variabelen, same
 
 **ECMASCRIPT** is de officiële naam voor de JavaScript **specificatie**.
 
-`Typeof null // object`. (bug, die nooit gefixt zal worden, in verband met creëren nieuwe bugs).
+`Typeof `null` // object`. (bug, die nooit gefixt zal worden, in verband met creëren nieuwe bugs).
 
 Object properties zijn ook wel named locations genoemd. Properties kunnen worden bereikt via de **dot notation** of **bracket notation**.
 Properties in de bracket notatie worden vaak **keys** genoemd.
@@ -113,7 +113,7 @@ Equality:
 Waardes die false zijn:
 * “” - lege string
 * `0`, `-0`, `NaN`
-* `Null`, `undefined`
+* ``null``, `undefined`
 * false
 
 * `==` - Kijkt naar de waarde gelijkheid, met coersie toegestaan.
@@ -265,10 +265,10 @@ var obj2 = {
 
 // --------
 
-foo();                // “global” // In strict mode geeft dit een undefined error.
+foo();                // “global” // In strict mode geeft dit een `undefined` error.
 obj1.foo();            // "obj1"
 foo.call( obj2 );        // "obj2"
-new foo();            // undefined
+new foo();            // `undefined`
 ```
 
 Als je een property van een object probeert te refereren, die niet bestaat, zal JavaScript automatisch de interne prototype van dat object gebruiken, om een ander object op te zoeken, waar die property wel opstaat.
@@ -361,8 +361,8 @@ Als je een RHS aanvraag doet, maar de waarde komt niet overeen met wat je er mee
 ## You don't know JavaScript - Types & Grammar - Hoofdstuk 1
 
 **ES types**:
-* Undefined
-* Null
+* `undefined`
+* `null`
 * Boolean
 * String
 * Number
@@ -385,7 +385,7 @@ JavaScript heeft dus *geen* **type enforcement**.
 
 `typeof` over een variabele aanroepen geeft de waarde van die variabele terug.
 
-Variabelen die op dit moment geen waarde hebben, returnen undefined.
+Variabelen die op dit moment geen waarde hebben, returnen `undefined`.
 
 Undeclared en `undefined` zijn twee verschillende dingen. **Undeclared** betekent dat er geen variabele is aangemaakt in de toegankelijke scope.
 
@@ -411,11 +411,11 @@ var val = helper();
 
 Arrays in arrays worden **multidimensionale arrays** genoemd.
 
-Als je in arrays genummerde waardes overslaat bij het toevoegen (0 > 2), dan wordt dat een **sparse array**. Hierin is de tweede waarde (1) undefined.
+Als je in arrays genummerde waardes overslaat bij het toevoegen (0 > 2), dan wordt dat een **sparse array**. Hierin is de tweede waarde (1) `undefined`.
 
 Je kan ook string keys/properties aan arrays toevoegen, die zullen niet meetellen aan de length property van de array.
 
-Als een string waarde, bedoeld als een key, met een base-10 nummer waarde in de string, gaat een array er vanuit dat je bedoelde dat het nummer wou hebben.
+Als een string waarde, bedoeld als een key, met een **base-10** nummer waarde in de string, gaat een array er vanuit dat je bedoelde dat het nummer wou hebben.
 
 Strings worden vaak gezien als arrays van karakters, echter zijn ze totaal anders.
 JavaScript strings zijn immutable, terwijl arrays wel mutable zijn.
@@ -424,26 +424,26 @@ Arrays hebben een reverse methode.
 De meest gebruikte methode om strings te reversen, is door ze in een array om te zetten, te reversen en vervolgens weer terug naar een string om te zetten.
 
 JavaScript nummers bevatten beide integer en decimale nummers.
-De implementatie waarop JavaScript zijn nummer systeem heeft gebaseerd heet IEEE754, vaak ook floating-point genoemd. JavaScript gebruikt daarvan het double precision (64-bit binary) format van die standaard.
+De implementatie waarop JavaScript zijn nummer systeem heeft gebaseerd heet **IEEE754**, vaak ook **floating-point** genoemd. JavaScript gebruikt daarvan het **double precision** (64-bit binary) format.
 
-Hele grote nummers worden automatisch omgezet naar de exponentiële vorm van dat nummer. Dit is hetzelfde als .toExponential( ) op een getal aanroepen.
+Hele grote nummers worden automatisch omgezet naar de exponentiële vorm van dat nummer. Dit is hetzelfde als `.toExponential()` op een getal aanroepen.
 
-De .toFixed( ) prototype functie van het Number object, zorgt ervoor dat je kan zien op hoeveel decimalen een nummer echt eindigt:
+De `.toFixed()` prototype functie van het Number object, zorgt ervoor dat je kan zien op hoeveel decimalen een nummer echt eindigt:
 
 ```js
 Var a = 42.42.
 a.toFixed(4); // “42.4200”
 ```
 
-De .toPrecision( ) methode doet iets soortgelijks, maar kijkt dan naar hoeveel significante getallen aanwezig moeten zijn om een waarde te representeren. De waardes die uit deze functie komen zijn string representaties.
+De `.toPrecision()` methode doet iets soortgelijks, maar kijkt dan naar hoeveel significante getallen aanwezig moeten zijn om een waarde te representeren. De waardes die uit deze functie komen zijn string representaties.
 
 ```js
 42..toFixed(4); // Dit is een correcte functie call.
 42 .toFixed(3); // Ook dit is valide.
 ```
 
-Numerieke waardes kunnen ook in andere vormen worden uitgelegd: binary, octal, hexadecimal.
-De octale waarde 0363 is sinds ES6 + strict mode niet meer toegestaan.
+Numerieke waardes kunnen ook in andere vormen worden uitgelegd: **binary**, **octal**, **hexadecimal**.
+De **octale** waarde 0363 is sinds ES6 + strict mode niet meer toegestaan.
 De nieuwe vormen, die wel valide zijn: 0o363 en 0O363. Gebruik echter altijd de lowercase o.
 
 Het meest bekende side effect van binary floating-point numbers (niet alleen in JavaScript) is dat:
@@ -452,26 +452,26 @@ Het meest bekende side effect van binary floating-point numbers (niet alleen in 
 0.1 + 0.2 === 0.3 // False
 ```
 
-Dit komt doordat het antwoord: 0.30000000000000004 is.
+Dit komt doordat het antwoord: `0.30000000000000004` is.
 Integers hebben dit probleem niet.
 
-De meest geaccepteerde manier om met deze rounding error om te gaan, is door een kleine waarde te gebruiken als tolerantie voor deze vergelijking. Deze waarde heet machine epsilon, 2^-52. In ES6 is dit nummer ingebouwd als property op het Number object, .EPSILON.
+De meest geaccepteerde manier om met deze rounding error om te gaan, is door een kleine waarde te gebruiken als tolerantie voor deze vergelijking. Deze waarde heet **machine epsilon**, `2^-52`. In ES6 is dit nummer ingebouwd als property op het Number object, `.EPSILON`.
 
-De maximale floating-point waarde is Number.MAX\_VALUE en de minimale floating-point waarde is Number.MIN_VALUE.
+De maximale floating-point waarde is `Number.MAX\_VALUE` en de minimale floating-point waarde is `Number.MIN\_VALUE`.
 
-Het hoogst veilig te gebruiken integer getal is: 2^53 -1. In ES6: Number.MAX\_SAFE\_INTEGER en Number.MIN\_SAFE_INTEGER.
+Het hoogst veilig te gebruiken integer getal is: `2^53 -1`. In ES6: `Number.MAX\_SAFE\_INTEGER` en `Number.MIN\_SAFE\_INTEGER`.
 Deze waardes worden vaak alleen geraakt als je werkt met 64-bit ID’s van databases. Deze kunnen dus niet als getal worden opgeslagen, maar wel als string.
 
 Sinds ES6 kan je checken of een variabele een integer is, met Number.isInteger( ).
 Je kan ook testen of een nummer een safe integer is, met Number.isSafeInteger( ).
 
-Om een nummer te forceren, dat het een 32-bit integer waarde wordt, gebruik je a | 0. Dit werkt, omdat de | bitwise operator alleen werkt voor 32-bits getallen.
+Om een nummer te forceren, dat het een 32-bit integer waarde wordt, gebruik je `a | 0`. Dit werkt, omdat de `|` **bitwise operator** alleen werkt voor 32-bits getallen.
 
-Null is een lege waarde. Had een waarde, maar nu niet meer. Dit is een special keyword.
-Undefined is een missende waarde. Heeft geen waarde gehad nog. Undefined is een identifier.
+`null` is een lege waarde. Had een waarde, maar nu niet meer. Dit is een **special keyword**.
+`undefined` is een missende waarde. Heeft geen waarde gehad nog. `undefined` is een **identifier**.
 
-Een andere manier om de undefined waarde te krijgen is, met behulp van de void operator.
-Als je ergens een waarde graag undefined wilt hebben, kun je dus de void operator gebruiken.
+Een andere manier om de `undefined` waarde te krijgen is, met behulp van de void operator.
+Als je ergens een waarde graag `undefined` wilt hebben, kun je dus de void operator gebruiken.
 
 Als je twee niet nummers aan elkaar probeert te koppelen in een operation, krijg je een NaN. Not a Number. NaN is nooit gelijk aan een andere NaN. Je kan testen of een waarde NaN is met isNaN( ). Dit heeft echter een probleem, dat het ook true returnt als je string eraan meegeeft.
 Je kan ook checken of een waarde niet gelijk is aan zichzelf, aangezien NaN de enige variant binnen JavaScript is, waar dat het geval is.
@@ -499,7 +499,7 @@ c; // [1,2,3,4]
 d; // [1,2,3,4]
 ```
 
-Simpele waardes (scalar primitives) zijn altijd kopieën. (null, undefined, string, number, boolean, symbol).
+Simpele waardes (scalar primitives) zijn altijd kopieën. (`null`, `undefined`, string, number, boolean, symbol).
 Compound values (samengestelde waardes) maken altijd een kopie, met een referentie naar het oorspronkelijke object. (objects, functions en arrays)
 
 ```js
@@ -564,7 +564,7 @@ Als je ze aanroept als constructor functie, dan zal typeof een object teruggeven
 
 Via de constructor functie instanties aanmaken levert een wrapper object op van dat type, niet de primitieve waarde, die je wellicht bedoelde.
 
-Er zijn geen Null en Undefined native constructors.
+Er zijn geen `null` en `undefined` native constructors.
 
 Voor de andere primitieve waarde, zoals strings, booleans en numbers, gebeurt er iets dat boxing heet.
 
@@ -584,10 +584,10 @@ Een array met minstens één lege slot, heet een sparse array.
 `.apply()` is een utlity beschikbaar op alle functies, deze roept de functie op, waarmee het gebruikt wordt, maar op een speciale manier.
 
 ```js
-Var a = Array.apply(null, {length: 3});
+Var a = Array.apply(`null`, {length: 3});
 ```
 
-Bovenstaande maakt een array handmatig aan met drie x undefined.
+Bovenstaande maakt een array handmatig aan met drie x `undefined`.
 
 Functie constructor is alleen hulpvol op sommige momenten, waar je dynamisch de functie parameters / diens functiebody moet bepalen.
 
@@ -665,12 +665,12 @@ JSON.stringify is geen directe vorm van coercion.
 
 Illegale JSON waardes:
 
-* Undefined
+* `undefined`
 * Functions
 * Symbols
 * Objects met circular references (property referenties binnen een object structuur, die een nooit-eindigende cyclus creëren)
 
-Als JSON in een array een invalide waarde vindt, vervangt deze de waarde met null. Als het op een object gebeurt, wordt die property verwijderd.
+Als JSON in een array een invalide waarde vindt, vervangt deze de waarde met `null`. Als het op een object gebeurt, wordt die property verwijderd.
 
 toJSON moet een JSON-safe representatie teruggeven, niet een JSON string.
 
@@ -679,13 +679,13 @@ Het wordt gebruikt om de recusive serialization van een object aan te passen, do
 
 Als het een array is, moet het een array zijn van strings, die in de serialization mogen zitten van een object.
 
-Als het een function is, zal het eens worden aangeroepen voor het object zelf, en verder iedere keer bij een property. Iedere keer wordt er een key en value aan meegegeven. Je kan een key skippen als je undefined returnt.
+Als het een function is, zal het eens worden aangeroepen voor het object zelf, en verder iedere keer bij een property. Iedere keer wordt er een key en value aan meegegeven. Je kan een key skippen als je `undefined` returnt.
 
 Een derde argument aan de functie stringify heet space en zorgt ervoor dat er een beter leesbare versie van een object uit komt. Het kan een nummer zijn of een string, waarvan de eerste tien karakters gelden als spacing.
 
 ### toNumber
 
-True wordt 1, false wordt 0, undefined wordt NaN, null wordt 0.
+True wordt 1, false wordt 0, `undefined` wordt NaN, `null` wordt 0.
 
 ```js
 var a = {
@@ -723,8 +723,8 @@ Alle andere gevallen (true).
 
 Falsy values list:
 
-* Undefined
-* Null
+* `undefined`
+* `null`
 * False
 * +0, -0, NaN
 * “”
@@ -821,7 +821,7 @@ var c = {};
 
 var d = "";
 var e = 0;
-var f = null;
+var f = `null`;
 var g;
 
 Boolean( a ); // true
@@ -839,7 +839,7 @@ var c = {};
 
 var d = "";
 var e = 0;
-var f = null;
+var f = `null`;
 var g;
 
 !!a;	// true
@@ -983,9 +983,9 @@ if (Boolean( a )) {
 
 ```
 
-#### Comparing: null to undefined
+#### Comparing: `null` to `undefined`
 
-Als je null en undefined met == vergelijkt, zal dit altijd true geven.
+Als je `null` en `undefined` met == vergelijkt, zal dit altijd true geven.
 
 #### Comparing: object to non-objects
 
@@ -1003,11 +1003,11 @@ a == b;					// true
 Gevallen waar dit niet zo is:
 
 ```js
-var a = null;
+var a = `null`;
 var b = Object( a );	// same as `Object()`
 a == b;					// false
 
-var c = undefined;
+var c = `undefined`;
 var d = Object( c );	// same as `Object()`
 c == d;					// false
 
@@ -1019,30 +1019,30 @@ e == f;					// false
 ### Edge cases
 
 ```js
-"0" == null;			// false
-"0" == undefined;		// false
+"0" == `null`;			// false
+"0" == `undefined`;		// false
 "0" == false;			// true -- UH OH!
 "0" == NaN;				// false
 "0" == 0;				// true
 "0" == "";				// false
 
-false == null;			// false
-false == undefined;		// false
+false == `null`;			// false
+false == `undefined`;		// false
 false == NaN;			// false
 false == 0;				// true -- UH OH!
 false == "";			// true -- UH OH!
 false == [];			// true -- UH OH!
 false == {};			// false
 
-"" == null;				// false
-"" == undefined;		// false
+"" == `null`;				// false
+"" == `undefined`;		// false
 "" == NaN;				// false
 "" == 0;				// true -- UH OH!
 "" == [];				// true -- UH OH!
 "" == {};				// false
 
-0 == null;				// false
-0 == undefined;			// false
+0 == `null`;				// false
+0 == `undefined`;			// false
 0 == NaN;				// false
 0 == [];				// true -- UH OH!
 0 == {};				// false
@@ -1098,7 +1098,7 @@ Als je een waarde ergens aan toewijst, heet dat een **declaration statement**.
 A = 3 * 6 is een voorbeeld van een **assignment expression**. Deze zijn altijd zonder het var keyword.
 Als je alleen een expressie hebt, heet dat een **expression statement**.
 
-Je krijgt undefined bij het verklaren van een variabele in de console, omdat het zo in de spec staat.
+Je krijgt `undefined` bij het verklaren van een variabele in de console, omdat het zo in de spec staat.
 
 **REPL**: Read, evaluate, print, loop tool.
 
@@ -1344,7 +1344,7 @@ Het duidelijkste voorbeeld komt uit ES6 let block-scoping:
 }
 ```
 
-Er zit een duidelijk verschil in een variabele die helemaal niet in een block is verklaard en een variabele die wel verklaard is, maar nog niet tot de initialisatie is gekomen. (**undefined vs ReferenceError**).
+Er zit een duidelijk verschil in een variabele die helemaal niet in een block is verklaard en een variabele die wel verklaard is, maar nog niet tot de initialisatie is gekomen. (**`undefined` vs ReferenceError**).
 
 ### Function arguments
 
@@ -1356,15 +1356,15 @@ function foo( a = 42, b = a + 1 ) {
 }
 
 foo();					// 42 43
-foo( undefined );		// 42 43
+foo( `undefined` );		// 42 43
 foo( 5 );				// 5 6
 foo( void 0, 7 );		// 42 7
-foo( null );			// null 1
+foo( `null` );			// `null` 1
 ```
 
-Null wordt omgezet in het cijfer 0 als je null + 1 doet.
-Bij een **default parameter** in ES6 is er geen onderscheid tussen undefined en het niet meegeven van een waarde aan die parameter.
-Je kan wel zien of er een undefined wordt meegegeven door te checken via arguments[waarde waar je undefined zou verwachten].
+`null` wordt omgezet in het cijfer 0 als je `null` + 1 doet.
+Bij een **default parameter** in ES6 is er geen onderscheid tussen `undefined` en het niet meegeven van een waarde aan die parameter.
+Je kan wel zien of er een `undefined` wordt meegegeven door te checken via arguments[waarde waar je `undefined` zou verwachten].
 
 ```js
 function foo(a) {
@@ -1373,7 +1373,7 @@ function foo(a) {
 }
 
 foo( 2 );	// 42 (linked)
-foo();		// undefined (not linked)
+foo();		// `undefined` (not linked)
 ```
 
 In het voorbeeld hierboven zijn de meegegeven arguments slot (arguments[x]) en de benaamde parameter gelinkt aan dezelfde waarde. In strict mode werkt dit echter ook niet.
@@ -1590,7 +1590,7 @@ foo( o1 );
 console.log( o1.a ); // 2
 
 foo( o2 );
-console.log( o2.a ); // undefined
+console.log( o2.a ); // `undefined`
 console.log( a ); // 2 -- Oops, leaked global!
 ```
 
@@ -1665,7 +1665,7 @@ Immediately Invoked Function Expression: IIFE. Gebruik ook hier gewoon een naam.
 
 Je kan ook parameters meegeven aan een IIFE.
 
-Met een IIFE kan je ook heel goed ervoor zorgen dat in die scope undefined niet veranderd is.
+Met een IIFE kan je ook heel goed ervoor zorgen dat in die scope `undefined` niet veranderd is.
 
 Een ander gebruik van een IIFE is om de volgorde van dingen te veranderen, met het UMD (Universal Module Definition) project:
 
@@ -1749,7 +1749,7 @@ console.log( a ); // 2
 
 console.log( a );
 
-var a = 2; // undefined
+var a = 2; // `undefined`
 ```
 
 Wat komt er eerder, de kip (assignment) of het ei (declaration)?
@@ -1770,7 +1770,7 @@ console.log( a );
 a = 2;
 ```
 
-Vandaar dat er een undefined wordt gegeven.
+Vandaar dat er een `undefined` wordt gegeven.
 
 Variabele en functie verklaringen (var a) worden naar het bovenste deel van de code in de huidige scope geplaatst, vandaar de naam hoisting.
 De declaration komt dus eerder dan de assignment.
@@ -1787,7 +1787,7 @@ var foo = function bar() {
 };
 ```
 
-In dit geval wordt foo losgehaald van de expression en boven de executing declaration gezet, waardoor er een functie call gedaan wordt op undefined en dat levert een TypeError op.
+In dit geval wordt foo losgehaald van de expression en boven de executing declaration gezet, waardoor er een functie call gedaan wordt op `undefined` en dat levert een TypeError op.
 
 ### Functions first
 
@@ -2240,7 +2240,7 @@ function bar() {
 	console.log( this.a );
 }
 
-foo(); //undefined
+foo(); //`undefined`
 ```
 
 In dit bovenstaande voorbeeld gaan meerdere dingen mis, ten eerste dat this.bar() wordt aangeroepen (wat overigens wel lukt), om vervolgens te falen bij het loggen van this.a.
@@ -2651,7 +2651,7 @@ function foo(p1,p2) {
 // using `null` here because we don't care about
 // the `this` hard-binding in this scenario, and
 // it will be overridden by the `new` call anyway!
-var bar = foo.bind( null, "p1" );
+var bar = foo.bind( `null`, "p1" );
 
 var baz = new bar( "p2" );
 
@@ -2663,13 +2663,13 @@ baz.val; // p1p2
 1. Als de functie met new wordt aangeroepen, is `this` het nieuw gemaakte object.
 2. Als de functie aangeroepen wordt met call, apply of bind dan is `this` het meegegeven object.
 3. Als de functie met een context wordt aangeroepen, is `this` die context.
-4. Anders in strict mode undefined of de global object.
+4. Anders in strict mode `undefined` of de global object.
 
 ### Binding exceptions
 
 #### Ignored this
 
-Als je null of undefined mee geeft aan een expliciete binding, zijn die waardes genegeerd en zal de default binding het overnemen.
+Als je `null` of `undefined` mee geeft aan een expliciete binding, zijn die waardes genegeerd en zal de default binding het overnemen.
 
 **Apply** kan worden gebruikt om arrays van waardes te spreaden in een functie call.
 **Bind** kan parameters **curryen** (standaard waardes zetten).
@@ -2680,20 +2680,20 @@ function foo(a,b) {
 }
 
 // spreading out array as parameters
-foo.apply( null, [2, 3] ); // a:2, b:3
+foo.apply( `null`, [2, 3] ); // a:2, b:3
 
 // currying with `bind(..)`
-var bar = foo.bind( null, 2 );
+var bar = foo.bind( `null`, 2 );
 bar( 3 ); // a:2, b:3
 ```
 
-Er zit echter een gevaar in het altijd gebruiken van undefined of null bij deze methodes, omdat als je het doet bij een library waar je geen controle over hebt, er wellicht 'per ongeluk' veranderingen aan het globale object worden gedaan.
+Er zit echter een gevaar in het altijd gebruiken van `undefined` of `null` bij deze methodes, omdat als je het doet bij een library waar je geen controle over hebt, er wellicht 'per ongeluk' veranderingen aan het globale object worden gedaan.
 
 #### Safer this
 
 Het opzetten van objecten, voor `this`, zodat het geen problematische side-effects heeft voor je programma heet **DMZ** (De-Militarized Zone).
 
-Om dit te doen kan je dus gewoon een leeg object meegeven aan de bind functies. De beste manier om een heel leeg object te maken is met Object.create(null), omdat Object.prototype hier niet op zit.
+Om dit te doen kan je dus gewoon een leeg object meegeven aan de bind functies. De beste manier om een heel leeg object te maken is met Object.create(`null`), omdat Object.prototype hier niet op zit.
 
 #### Indirection
 
@@ -2780,7 +2780,7 @@ Je gebruikt bijna altijd de literal form.
 ### Type
 
 Objects zijn een van de zes primaire JavaScript types.
-Dingen, zoals string, number, boolean, null en undefined zijn zelf geen objecten.
+Dingen, zoals string, number, boolean, `null` en `undefined` zijn zelf geen objecten.
 
 Er zijn enkele **complex primitives**:
 
@@ -2819,7 +2819,7 @@ Object.prototype.toString.call( strObject );	// [object String]
 
 Om dingen met de waarde te doen van bijvoorbeeld een string moet het naar een String object vorm worden omgezet, gelukkig gebeurt dat automatisch, dus hoef je bijna nooit de constructed vorm te gebruiken.
 
-null en undefined hebben geen object wrapper vorm, alleen de primitieve waardes.
+`null` en `undefined` hebben geen object wrapper vorm, alleen de primitieve waardes.
 
 Date kan alleen worden aangemaakt met de constructed vorm.
 
@@ -2995,7 +2995,7 @@ var myObject = {
 Object.preventExtensions( myObject );
 
 myObject.b = 3;
-myObject.b; // undefined
+myObject.b; // `undefined`
 ```
 
 ##### Seal
@@ -3024,7 +3024,7 @@ Volgens de specificatie voort de bovenstaande code een **[[Get]] operation** uit
 
 Deze methode bekijkt eerst of het object een property heeft met de naam die wordt opgevraagd, als dat niet zo is zal de [[Prototype]] chain worden gevolgd.
 
-Als het via de bovenstaande manier, op geen enkele manier, een waarde kan teruggeven voor de gewenste property, zal undefined worden teruggegeven.
+Als het via de bovenstaande manier, op geen enkele manier, een waarde kan teruggeven voor de gewenste property, zal `undefined` worden teruggegeven.
 
 ### [[Put]]
 
@@ -3119,7 +3119,7 @@ myObject.hasOwnProperty( "a" );	// true
 myObject.hasOwnProperty( "b" );	// false
 ```
 
-Je kan een van deze twee manieren gebruiken, om erachter te komen of een property bestaat op een object, of dat er gewoon undefined aan deze property is toegewezen.
+Je kan een van deze twee manieren gebruiken, om erachter te komen of een property bestaat op een object, of dat er gewoon `undefined` aan deze property is toegewezen.
 
 De **in** methode kijkt of het object een property heeft met die naam, of dat het in de prototype zit.
 De **hasOwnProperty** methode kijkt alleen of het object een property heeft met die naam. Deze kijkt ook naar de [[Prototype]]
@@ -3189,7 +3189,7 @@ Object.defineProperty( myObject, Symbol.iterator, {
 var it = myObject[Symbol.iterator]();
 it.next(); // { value:2, done:false }
 it.next(); // { value:3, done:false }
-it.next(); // { value:undefined, done:true }
+it.next(); // { value:`undefined`, done:true }
 
 // iterate `myObject` with `for..of`
 for (var v of myObject) {
@@ -3492,7 +3492,7 @@ De standaard [[GET]] methode van objecten volgt het [[Prototype]] pad, op zoek n
 
 Met de bovenstaande code kan je een object linken aan een ander object, via de [[Prototype]].
 
-Als er aan het einde van de [[Prototype]] chain nog steeds geen variabele is gevonden, wordt er undefined terug gegeven.
+Als er aan het einde van de [[Prototype]] chain nog steeds geen variabele is gevonden, wordt er `undefined` terug gegeven.
 
 ```js
 var anotherObject = {
@@ -3675,7 +3675,7 @@ bar.something(); // Tell me something good...
 
 `Object.create()` maakt een nieuw object, die gelinkt is aan het object dat je eraan meegeeft, zonder al het new gebeuren.
 
-**dictionaries** zijn objecten zonder [[Prototype]], gemaakt via `Object.create(null)`. Deze worden voornamelijk gebruikt om data in op te slaan.
+**dictionaries** zijn objecten zonder [[Prototype]], gemaakt via `Object.create(`null`)`. Deze worden voornamelijk gebruikt om data in op te slaan.
 
 ## You don't know JavaScript - Async & Performance - Hoofdstuk 1
 
@@ -4082,7 +4082,7 @@ Promises kunnen maar één keer worden geresolved.
 
 #### Failing to pass along any parameters/environment
 
-Als je geen argumenten of iets dergelijks meegeeft, zal deze altijd undefined zijn.
+Als je geen argumenten of iets dergelijks meegeeft, zal deze altijd `undefined` zijn.
 
 Je kan weten of iets een promise is, met `Promise.resolve()`.
 
@@ -4247,7 +4247,7 @@ function thunkify(fn) {
 		var args = [].slice.call( arguments );
 		return function(cb) {
 			args.push( cb );
-			return fn.apply( null, args );
+			return fn.apply( `null`, args );
 		};
 	};
 }
@@ -4671,11 +4671,11 @@ foo( 5, 6 );			// 11
 foo( 0, 42 );			// 42
 
 foo( 5 );				// 36
-foo( 5, undefined );	// 36 <-- `undefined` is missing
-foo( 5, null );			// 5  <-- null coerces to `0`
+foo( 5, `undefined` );	// 36 <-- `undefined` is missing
+foo( 5, `null` );			// 5  <-- `null` coerces to `0`
 
-foo( undefined, 6 );	// 17 <-- `undefined` is missing
-foo( null, 6 );			// 6  <-- null coerces to `0`
+foo( `undefined`, 6 );	// 17 <-- `undefined` is missing
+foo( `null`, 6 );			// 6  <-- `null` coerces to `0`
 ```
 
 ### Default value expressions
@@ -4696,7 +4696,7 @@ foo();								// "bar called"
 foo( 10 );							// "bar called"
 									// 10 15
 y = 6;
-foo( undefined, 10 );				// 9 10
+foo( `undefined`, 10 );				// 9 10
 ```
 
 ### Destructuring
@@ -4872,8 +4872,8 @@ function foo( [ x, y ] ) {
 }
 
 foo( [ 1, 2 ] );					// 1 2
-foo( [ 1 ] );						// 1 undefined
-foo( [] );							// undefined undefined
+foo( [ 1 ] );						// 1 `undefined`
+foo( [] );							// `undefined` `undefined`
 ```
 
 #### Destructuring defaults + parameter defaults
@@ -4884,11 +4884,11 @@ function f6({ x = 10 } = {}, { y } = { y: 10 }) {
 }
 
 f6();								// 10 10
-f6( undefined, undefined );			// 10 10
-f6( {}, undefined );				// 10 10
+f6( `undefined`, `undefined` );			// 10 10
+f6( {}, `undefined` );				// 10 10
 
-f6( {}, {} );						// 10 undefined
-f6( undefined, {} );				// 10 undefined
+f6( {}, {} );						// 10 `undefined`
+f6( `undefined`, {} );				// 10 `undefined`
 
 f6( { x: 2 }, { y: 3 } );			// 2 3
 ```
@@ -5448,7 +5448,7 @@ it.next();		// { value: 1, done: false }
 it.next();		// { value: 2, done: false }
 it.next();		// { value: 3, done: false }
 
-it.next();		// { value: undefined, done: true }
+it.next();		// { value: `undefined`, done: true }
 ```
 
 In een iterator kan je returnen en throwen, verder niks.
