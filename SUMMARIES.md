@@ -234,20 +234,18 @@ function User(){
 
 	return publicAPI;
 }
-```
 
 // create a `User` module instance
 
-```js
 var fred = User();
 
 fred.login( "fred", "12Battery34!" );
 ```
 
-Als je User ( ) doet, creëer je een instance van de User module. Dit is in feite een kopie, met een nieuwe scope.
+Als je `User( )` doet, creëer je een instance van de User module. Dit is in feite een kopie, met een nieuwe scope.
 Doordat via de publicAPI login is geëxporteerd, zijn de variabelen username en password niet verloren geraakt, nadat de functie klaar was.
 
-This is niet altijd gerelateerd aan object-oriented patterns. Als een functie een this bevat, slaat deze vaak op een object. This refereert niet naar de functie zelf.
+`this` is niet altijd gerelateerd aan object-oriented patterns. Als een functie een `this` bevat, slaat deze vaak op een object. *`this` refereert niet naar de functie zelf.*
 
 ```js
 function foo() {
