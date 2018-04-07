@@ -349,39 +349,39 @@ Scopes worden bepaalt door **functies** en **blocks**. **Functie scope** heet oo
 **LHS** gaat over de declaratie van een statement. Draait om het vinden van de variabele.
 **RHS** gaat over de waarde van een statement. (/ Als er een variabele aan de rechterkant van een statement staat.)
 
-Ook als je waardes meegeeft aan via parameters, wordt er in die functie een LHS operatie gedaan, omdat de meegegeven waarde aan de parameternaam wordt gekoppeld.
+Ook als je waardes meegeeft via parameters, wordt er in die functie een **LHS** operatie gedaan, omdat de meegegeven waarde aan de parameternaam wordt gekoppeld.
 
-Als een RHS faalt om een variabele te vinden, waar dan ook in de geneste scopes, geeft de engine een ReferenceError.
+Als een **RHS** faalt om een variabele te vinden, waar dan ook in de geneste scopes, geeft de engine een **ReferenceError**.
 
 Als de engine een LHS aanvraag aan het doen is en het komt op de bovenste etage aan (globale scope), zonder deze variabele te vinden en het programma loopt niet in strict mode zal er in de globale scope een nieuwe variabele aangemaakt worden en teruggegeven worden aan de engine.
 Strict mode zorgt ervoor dat er niet automatisch of impliciet variabelen aangemaakt kunnen worden op de bovenstaande manier. Ook dan zal de engine een ReferenceError geven.
 
-Als je een RHS aanvraag doet, maar de waarde komt niet overeen met wat je er mee probeert ermee te doen, zal de engine een andere error geven: TypeError.
+Als je een RHS aanvraag doet, maar de waarde komt niet overeen met wat je er mee probeert ermee te doen, zal de engine een andere error geven: **TypeError**.
 
 ## You don't know JS - Types & Grammar - Hoofdstuk 1
 
-ES types:
-Undefined
-Null
-Boolean
-String
-Number
-Object
-Symbol
+**ES types**:
+* Undefined
+* Null
+* Boolean
+* String
+* Number
+* Object
+* Symbol
 
-Een type is (in JavaScript) een intrinsieke, ingebouwde set karakteristieken, die op een unieke manier het gedrag, van een gegeven waarde identificeert en onderscheidt van andere waardes, voor de engine én de developer.
+Een **type** is (in JavaScript) een intrinsieke, ingebouwde set karakteristieken, die op een unieke manier het gedrag, van een gegeven waarde identificeert en onderscheidt van andere waardes, voor de engine én de developer.
 
-Alle types, behalve objecten heten primitives.
+Alle types, behalve objecten heten **primitives**.
 
-Null is de enige primitieve waarde, die falsy is.
+`null` is de enige primitieve waarde, die **falsy** is.
 
-Een function is een subtype van een object. Het is een aanroepbaar object.
+Een function is een *subtype* van een object. Het is een **aanroepbaar object**.
 De length property van een function komt overeen met de hoeveelheid benoemde parameters.
 
 Ook arrays zijn subtypes van objecten.
 
 In JS hebben de variabelen geen types, maar juist de waardes.
-JS heeft dus geen type enforcement.
+JS heeft dus *geen* **type enforcement**.
 
 typeof over een variabele aanroepen geeft de waarde van die variabele terug.
 
