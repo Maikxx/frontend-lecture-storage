@@ -604,15 +604,15 @@ new Date().getTime();
 Het bovenstaande geeft een integer terug, wat het aantal miliseconde vertegenwoordigd sinds **1 januari 1970**. Sinds ES6 kan je `Date.now()` gebruiken.
 
 De `Error()` constructor gedraagt zich hetzelfde met het new keyword, als zonder.
-Dit object gebruik je vaak in combinatie met de throw operator.
+Dit object gebruik je vaak in combinatie met de **throw operator**.
 
-Symbols zijn speciale unieke (niet altijd) waardes, die gebruikt kunnen worden als properties op objecten, met weinig angst dat ze botsen.
+**Symbols** zijn speciale unieke (niet altijd) waardes, die gebruikt kunnen worden als properties op objecten, met weinig angst dat ze botsen.
 Je mag bij deze constructor geen new keyword gebruiken.
 Je gebruikt ze voornamelijk voor privé of speciale properties.
 
-De String.prototype.(methode) zijn volgens de spec te vinden op String#methode. Geen enkele van deze methodes passen de string aan in place.
+De `String.prototype.methodeNaam` zijn volgens de spec te vinden op **String#methode**. Geen enkele van deze methodes passen de string aan **in place**.
 
-Function.prototype geeft een lege functie terug, net als dat Array.prototype dat doet. Dit is handig, om errors in zelf gedefineerde functies te voorkomen:
+`Function.prototype` geeft een lege functie terug, net als dat `Array.prototype` dat doet. Dit is handig, om errors in zelf gedefineerde functies te voorkomen:
 
 ```js
 function isThisCool(vals,fn,rx) {
@@ -635,7 +635,7 @@ isThisCool(
 ```
 
 Sinds ES6 is dit niet meer nodig.
-Het zorgt wel voor Memory/CPU trashing.
+Het zorgt wel voor **Memory/CPU trashing**.
 
 Gebruik ook nooit `Array.prototype` die achtereenvolgend worden aangepast.
 
