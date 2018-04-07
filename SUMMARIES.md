@@ -81,12 +81,12 @@ Een **scope** of **lexical scope** staat voor een collectie van variabelen, same
 **Lexical scope** betekent dat de code in één scope toegang heeft tot variabelen binnen die scope, of die daarbuiten.
 
 Recap:
-Je hebt operatoren nodig om acties uit te voeren met waardes.
-Je hebt waardes en types nodig om verschillende acties mogelijk te maken op de verschillende types.
-Je hebt variabelen nodig om data (of state) in op te slaan, gedurende de executie van het programma.
-Je hebt conditionals nodig om beslissingen te maken.
-Je hebt loops nodig om herhaaldelijk taken uit te voeren, totdat de condition false wordt.
-Je hebt functies nodig om je code te organiseren in logische en herbruikbare delen.
+* Je hebt operatoren nodig om acties uit te voeren met waardes.
+* Je hebt waardes en types nodig om verschillende acties mogelijk te maken op de verschillende types.
+* Je hebt variabelen nodig om data (of state) in op te slaan, gedurende de executie van het programma.
+* Je hebt conditionals nodig om beslissingen te maken.
+* Je hebt loops nodig om herhaaldelijk taken uit te voeren, totdat de condition false wordt.
+* Je hebt functies nodig om je code te organiseren in logische en herbruikbare delen.
 
 ## You don't know JS - Up and Going - Hoofdstuk 2
 
