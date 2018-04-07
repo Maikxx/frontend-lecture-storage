@@ -1,6 +1,6 @@
-# You don't know JS Samenvattingen
+# You don't know JavaScript Samenvattingen
 
-## You don't know JS - Up and Going - Hoofdstuk 1
+## You don't know JavaScript - Up and Going - Hoofdstuk 1
 
 Synoniemen voor programma: **source code** en **code**. Dit is een set **instructies** die de computer vertellen welke taak deze moet uitvoeren.
 
@@ -21,11 +21,11 @@ Een programma moet worden uitgevoerd. Voordat dit kan moet het eerst worden geï
 Het lezen van code regel voor regel heet **interpreteren**.
 Soms werken talen zo, dat ze dingen van te voren af al vertalen naar computer leesbare code, dit heet **compiling**.
 
-JS engine compiles tegelijkertijd met dat het uitgevoerd wordt.
+JavaScript engine compiles tegelijkertijd met dat het uitgevoerd wordt.
 
 Om input te krijgen kan je forms gebruiken of de prompt() functie.
 
-Als je een waarde aan een variabele assignt, berekent JS eerst de **source value** (rechterzijde van de statement).
+Als je een waarde aan een variabele assignt, berekent JavaScript eerst de **source value** (rechterzijde van de statement).
 
 Variabelen verklaren doe je met het keyword `var`.
 
@@ -57,7 +57,7 @@ Als je dat niet doet, krijg je **weak typing**, of **dynamic typing**. Dit zorgt
 Het primaire doel van variabelen: de state van een programma onderhouden. **State** volgt dus de veranderingen die je programma doorlopen.
 
 Het centraliseren van waardes heet **constants**. Deze variabelen mogen niet meer veranderen.
-JS constant namen zijn geschreven met hoofdletters en _ tussen de woorden in. De nieuwe versie gebruikt het keyword `const`.
+JavaScript constant namen zijn geschreven met hoofdletters en _ tussen de woorden in. De nieuwe versie gebruikt het keyword `const`.
 
 Een set samengevoegde statements heet een **block**. Deze zijn gewrapt in {}. Block statements hebben geen semicolons nodig.
 
@@ -88,7 +88,7 @@ Een **scope** of **lexical scope** staat voor een collectie van variabelen, same
 * Je hebt loops nodig om herhaaldelijk taken uit te voeren, totdat de condition false wordt.
 * Je hebt functies nodig om je code te organiseren in logische en herbruikbare delen.
 
-## You don't know JS - Up and Going - Hoofdstuk 2
+## You don't know JavaScript - Up and Going - Hoofdstuk 2
 
 **ECMASCRIPT** is de officiële naam voor de JavaScript **specificatie**.
 
@@ -169,7 +169,7 @@ Als je in een `switch` statement geen `breaks` gebruikt, terwijl die case matcht
 
 Een andere vorm van een conditional is een **conditional operator**, beter bekend als de **ternary operator**. Het is korter dan een enkele if…else.
 
-**Strict mode** versterkt de restricties van sommige regels van gedrag in JavaScript. Dit zorgt ervoor dat de code veiliger is en zich meer aan de richtlijnen houdt. Het zorgt ook voor **optimalisatie van de JS engine**. Het zorgt ervoor dat er niet meer een globale variabele aangemaakt wordt als je een keyword vergeet. Strict mode wordt ook gezien als de toekomst van de taal.
+**Strict mode** versterkt de restricties van sommige regels van gedrag in JavaScript. Dit zorgt ervoor dat de code veiliger is en zich meer aan de richtlijnen houdt. Het zorgt ook voor **optimalisatie van de JavaScript engine**. Het zorgt ervoor dat er niet meer een globale variabele aangemaakt wordt als je een keyword vergeet. Strict mode wordt ook gezien als de toekomst van de taal.
 
 `Function foo() {}` is simpelweg een variabele in de globale scope, met een referentie naar zichzelf (een functie). Een functie kan een waarde vertegenwoordigen, die aan andere variabelen of functies kan worden toegewezen.
 
@@ -178,7 +178,7 @@ Een andere vorm van een conditional is een **conditional operator**, beter beken
 
 ### Immediately Invoked Function Expressions (IIFEs)
 `(function IIFE () {console.log(“Hello World”)})();`
-De omringende `( )` heeft JS nodig om het onderscheid te kunnen maken met een normale function call.
+De omringende `( )` heeft JavaScript nodig om het onderscheid te kunnen maken met een normale function call.
 **IIFEs** creëren een eigen variabele scope, waardoor dezelfde namen binnen en buiten de functie gebruikt kunnen worden.
 IIFEs kunnen ook dingen returnen.
 
@@ -271,7 +271,7 @@ foo.call( obj2 );        // "obj2"
 new foo();            // undefined
 ```
 
-Als je een property van een object probeert te refereren, die niet bestaat, zal JS automatisch de interne prototype van dat object gebruiken, om een ander object op te zoeken, waar die property wel opstaat.
+Als je een property van een object probeert te refereren, die niet bestaat, zal JavaScript automatisch de interne prototype van dat object gebruiken, om een ander object op te zoeken, waar die property wel opstaat.
 
 ```js
 var foo = {
@@ -292,7 +292,7 @@ Het beste patroon waarvoor dit gebruikt kan worden is **behaviour delegation**. 
 
 Er zijn twee dingen die je kunt doen om nieuwe features begrijpbaar te maken voor oudere browsers: **polyfilling** en **transpiling**.
 
-Een **polyfill** refereert naar het pakken van een stuk nieuwe JS code en dat omzetten tot code met hetzelfde gedrag, dat beschikbaar is in de oudere JS omgevingen.
+Een **polyfill** refereert naar het pakken van een stuk nieuwe JavaScript code en dat omzetten tot code met hetzelfde gedrag, dat beschikbaar is in de oudere JavaScript omgevingen.
 
 `NaN` waardes zijn de enige waardes die nooit gelijk zijn aan zichzelf.
 
@@ -302,15 +302,15 @@ Waarom zouden we transpilen?
 
 * Nieuwe syntax maakt je code *leesbaarder* en *onderhoudsarmer*.
 * Als je de getranspilede code alleen gebruikt voor oudere browsers en de nieuwe serveert aan de nieuwere browsers, kun je gebruik maken van de *performance optimalizations*, die met de nieuwe syntax zijn meegebracht. Zorgt er ook voor dat browser makers meer echte code hebben om mee te testen.
-* Geeft *feedback* aan het JS comité (**TC39**).
+* Geeft *feedback* aan het JavaScript comité (**TC39**).
 
 `undefined` is de enige waarde die niet in een standaard parameter kan worden meegegeven.
 
 Je moet altijd transpilen.
 
-Bekendste non-JS JS: DOM API. Deze API is alleen beschikbaar in de browser. Hierin is document een belangrijk host object.
+Bekendste non-JavaScript JavaScript: DOM API. Deze API is alleen beschikbaar in de browser. Hierin is document een belangrijk host object.
 
-## You don't know JS - Up and Going - Hoofdstuk 3
+## You don't know JavaScript - Up and Going - Hoofdstuk 3
 
 JavaScript is *geen* **interpreted language**, wat betekent dat het niet gecompiled wordt. Het wordt namelijk wel degelijk gecompiled, maar bijna instant daarna wordt het geëxecute.
 
@@ -318,7 +318,7 @@ Een belangrijke uitwerking van closures wordt gedaan in het module pattern.
 
 **Delegation** zorgt ervoor dat je weinig meer met classes en inheritance te doen hebt.
 
-## You don't know JS - Scopes & Closures - Hoofdstuk 1
+## You don't know JavaScript - Scopes & Closures - Hoofdstuk 1
 
 De belangrijkste mogelijkheid in iedere programmeertaal: de mogelijkheid om waardes op te kunnen slaan in variabelen en deze vervolgens later op te halen of te veranderen. Dit zorgt voor state in een programma.
 
@@ -335,9 +335,9 @@ Deze boom heet **AST**: **Abstract Syntax Tree**.
 
 JavaScript engines hebben geen luxe, om er lang over te doen om te optimizen, omdat het niet een stap van te voren gebeurt.
 
-**JIT**: Een truc van JS, om te **lazy-compilen** en **hot-recompilen**.
+**JIT**: Een truc van JavaScript, om te **lazy-compilen** en **hot-recompilen**.
 
-Een **engine** is verantwoordelijk voor de compilatie en uitvoering van een JS programma, vanaf het begin tot het einde.
+Een **engine** is verantwoordelijk voor de compilatie en uitvoering van een JavaScript programma, vanaf het begin tot het einde.
 **Compiler**: Parset en genereert de code.
 **Scope**: Een lijst van alle variabele, met daarbij een set van strikte regels, die gaan over hoe deze toegankelijk zijn voor de huidig lopende code.
 
@@ -358,7 +358,7 @@ Strict mode zorgt ervoor dat er niet automatisch of impliciet variabelen aangema
 
 Als je een RHS aanvraag doet, maar de waarde komt niet overeen met wat je er mee probeert ermee te doen, zal de engine een andere error geven: **TypeError**.
 
-## You don't know JS - Types & Grammar - Hoofdstuk 1
+## You don't know JavaScript - Types & Grammar - Hoofdstuk 1
 
 **ES types**:
 * Undefined
@@ -380,8 +380,8 @@ De length property van een function komt overeen met de hoeveelheid benoemde par
 
 Ook arrays zijn subtypes van objecten.
 
-In JS hebben de variabelen geen types, maar juist de waardes.
-JS heeft dus *geen* **type enforcement**.
+In JavaScript hebben de variabelen geen types, maar juist de waardes.
+JavaScript heeft dus *geen* **type enforcement**.
 
 `typeof` over een variabele aanroepen geeft de waarde van die variabele terug.
 
@@ -405,26 +405,26 @@ var val = helper();
 }
 ```
 
-## You don't know JS - Types & Grammar - H2
+## You don't know JavaScript - Types & Grammar - H2
 
-Bouwstenen van iedere taal: arrays, strings en numbers. JavaScript heeft hier enkele unieke karakteristieken aan verbonden.
+**Bouwstenen** van iedere taal: arrays, strings en numbers. JavaScript heeft hier enkele unieke karakteristieken aan verbonden.
 
-Arrays in arrays worden multidimensionale arrays genoemd.
+Arrays in arrays worden **multidimensionale arrays** genoemd.
 
-Als je in arrays genummerde waardes overslaat bij het toevoegen (0 > 2), dan wordt dat een sparse array. Hierin is de tweede waarde (1) undefined.
+Als je in arrays genummerde waardes overslaat bij het toevoegen (0 > 2), dan wordt dat een **sparse array**. Hierin is de tweede waarde (1) undefined.
 
 Je kan ook string keys/properties aan arrays toevoegen, die zullen niet meetellen aan de length property van de array.
 
 Als een string waarde, bedoeld als een key, met een base-10 nummer waarde in de string, gaat een array er vanuit dat je bedoelde dat het nummer wou hebben.
 
 Strings worden vaak gezien als arrays van karakters, echter zijn ze totaal anders.
-JS strings zijn immutable, terwijl arrays wel mutable zijn.
+JavaScript strings zijn immutable, terwijl arrays wel mutable zijn.
 
 Arrays hebben een reverse methode.
 De meest gebruikte methode om strings te reversen, is door ze in een array om te zetten, te reversen en vervolgens weer terug naar een string om te zetten.
 
-JS nummers bevatten beide integer en decimale nummers.
-De implementatie waarop JS zijn nummer systeem heeft gebaseerd heet IEEE754, vaak ook floating-point genoemd. JS gebruikt daarvan het double precision (64-bit binary) format van die standaard.
+JavaScript nummers bevatten beide integer en decimale nummers.
+De implementatie waarop JavaScript zijn nummer systeem heeft gebaseerd heet IEEE754, vaak ook floating-point genoemd. JavaScript gebruikt daarvan het double precision (64-bit binary) format van die standaard.
 
 Hele grote nummers worden automatisch omgezet naar de exponentiële vorm van dat nummer. Dit is hetzelfde als .toExponential( ) op een getal aanroepen.
 
@@ -446,7 +446,7 @@ Numerieke waardes kunnen ook in andere vormen worden uitgelegd: binary, octal, h
 De octale waarde 0363 is sinds ES6 + strict mode niet meer toegestaan.
 De nieuwe vormen, die wel valide zijn: 0o363 en 0O363. Gebruik echter altijd de lowercase o.
 
-Het meest bekende side effect van binary floating-point numbers (niet alleen in JS) is dat:
+Het meest bekende side effect van binary floating-point numbers (niet alleen in JavaScript) is dat:
 
 ```js
 0.1 + 0.2 === 0.3 // False
@@ -474,7 +474,7 @@ Een andere manier om de undefined waarde te krijgen is, met behulp van de void o
 Als je ergens een waarde graag undefined wilt hebben, kun je dus de void operator gebruiken.
 
 Als je twee niet nummers aan elkaar probeert te koppelen in een operation, krijg je een NaN. Not a Number. NaN is nooit gelijk aan een andere NaN. Je kan testen of een waarde NaN is met isNaN( ). Dit heeft echter een probleem, dat het ook true returnt als je string eraan meegeeft.
-Je kan ook checken of een waarde niet gelijk is aan zichzelf, aangezien NaN de enige variant binnen JS is, waar dat het geval is.
+Je kan ook checken of een waarde niet gelijk is aan zichzelf, aangezien NaN de enige variant binnen JavaScript is, waar dat het geval is.
 
 Als je var a = 1 / 0 doet, krijg je Infinity. Hier is een positieve (POSITIVE\_INFINITY) en een negatieve (NEGATIVE_INFINITY) variant van.
 
@@ -483,7 +483,7 @@ Ook als je vergelijkingen doet met 0 en -0, zal dit true teruggeven.
 
 Om de speciale gelijkheid van -0 en NaN te vergelijken kan je sinds ES6 gebruik maken van object.is( ). Gebruik dit alleen bij deze twee cases.
 
-In JS kan je geen referentie hebben van een variabele in een andere variabele. Een referentie richt zich op een (gedeelde) waarde.
+In JavaScript kan je geen referentie hebben van een variabele in een andere variabele. Een referentie richt zich op een (gedeelde) waarde.
 
 ```js
 var a = 2;
@@ -539,7 +539,7 @@ console.log( b ); // 2, not 3
 
 Het probleem hiermee (boxed object wrappers) is, dat de onderliggende scalar primitive waarde niet mutable is.
 
-## You don't know JS - Types & Grammar - H3
+## You don't know JavaScript - Types & Grammar - H3
 
 Ingebouwde types heten natives.
 
@@ -568,7 +568,7 @@ Er zijn geen Null en Undefined native constructors.
 
 Voor de andere primitieve waarde, zoals strings, booleans en numbers, gebeurt er iets dat boxing heet.
 
-Primitieve waardes hebben geen methodes of properties, hiervoor heb je een object wrapper nodig. JS doet dit automatisch.
+Primitieve waardes hebben geen methodes of properties, hiervoor heb je een object wrapper nodig. JavaScript doet dit automatisch.
 
 Als je bijvoorbeeld var a = new Boolean (false) doet, zal dit alsnog true returnen in een vergelijking, omdat er een object omheen zit.
 
@@ -638,9 +638,9 @@ Het zorgt wel voor Memory/CPU trashing.
 
 Gebruik ook nooit `Array.prototype` die achtereenvolgend worden aangepast.
 
-## You don't know JS - Types & Grammar - H4
+## You don't know JavaScript - Types & Grammar - H4
 
-Het ombouwen van een waarde, van het ene type naar het andere heet vaak type casting, als het expliciet wordt gedaan en coercion als het impliciet gedaan wordt (door JS zelf, die volgt de regels op die gaan over hoe een waarde gebruikt mag en kan worden).
+Het ombouwen van een waarde, van het ene type naar het andere heet vaak type casting, als het expliciet wordt gedaan en coercion als het impliciet gedaan wordt (door JavaScript zelf, die volgt de regels op die gaan over hoe een waarde gebruikt mag en kan worden).
 
 Eigenlijk wordt bij beide varianten gepraat over coercion, dus tegenwoordig heet het explicit coercion en implicit coercion.
 
@@ -717,7 +717,7 @@ Number( [ "abc" ] );// NaN
 
 1 en 0 zijn niet hetzelfde als true en false, echter kun je ze wel converteren van 1 > true en 0 > false.
 
-Alle JS waardes kunnen in een van de twee categorieën vallen:
+Alle JavaScript waardes kunnen in een van de twee categorieën vallen:
 Waardes die false worden als ze omgezet worden naar een boolean.
 Alle andere gevallen (true).
 
@@ -732,7 +732,7 @@ Falsy values list:
 Falsy objects zijn niet slechts objecten die falsy waardes omringen.Een falsy object is een waarde, die lijkt op en zich hetzelfde gedraagt als een normaal
 Object, maar als je ze naar een boolean coerced, zal het een false waarde worden.
 
-Falsy objects werden gebruikt voornamelijk in legacy code. Zoals document.all, dit zal true returnen. Het zit niet in JS zelf, maar in de implementatie van oude browsers.
+Falsy objects werden gebruikt voornamelijk in legacy code. Zoals document.all, dit zal true returnen. Het zit niet in JavaScript zelf, maar in de implementatie van oude browsers.
 
 ### Explicit Coercion
 
@@ -1084,11 +1084,11 @@ a < b;	// false
 
 Dit wordt false, omdat beide variabelen omgezet worden tot [object Object], waardoor ze gelijk zijn aan elkaar en dus niet minder.
 
-<= wordt in JS vaak gezien als not greater than.
+<= wordt in JavaScript vaak gezien als not greater than.
 
-## You don't know JS - Types & Grammar - H5
+## You don't know JavaScript - Types & Grammar - H5
 
-**Grammar**: Hoe de JS taal syntax werkt. Het beschrijft de regels over hoe een taal werkt.
+**Grammar**: Hoe de JavaScript taal syntax werkt. Het beschrijft de regels over hoe een taal werkt.
 
 **Expression** en **statement** zijn niet hetzelfde.
 Statements zijn volledige zinnen en expressions zijn delen van zinnen, regels. Operators zijn de samenvoegingen tussen regels.
@@ -1183,8 +1183,8 @@ De curly braces is de **r-value**.
 } // Dit is een standalone block.
 ```
 
-Het is valide JS. En foo: bar( ) is een **labeled statement**. Dit is een soort van **goto**, wat volgens vele een hele slechte manier van coden is.
-JS heeft **labeled jumps**. Het betekent niet letterlijk ga hierheen, maar meer dat het hier iets mee moet doen.
+Het is valide JavaScript. En foo: bar( ) is een **labeled statement**. Dit is een soort van **goto**, wat volgens vele een hele slechte manier van coden is.
+JavaScript heeft **labeled jumps**. Het betekent niet letterlijk ga hierheen, maar meer dat het hier iets mee moet doen.
 
 ```js
 // `foo` labeled-loop
@@ -1210,7 +1210,7 @@ foo: for (var i=0; i<4; i++) {
 ```
 
 Statement labels kunnen geen quotes om zich heen hebben, zoals dat bij JSON wel zo is.
-**JSON-P**: Het wrappen van JSON data in een functie. Het zorgt er voor dat JSON valide JS syntax wordt.
+**JSON-P**: Het wrappen van JSON data in een functie. Het zorgt er voor dat JSON valide JavaScript syntax wordt.
 
 ### Blocks
 
@@ -1255,7 +1255,7 @@ foo( {
 
 ### Else if and optional blocks
 
-In JS is er geen else if, maar doordat je met een if en else de {} kan omzeilen, wordt else if geldige syntax. Under the hood wordt het omgezet tot slechts if else chains genest.
+In JavaScript is er geen else if, maar doordat je met een if en else de {} kan omzeilen, wordt else if geldige syntax. Under the hood wordt het omgezet tot slechts if else chains genest.
 
 ### Operator precedence
 
@@ -1474,7 +1474,7 @@ switch (a) {
 
 In dit geval kijkt de switch eerst of er een match is (die is er niet), vervolgens gaat deze terug naar de top en komt een default en een break (in case 3) tegen die die allebei uitvoert.
 
-## You don't know JS - Scopes & Closures - Hoofdstuk 2
+## You don't know JavaScript - Scopes & Closures - Hoofdstuk 2
 
 **Scope**: Een set regels, die leidend zijn voor hoe de Engine verschillende variabelen kan opzoeken met hun naam. Deze kan dan gevonden worden in de huidige scope, of in de geneste scopes waar deze call vandaan komt.
 
@@ -1539,14 +1539,14 @@ In dit geval zal er in foo een nieuwe variabele b worden aangemaakt, die de glob
 
 Als je in strict mode zit, zal eval in zijn eigen lexicale scope werken. In dit geval zullen veranderingen die in eval gedaan worden, niet de omringende scope van waar deze is aangeroepen, aanpassen.
 
-Andere dingen in JS, die ongeveer hetzelfde doen:
+Andere dingen in JavaScript, die ongeveer hetzelfde doen:
 
 * setInterval
 * setTimeout
 * Function constructor
 
 **With**
-Dit is een depricated kenmerk van JS.
+Dit is een depricated kenmerk van JavaScript.
 With wordt normaal gezien als een short-hand voor het maken van meerdere property references tegen een object, zonder het object steeds opnieuw te refereren.
 
 ```js
@@ -1605,11 +1605,11 @@ Dit zorgt ervoor dat de engine helemaal geen performance optimalizations meer do
 
 Gebruik deze twee manieren niet.
 
-## You don't know JS - Scopes & Closures - Hoofdstuk 3
+## You don't know JavaScript - Scopes & Closures - Hoofdstuk 3
 
 ### Scope from functions
 
-Een functie is een manier om een scope te maken. Dingen die in deze scope zijn gedefineerd zijn daarbuiten niet beschikbaar. Met dit patroon maak je goed gebruik van de dynamische aard van JS variabelen.
+Een functie is een manier om een scope te maken. Dingen die in deze scope zijn gedefineerd zijn daarbuiten niet beschikbaar. Met dit patroon maak je goed gebruik van de dynamische aard van JavaScript variabelen.
 
 ### Hiding in plain scope
 
@@ -1625,7 +1625,7 @@ Een ander voordeel van het verstoppen van variabelen en functies, is dat je voor
 
 ### Global namespaces
 
-Als je veel verschillende libraries in je JS laadt, die niet hun variabelen goed zouden verstoppen, zou dat veel overwriting en errors veroorzaken.Goede libraries gebruiken vaak een unieke naam en wordt vervolgens gebruikt als namespace voor die library.
+Als je veel verschillende libraries in je JavaScript laadt, die niet hun variabelen goed zouden verstoppen, zou dat veel overwriting en errors veroorzaken.Goede libraries gebruiken vaak een unieke naam en wordt vervolgens gebruikt als namespace voor die library.
 
 ### Module management
 
@@ -1690,8 +1690,8 @@ Hier is de dev function scope gegeven in het tweede deel van de snippet.
 **Block scoping** gaat over het verklaren van variabelen zo dichtbij en lokaal mogelijk als waar ze gebruikt moeten gaan worden.
 Block scoping is een tool om Principles of Least Exposure te verlengen.
 
-Block scoping bestaat niet direct in JS.
-Sommige kenmerken van JS doen daar wel op lijken:
+Block scoping bestaat niet direct in JavaScript.
+Sommige kenmerken van JavaScript doen daar wel op lijken:
  With
  Try / Catch -> Het catch deel is geblockscoped.
  Let -> Koppelt een variabele aan de scope van een block code ({ }) waar deze in is geplaatst. Sommige mensen plaatsen liever om alles waar ze een block van willen maken { } dit is dan een expliciete manier van scoping. Anders is het impliciet.  Verklaringen die met let zijn gedaan zullen niet hoisten, dus als je ze probeert te bereiken voordat ze gedefineerd zijn, krijg je een referenceerror.
@@ -1730,13 +1730,13 @@ Let bindt zich aan artibraire blocks code in plaats van functie scopes of global
 
 Dit maakt ook een block scoped variabele, maar die waarde kan niet worden veranderd.
 
-## You don't know JS - Scopes & Closures - Hoofdstuk 4 - Hoisting
+## You don't know JavaScript - Scopes & Closures - Hoofdstuk 4 - Hoisting
 
 Iedere variabele verklaard in een scope is verbonden met die scope.
 
 ### Chicken or the egg?
 
-Je JS programma wordt uitgevoerd van **top-to-bottom**, echter is er één ding dat fout denken over je programma kan opleveren.
+Je JavaScript programma wordt uitgevoerd van **top-to-bottom**, echter is er één ding dat fout denken over je programma kan opleveren.
 
 ```js
 a = 2;
@@ -1837,9 +1837,9 @@ else {
 
 Je kan beter functies in blocks vermijden.
 
-## You don't know JS - Scopes & Closures - Hoofdstuk 4 - Scope Closures
+## You don't know JavaScript - Scopes & Closures - Hoofdstuk 4 - Scope Closures
 
-**Closures** zijn overal in JS en je moet ze kunnen herkennen en er mee om gaan.
+**Closures** zijn overal in JavaScript en je moet ze kunnen herkennen en er mee om gaan.
 Closures zijn een resultaat van het schrijven van code, dat vertrouwt op de **lexical scope**.
 
 ### Nitty Gritty
@@ -1907,7 +1907,7 @@ for (var i=1; i<=5; i++) {
 }
 ```
 
-Het kan zelfs nog makkelijk worden gemaakt met JS, doordat er speciaal gedrag is vastgesteld voor let in het hoofd van een for-loop. Als je hier namelijk let gebruikt, zal dit aangeven dat je de variabele niet slechts één keer wilt verklaren voor de hele loop, maar voor iedere iteratie.
+Het kan zelfs nog makkelijk worden gemaakt met JavaScript, doordat er speciaal gedrag is vastgesteld voor let in het hoofd van een for-loop. Als je hier namelijk let gebruikt, zal dit aangeven dat je de variabele niet slechts één keer wilt verklaren voor de hele loop, maar voor iedere iteratie.
 
 ```js
 for (let i=1; i<=5; i++) {
@@ -2085,7 +2085,7 @@ foo.awesome(); // LET ME INTRODUCE: HIPPO
 ```
 
 ### Future Modules
-Met de nieuwe ES6 module syntax, kan je je JS opdelen in files en al deze losse files worden als modules behandeld. Iedere module kan dingen importeren, net als exporteren.
+Met de nieuwe ES6 module syntax, kan je je JavaScript opdelen in files en al deze losse files worden als modules behandeld. Iedere module kan dingen importeren, net als exporteren.
 
 **Statically recognized pattern**: Iets waar de compiler iets van begrijpt.
 
@@ -2097,7 +2097,7 @@ import x from “y” haalt een deel van een module op, terwijl module x from �
 
 De inhoudt van een module file wordt behandeld, alsof er een omringende scope closure omheen ligt, zoals at bij functie-closure modules ook zo is.
 
-## You don't know JS - This & Object Prototypes - Hoofdstuk 1 - This or That?
+## You don't know JavaScript - This & Object Prototypes - Hoofdstuk 1 - This or That?
 
 **This**: Een speciaal identifier keyword, dat automatisch wordt bepaald in de scope van iedere functie.
 
@@ -2260,7 +2260,7 @@ Als een functie wordt aangeroepen, wordt er een **activation record** of **execu
 
 Hierin staat ook een waarde van de 'this' reference, die voor de levensduur van de functie geldt.
 
-## You don't know JS - This & Object Prototypes - Hoofdstuk 2 - This all makes sense now!
+## You don't know JavaScript - This & Object Prototypes - Hoofdstuk 2 - This all makes sense now!
 
 This binding is volledig afhankelijk van de **call-site** (Hoe de functie is aangeroepen).
 
@@ -2422,13 +2422,13 @@ var a = "oops, global"; // `a` also property on global object
 doFoo( obj.foo ); // "oops, global"
 ```
 
-Zelfs als de functie een ingebouwde JS functie is, zoals setTimeout(), geldt dit.
+Zelfs als de functie een ingebouwde JavaScript functie is, zoals setTimeout(), geldt dit.
 
 #### Explicit binding
 
 Als je een function call wilt dwingen om een bepaald object te gebruiken als **this** binding, zonder een property reference op een object te zetten.
 
-Enkele tools om dit te doen in JS zijn, dingen zoals **.call() en .apply()**. Elke functie die je zelf maakt heeft deze properties via diens prototype.
+Enkele tools om dit te doen in JavaScript zijn, dingen zoals **.call() en .apply()**. Elke functie die je zelf maakt heeft deze properties via diens prototype.
 
 Deze functies werken, door beide als eerste argument een object mee te krijgen, die gebruikt moet worden voor this, om vervolgens de functie aan te roepen met die this.
 
@@ -2561,7 +2561,7 @@ var obj = {
 
 In class-oriented languages, zijn constructors speciale methodes op classes die die functie uitvoeren als de class wordt aangeroepen met **new**.
 
-De JS syntax lijkt hetzelfde, maar het is achter de schermen totaal niet zo.
+De JavaScript syntax lijkt hetzelfde, maar het is achter de schermen totaal niet zo.
 
 **constructors** zijn functies die worden aangeroepen met het new keyword voor zich.
 
@@ -2756,7 +2756,7 @@ bar.call( obj2 ); // 2, not 3!
 
 In dit geval is foo bound aan obj1. bar zal dan ook this-bound zijn aan obj1, deze kan niet worden overschreven, zoals te zien is bij de laatste call, zelfs niet met new.
 
-## You don't know JS - This & Object Prototypes - Hoofdstuk 3 - Objects
+## You don't know JavaScript - This & Object Prototypes - Hoofdstuk 3 - Objects
 
 **Objects** komen in twee vormen:
 
@@ -2779,7 +2779,7 @@ Je gebruikt bijna altijd de literal form.
 
 ### Type
 
-Objects zijn een van de zes primaire JS types.
+Objects zijn een van de zes primaire JavaScript types.
 Dingen, zoals string, number, boolean, null en undefined zijn zelf geen objecten.
 
 Er zijn enkele **complex primitives**:
@@ -2802,7 +2802,7 @@ Er zijn nog meer sub-types van objecten (**built-in objects**):
 * Error
 
 Deze staan niet gelijk aan hun primitieve waardes.
-Dit zijn eigenlijk allemaal ingebouwde functies, in JS.
+Dit zijn eigenlijk allemaal ingebouwde functies, in JavaScript.
 
 ```js
 var strPrimitive = "I am a string";
@@ -2879,7 +2879,7 @@ Dit type wordt vooral gebruikt in ES6 Symbols.
 
 Functies die tot een object behoren worden gezien als **methods**, in andere talen.
 
-In JS wordt een property niet een **method** als het toevallig de waarde van een functie heeft.
+In JavaScript wordt een property niet een **method** als het toevallig de waarde van een functie heeft.
 
 **Function** en **method** zijn te verwisselen als benaming voor een functie.
 
@@ -3199,7 +3199,7 @@ for (var v of myObject) {
 // 3
 ```
 
-## You don't know JS - This & Object Prototypes - Hoofdstuk 4 - Mixing (Up) "Class" Objects
+## You don't know JavaScript - This & Object Prototypes - Hoofdstuk 4 - Mixing (Up) "Class" Objects
 
 **OOP** - Object Oriented Programming.
 
@@ -3224,7 +3224,7 @@ Vaak zie je discussies over populaire OOP Design Patterns voorbijkomen, over bij
 ### Javascript "Classes"
 
 Javascript heeft geen classes.
-Javascript probeert de grote vraag van developers, om classes in JS te implementeren, te beamen met syntax, die lijkt op classes.
+Javascript probeert de grote vraag van developers, om classes in JavaScript te implementeren, te beamen met syntax, die lijkt op classes.
 
 ### Class Mechanics
 
@@ -3266,7 +3266,7 @@ Als je *new CoolGuy()* aanroept in dit geval, roep je eigenlijk de methode CoolG
 
 Aan de variabele wordt een object teruggegeven, vanuit die constructor.
 
-*note*: De bovenstaande code is geen JS, maar waarschijnlijk Java en is conceptueel.
+*note*: De bovenstaande code is geen JavaScript, maar waarschijnlijk Java en is conceptueel.
 
 ### Class Inheritance
 
@@ -3320,7 +3320,7 @@ Deze techniek heet **polymorphism** of **virtual polymorphism**. In het bovensta
 Relatief betekent dat het één level omhoog kijkt.
 In veel talen wordt **inherited:** vervangen door **super()**.
 
-In JS hoort een class tot een constructor, terwijl in andere talen dit andersom is.
+In JavaScript hoort een class tot een constructor, terwijl in andere talen dit andersom is.
 
 In het bovenstaande geval wordt in de Drive() methode de ignition() methode aangeroepen, en degene die deze dan aan roept is die van de SpeedBoat, tenzij Vehicle zelf wordt geinstantieerd tot een class.
 
@@ -3332,11 +3332,11 @@ Als classes zijn geinherit, is er een manier voor deze classes zelf (niet de ins
 
 ### Mixins
 
-JS's object mechanisme zal niet automatisch kopie gedrag uitvoeren, als je iets inherit of instantieert, omdat er geen classes zijn om te instantieren.
+JavaScript's object mechanisme zal niet automatisch kopie gedrag uitvoeren, als je iets inherit of instantieert, omdat er geen classes zijn om te instantieren.
 
 Objecten krijgen geen kopieën van elkaar, maar worden aan elkaar gelinkt.
 
-JS faket dit gedrag van andere classes via twee verschillende manieren.
+JavaScript faket dit gedrag van andere classes via twee verschillende manieren.
 
 #### Explicit Mixins
 
@@ -3401,7 +3401,7 @@ Doordat de twee objecten een referentie hebben naar diens gezamenlijke functies,
 Een variatie op dit expliciete mixin pattern, die in sommige manieren expliciet is en in andere impliciet, heet **parasitic inheritance**.
 
 ```js
-// "Traditional JS Class" `Vehicle`
+// "Traditional JavaScript Class" `Vehicle`
 function Vehicle() {
 	this.engines = 1;
 }
@@ -3471,11 +3471,11 @@ Another.count; // 1 (not shared state with `Something`)
 
 De `Something.cool.call(this)` kan in een constructor voorkomen, of in een methode van een object.
 
-## You don't know JS - This & Object Prototypes - Hoofdstuk 5 - Prototypes
+## You don't know JavaScript - This & Object Prototypes - Hoofdstuk 5 - Prototypes
 
 ### [[Prototype]]
 
-Objecten in JS hebben een interne property, die in de spec als **[[Prototype]]** beschreven staat. Dit is simpelweg een referentie naar een ander object.
+Objecten in JavaScript hebben een interne property, die in de spec als **[[Prototype]]** beschreven staat. Dit is simpelweg een referentie naar een ander object.
 
 ```js
 var anotherObject = {
@@ -3557,7 +3557,7 @@ myObject.hasOwnProperty( "a" ); // true
 
 ### "Class"
 
-In JS zijn er geen classes, enkel objecten. Het object bepaalt zijn eigen gedrag direct.
+In JavaScript zijn er geen classes, enkel objecten. Het object bepaalt zijn eigen gedrag direct.
 
 ### "Class" Functions
 
@@ -3581,9 +3581,9 @@ In dit geval zijn er enkel twee objecten aan elkaar gelinkt, maar er is geen ins
 
 #### What's in a name?
 
-In JS maak je geen kopieën van het ene object naar het andere, maar je linkt tussen objecten. Dit heet vaak **Prototypal inheritance**.
+In JavaScript maak je geen kopieën van het ene object naar het andere, maar je linkt tussen objecten. Dit heet vaak **Prototypal inheritance**.
 
-**Delegation** is een beter woord voor het JS object-linking mechanisme.
+**Delegation** is een beter woord voor het JavaScript object-linking mechanisme.
 
 **Differential inheritance**, dit is het beschrijven van het gedrag van een object, wat betreft hetgeen wat anders is, dan een standaarde descriptor.
 Bijvoorbeeld:
@@ -3593,7 +3593,7 @@ Dit is niet per se een goede manier om [[Prototype]] te beschrijven.
 
 #### "Constructors"
 
-In JS doen twee dingen denken dat er classes zijn:
+In JavaScript doen twee dingen denken dat er classes zijn:
 
 ```js
 function Foo() {
@@ -3614,7 +3614,7 @@ Als je ergens new voor zet wordt dat automatisch een **constructor call**.
 
 #### Mechanics
 
-Het bovenstaande is niet het enige wat gebruikt wordt om JS op classes te laten lijken:
+Het bovenstaande is niet het enige wat gebruikt wordt om JavaScript op classes te laten lijken:
 
 ```js
 function Foo(name) {
@@ -3677,9 +3677,9 @@ bar.something(); // Tell me something good...
 
 **dictionaries** zijn objecten zonder [[Prototype]], gemaakt via `Object.create(null)`. Deze worden voornamelijk gebruikt om data in op te slaan.
 
-## You don't know JS - Async & Performance - Hoofdstuk 1
+## You don't know JavaScript - Async & Performance - Hoofdstuk 1
 
-Een JS programmma wordt vrijwel altijd opgebroken in twee of meer delen, waar het eerste deel *nu* loopt en het volgende *later*, als er een event gebeurt.
+Een JavaScript programmma wordt vrijwel altijd opgebroken in twee of meer delen, waar het eerste deel *nu* loopt en het volgende *later*, als er een event gebeurt.
 
 Als er events zijn om uit te voeren, zal de **event loop** lopen,totdat de **queue** leeg is.
 Iedere iteratie op die event loop heet een **tick**.
@@ -3693,7 +3693,7 @@ Vaak moet je processen die tegelijk lopen, orderen, om **race conditions** te vo
 
 Een van de meest voorkomende manieren om om te gaan met het later, is een **callback functie**.
 
-Tot ES6 had JS nooit een echte vorm van asynchroniteit in zich.
+Tot ES6 had JavaScript nooit een echte vorm van asynchroniteit in zich.
 
 De **event loop** is een mechanisme van het omgaan met meerdere chunks van een programma gedurende een bepaalde periode.
 
@@ -3887,9 +3887,9 @@ schedule( function(){
 // ACDB
 ```
 
-## You don't know JS - Async & Performance - Hoofdstuk 2
+## You don't know JavaScript - Async & Performance - Hoofdstuk 2
 
-Callbacks zijn een fundamenteel van asynchroniteit in JS, maar ze zijn niet genoeg om het hele spectrum van async programmeren in JS bij te houden.
+Callbacks zijn een fundamenteel van asynchroniteit in JavaScript, maar ze zijn niet genoeg om het hele spectrum van async programmeren in JavaScript bij te houden.
 
 Callbacks zorgen ervoor dat we harder moeten gaan nadenken over de code die we schrijven, omdat ze een non-lineaire, non-sequentiele flow volgen.
 
@@ -3951,7 +3951,7 @@ De fictionele chaos, verbonden met sync/async heet **Zalgo**.
 
 Callbacks kunnen vrijwel alles doen, wat je wilt, maar je moet er hard voor werken om het *goed* voor elkaar te krijgen.
 
-## You don't know JS - Async & Performance - Hoofdstuk 3
+## You don't know JavaScript - Async & Performance - Hoofdstuk 3
 
 Callbacks hadden de volgende twee problemen:
 * Het missen van sequentialiteit
@@ -4104,10 +4104,10 @@ Promises moeten eigenlijk een pit of success worden, waar:
 * Als je een rejected Promise in die state wilt houden, voordat je het kan observeren, kan je defer() gebruiken.
 
 ### Promise.all([...])
-Een **gate** is een mechanisme, die wacht op twee of meer parallele / concurrent taken om te volbrengen, voordat er wordt doorgegegaan. In JS heet dit `Promise.All([])`
+Een **gate** is een mechanisme, die wacht op twee of meer parallele / concurrent taken om te volbrengen, voordat er wordt doorgegegaan. In JavaScript heet dit `Promise.All([])`
 
 ### Promise.race([...])
-Een **latch** is een mechanisme, die reageert op de eerste promise die wordt volbracht. In JS heet dit een **race**.
+Een **latch** is een mechanisme, die reageert op de eerste promise die wordt volbracht. In JavaScript heet dit een **race**.
 
 Promises kunnen niet worden uitgezet.
 
@@ -4124,7 +4124,7 @@ Er is geen manier om errors te verkrijgen, die misschien gebeuren in de chain.
 Een callback-verwachtende functie in een Promise-aware functie wrappen heet ook wel **lifting / Promisifying**.
 Het kan ook **Promisory** heten.
 
-## You don't know JS - Async & Performance - Hoofdstuk 4 - Generators
+## You don't know JavaScript - Async & Performance - Hoofdstuk 4 - Generators
 
 **Generator** maakt het mogelijk om asynchrone flow uit te drukken in opeenvolgend-uitziende code.
 Het is een functie-type, die niet doet aan **run-to-completion**.
@@ -4191,7 +4191,7 @@ In generators zit ook altijd een **assumed/implicit return**.
 **Abnormal completion / Early termination**: Zorgt ervoor dat een generator niet in een bepaalde staat blijft hangen, nadat er uit de loop is ge`break`t.
 
 Heten ook wel **Pausible / iterable functions**.
-JS loopt van rechts naar links de code af.
+JavaScript loopt van rechts naar links de code af.
 
 Generators die Promises yielden is een heel erg krachtig *patroon*, dat het in ES7 `async/await` heet.
 
@@ -4225,7 +4225,7 @@ it.next().value;	// `*foo()` finished
 
 Het doel van delegation is het organiseren van code.
 
-Een **thunk** is een JS functie (zonder parameters), die verbonden is met een andere functie.
+Een **thunk** is een JavaScript functie (zonder parameters), die verbonden is met een andere functie.
 
 ```js
 function foo(x,y) {
@@ -4265,7 +4265,7 @@ fooThunk( function(sum) {
 
 In het bovenstaande geval is `whatIsThis` eigenlijk iets dat thunks maakt, vanuit foo. Het is dus eigenlijk een **factory** voor **thunks**. Een **thunktory**.
 
-## You don't know JS - Async & Performance - Hoofdstuk 5 - Program Performance
+## You don't know JavaScript - Async & Performance - Hoofdstuk 5 - Program Performance
 
 De perceptie die de gebruiker heeft van performance, is net zo, als het niet meer, zo belangrijk, als het echt meetbare.
 
@@ -4273,7 +4273,7 @@ De perceptie die de gebruiker heeft van performance, is net zo, als het niet mee
 
 **Virtual threading**: Het splitsen van een programma in twee delen, waar een deel op de belangrijkste UI thread loopt en het andere deel op een andere threat.
 
-**Web workers** is een feature, sinds HTML5, die er voor kan zorgen dat er meerdere instances van de JS engine worden verzorgd. Elk deel hiervan is dan een Web Worker.
+**Web workers** is een feature, sinds HTML5, die er voor kan zorgen dat er meerdere instances van de JavaScript engine worden verzorgd. Elk deel hiervan is dan een Web Worker.
 Dit soort parallelisme heet **task parallelism**.
 
 ```js
@@ -4403,7 +4403,7 @@ SIMD.int32x4.add( v3, v4 );		// [ 20, 121, 1031, 10041 ]
 
 Hier boven staan twee type vector data: 32-bit floating-point nummers en 32-bit integers.
 
-**asm.js** is de naam voor een goed performende subset van de JS taal.
+**asm.js** is de naam voor een goed performende subset van de JavaScript taal.
 
 ```js
 var a = 42;
@@ -4427,7 +4427,7 @@ In dit geval gebruik je de **binaire of** (|) met de waarde 0, om er voor te zor
 
 Een **heap** is een naam voor een gereserveerde plek in de memory, waar variabelen kunnen worden opgeslagen.
 
-## You don't know JS - Async & Performance - Hoofdstuk 6 - Benchmarking & Tuning
+## You don't know JavaScript - Async & Performance - Hoofdstuk 6 - Benchmarking & Tuning
 
 De duratie van de tijd die je een bepaalde test hethaalt, komt van de accuratie van de timer die je gebruikt om het te testen.
 
@@ -4487,7 +4487,7 @@ function factorial(n) {
 factorial( 5 );		// 120
 ```
 
-Verschillende JS engines zijn niet gelijk, dus behandel ze ook niet alsof ze gelijk moeten zijn.
+Verschillende JavaScript engines zijn niet gelijk, dus behandel ze ook niet alsof ze gelijk moeten zijn.
 
 ### Big Picture
 
@@ -4539,21 +4539,21 @@ factorial( 5 );		// 120
 
 Deze versie is TCO friendly.
 
-## You don't know JS - ES6 & Beyond - Hoofdstuk 1 - ES? Now & Future
+## You don't know JavaScript - ES6 & Beyond - Hoofdstuk 1 - ES? Now & Future
 
 ES6 heeft op veel plekken een hele hoop nieuwe syntactische vormen.
 
 ### Versioning
 
-De standaard voor JS heet officieel **ECMAScript**, of ES.
-ES3 was de eerste op grote schaal gebruikte basis voor JS.
+De standaard voor JavaScript heet officieel **ECMAScript**, of ES.
+ES3 was de eerste op grote schaal gebruikte basis voor JavaScript.
 
 Door politieke redenen, is ES4 nooit uitgekomen.
-ES5 kwam uit in 2009, wat de standaard werd voor de moderne JS revolutie en de enorme explosie in browsers.
+ES5 kwam uit in 2009, wat de standaard werd voor de moderne JavaScript revolutie en de enorme explosie in browsers.
 
 Sinds ES6 (ES2015) is ES in jaarlijkse schema's gaan releasen.
 
-De toekomst van het JS versioning systeem, zal waarschijnlijk meer veranderen naar feature-based, in plaats van per jaar.
+De toekomst van het JavaScript versioning systeem, zal waarschijnlijk meer veranderen naar feature-based, in plaats van per jaar.
 
 ### Transpiling
 
@@ -4564,7 +4564,7 @@ De toekomst van het JS versioning systeem, zal waarschijnlijk meer veranderen na
 Een shim is hetzelfde als een polyfill.
 Syntax can niet worden gepolyfilled, maar API's kunnen dat vaak wel.
 
-## You don't know JS - ES6 & Beyond - Hoofdstuk 2 - Syntax
+## You don't know JavaScript - ES6 & Beyond - Hoofdstuk 2 - Syntax
 
 ### Let
 `let` - Nieuwe vorm van variabelen aanmaken.
@@ -5168,7 +5168,7 @@ var controller = {
 };
 ```
 
-![Arrow function decision chart](https://raw.githubusercontent.com/getify/You-Dont-Know-JS/master/es6%20%26%20beyond/fig1.png)
+![Arrow function decision chart](https://raw.githubusercontent.com/getify/You-Dont-Know-JavaScript/master/es6%20%26%20beyond/fig1.png)
 
 ### For..of loops
 
@@ -5206,7 +5206,7 @@ Je kan dit soort loops stoppen met break, continue, returns (in functies) en thr
 
 De **u flag** voor ES6+ regex zorgt ervoor dat een regex unicodes kan vinden.
 
-Standaard worden JS strings gezien als 16-bits karakters, die overeen komen met **basic multilingual plane (BMP)**.
+Standaard worden JavaScript strings gezien als 16-bits karakters, die overeen komen met **basic multilingual plane (BMP)**.
 
 Veel UTF-16 karakters vallen hier niet onder. Sinds ES6 kan je hier dus wel voor zorgen.
 
@@ -5295,7 +5295,7 @@ Unicode karakters (zoals in veel verschillende talen) liggen tussen `0x0000` en 
 
 Er lopen nog veel meer unicode karakters buiten deze BMP, tot `0x10FFFF`. Deze heten ook wel **astral symbols**.
 
-Vroeger kon je unicode gebruiken in JS met:
+Vroeger kon je unicode gebruiken in JavaScript met:
 
 ```js
 var snowman = "\u2603";
@@ -5431,13 +5431,13 @@ var a = [1,2,3];
 a[Symbol.iterator];			// native function
 ```
 <!--
-## You don't know JS - ES6 & Beyond - Hoofdstuk 3 - Organization
+## You don't know JavaScript - ES6 & Beyond - Hoofdstuk 3 - Organization
 
 **Iterators** geven synchrone toegang tot data of taken. Deze worden gebruikt door bijvoorbeeld `for..of` en `...`.
 
 Dit is een gestructureerd patroon voor het ophalen van data één voor één.
 
-JS bevat van zichzelf geen Interfaces.
+JavaScript bevat van zichzelf geen Interfaces.
 
 ```js
 var arr = [1,2,3];
