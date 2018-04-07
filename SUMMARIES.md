@@ -94,8 +94,8 @@ Een **scope** of **lexical scope** staat voor een collectie van variabelen, same
 
 `Typeof null // object`. (bug, die nooit gefixt zal worden, in verband met creëren nieuwe bugs).
 
-Object properties zijn ook wel named locations genoemd. Properties kunnen worden bereikt via de dot notation of bracket notation.
-Properties in de bracket notatie worden vaak keys genoemd.
+Object properties zijn ook wel named locations genoemd. Properties kunnen worden bereikt via de **dot notation** of **bracket notation**.
+Properties in de bracket notatie worden vaak **keys** genoemd.
 
 Arrays en functies zijn een soort subtypes van objecten.
 Gebruik arrays voor numeriek gepositioneerde waarden en objecten voor benaamde properties.
@@ -104,27 +104,27 @@ Functies kunnen ook properties hebben en worden bereikt via de dot notation, maa
 
 Een String object form, of native wordt gekoppeld aan een primitief string type waarde. Hierdoor kan je properties op string etcetera roepen.
 
-Er zijn twee hoofdelijke types van waarde vergelijking: equality en inequality. Hier komt altijd een boolean uit.
+Er zijn twee hoofdelijke types van waarde vergelijking: **equality** en **inequality**. Hier komt altijd een boolean uit.
 
 Equality:
-Var a = “42”;
-Var b = a * 1 — impliciete coersie tot het nummer 42.
+`Var a = “42”;`
+`Var b = a * 1` — impliciete coersie tot het nummer 42.
 
 Waardes die false zijn:
-“” - lege string.
-`0`, `-0`, `NaN`.
-`Null`, `undefined`.
-false.
+* “” - lege string
+* `0`, `-0`, `NaN`
+* `Null`, `undefined`
+* false
 
-`==` - Kijkt naar de waarde gelijkheid, met coersie toegestaan.
-`===` - Kijkt naar de waarde gelijkheid, zonder dat coersie is toegestaan.
+* `==` - Kijkt naar de waarde gelijkheid, met coersie toegestaan.
+* `===` - Kijkt naar de waarde gelijkheid, zonder dat coersie is toegestaan.
 
-Bij a == b wordt de a waarde gelijk aan het type van b. (“42” -> 42).
+Bij `a == b` wordt de a waarde gelijk aan het type van `b`. (“42” -> 42).
 
-Wanneer gebruik je == of ===?
-Als minstens één van de kanten van de vergelijking false of true kunnen zijn. ===
-Als minstens één van de waarde in een vergelijking gelijk kan zijn aan 0, “”, [ ]. ===
-Alle andere momenten ==
+Wanneer gebruik je `==` of `===`?
+* Als minstens één van de kanten van de vergelijking `false` of `true` kunnen zijn. ===
+* Als minstens één van de waarde in een vergelijking gelijk kan zijn aan `0`, `“”`, `[ ]`. ===
+* Alle andere momenten ==
 
 Als je twee non-primitieve waardes vergelijkt, zoals objecten, moet je heel goed opletten op de == en ===.
 
