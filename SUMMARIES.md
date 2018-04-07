@@ -80,7 +80,7 @@ Functies zijn in het leven geroepen om herhaling tegen te gaan. Functies kunnen 
 Een **scope** of **lexical scope** staat voor een collectie van variabelen, samen met de regels over hoe deze variabelen toegankelijk zijn, via hun naam. Er mogen geen twee dezelfde namen in een functie zitten. Scopes kunnen worden genest.
 **Lexical scope** betekent dat de code in één scope toegang heeft tot variabelen binnen die scope, of die daarbuiten.
 
-Recap:
+### Recap
 * Je hebt operatoren nodig om acties uit te voeren met waardes.
 * Je hebt waardes en types nodig om verschillende acties mogelijk te maken op de verschillende types.
 * Je hebt variabelen nodig om data (of state) in op te slaan, gedurende de executie van het programma.
