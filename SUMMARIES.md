@@ -69,9 +69,9 @@ Besluiten in programma’s worden genomen door **conditionals**.
 
 Een lege string en de waarde 0 zullen in een conditional false worden.
 
-Het herhalen, terwijl de conditie waar is, wordt in programmeren loopen genoemd. Een loop bestaat uit een test conditie en een block code. Iedere keer als de code in het blok loopt, heet het een iteratie.
+Het herhalen, terwijl de conditie waar is, wordt in programmeren **loopen** genoemd. Een loop bestaat uit een test conditie en een block code. Iedere keer als de code in het blok loopt, heet het een **iteratie**.
 
-Verschil tussen while en do…while: bij een while loop wordt de conditie getest, nog voor de iteratie één keer gelopen is, bij de do…while is dat niet zo. Een do…while loop zal dus altijd één keer lopen.
+Verschil tussen `while` en `do…while`: bij een `while` loop wordt de conditie getest, nog voor de iteratie één keer gelopen is, bij de `do…while` is dat niet zo. Een `do…while` loop zal dus altijd één keer lopen.
 
 Een for-loop heeft drie voorwaardes: initialization voorwaarde; conditional test voorwaarde; update voorwaarde.
 
