@@ -41,7 +41,7 @@ Variabelen verklaren doe je met het keyword `var`.
 Verschillende representaties van waardes heten **types**.
 Waardes die direct in de source code worden opgenomen heten **literals**.
 
-Het transformeren van waardes (nummer > string, vice versa) heet coercion.
+Het transformeren van waardes (nummer > string, vice versa) heet **coercion**.
 Een voorbeeld hiervan is de Number() functie. Deze coersie (dwang) is een expliciete coersie.
 Als je twee waardes van niet hetzelfde type vergelijkt is het een impliciete coersie.
 
