@@ -90,9 +90,9 @@ Een **scope** of **lexical scope** staat voor een collectie van variabelen, same
 
 ## You don't know JS - Up and Going - Hoofdstuk 2
 
-ECMASCRIPT is de officiële naam voor de JavaScript specificatie.
+**ECMASCRIPT** is de officiële naam voor de JavaScript **specificatie**.
 
-Typeof null = object. (bug, die nooit gefixt zal worden, in verband met creëren nieuwe bugs).
+`Typeof null // object`. (bug, die nooit gefixt zal worden, in verband met creëren nieuwe bugs).
 
 Object properties zijn ook wel named locations genoemd. Properties kunnen worden bereikt via de dot notation of bracket notation.
 Properties in de bracket notatie worden vaak keys genoemd.
