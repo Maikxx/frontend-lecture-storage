@@ -338,16 +338,16 @@ JavaScript engines hebben geen luxe, om er lang over te doen om te optimizen, om
 **JIT**: Een truc van JS, om te **lazy-compilen** en **hot-recompilen**.
 
 Een **engine** is verantwoordelijk voor de compilatie en uitvoering van een JS programma, vanaf het begin tot het einde.
-Compiler: Parset en genereert de code.
-Scope: Een lijst van alle variabele, met daarbij een set van strikte regels, die gaan over hoe deze toegankelijk zijn voor de huidig lopende code.
+**Compiler**: Parset en genereert de code.
+**Scope**: Een lijst van alle variabele, met daarbij een set van strikte regels, die gaan over hoe deze toegankelijk zijn voor de huidig lopende code.
 
-Scopes worden bepaalt door functies en blocks. Functie scope heet ook wel lexical scope.
+Scopes worden bepaalt door **functies** en **blocks**. **Functie scope** heet ook wel lexical scope.
 
 * De compiler vraagt aan de scope of de variabele al bestaat in diezelfde scope, als dat zo is, zal deze verklaring van een variabele worden overgeslagen. Anders vraagt de compiler aan scope, om een nieuwe variabele aan te maken in die scope collectie.
 * De compiler zorgt er dan voor dat er code is geproduceerd voor de engine, zodat deze later uitgevoerd kan worden. Als de code gerund wordt door de engine, vraagt deze eerst aan scope of er een variabele toegankelijk is in de huidige scope collectie, als dat zo is, gebruikt de engine deze variabele, anders kijkt engine ergens anders voor deze variabele.
 
-LHS gaat over de declaratie van een statement. Draait om het vinden van de variabele.
-RHS gaat over de waarde van een statement. ( / Als er een variabele aan de rechterkant van een statement staat.)
+**LHS** gaat over de declaratie van een statement. Draait om het vinden van de variabele.
+**RHS** gaat over de waarde van een statement. (/ Als er een variabele aan de rechterkant van een statement staat.)
 
 Ook als je waardes meegeeft aan via parameters, wordt er in die functie een LHS operatie gedaan, omdat de meegegeven waarde aan de parameternaam wordt gekoppeld.
 
