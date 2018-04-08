@@ -673,16 +673,16 @@ Illegale JSON waardes:
 
 Als JSON in een array een invalide waarde vindt, vervangt deze de waarde met `null`. Als het op een object gebeurt, wordt die property verwijderd.
 
-toJSON moet een JSON-safe representatie teruggeven, niet een JSON string.
+`toJSON()` moet een JSON-safe representatie teruggeven, niet een JSON string.
 
-Je kan ook een optioneel tweede argument meegeven aan JSON.stringify. Dit heet de replacer, dit kan een array of functie zijn.
-Het wordt gebruikt om de recusive serialization van een object aan te passen, door een filter mechanisme te gebruiken, die aangeeft welke properties er wel en welke niet moeten worden geïnclude.
+Je kan ook een optioneel tweede argument meegeven aan `JSON.stringify()`. Dit heet de **replacer**, dit kan een array of functie zijn.
+Het wordt gebruikt om de **recusive serialization** van een object aan te passen, door een filter mechanisme te gebruiken, die aangeeft welke properties er wel en welke niet moeten worden geïnclude.
 
 Als het een array is, moet het een array zijn van strings, die in de serialization mogen zitten van een object.
 
 Als het een function is, zal het eens worden aangeroepen voor het object zelf, en verder iedere keer bij een property. Iedere keer wordt er een key en value aan meegegeven. Je kan een key skippen als je `undefined` returnt.
 
-Een derde argument aan de functie stringify heet space en zorgt ervoor dat er een beter leesbare versie van een object uit komt. Het kan een nummer zijn of een string, waarvan de eerste tien karakters gelden als spacing.
+Een derde argument aan de functie `JSON.stringify()` heet **space** en zorgt ervoor dat er een beter leesbare versie van een object uit komt. Het kan een nummer zijn of een string, waarvan de eerste tien karakters gelden als spacing.
 
 ### toNumber
 
