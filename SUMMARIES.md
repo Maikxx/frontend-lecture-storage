@@ -3309,20 +3309,20 @@ class SpeedBoat inherits Vehicle {
 
 ### Polymorphism
 
-In het bovenstaande voorbeeld, is te zien dat Car een eigen drive methode aanmaakt, die de inherited methode overschrijft.
+In het bovenstaande voorbeeld, is te zien dat `Car` een eigen drive methode aanmaakt, die de inherited methode overschrijft.
 
-Met **inherited:** kan je de methode van de parent class toch gebruiken, ookal heb je deze overschreven.
+Met `inherited:` kan je de methode van de parent class toch gebruiken, ookal heb je deze overschreven.
 
 Deze techniek heet **polymorphism** of **virtual polymorphism**. In het bovenstaande geval is het **relative polymorphism**.
 
 Relatief betekent dat het één level omhoog kijkt.
-In veel talen wordt **inherited:** vervangen door **super()**.
+In veel talen wordt `inherited:` vervangen door `super()`.
 
-In JavaScript hoort een class tot een constructor, terwijl in andere talen dit andersom is.
+In JavaScript hoort een *class* tot een **constructor**, terwijl in andere talen dit andersom is.
 
-In het bovenstaande geval wordt in de Drive() methode de ignition() methode aangeroepen, en degene die deze dan aan roept is die van de SpeedBoat, tenzij Vehicle zelf wordt geinstantieerd tot een class.
+In het bovenstaande geval wordt in de `Drive()` methode de `ignition()` methode aangeroepen, en degene die deze dan aan roept is die van de `SpeedBoat`, tenzij `Vehicle` zelf wordt geinstantieerd tot een class.
 
-Als classes zijn geinherit, is er een manier voor deze classes zelf (niet de instances), om relatief de geinherite class form te rerentieëren, dit wordt vaak gedaan door super().
+Als classes zijn geinherit, is er een manier voor deze classes zelf (niet de instances), om relatief de geinherite class form te rerentieëren, dit wordt vaak gedaan door `super()`.
 
 ### Multiple Inheritance
 
