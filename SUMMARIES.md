@@ -4186,14 +4186,14 @@ res.value;		// 42
 ```
 
 In generators zit ook altijd een **assumed/implicit return**.
-**Iterable** is een object die een iterator bevat, die over waardes kan itereren.
+Een **iterable** is een object die een iterator bevat, die over waardes kan itereren.
 
 **Abnormal completion / Early termination**: Zorgt ervoor dat een generator niet in een bepaalde staat blijft hangen, nadat er uit de loop is ge`break`t.
 
 Heten ook wel **Pausible / iterable functions**.
-JavaScript loopt van rechts naar links de code af.
+JavaScript loopt van *rechts* naar *links* de code af.
 
-Generators die Promises yielden is een heel erg krachtig *patroon*, dat het in ES7 `async/await` heet.
+Een generator die een Promis kan `yield`en, is een heel erg krachtig *patroon*, zo krachtig dat het in ES7 `async/await` heet.
 
 Je kan ook Generators *delegaten*, via **yield-delegation**.
 
