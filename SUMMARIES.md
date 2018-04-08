@@ -3134,13 +3134,13 @@ Deze twee methodes kijken niet naar de [[Prototype]].
 
 ### Iteration
 
-Als je wilt itereren over de waardes van een object, wordt bij indexed-arrays vaak een for-loop gebruikt, dit is echter niet itereren over de waardes, maar over de **indices**.
+Als je wilt itereren over de waardes van een object, wordt bij indexed-arrays vaak een `for`-loop gebruikt, dit is echter niet itereren over de waardes, maar over de **indices**.
 
-**forEach()** itereert over alle waardes in een array en negeert iedere callback return waardes.
-**every()** blijft itereren, totdat het einde van de array is bereikt, of de callback een falsy value returnt.
-**some()** blijft itereren, totdat het einde van de array is bereikt, of de callback een truthy value returnt.
+`forEach()` itereert over alle waardes in een array en negeert iedere callback `return` waardes.
+`every()` blijft itereren, totdat het einde van de array is bereikt, of de callback een *falsy* value returnt.
+`some()` blijft itereren, totdat het einde van de array is bereikt, of de callback een *truthy* value returnt.
 
-Als je direct over de waardes van een array, of object properties wilt itereren, kun je de ES6 **for..of** loop gebruiken.
+Als je direct over de waardes van een array, of object properties wilt itereren, kun je de ES6 `for..of` loop gebruiken.
 
 Deze werkt als volgt:
 
