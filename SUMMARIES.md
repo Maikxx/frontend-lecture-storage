@@ -3526,7 +3526,7 @@ Als je een property assignt, die niet direct op het object is, maar wel hoger in
 * Als een normale data accessor property, met dezelfde naam als deze property bestaat hoger in de chain, en deze is *wel* **read-only (writable:`false`)**, dan zijn beide het aanmaken van die nieuwe property en het maken van een **shadowed property** niet toegestaan.
 * Als de property naam hoger in de chain voorkomt en het een **setter** is, wordt deze aangeroepen en wordt deze *niet* opnieuw gedefineerd.
 
-Als je toch wilt shadowen in de laatste twee gevallen, moet je Object.defineProperty() gebruiken.
+Als je toch wilt shadowen in de laatste twee gevallen, moet je `Object.defineProperty()` gebruiken.
 
 Vaak is shadowen moeilijker en meer genuanceerd, dan dat het waard is, dus je kan het beter vermijden.
 
@@ -3561,7 +3561,7 @@ In JavaScript zijn er geen classes, enkel objecten. Het object bepaalt zijn eige
 
 Lange tijd werd er schaamteloos gebruik gemaakt van een soort van *hack*, dat lijkt op classes.
 
-Dit gedrag komt van de karakteristiek, dat iedere functie standaard een **public** en **non-enumerable** property op zich hebben, genaamd prototype. Deze wijst normaal gesproken naar een standaard object.
+Dit gedrag komt van de karakteristiek, dat iedere functie standaard een **public** en **non-enumerable** property op zich heeft, genaamd prototype. Deze wijst normaal gesproken naar een standaard object.
 
 ```js
 function Foo() {
@@ -3573,9 +3573,9 @@ var a = new Foo();
 Object.getPrototypeOf(a) === Foo.prototype; // `true`
 ```
 
-In dit geval, doordat a wordt toegewezen aan de new functie, zal deze een interne **[[Prototype]]** link krijgen, naar het object, waarnaar Foo.prototype linkt.
+In dit geval, doordat `a` wordt toegewezen aan de `new` functie, zal deze een interne **[[Prototype]]** link krijgen, naar het object, waarnaar `Foo.prototype` linkt.
 
-In dit geval zijn er enkel twee objecten aan elkaar gelinkt, maar er is geen instantiatie of kopieën gemaakt.
+In dit geval zijn er enkel twee objecten aan elkaar gelinkt, maar er is geen instantiatie gedaan of kopieën gemaakt.
 
 #### What's in a name?
 
