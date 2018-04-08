@@ -3671,21 +3671,21 @@ var bar = Object.create(foo);
 bar.something(); // Tell me something good...
 ```
 
-`Object.create()` maakt een nieuw object, die gelinkt is aan het object dat je eraan meegeeft, zonder al het new gebeuren.
+`Object.create()` maakt een nieuw object, die gelinkt is aan het object dat je eraan meegeeft, zonder al het `new` gebeuren.
 
-**dictionaries** zijn objecten zonder [[Prototype]], gemaakt via `Object.create(`null`)`. Deze worden voornamelijk gebruikt om data in op te slaan.
+**dictionaries** zijn objecten zonder [[Prototype]], gemaakt via `Object.create(`null`)`. Deze worden voornamelijk gebruikt om *data* in op te slaan.
 
 ## You don't know JavaScript - Async & Performance - H1
 
 Een JavaScript programmma wordt vrijwel altijd opgebroken in twee of meer delen, waar het eerste deel *nu* loopt en het volgende *later*, als er een event gebeurt.
 
-Als er events zijn om uit te voeren, zal de **event loop** lopen,totdat de **queue** leeg is.
+Als er *events* zijn om uit te voeren, zal de **event loop** lopen, totdat de **queue** leeg is.
 Iedere iteratie op die event loop heet een **tick**.
 User interactions, IO en timers zorgen ervoor dat er dingen aan de queue worden toegevoegd.
 
 Er kan maar een event tegelijk worden verwerkt.
 
-**Concurrency** is al twee of meerdere **chains of events** interleave, over time. Dit doet lijken alsof ze *tegelijk* lopen.
+**Concurrency** is als twee of meerdere **chains of events** interleave, over time. Dit doet lijken alsof ze *tegelijk* lopen.
 
 Vaak moet je processen die tegelijk lopen, orderen, om **race conditions** te voorkomen.
 
@@ -3695,7 +3695,7 @@ Tot ES6 had JavaScript nooit een echte vorm van asynchroniteit in zich.
 
 De **event loop** is een mechanisme van het omgaan met meerdere chunks van een programma gedurende een bepaalde periode.
 
-`setTimeout()` zet niet je callback in de event queue, maar als de timer verstrijkt, wordt de callback pas in de event loop gezet.
+`setTimeout()` zet niet je callback in de event queue, maar pas als de timer verstrijkt, wordt de callback in de event loop gezet.
 
 **Async** betekent het gat tussen nu en later.
 **Parallel** is dat dingen naast elkaar kunnen gebeuren.
