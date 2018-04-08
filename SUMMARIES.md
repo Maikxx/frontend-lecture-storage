@@ -955,8 +955,6 @@ var y = "42";
 x == y; // `false`
 ```
 
-Een boolean wordt altijd eerst omgezet in een nummer, als het wordt vergeleken.
-
 ```js
 var a = "42";
 
