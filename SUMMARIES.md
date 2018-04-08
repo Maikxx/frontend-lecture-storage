@@ -1420,12 +1420,12 @@ Als er een `return` is gezet in een `finally` block, zal deze de `return` van ee
 
 ### Switch
 
-Als er in een switch een case matcht, zal dit block beginnen executen, totdat het een break tegenkomt of het eind van het switch block.
+Als er in een `switch` een case matcht, zal dit block beginnen executen, totdat het een `break` tegenkomt of het eind van het `switch` block.
 
 ```js
 var a = "42";
 
-switch (`true`) {
+switch (true) {
 	case a == 10:
 		console.log("10 or '10'");
 		break;
