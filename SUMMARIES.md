@@ -1139,9 +1139,9 @@ b;	// 42
 
 `++` en `--` kunnen beide worden gebruikt als **postfix** (na) en **prefix** (voor).
 Als het in de prefix versie wordt gebruikt, gebeurt het side effect voordat de waarde is gereturned.
-Het side effect verdwijnt niet als je het in () wrapt.
+Het side effect verdwijnt niet als je het in `()` wrapt.
 
-, = **Statement-series comma operator**.
+`,` = **Statement-series comma operator**.
 
 ```js
 var a = 42, b;
@@ -1151,7 +1151,7 @@ a;	// 43
 b;	// 43
 ```
 
-Dit betekent: de tweede expressie (a) zal worden uitgevoerd, nadat het after side effect van a++ is gebeurt.
+Dit betekent: de tweede expressie `a` zal worden uitgevoerd, nadat het after side effect van `a++` is gebeurt.
 
 **delete** wordt gebruikt om properties van objecten te halen.
 Het resultaat van het succesvol verwijderen van iets, is `true` als het lukt en `false` als het niet lukt.
