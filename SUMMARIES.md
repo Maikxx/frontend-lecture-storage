@@ -3203,17 +3203,17 @@ for (var v of myObject) {
 
 ### Class theory
 
-**Class/Inheritance**: Een manierom code te organiseren en architectureren. Het is een manier om wereldse problemen te modelleren in onze software.
+**Class/Inheritance**: Een manierom code te organiseren en op te bouwen. Het is een manier om wereldse problemen te modelleren in software.
 
-*OOP* of **class oriented programming** erkent dat data van binnen bepaald gedrag met zich meebrengt, dus is het logisch om de data en het gedrag samen te verpakken of **encapsulating**. Het heet ook wel **data structures**.
+*COP* of **class oriented programming** erkent dat data van binnen bepaald gedrag met zich meebrengt, dus is het logisch om de data en het gedrag samen te verpakken of **encapsulating**. Het heet ook wel **data structures**.
 
-In dit mechanisme, maak je een soort van overkoepelende *base class* voor een bepaalde categorie, die gemeenschappelijke waardes bezit, waar weer subcategorieën (die dus ook die properties delen) van af stammen, of wel **inheriting** / **extending**.
+In dit mechanisme, maak je een soort van overkoepelende *base class* voor een bepaalde categorie, die gemeenschappelijke waardes bezit, waar weer *subcategorieën* (die dus ook die properties delen) van af stammen, of wel **inheriting** / **extending**.
 
-**Polymorpism**: Het idee dat het gedrag van een functie in de parent class, kan worden overschreven door dezelfde functie in de child class, om het meer specifieke dingen toe te wijzen.
+**Polymorpism**: Het idee dat het gedrag van een functie in de *parent class*, kan worden overschreven door dezelfde functie in de *child class*, om het meer specifieke dingen toe te wijzen.
 
 ### "Class" Design Pattern
 
-Vaak zie je discussies over populaire OOP Design Patterns voorbijkomen, over bijvoorbeeld **Iterator**, **Observer**, **Factory**, **Singleton** etc.
+Vaak zie je discussies over populaire *OOP Design Patterns* voorbijkomen, over bijvoorbeeld **Iterator**, **Observer**, **Factory**, **Singleton** etc.
 
 **Procedural programming**: Een manier om code te beschrijven, die alleen maar bestaat uit **procedures**, oftewel functies, die andere functies aanroepen.
 
@@ -3221,22 +3221,22 @@ Vaak zie je discussies over populaire OOP Design Patterns voorbijkomen, over bij
 
 ### Javascript "Classes"
 
-Javascript heeft geen classes.
-Javascript probeert de grote vraag van developers, om classes in JavaScript te implementeren, te beamen met syntax, die lijkt op classes.
+*Javascript heeft geen classes*.
+Javascript probeert de grote vraag van developers, om classes in JavaScript te implementeren, te faken met syntax, dat lijkt op classes.
 
 ### Class Mechanics
 
-In veel class-oriented talen, is de standaard library een **stack** data structure, waar je dingen aan toe kan pushen, poppen etc., als een Stack class.
+In veel class-oriented talen, is de standaard library een **stack** data structure, waar je dingen aan toe kan `push`en, `pop`pen etc., als een **Stack class**.
 
 In dit soort talen moet je een **instantiatie** doen van de Stack class, voordat je hier iets mee kan doen.
 
 #### Building
 
-**Class** komt voort uit de architectuur, waar je als architect de blueprint legt voor gebouwen, terwijl het niet uitmaakt hoeveel er worden gebouwd, en wat er in de huizen zit.
+**Class** komt voort uit de *architectuur*, waar je als architect de *blueprint* legt voor gebouwen, terwijl het niet uitmaakt hoeveel er worden gebouwd, en wat er in de huizen zit.
 
 Als het gebouw klaar is, met internals en alles, is dat een **instantiatie** van de class. Dit is eigenlijk een kopie van de class, aangezien deze kan worden hergebruikt.
 
-Een class wordt geinstantieerd in een object vorm, door een kopie operatie.
+Een class wordt geinstantieerd in een object vorm, door een kopie er van te maken.
 
 #### Constructor
 
@@ -3260,7 +3260,7 @@ Joe = new CoolGuy("jumping rope")
 Joe.showOff() // Here's my trick: jumping rope
 ```
 
-Als je *new CoolGuy()* aanroept in dit geval, roep je eigenlijk de methode CoolGuy(trick) aan.
+Als je `new CoolGuy()` aanroept in dit geval, roep je eigenlijk de methode `CoolGuy(trick)` aan.
 
 Aan de variabele wordt een object teruggegeven, vanuit die constructor.
 
