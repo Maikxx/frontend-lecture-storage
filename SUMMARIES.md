@@ -4121,7 +4121,7 @@ Er is geen manier om errors te verkrijgen, die misschien gebeuren in de chain.
 
 **SoC** Separation of Concerns / Capabilities.
 
-Een callback-verwachtende functie in een Promise-aware functie wrappen heet ook wel **lifting / Promisifying**.
+Een *callback*-verwachtende functie in een *Promise*-aware functie wrappen heet ook wel **lifting / Promisifying**.
 Het kan ook **Promisory** heten.
 
 ## You don't know JavaScript - Async & Performance - H4 - Generators
