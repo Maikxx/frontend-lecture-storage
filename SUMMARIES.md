@@ -4639,7 +4639,7 @@ foo();		// Reference Error
 ### Spread / Rest
 
 `...` is de **spread / rest** operator, afhankelijk van waar het gebruikt wordt.
-Als het voor een array (of andere iterable) wordt geplaatst is het een spread.
+Als het voor een array (of andere iterable) wordt geplaatst is het een **spread**.
 
 ```js
 function foo(x,y,z) {
@@ -4649,7 +4649,7 @@ function foo(x,y,z) {
 foo(...[1,2,3]);				// 1 2 3
 ```
 
-De rest operator:
+De **rest** operator:
 
 ```js
 function foo(x, y, ...z) {
@@ -4671,11 +4671,11 @@ foo(5, 6);			// 11
 foo(0, 42);			// 42
 
 foo(5);				// 36
-foo(5, `undefined`);	// 36 <-- `undefined` is missing
-foo(5, `null`);			// 5  <-- `null` coerces to `0`
+foo(5, undefined);	// 36 <-- undefined is missing
+foo(5, null);			// 5  <-- null coerces to `0`
 
-foo(`undefined`, 6);	// 17 <-- `undefined` is missing
-foo(`null`, 6);			// 6  <-- `null` coerces to `0`
+foo(undefined, 6);	// 17 <-- undefined is missing
+foo(null, 6);			// 6  <-- null coerces to `0`
 ```
 
 ### Default value expressions
