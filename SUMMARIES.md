@@ -5154,7 +5154,7 @@ var controller = {
 		btn.addEventListener("click", function(){
 			// ..
 			self.makeRequest(..);
-		}, `false`);
+		}, false);
 	}
 };
 
@@ -5164,7 +5164,7 @@ var controller = {
 		btn.addEventListener("click", () => {
 			// ..
 			this.makeRequest(..);
-		}, `false`);
+		}, false);
 	}
 };
 ```
