@@ -4515,7 +4515,7 @@ function baz() {
 baz();						// 42
 ```
 
-Hier is bar geen tail call, omdat nadat foo en bar klaar zijn, er nog 1 moet worden toegevoegd aan de waarde van bar.
+Hier is `bar` geen tail call, omdat nadat `foo` en `bar` klaar zijn, er nog `1` moet worden toegevoegd aan de waarde van `bar`.
 
 Het aanroepen van een nieuwe functie vereist een extra hoeveelheid gereserveerd geheugen, om de **call stack** te onderhouden, genaamd de **stack frame**.
 
