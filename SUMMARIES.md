@@ -3938,12 +3938,14 @@ addNumbers(21, "21");	// 42
 Dit is een voorbeeld van het geopolitische principe **trust but verify**.
 
 Manieren om callbacks toch een soort van te laten werken zijn:
+
 * **Split Callbacks** (callback en error callback verdeeld over twee parameters).
 * **Error-first style / Node style** (De eerste parameter is de error, als er een error is, wordt de rest van de callbacks niet uitgevoerd).
 
 Trust issues:
-* Nooit worden aangeroepen van de callback.
-* Te vroeg worden aangeroepen.
+
+* Wordt de callback wel aangeroepen?
+* Wordt de callback wel op het juiste moment aangeroepen?
 
 De fictionele chaos, verbonden met sync/async heet **Zalgo**.
 
