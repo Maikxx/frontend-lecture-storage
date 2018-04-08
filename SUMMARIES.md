@@ -1438,7 +1438,7 @@ switch (true) {
 // 42 or ’42'
 ```
 
-In dit geval moet bijvoorbeeld a == 10 gelijk zijn aan `true`.
+In dit geval moet bijvoorbeeld `a == 10` gelijk zijn aan `true`.
 
 ```js
 var a = "hello world";
