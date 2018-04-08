@@ -1444,7 +1444,7 @@ In dit geval moet bijvoorbeeld `a == 10` gelijk zijn aan `true`.
 var a = "hello world";
 var b = 10;
 
-switch (`true`) {
+switch (true) {
 	case (a || b == 10):
 		// never gets here
 		break;
@@ -1454,7 +1454,7 @@ switch (`true`) {
 // Oops
 ```
 
-Als je wilt dat het bovenstaande voorbeeld werkt moet je (a || b == 10) expliciet naar een boolean omzetten door er !! Voor te zetten.
+Als je wilt dat het bovenstaande voorbeeld werkt moet je `(a || b == 10)` expliciet naar een boolean omzetten door er `!!` Voor te zetten.
 
 ```js
 switch (a) {
