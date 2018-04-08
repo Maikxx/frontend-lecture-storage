@@ -3510,17 +3510,17 @@ for (var k in myObject) {
 
 #### Object.prototype
 
-Het einde van de chain is in normale gevallen de Object.prototype.
+Het einde van de chain is in normale gevallen de `Object.prototype`.
 
 ### Setting & shadowing properties
 
-Als een object al een data accessor property, direct op zich heeft, met bijvoorbeeld de naam *foo*, is een assignment zo simpel als het overschrijven van deze property.
+Als een object al een data accessor property, direct op zich heeft, met bijvoorbeeld de naam `foo`, is een assignment zo simpel als het overschrijven van deze property.
 
 Als deze niet direct op dit object bestaat, wordt de [[Prototype]] chain gevolgd, tot deze wordt gevonden, als deze niet wordt gevonden wordt de waarde toegevoegd op het object gezet.
 
 Als een property op beide het directe object en hoger in de chain bestaat, heet dit **shadowing**.
 
-Als een property assignt, die niet direct op het object is, maar wel hoger in de chain kunnen er enkele dingen gebeuren:
+Als je een property assignt, die niet direct op het object is, maar wel hoger in de chain kunnen er enkele dingen gebeuren:
 
 * Als een normale data accessor property, met dezelfde naam als deze property bestaat hoger in de chain, en deze is *niet* **read-only (writable:`false`)**, zal de assignment direct op het target object worden gezet, wat zorgt voor een **shadowed property**.
 * Als een normale data accessor property, met dezelfde naam als deze property bestaat hoger in de chain, en deze is *wel* **read-only (writable:`false`)**, dan zijn beide het aanmaken van die nieuwe property en het maken van een **shadowed property** niet toegestaan.
