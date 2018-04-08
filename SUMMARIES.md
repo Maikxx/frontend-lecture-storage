@@ -919,7 +919,7 @@ var a = 42;
 a && foo(); // 42
 ```
 
-Als `a` niet truthy is, zal foo nooit worden aangeroepen, dit heet *short circuiting*.
+Als `a` niet truthy is, zal foo nooit worden aangeroepen, dit heet **short circuiting**.
 De impliciete transformatie naar een boolean zal plaatsvinden nadat de compound expression is geëvalueerd.
 
 ### Symbol Coercion
