@@ -1626,7 +1626,7 @@ Een ander voordeel van het verstoppen van variabelen en functies, is dat je voor
 
 ### Global namespaces
 
-Als je veel verschillende libraries in je JavaScript laadt, die niet hun variabelen goed zouden verstoppen, zou dat veel overwriting en errors veroorzaken.Goede libraries gebruiken vaak een unieke naam en wordt vervolgens gebruikt als namespace voor die library.
+Als je veel verschillende libraries in je JavaScript laadt, die niet hun variabelen goed zouden verstoppen, zou dat veel overwriting en errors veroorzaken. Goede libraries gebruiken vaak een unieke naam en wordt vervolgens gebruikt als namespace voor die library.
 
 ### Module management
 
@@ -1636,9 +1636,9 @@ Een andere mogelijkheid om collision te vermijden is het gebruiken van de modern
 
 Het hebben van functies als scopes is vaak niet ideaal, omdat je ze moet aanroepen en een naam moet geven, maar je kan wel gebruik maken van een **IIFE**.
 
-Als function het eerste woord is in een statement heet het een function declaration en anders een function expression.
+Als `function` het eerste woord is in een statement is, heet het een **function declaration** en anders een **function expression**.
 
-In een IIFE is de naam van de functie niet buiten de omringende () beschikbaar.
+In een IIFE is de naam van de functie niet buiten de omringende `()` beschikbaar.
 
 ### Anonymous vs. named
 
