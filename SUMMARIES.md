@@ -1071,10 +1071,10 @@ Deze geeft één van de zeven strings terug, genoemd in H1, hiervan is er geen �
 
 ### Abstract relational comparison
 
-Dit algorithme wordt altijd afgehandeld met <.
-Dus a > b, wordt afgehandeld als b < a.
+Dit algorithme wordt altijd afgehandeld met `<`.
+Dus `a > b`, wordt afgehandeld als `b < a`.
 
-Dit algorithme roept eerst toPrimitive aan op beide waardes, als één van de twee resultaten daarvan geen string is, worden beide waardes omgezet naar nummers.
+Dit algorithme roept eerst `toPrimitive()` aan op beide waardes, als één van de twee resultaten daarvan geen string is, worden beide waardes omgezet naar nummers.
 
 ```js
 var a = { b: 42 };
@@ -1085,7 +1085,7 @@ a < b;	// `false`
 
 Dit wordt `false`, omdat beide variabelen omgezet worden tot [object Object], waardoor ze gelijk zijn aan elkaar en dus niet minder.
 
-<= wordt in JavaScript vaak gezien als not greater than.
+`<=` wordt in JavaScript vaak gezien als not greater than or equal to.
 
 ## You don't know JavaScript - Types & Grammar - H5
 
