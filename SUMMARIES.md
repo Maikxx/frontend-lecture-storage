@@ -2900,22 +2900,22 @@ Er zit verschil tussen **shallow copy** en **deep copy** van objecten. Een deep 
 
 Een manier om objecten te kopiëren is via **JSON.parse**, als een object naar een JSON string kan worden omgezet en vervolgens met dezelfde structuur en waardes kan worden omgezet tot object.
 
-Je kan het beste een shallow copy maken, in ES6 zit nu Object.assign() voor deze taak. Deze neemt een *target object* als eerste parameter en een of meerdere *source objects* als de rest parameters.
+Je kan het beste een shallow copy maken, in ES6 zit nu `Object.assign()` voor deze taak. Deze neemt een *target object* als eerste parameter en een of meerdere *source objects* als de rest parameters.
 
-Deze zal over alle **enumerable**, **owned keys** (die direct aanwezig zijn), van de source objects loopen en die kopieëren via '=' naar het *target object*, het returnt vervolgs het *target object*.
+Deze zal over alle **enumerable**, **owned keys** (die direct aanwezig zijn), van de source objects loopen en die kopieëren via `=` naar het *target object*, het returnt vervolgs het *target object*.
 
 ```js
 var newObj = Object.assign({}, myObject);
 
 newObj.a;						// 2
-newObj.b === anotherObject;		// `true`
-newObj.c === anotherArray;		// `true`
-newObj.d === anotherFunction;	// `true`
+newObj.b === anotherObject;		// true
+newObj.c === anotherArray;		// true
+newObj.d === anotherFunction;	// true
 ```
 
 ### Property descriptors
 
-Sinds ES5 zijn alle properties beschreven in termen van een  **property descriptors**.
+Sinds ES5 zijn alle properties beschreven in termen van een **property descriptors**.
 
 ```js
 var myObject = {
@@ -2931,9 +2931,9 @@ Object.getOwnPropertyDescriptor(myObject, "a");
 // }
 ```
 
-Als een property descriptor alleen maar data waardes heeft heet het een **data descriptor**.
+Als een property descriptor alleen maar data waardes heeft, heet het een **data descriptor**.
 
-Als een object **configurable** is, dan kan je via de **Object.defineProperty()** methode bestaande properties aanpassen, en als het **writable** is, kun je hier dingen aan toevoegen.
+Als een object **configurable** is, dan kan je via de `Object.defineProperty()` methode bestaande properties aanpassen, en als het **writable** is, kun je hier dingen aan toevoegen.
 
 ```js
 var myObject = {};
@@ -2950,20 +2950,20 @@ myObject.a; // 2
 
 #### Writable
 
-Als je een object via de defineProperty methode op writable: `false` zet, dan kan je die property niet meer veranderen.
-Je krijgt een TypeError in strict mode.
+Als je een object via de `defineProperty` methode op `writable: false` zet, dan kan je die property niet meer veranderen.
+Je krijgt een `TypeError` in `strict mode`.
 
 #### Configurable
 
-Als je een configurable property via de bovenstaande methode op `false` zet kan je die niet meer terug zetten naar `true`, het levert een TypeError op.
+Als je een configurable property via de bovenstaande methode op `false` zet kan je die niet meer terug zetten naar `true`, het levert een `TypeError` op.
 
-Als een property al configurable `false` is, kan je writeable nog wel naar `false` zetten, maar niet meer naar `true`.
+Als een property al configurable `false` is, kan je `writeable` nog wel naar `false` zetten, maar niet meer naar `true`.
 
-**configurable:`false`** zorgt er ook voor dat je een property niet meer kan verwijderen met **delete**.
+`configurable: false` zorgt er ook voor dat je een property niet meer kan verwijderen met **delete**.
 
 #### Enumerable
 
-Deze karakteristiek beheert of een property te vinden is in **object-property enumerations**, zoals een **for..in** loop. Je kan alsnog de waardes bereiken, op alle andere manieren.
+Deze karakteristiek beheert of een property te vinden is in **object-property enumerations**, zoals een `for..in` loop. Je kan alsnog de waardes bereiken, op alle andere manieren.
 
 #### Immutability
 
@@ -2971,7 +2971,7 @@ Soms wil je properties hebben, die niet kunnen worden veranderd, sinds ES5 kan d
 
 ##### Object constant
 
-Als je *writable: `false`* en *configurable:`false`* combineert, creëer je als het ware een **constant** (iets dat niet kan worden verwijderd, veranderd of hergedefineerd).
+Als je `writable: false` en `configurable:false` combineert, creëer je als het ware een **constant** (iets dat niet kan worden verwijderd, veranderd of hergedefineerd).
 
 ```js
 var myObject = {};
@@ -2985,7 +2985,7 @@ Object.defineProperty(myObject, "FAVORITE_NUMBER", {
 
 ##### Prevent extensions
 
-Als je wilt dat een object geen *nieuwe* properties kan krijgen, maar degene die die al heeft onveranderd laat kun je **Object.preventExtensions()** aanroepen.
+Als je wilt dat een object geen *nieuwe* properties kan krijgen, maar degene die die al heeft onveranderd laat kun je `Object.preventExtensions()` aanroepen.
 
 ```js
 var myObject = {
@@ -2995,20 +2995,20 @@ var myObject = {
 Object.preventExtensions(myObject);
 
 myObject.b = 3;
-myObject.b; // `undefined`
+myObject.b; // undefined
 ```
 
 ##### Seal
 
-**Object.seal()** maakt een sealed object, wat betekent het pakt een bestaand object en roept daarop aan Object.preventExtensions(), maar zet ook diens configurable: `false`.
+`Object.seal()` maakt een **sealed object**, wat betekent dat het een bestaand object pakt en roept daarop aan `Object.preventExtensions()`, maar zet ook diens `configurable: false`.
 
 Je kan dus geen properties meer toevoegen, maar je kan ook de bestaande properties niet meer veranderen of verwijderen. Je kan nog wel de waardes veranderen.
 
 ##### Freeze
 
-**Object.freeze()** doet hetzelfde als seal, maar zet ook alle **data accesor** properties writable: `false`, zodat de waardes niet meer kunnen veranderen.
+`Object.freeze()` doet hetzelfde als seal, maar zet ook alle **data accesor** properties `writable: false`, zodat de waardes niet meer kunnen veranderen.
 
-Dit is de hoogst mogelijke vorm van immutability.
+Dit is de hoogst mogelijke vorm van **immutability**.
 
 ### [[Get]]
 
