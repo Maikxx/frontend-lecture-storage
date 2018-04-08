@@ -1270,10 +1270,10 @@ Dit betekent en komt voor als een van de twee operatoren (`&&` of `||`) de linke
 
 ### Tighter binding
 
-De ternary operator heeft minder precedence dan de && of ||. De laatste twee *binden dus hechter*.
+De ternary operator heeft minder precedence dan de `&&` of `||`. De laatste twee *binden dus hechter*.
 
-Operators zijn óf **links-associatief** of **rechts-associatief**. Dit slaat op de manier of groeperen wordt toegepast op basis van links naar rechts.
-&& is links-associatief, net als ||.
+Operators zijn óf **links-associatief** of **rechts-associatief**. Dit slaat op de manier van groeperen die wordt toegepast op basis van links naar rechts.
+`&&` is links-associatief, net als `||`.
 Rechts associativiteit heeft niks te maken met rechts-naar-links evaluatie van de code. Het betekent het groeperen van rechts naar links.
 
 De ternary operator is rechts-associatief.
