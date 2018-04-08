@@ -901,13 +901,13 @@ onlyOne(b, a, b, b, b, a);    // `false`
 
 Dingen die impliciet iets naar een boolean omvormen:
 
-* If statement
-* For (second clause)
-* While en do while
+* `if` statement
+* `for` (second clause)
+* `while` en `do while`
 * Ternary operator
-* && || -> Moeten eigenlijk operand selector operators worden genoemd, omdat het niet duidelijk is wat ze doen
+* `&&` `||` -> Moeten eigenlijk operand selector operators worden genoemd, omdat het niet duidelijk is wat ze doen
 
-Guard operator: De eerste expressie test beschermt de tweede expressie:
+**Guard operator**: De eerste expressie test beschermt de tweede expressie:
 
 ```js
 function foo() {
