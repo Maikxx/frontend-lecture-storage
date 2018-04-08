@@ -4126,16 +4126,16 @@ Het kan ook **Promisory** heten.
 
 ## You don't know JavaScript - Async & Performance - H4 - Generators
 
-**Generator** maakt het mogelijk om asynchrone flow uit te drukken in opeenvolgend-uitziende code.
+Een **generator** maakt het mogelijk om asynchrone flow uit te drukken in opeenvolgend-uitziende code.
 Het is een functie-type, die niet doet aan **run-to-completion**.
 
-Het pauze / hervat mechanisme is **cooperative**, in plaats van **preemptive**, wat betekent, dat een generator zelf de kracht beschikt om zichzelf te pauzeren, terwijl de **iterator**, die de generator beheerd, slechts de generator kan hervatten.
+Het pauze / hervat mechanisme is **cooperative**, in plaats van **preemptive**, wat betekent, dat een generator zelf de kracht beschikt om zichzelf te *pauzeren*, terwijl de **iterator**, die de generator beheerd, slechts de generator kan *hervatten*.
 
 Het voornaamste voordeel aan generators, is dat het eruit ziet als synchrone code.
 
 Een pause plek in de code aanduiden, kan met **yield**.
 
-Een generator functie heeft vaak een * voor diens naam, of na het function keyword.
+Een generator functie heeft vaak een `*` voor diens naam, of na het `function` keyword.
 
 ```js
 var x = 1;
@@ -4163,11 +4163,11 @@ it.next();				// x: 3
 
 `var it = foo()` voert nog niet de functie uit, maar maakt er een **iterator** van.
 
-Op het moment dat foo, na de eerste `it.next()`, bij `yield` aankomt, stopt deze next() call, maar is de functie nog lopende en actief, maar wel in een gepauseerde staat.
+Op het moment dat `foo`, na de eerste `it.next()`, bij `yield` aankomt, stopt deze `next()` call, maar is de functie nog lopende en actief, maar wel in een *gepauseerde* staat.
 
 De laatste `it.next()` hervat de executie van de functie, van waar deze was gepauseerd.
 
-Een generator kan alsnog input (argumenten) nemen en output geven (returnen).
+Een generator kan alsnog input (argumenten) krijgen en output geven (returnen).
 
 ```js
 function *foo(x) {
