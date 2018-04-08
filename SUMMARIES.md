@@ -4545,8 +4545,8 @@ ES6 heeft op veel plekken een hele hoop nieuwe syntactische vormen.
 
 ### Versioning
 
-De standaard voor JavaScript heet officieel **ECMAScript**, of ES.
-ES3 was de eerste op grote schaal gebruikte basis voor JavaScript.
+De standaard voor JavaScript heet officieel **ECMAScript**, of **ES**.
+**ES3** was de eerste op grote schaal gebruikte basis voor JavaScript.
 
 Door politieke redenen, is ES4 nooit uitgekomen.
 ES5 kwam uit in 2009, wat de standaard werd voor de moderne JavaScript revolutie en de enorme explosie in browsers.
@@ -4562,7 +4562,7 @@ De toekomst van het JavaScript versioning systeem, zal waarschijnlijk meer veran
 ### Shims / Polyfills
 
 Een shim is hetzelfde als een polyfill.
-Syntax can niet worden gepolyfilled, maar API's kunnen dat vaak wel.
+Syntax kan niet worden gepolyfilled, maar API's kunnen dat vaak wel.
 
 ## You don't know JavaScript - ES6 & Beyond - H2 - Syntax
 
