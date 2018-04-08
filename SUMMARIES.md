@@ -1414,9 +1414,9 @@ console.log(foo());
 // Uncaught Exception: Oops!
 ```
 
-**Yield** kan worden gezien als een directe return statement. Echter, niet zoals een return, is een yield niet compleet totdat de generator is hervat. Finally zal niet direct na een try block lopen, met daarin een yield.
+`yield` kan worden gezien als een directe `return` statement. Echter, niet zoals een `return`, is een `yield` niet compleet totdat de generator is hervat. `finally` zal niet direct na een `try` block lopen, met daarin een `yield`.
 
-Als er een return is gezet in een finally block, zal deze de return van een try overschrijven. Je moet hiervoor wel expliciet return aanroepen.
+Als er een `return` is gezet in een `finally` block, zal deze de `return` van een `try` overschrijven. Je moet hiervoor wel expliciet `return` aanroepen.
 
 ### Switch
 
