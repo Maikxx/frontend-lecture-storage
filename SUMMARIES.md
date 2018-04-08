@@ -2299,7 +2299,7 @@ function foo() {
 baz(); // <-- call-site for `baz`
 ```
 
-Je kan de call-stack vinden via de debugger in de browser.
+Je kan de call-stack vinden via de `debugger` in de browser.
 
 ### Nothing but rules
 
