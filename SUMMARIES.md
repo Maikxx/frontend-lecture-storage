@@ -986,7 +986,7 @@ if (Boolean(a)) {
 
 #### Comparing: `null` to `undefined`
 
-Als je `null` en `undefined` met == vergelijkt, zal dit altijd `true` geven.
+Als je `null` en `undefined` met `==` vergelijkt, zal dit altijd `true` geven.
 
 #### Comparing: object to non-objects
 
