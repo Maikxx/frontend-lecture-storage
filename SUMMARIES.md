@@ -1884,13 +1884,13 @@ for (var i=1; i<=5; i++) {
 }
 ```
 
-In dit geval wordt ‘6’ vijf keer uitgeprint in de console. Dit komt omdat de ‘uitvoerende condition’ van de loop is, wanneer i niet minder is dan of gelijk aan 5. De eerste keer dat dat het geval is, is als i ‘6’ is.
+In dit geval wordt `6` vijf keer uitgeprint in de console. Dit komt omdat de ‘uitvoerende condition’ van de loop is, wanneer `i` niet minder is dan of gelijk aan `5`. De eerste keer dat dat het geval is, is als `i` `6` is.
 
-Alle functies in de for loop worden wel apart aangemaakt, maar ze hebben allemaal closure over de gedeelde globale scope, die slechts één i in zich heeft.
+Alle functies in de `for` loop worden wel apart aangemaakt, maar ze hebben allemaal closure over de gedeelde globale scope, die slechts één `i` in zich heeft.
 
 In dit geval heb je een nieuwe closure nodig voor iedere iteratie van de loop.
 
-Als je hier een lege IIFE omheen zet, werkt het alsnog niet, omdat het dan iedere keer alsnog dezelfde i pakt, echter als je var j = i boven de setTimeout in deze functie zet, werkt het wel.
+Als je hier een lege IIFE omheen zet, werkt het alsnog niet, omdat het dan iedere keer alsnog dezelfde `i` pakt, echter als je `var j = i` boven de `setTimeout` in deze functie zet, werkt het wel.
 
 ### Block Scoping Revisited
 In het bovenstaande voorbeeld had je een per-iteration block scope nodig om het op te lossen.
