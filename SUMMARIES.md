@@ -1505,9 +1505,9 @@ function foo(a) {
 foo(2); // 2 4 12
 ```
 
-In dit voorbeeld zitten drie scopes, globale scope, foo’s inner scope met de waarde a meegenomen, en bar’s inner scope met de waarde c meegenomen. Deze scopes kunnen worden gezien als scope bubbles.
+In dit voorbeeld zitten drie scopes, globale scope, foo’s inner scope met de waarde a meegenomen, en bar’s inner scope met de waarde `c` meegenomen. Deze scopes kunnen worden gezien als **scope bubbles**.
 
-Deze bubbles zijn bepaald, door waar de scope blocks zijn geschreven.
+Deze bubbles zijn bepaald door waar de scope blocks zijn geschreven.
 Elke functie maakt een nieuwe bubble van scope.
 
 ### Look-ups
