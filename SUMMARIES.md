@@ -982,7 +982,6 @@ if (!!a) {
 if (Boolean(a)) {
 	// ..
 }
-
 ```
 
 #### Comparing: `null` to `undefined`
