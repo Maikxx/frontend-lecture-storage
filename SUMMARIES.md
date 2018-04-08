@@ -1363,7 +1363,7 @@ foo(void 0, 7);		// 42 7
 foo(null);			// null 1
 ```
 
-`null` wordt omgezet in het cijfer 0 als je `null` + 1 doet.
+`null` wordt omgezet in het cijfer 0 als je `null + 1` doet.
 Bij een **default parameter** in ES6 is er geen onderscheid tussen `undefined` en het niet meegeven van een waarde aan die parameter.
 Je kan wel zien of er een `undefined` wordt meegegeven door te checken via arguments[waarde waar je `undefined` zou verwachten].
 
