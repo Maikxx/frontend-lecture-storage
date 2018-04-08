@@ -2262,11 +2262,11 @@ Hierin staat ook een waarde van de 'this' reference, die voor de levensduur van 
 
 ## You don't know JavaScript - This & Object Prototypes - H2 - This all makes sense now!
 
-This binding is volledig afhankelijk van de **call-site** (Hoe de functie is aangeroepen).
+`this` binding is volledig afhankelijk van de **call-site** (Hoe de functie is aangeroepen).
 
 ### Call-site
 
-Dit is de locatie van waar de functie vandaan is aangeroepen,niet waar die functie verklaard is.
+Dit is de locatie van waar de functie vandaan is aangeroepen, niet waar die functie verklaard is.
 
 Het is belangrijk om over de **call-stack** (de functies die zijn aangeroepen tot op dit moment) na te denken.
 
