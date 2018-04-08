@@ -1,6 +1,6 @@
 # You don't know JavaScript Samenvattingen
 
-## You don't know JavaScript - Up and Going - Hoofdstuk 1
+## You don't know JavaScript - Up and Going - H1
 
 Synoniemen voor programma: **source code** en **code**. Dit is een set **instructies** die de computer vertellen welke taak deze moet uitvoeren.
 
@@ -88,7 +88,7 @@ Een **scope** of **lexical scope** staat voor een collectie van variabelen, same
 * Je hebt loops nodig om herhaaldelijk taken uit te voeren, totdat de condition `false` wordt.
 * Je hebt functies nodig om je code te organiseren in logische en herbruikbare delen.
 
-## You don't know JavaScript - Up and Going - Hoofdstuk 2
+## You don't know JavaScript - Up and Going - H2
 
 **ECMASCRIPT** is de officiële naam voor de JavaScript **specificatie**.
 
@@ -310,7 +310,7 @@ Je moet altijd transpilen.
 
 Bekendste non-JavaScript JavaScript: DOM API. Deze API is alleen beschikbaar in de browser. Hierin is document een belangrijk host object.
 
-## You don't know JavaScript - Up and Going - Hoofdstuk 3
+## You don't know JavaScript - Up and Going - H3
 
 JavaScript is *geen* **interpreted language**, wat betekent dat het niet gecompiled wordt. Het wordt namelijk wel degelijk gecompiled, maar bijna instant daarna wordt het geëxecute.
 
@@ -318,7 +318,7 @@ Een belangrijke uitwerking van closures wordt gedaan in het module pattern.
 
 **Delegation** zorgt ervoor dat je weinig meer met classes en inheritance te doen hebt.
 
-## You don't know JavaScript - Scopes & Closures - Hoofdstuk 1
+## You don't know JavaScript - Scopes & Closures - H1
 
 De belangrijkste mogelijkheid in iedere programmeertaal: de mogelijkheid om waardes op te kunnen slaan in variabelen en deze vervolgens later op te halen of te veranderen. Dit zorgt voor state in een programma.
 
@@ -358,7 +358,7 @@ Strict mode zorgt ervoor dat er niet automatisch of impliciet variabelen aangema
 
 Als je een RHS aanvraag doet, maar de waarde komt niet overeen met wat je er mee probeert ermee te doen, zal de engine een andere error geven: **TypeError**.
 
-## You don't know JavaScript - Types & Grammar - Hoofdstuk 1
+## You don't know JavaScript - Types & Grammar - H1
 
 **ES types**:
 * `undefined`
@@ -1475,7 +1475,7 @@ switch (a) {
 
 In dit geval kijkt de switch eerst of er een match is (die is er niet), vervolgens gaat deze terug naar de top en komt een default en een break (in case 3) tegen die die allebei uitvoert.
 
-## You don't know JavaScript - Scopes & Closures - Hoofdstuk 2
+## You don't know JavaScript - Scopes & Closures - H2
 
 **Scope**: Een set regels, die leidend zijn voor hoe de Engine verschillende variabelen kan opzoeken met hun naam. Deze kan dan gevonden worden in de huidige scope, of in de geneste scopes waar deze call vandaan komt.
 
@@ -1606,7 +1606,7 @@ Dit zorgt ervoor dat de engine helemaal geen performance optimalizations meer do
 
 Gebruik deze twee manieren niet.
 
-## You don't know JavaScript - Scopes & Closures - Hoofdstuk 3
+## You don't know JavaScript - Scopes & Closures - H3
 
 ### Scope from functions
 
@@ -1731,7 +1731,7 @@ Let bindt zich aan artibraire blocks code in plaats van functie scopes of global
 
 Dit maakt ook een block scoped variabele, maar die waarde kan niet worden veranderd.
 
-## You don't know JavaScript - Scopes & Closures - Hoofdstuk 4 - Hoisting
+## You don't know JavaScript - Scopes & Closures - H4 - Hoisting
 
 Iedere variabele verklaard in een scope is verbonden met die scope.
 
@@ -1838,7 +1838,7 @@ else {
 
 Je kan beter functies in blocks vermijden.
 
-## You don't know JavaScript - Scopes & Closures - Hoofdstuk 4 - Scope Closures
+## You don't know JavaScript - Scopes & Closures - H4 - Scope Closures
 
 **Closures** zijn overal in JavaScript en je moet ze kunnen herkennen en er mee om gaan.
 Closures zijn een resultaat van het schrijven van code, dat vertrouwt op de **lexical scope**.
@@ -2098,7 +2098,7 @@ import x from “y” haalt een deel van een module op, terwijl module x from �
 
 De inhoudt van een module file wordt behandeld, alsof er een omringende scope closure omheen ligt, zoals at bij functie-closure modules ook zo is.
 
-## You don't know JavaScript - This & Object Prototypes - Hoofdstuk 1 - This or That?
+## You don't know JavaScript - This & Object Prototypes - H1 - This or That?
 
 **This**: Een speciaal identifier keyword, dat automatisch wordt bepaald in de scope van iedere functie.
 
@@ -2261,7 +2261,7 @@ Als een functie wordt aangeroepen, wordt er een **activation record** of **execu
 
 Hierin staat ook een waarde van de 'this' reference, die voor de levensduur van de functie geldt.
 
-## You don't know JavaScript - This & Object Prototypes - Hoofdstuk 2 - This all makes sense now!
+## You don't know JavaScript - This & Object Prototypes - H2 - This all makes sense now!
 
 This binding is volledig afhankelijk van de **call-site** (Hoe de functie is aangeroepen).
 
@@ -2757,7 +2757,7 @@ bar.call(obj2); // 2, not 3!
 
 In dit geval is foo bound aan obj1. bar zal dan ook this-bound zijn aan obj1, deze kan niet worden overschreven, zoals te zien is bij de laatste call, zelfs niet met new.
 
-## You don't know JavaScript - This & Object Prototypes - Hoofdstuk 3 - Objects
+## You don't know JavaScript - This & Object Prototypes - H3 - Objects
 
 **Objects** komen in twee vormen:
 
@@ -3200,7 +3200,7 @@ for (var v of myObject) {
 // 3
 ```
 
-## You don't know JavaScript - This & Object Prototypes - Hoofdstuk 4 - Mixing (Up) "Class" Objects
+## You don't know JavaScript - This & Object Prototypes - H4 - Mixing (Up) "Class" Objects
 
 **OOP** - Object Oriented Programming.
 
@@ -3472,7 +3472,7 @@ Another.count; // 1 (not shared state with `Something`)
 
 De `Something.cool.call(this)` kan in een constructor voorkomen, of in een methode van een object.
 
-## You don't know JavaScript - This & Object Prototypes - Hoofdstuk 5 - Prototypes
+## You don't know JavaScript - This & Object Prototypes - H5 - Prototypes
 
 ### [[Prototype]]
 
@@ -3678,7 +3678,7 @@ bar.something(); // Tell me something good...
 
 **dictionaries** zijn objecten zonder [[Prototype]], gemaakt via `Object.create(`null`)`. Deze worden voornamelijk gebruikt om data in op te slaan.
 
-## You don't know JavaScript - Async & Performance - Hoofdstuk 1
+## You don't know JavaScript - Async & Performance - H1
 
 Een JavaScript programmma wordt vrijwel altijd opgebroken in twee of meer delen, waar het eerste deel *nu* loopt en het volgende *later*, als er een event gebeurt.
 
@@ -3888,7 +3888,7 @@ schedule(function(){
 // ACDB
 ```
 
-## You don't know JavaScript - Async & Performance - Hoofdstuk 2
+## You don't know JavaScript - Async & Performance - H2
 
 Callbacks zijn een fundamenteel van asynchroniteit in JavaScript, maar ze zijn niet genoeg om het hele spectrum van async programmeren in JavaScript bij te houden.
 
@@ -3952,7 +3952,7 @@ De fictionele chaos, verbonden met sync/async heet **Zalgo**.
 
 Callbacks kunnen vrijwel alles doen, wat je wilt, maar je moet er hard voor werken om het *goed* voor elkaar te krijgen.
 
-## You don't know JavaScript - Async & Performance - Hoofdstuk 3
+## You don't know JavaScript - Async & Performance - H3
 
 Callbacks hadden de volgende twee problemen:
 * Het missen van sequentialiteit
@@ -4125,7 +4125,7 @@ Er is geen manier om errors te verkrijgen, die misschien gebeuren in de chain.
 Een callback-verwachtende functie in een Promise-aware functie wrappen heet ook wel **lifting / Promisifying**.
 Het kan ook **Promisory** heten.
 
-## You don't know JavaScript - Async & Performance - Hoofdstuk 4 - Generators
+## You don't know JavaScript - Async & Performance - H4 - Generators
 
 **Generator** maakt het mogelijk om asynchrone flow uit te drukken in opeenvolgend-uitziende code.
 Het is een functie-type, die niet doet aan **run-to-completion**.
@@ -4266,7 +4266,7 @@ fooThunk(function(sum) {
 
 In het bovenstaande geval is `whatIsThis` eigenlijk iets dat thunks maakt, vanuit foo. Het is dus eigenlijk een **factory** voor **thunks**. Een **thunktory**.
 
-## You don't know JavaScript - Async & Performance - Hoofdstuk 5 - Program Performance
+## You don't know JavaScript - Async & Performance - H5 - Program Performance
 
 De perceptie die de gebruiker heeft van performance, is net zo, als het niet meer, zo belangrijk, als het echt meetbare.
 
@@ -4428,7 +4428,7 @@ In dit geval gebruik je de **binaire of** (|) met de waarde 0, om er voor te zor
 
 Een **heap** is een naam voor een gereserveerde plek in de memory, waar variabelen kunnen worden opgeslagen.
 
-## You don't know JavaScript - Async & Performance - Hoofdstuk 6 - Benchmarking & Tuning
+## You don't know JavaScript - Async & Performance - H6 - Benchmarking & Tuning
 
 De duratie van de tijd die je een bepaalde test hethaalt, komt van de accuratie van de timer die je gebruikt om het te testen.
 
@@ -4540,7 +4540,7 @@ factorial(5);		// 120
 
 Deze versie is TCO friendly.
 
-## You don't know JavaScript - ES6 & Beyond - Hoofdstuk 1 - ES? Now & Future
+## You don't know JavaScript - ES6 & Beyond - H1 - ES? Now & Future
 
 ES6 heeft op veel plekken een hele hoop nieuwe syntactische vormen.
 
@@ -4565,7 +4565,7 @@ De toekomst van het JavaScript versioning systeem, zal waarschijnlijk meer veran
 Een shim is hetzelfde als een polyfill.
 Syntax can niet worden gepolyfilled, maar API's kunnen dat vaak wel.
 
-## You don't know JavaScript - ES6 & Beyond - Hoofdstuk 2 - Syntax
+## You don't know JavaScript - ES6 & Beyond - H2 - Syntax
 
 ### Let
 `let` - Nieuwe vorm van variabelen aanmaken.
@@ -5432,7 +5432,7 @@ var a = [1,2,3];
 a[Symbol.iterator];			// native function
 ```
 <!--
-## You don't know JavaScript - ES6 & Beyond - Hoofdstuk 3 - Organization
+## You don't know JavaScript - ES6 & Beyond - H3 - Organization
 
 **Iterators** geven synchrone toegang tot data of taken. Deze worden gebruikt door bijvoorbeeld `for..of` en `...`.
 
