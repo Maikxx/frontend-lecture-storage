@@ -2833,13 +2833,13 @@ De waardes van een property hoeven niet altijd in het object zelf aanwezig te zi
 
 Om properties te bereiken in een object gebruik je:
 
-* **.** operator / property access - Heeft een Identifier toegankelijke naam nodig.
-* **[ ]** operator / key access - Kan elke UTF-8 / Unicode string bereiken.
+* `.` operator / property access - Heeft een Identifier toegankelijke naam nodig.
+* `[ ]` operator / key access - Kan elke UTF-8 / Unicode string bereiken.
 
 Je kan met de key access operator programmatisch de identifier opbouwen:
 
 ```js
-var wantA = `true`;
+var wantA = true;
 var myObject = {
 	a: 2
 };
