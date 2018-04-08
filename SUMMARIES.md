@@ -742,7 +742,7 @@ Strings <—> Numbers.
 
 Hiervoor gebruik je de ingebouwde `String()` en `Number()` functies. Hierbij gebruik je geen `new`. Je kan ook `toString()` gebruiken, of +getal. Het laatstgenoemde heet een **unary operator** (operator met slechts één **operand**).
 
-\- - maakt een positieve string ook een positief nummer.
+\-- maakt een positieve string ook een positief nummer.
 
 ### Date to number
 
