@@ -1096,7 +1096,7 @@ Statements zijn volledige zinnen en expressions zijn delen van zinnen, regels. O
 
 Een statement bevat expressions.
 Als je een waarde ergens aan toewijst, heet dat een **declaration statement**.
-A = 3 * 6 is een voorbeeld van een **assignment expression**. Deze zijn altijd zonder het var keyword.
+`a = 3 * 6` is een voorbeeld van een **assignment expression**. Deze zijn altijd zonder het `var` keyword.
 Als je alleen een expressie hebt, heet dat een **expression statement**.
 
 Je krijgt `undefined` bij het verklaren van een variabele in de console, omdat het zo in de spec staat.
