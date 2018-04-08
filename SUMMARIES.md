@@ -4754,6 +4754,7 @@ Je kan ook computed properties gebruiken.
 var which = "x",
 	o = {};
 
+// Haal "x" uit bar() en zet deze op het "o" object als "x".
 ({ [which]: o[which] } = bar());
 
 console.log(o.x);					// 4
