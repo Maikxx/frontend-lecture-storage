@@ -3632,14 +3632,14 @@ b.myName(); // "b"
 
 Hier gebeuren twee class-oriented dingen:
 
-* `this.name = name` voegt een name property op elk object toe.
-* `Foo.prototype.myName = ...` voegt een functie toe aan het Foo.prototype object.
+* `this.name = name` voegt een name property op elk afzonderlijk object toe.
+* `Foo.prototype.myName = ...` voegt een functie toe aan het `Foo.prototype` object.
 
 #### Constructor redux
 
 `a.constructor === Foo` betekent niet dat `a` een property constructor op zich heeft.
 
-Deze wordt overgenomen van Foo.
+Deze wordt overgenomen van `Foo`.
 
 ```js
 function Foo() { /* .. */ }
@@ -3651,9 +3651,9 @@ a1.constructor === Foo; // `false`!
 a1.constructor === Object; // `true`!
 ```
 
-`instanceof` pakt een standaard object als linker argument en een functie, als diens rechter argument. Dit kijkt of er ergens in de hele [[Prototype]] chain van het standaard object, wijst het object naar Functie.prototype dat echt bestaat.
+`instanceof` pakt een standaard object als linker argument en een functie, als diens rechter argument. Dit kijkt of er ergens in de hele [[Prototype]] chain van het standaard object, wijst het object naar `Function.prototype` dat echt bestaat.
 
-`Foo.prototype.isPrototypeOf(obj)` beantwoord de vraag of ergens in de hele chain van obj een Foo.prototype voorkomt.
+`Foo.prototype.isPrototypeOf(obj)` beantwoord de vraag of ergens in de hele chain van `obj` een `Foo.prototype` voorkomt.
 
 Veel browsers kunnen de [[prototype]] bereiken via `obj.__proto__ === obj.prototype`.
 
