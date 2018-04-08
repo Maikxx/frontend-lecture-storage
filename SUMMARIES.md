@@ -789,9 +789,9 @@ if (!~a.indexOf("ol")) {    // `true`
 
 ### Truncating bits
 
-Sommige developers gebruiken ~~ om het decimale deel van een nummer af te ronden.
-Het lijkt op, maar is niet hetzelfde als Math.floor.
-Eerst maakt deze operator van een getal een int32 en doet vervolgens een bitwise flip, waarna het nog een keer geflipt wordt. In principe voert deze operatie dus alleen ToInt32 uit.
+Sommige developers gebruiken `~~` om het decimale deel van een nummer af te ronden.
+Het lijkt op, maar is niet hetzelfde als `Math.floor()`.
+Eerst maakt deze operator van een getal een **int32** en doet vervolgens een **bitwise flip**, waarna het nog een keer geflipt wordt. In principe voert deze operatie dus alleen ToInt32 uit.
 
 ```js
 Math.floor(-49.6);    // -50
