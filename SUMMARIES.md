@@ -814,7 +814,7 @@ parseInt("0x10");			// 16
 parseInt("103", 2);		// 2
 ```
 
-### *—> Boolean
+### * —> Boolean
 
 ```js
 Boolean() // is een manier om een waarde in een boolean om te zetten.
