@@ -1260,9 +1260,9 @@ In JavaScript is er geen `else if`, maar doordat je met een `if` en `else` de `{
 
 ### Operator precedence
 
-De , operator heeft de laagste presedence.
+De `,` operator heeft de laagste presedence.
 Het chainen van verschillende operators achter elkaar is iets wat heel vaak gebeurd.
-&& heeft de hoogste presedence, gevolgt door ||.
+`&&` heeft de hoogste presedence, gevolgt door `||`.
 
 ### Short circuited
 
