@@ -2017,7 +2017,7 @@ foo.identify(); // FOO MODULE
 Doordat hier een referentie tot de public API wordt behouden kun je van die instance, van binnen uit dingen veranderen, zoals het toevoegen of verwijderen van methodes, properties en diens waardes.
 
 ### Modern Modules
-Veel dependency loaders/managers verpakken dit module verklaringspatroon in een vriendelijke API. Het werkt als volgt:
+Veel **dependency loaders/managers** verpakken dit module verklaringspatroon in een vriendelijke API. Het werkt als volgt:
 
 ```js
 var MyModules = (function Manager() {
@@ -2085,7 +2085,7 @@ foo.awesome(); // LET ME INTRODUCE: HIPPO
 ```
 
 ### Future Modules
-Met de nieuwe ES6 module syntax, kan je je JavaScript opdelen in files en al deze losse files worden als modules behandeld. Iedere module kan dingen importeren, net als exporteren.
+Met de nieuwe ES6 `module` syntax, kan je je JavaScript opdelen in files en al deze losse files worden als modules behandeld. Iedere module kan dingen `import`eren, net als `export`eren.
 
 **Statically recognized pattern**: Iets waar de compiler iets van begrijpt.
 
@@ -2093,13 +2093,13 @@ Met de nieuwe ES6 module syntax, kan je je JavaScript opdelen in files en al dez
 
 ES6 modules hebben geen inline variant, dus als je ze wilt gebruiken moet je ze allemaal los in aparte files zetten. Doordat de browsers een module loader hebben, zullen de files geïmporteerd worden in de volgorde waarop ze zijn aangegeven.
 
-import x from “y” haalt een deel van een module op, terwijl module x from “x” de hele api van die module ophaalt.
+`import x from “y”` haalt een deel van een module op, terwijl `module x from “x”` de hele api van die module ophaalt.
 
 De inhoudt van een module file wordt behandeld, alsof er een omringende scope closure omheen ligt, zoals at bij functie-closure modules ook zo is.
 
 ## You don't know JavaScript - This & Object Prototypes - H1 - This or That?
 
-**This**: Een speciaal identifier keyword, dat automatisch wordt bepaald in de scope van iedere functie.
+`this`: Een speciaal identifier keyword, dat automatisch wordt bepaald in de scope van iedere functie.
 
 ### Why this?
 
