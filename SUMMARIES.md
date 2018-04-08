@@ -2693,7 +2693,7 @@ Er zit echter een gevaar in het altijd gebruiken van `undefined` of `null` bij d
 
 Het opzetten van objecten, voor `this`, zodat het geen problematische side-effects heeft voor je programma heet **DMZ** (De-Militarized Zone).
 
-Om dit te doen kan je dus gewoon een leeg object meegeven aan de bind functies. De beste manier om een heel leeg object te maken is met Object.create(`null`), omdat Object.prototype hier niet op zit.
+Om dit te doen kan je dus gewoon een leeg object meegeven aan de `bind` functies. De beste manier om een heel leeg object te maken is met `Object.create(null)`, omdat `Object.prototype` hier niet op zit.
 
 #### Indirection
 
@@ -2702,7 +2702,7 @@ Je kan ook *indirecte referenties* maken naar functies, bewust of niet, en in di
 #### Softening binding
 
 **Hard-binding** verminderd de flexibiliteit van een functie aanzienlijk.
-**Soft-binding** een manier om alternatief gedrag te stellen voor **default binding**, terwijl het mogelijk blijft om `this bound` te kunnen worden, via impliciete of expliciete bindings.
+**Soft-binding** een manier om alternatief gedrag te stellen voor **default binding**, terwijl het mogelijk blijft om `this` bound te kunnen worden, via impliciete of expliciete bindings.
 
 ```js
 function foo() {
@@ -2754,7 +2754,7 @@ var bar = foo.call(obj1);
 bar.call(obj2); // 2, not 3!
 ```
 
-In dit geval is foo bound aan obj1. bar zal dan ook this-bound zijn aan obj1, deze kan niet worden overschreven, zoals te zien is bij de laatste call, zelfs niet met new.
+In dit geval is `foo` bound aan `obj1`. `bar` zal dan ook `this`-bound zijn aan `obj1`, deze kan niet worden overschreven, zoals te zien is bij de laatste call, zelfs niet met `new`.
 
 ## You don't know JavaScript - This & Object Prototypes - H3 - Objects
 
