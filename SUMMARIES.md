@@ -1640,7 +1640,7 @@ Als `function` het eerste woord is in een statement is, heet het een **function 
 
 In een IIFE is de naam van de functie niet buiten de omringende `()` beschikbaar.
 
-### Anonymous vs. named
+### Anonymous vs named
 
 ```js
 setTimeout(function(){
