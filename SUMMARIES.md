@@ -730,17 +730,17 @@ Falsy values list:
 * `+0`, `-0`, `NaN`
 * `“”`
 
-Falsy objects zijn niet slechts objecten die falsy waardes omringen.Een falsy object is een waarde, die lijkt op en zich hetzelfde gedraagt als een normaal
-Object, maar als je ze naar een boolean coerced, zal het een `false` waarde worden.
+Falsy objects zijn niet slechts objecten die falsy waardes omringen. Een falsy object is een waarde, die lijkt op en zich hetzelfde gedraagt als een normaal object, maar als je ze naar een boolean coerced, zal het een `false` waarde worden.
 
-Falsy objects werden gebruikt voornamelijk in legacy code. Zoals document.all, dit zal `true` returnen. Het zit niet in JavaScript zelf, maar in de implementatie van oude browsers.
+Falsy objecten werden gebruikt voornamelijk in legacy code. Zoals `document.all`, dit zal `true` returnen. Het zit niet in JavaScript zelf, maar in de implementatie van oude browsers.
 
 ### Explicit Coercion
 
 Dit is het converteren van een type, op een duidelijke en expliciete manier.
 
-Strings <—> Numbers
-Hiervoor gebruik je de ingebouwde String en Number functies. Hierbij gebruik je geen new. Je kan ook toString gebruiken, of +getal. Het laatstgenoemde heet een unary operator (operator met slechts één operand)
+Strings <—> Numbers.
+
+Hiervoor gebruik je de ingebouwde `String()` en `Number()` functies. Hierbij gebruik je geen `new`. Je kan ook `toString()` gebruiken, of +getal. Het laatstgenoemde heet een **unary operator** (operator met slechts één **operand**).
 
 \- - maakt een positieve string ook een positief nummer.
 
