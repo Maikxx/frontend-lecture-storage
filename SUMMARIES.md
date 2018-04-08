@@ -753,13 +753,13 @@ Var timestamp = +new Date();
 ```
 
 Dit geeft het directe ‘nu’ moment terug in ms sinds 1970.
-Je kan echter beter Date.now() gebruiken tegenwoordig.
+Je kan echter beter `Date.now()` gebruiken tegenwoordig.
 
 ### ~
 
-De tilde operator (bitwise NOT) wordt vaak niet gebruikt, omdat het niet begrepen wordt. Deze voert eerst de ToInt32 functie uit en voert vervolgens een bitwise negation (het draait de gelijkheid van iedere bit om).
+De **tilde operator** (**bitwise NOT**) wordt vaak niet gebruikt, omdat het niet begrepen wordt. Deze voert eerst de `ToInt32()` functie uit en voert vervolgens een **bitwise negation** (het draait de gelijkheid van iedere bit om).
 
-ToInt32 voert eerst een toNumber transformatie uit.
+`ToInt32()` voert eerst een `toNumber()` transformatie uit.
 Soms als je bitwise operators gebruikt, met bepaalde nummers, zullen de waardes een andere nummer waarde hebben.
 
 ```js
