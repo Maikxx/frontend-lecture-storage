@@ -1222,7 +1222,7 @@ Statement labels kunnen geen quotes om zich heen hebben, zoals dat bij JSON wel 
 
 ### Object Destructuring
 
-Een andere plek waar je {} tegenkomt is bij een destructuring assignment.
+Een andere plek waar je `{}` tegenkomt is bij een **destructuring assignment**.
 
 ```js
 function getData() {
@@ -1256,7 +1256,7 @@ foo({
 
 ### Else if and optional blocks
 
-In JavaScript is er geen else if, maar doordat je met een if en else de {} kan omzeilen, wordt else if geldige syntax. Under the hood wordt het omgezet tot slechts if else chains genest.
+In JavaScript is er geen `else if`, maar doordat je met een `if` en `else` de `{}` kan omzeilen, wordt `else if` geldige syntax. Under the hood wordt het omgezet tot geneste slechts `if else` chains.
 
 ### Operator precedence
 
