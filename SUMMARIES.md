@@ -1122,7 +1122,7 @@ a = do {
 a;	// 42
 ```
 
-Hier voert do een block uit (met een of meerdere statements erin) en de laatste statement completion value van de do expression kan aan een variabele worden toegewezen.
+Hier voert `do` een block uit (met een of meerdere statements erin) en de laatste statement completion value van de `do` expression kan aan een variabele worden toegewezen.
 
 ### Expression side effects
 
