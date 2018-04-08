@@ -1473,7 +1473,7 @@ switch (a) {
 // 3
 ```
 
-In dit geval kijkt de switch eerst of er een match is (die is er niet), vervolgens gaat deze terug naar de top en komt een default en een break (in case 3) tegen die die allebei uitvoert.
+In dit geval kijkt de `switch` eerst of er een match is (die is er niet), vervolgens gaat deze terug naar de top en komt een `default` en een `break` (in `case` 3) tegen die die allebei uitvoert.
 
 ## You don't know JavaScript - Scopes & Closures - H2
 
