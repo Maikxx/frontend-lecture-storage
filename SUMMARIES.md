@@ -1374,14 +1374,14 @@ function foo(a) {
 }
 
 foo(2);	// 42 (linked)
-foo();		// `undefined` (not linked)
+foo();	// undefined (not linked)
 ```
 
-In het voorbeeld hierboven zijn de meegegeven arguments slot (arguments[x]) en de benaamde parameter gelinkt aan dezelfde waarde. In strict mode werkt dit echter ook niet.
+In het voorbeeld hierboven zijn de meegegeven arguments slot (arguments[x]) en de benaamde parameter gelinkt aan dezelfde waarde. In `strict mode` werkt dit echter ook niet.
 
 ### try…finally
 
-De code in het finally block zal altijd lopen, zelfs als er een error is. Het wordt altijd na try en catch gebruikt. Het lijkt op een callback functie, die altijd aangeroepen wordt.
+De code in het `finally` block zal altijd lopen, zelfs als er een error is. Het wordt altijd na `try` en `catch` gebruikt. Het lijkt op een callback functie, die altijd aangeroepen wordt.
 
 ```js
 function foo() {
