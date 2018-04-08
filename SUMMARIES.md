@@ -107,8 +107,8 @@ Een String object form, of native wordt gekoppeld aan een primitief string type 
 Er zijn twee hoofdelijke types van waarde vergelijking: **equality** en **inequality**. Hier komt altijd een boolean uit.
 
 Equality:
-`Var a = “42”;`
-`Var b = a * 1` — impliciete coersie tot het nummer 42.
+`var a = “42”;`
+`var b = a * 1` — impliciete coersie tot het nummer 42.
 
 Waardes die `false` zijn:
 * “” - lege string
@@ -431,7 +431,7 @@ Hele grote nummers worden automatisch omgezet naar de exponentiële vorm van dat
 De `.toFixed()` prototype functie van het Number object, zorgt ervoor dat je kan zien op hoeveel decimalen een nummer echt eindigt:
 
 ```js
-Var a = 42.42.
+var a = 42.42.
 a.toFixed(4); // “42.4200”
 ```
 
@@ -646,7 +646,7 @@ Het ombouwen van een waarde, van het ene type naar het andere heet vaak **type c
 Eigenlijk wordt bij beide varianten gepraat over coercion, dus tegenwoordig heet het **explicit coercion** en **implicit coercion**.
 
 ```js
-Var b = 42 + ‘’; // Implicit coercion
+var b = 42 + ‘’; // Implicit coercion
 ```
 
 Het side effect van bovenstaande is dat 42 een string wordt.
@@ -749,7 +749,7 @@ Hiervoor gebruik je de ingebouwde `String()` en `Number()` functies. Hierbij geb
 Het meest gebruikte hiervoor is:
 
 ```js
-Var timestamp = +new Date();
+var timestamp = +new Date();
 ```
 
 Dit geeft het directe ‘nu’ moment terug in ms sinds 1970.
@@ -1170,7 +1170,7 @@ Let op dat je niet `var a = b = c = 42` doet, want dat kan niet.
 ### Contextual rules
 
 ```js
-Var a = {
+var a = {
 	foo: bar()
 };
 ```
@@ -1759,7 +1759,7 @@ Wat komt er eerder, de kip (assignment) of het ei (declaration)?
 
 Alle verklaringen, van variabelen en functies, zullen als eerst worden uitgevoerd in je code.
 
-Var a = 2 lijkt alsof het één statement is, maar het wordt door de compiler opgedeeld in twee delen: var a en a = 2.
+var a = 2 lijkt alsof het één statement is, maar het wordt door de compiler opgedeeld in twee delen: var a en a = 2.
 
 Het eerste deel van de statement (declaration) wordt verwerkt tijdens de compilation phase, terwijl het tweede deel van de statement (assignment) wordt op zijn plaats gelaten tot de execution phase.
 
