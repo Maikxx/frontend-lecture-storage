@@ -3601,14 +3601,14 @@ function Foo() {
 var a = new Foo();
 ```
 
-* new keyword
-* het lijkt alsof er een constructor functie wordt aangeroepen.
+* `new` keyword
+* het lijkt alsof er een constructor functie wordt aangeroepen
 
 Classes zijn uit conventie benoemd met een hoofdletter aan het begin.
 
 #### Constructor or Call?
 
-Als je ergens new voor zet wordt dat automatisch een **constructor call**.
+Als je ergens `new` voor zet wordt dat automatisch een **constructor call**.
 
 #### Mechanics
 
