@@ -4195,7 +4195,7 @@ JavaScript loopt van *rechts* naar *links* de code af.
 
 Een generator die een Promis kan `yield`en, is een heel erg krachtig *patroon*, zo krachtig dat het in ES7 `async/await` heet.
 
-Je kan ook Generators *delegaten*, via **yield-delegation**.
+Je kan ook generators *delegaten*, via **yield-delegation**.
 
 ```js
 function *foo() {
