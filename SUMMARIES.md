@@ -1357,10 +1357,10 @@ function foo(a = 42, b = a + 1) {
 }
 
 foo();					// 42 43
-foo(`undefined`);		// 42 43
+foo(undefined);		// 42 43
 foo(5);				// 5 6
 foo(void 0, 7);		// 42 7
-foo(`null`);			// `null` 1
+foo(null);			// null 1
 ```
 
 `null` wordt omgezet in het cijfer 0 als je `null` + 1 doet.
