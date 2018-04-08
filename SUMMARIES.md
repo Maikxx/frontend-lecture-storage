@@ -2925,9 +2925,9 @@ var myObject = {
 Object.getOwnPropertyDescriptor(myObject, "a");
 // {
 //    value: 2,
-//    writable: `true`,
-//    enumerable: `true`,
-//    configurable: `true`
+//    writable: true,
+//    enumerable: true,
+//    configurable: true
 // }
 ```
 
@@ -2940,9 +2940,9 @@ var myObject = {};
 
 Object.defineProperty(myObject, "a", {
 	value: 2,
-	writable: `true`,
-	configurable: `true`,
-	enumerable: `true`
+	writable: true,
+	configurable: true,
+	enumerable: true
 });
 
 myObject.a; // 2
@@ -2959,7 +2959,7 @@ Als je een configurable property via de bovenstaande methode op `false` zet kan 
 
 Als een property al configurable `false` is, kan je `writeable` nog wel naar `false` zetten, maar niet meer naar `true`.
 
-`configurable: false` zorgt er ook voor dat je een property niet meer kan verwijderen met **delete**.
+`configurable: false` zorgt er ook voor dat je een property niet meer kan verwijderen met `delete`.
 
 #### Enumerable
 
@@ -2978,8 +2978,8 @@ var myObject = {};
 
 Object.defineProperty(myObject, "FAVORITE_NUMBER", {
 	value: 42,
-	writable: `false`,
-	configurable: `false`
+	writable: false,
+	configurable: false
 });
 ```
 
@@ -3022,7 +3022,7 @@ myObject.a; // 2
 
 Volgens de specificatie voort de bovenstaande code een **[[Get]] operation** uit.
 
-Deze methode bekijkt eerst of het object een property heeft met de naam die wordt opgevraagd, als dat niet zo is zal de [[Prototype]] chain worden gevolgd.
+Deze methode bekijkt eerst of het object een property heeft met de naam die wordt opgevraagd, als dat niet zo is zal de **[[Prototype]] chain** worden gevolgd.
 
 Als het via de bovenstaande manier, op geen enkele manier, een waarde kan teruggeven voor de gewenste property, zal `undefined` worden teruggegeven.
 
@@ -3031,7 +3031,7 @@ Als het via de bovenstaande manier, op geen enkele manier, een waarde kan terugg
 Je zou denken dat deze methode wordt aangeroepen als je een waarde toevoegd aan een object, maar het ligt meer genuanceerd, voornamelijk met betrekking tot het gedrag dat gebeurt als het property al bestaat.
 
 1. Is de property een **accesor descriptor**? Roep dan de setter aan, als die er is.
-2. Is de property een **data descriptor** met writable:`false`, doe niks in non-strict, en geef een TypeError in strict mode.
+2. Is de property een **data descriptor** met `writable: false`, doe niks in non-strict, en geef een `TypeError` in `strict mode`.
 3. Zet anders de waarde als normaal.
 
 ### Getters & Setters
