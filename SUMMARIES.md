@@ -1595,13 +1595,13 @@ console.log(o2.a); // undefined
 console.log(a); // 2 -- Oops, leaked global!
 ```
 
-With maakt een hele nieuwe lexicale scope uit het niets.
-Doordat er geen variabele a in het tweede object zit dat meegegeven werd, wordt er een globale variabele a aangemaakt.
-Deze functie is in strict mode niet meer toegestaan.
+`with` maakt een hele nieuwe lexicale scope uit het niets.
+Doordat er geen variabele `a` in het tweede object zit dat meegegeven werd, wordt er een globale variabele `a` aangemaakt.
+Deze functie is in `strict mode` niet meer toegestaan.
 
 ### Performance
 
-Als de engine with of eval tegenkomt, moet deze gaan gokken, of al de locaties van de variabelen wel correct zijn.
+Als de engine `with` of `eval` tegenkomt, moet deze gaan gokken, of al de locaties van de variabelen wel correct zijn.
 Dit zorgt ervoor dat de engine helemaal geen performance optimalizations meer doet.
 
 Gebruik deze twee manieren niet.
