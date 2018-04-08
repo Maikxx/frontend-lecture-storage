@@ -4820,7 +4820,7 @@ var o = {a:1, b:2, c:3},
 p = {a, b, c} = o;
 
 console.log(a, b, c);			// 1 2 3
-p === o;						// `true`
+p === o;						// true
 ```
 
 #### Too many, too few, just enough
@@ -4873,8 +4873,8 @@ function foo([x, y]) {
 }
 
 foo([1, 2]);					// 1 2
-foo([1]);						// 1 `undefined`
-foo([]);							// `undefined` `undefined`
+foo([1]);						// 1 undefined
+foo([]);						// undefined undefined
 ```
 
 #### Destructuring defaults + parameter defaults
@@ -4884,14 +4884,14 @@ function f6({x = 10} = {}, {y} = {y: 10}) {
 	console.log(x, y);
 }
 
-f6();								// 10 10
-f6(`undefined`, `undefined`);			// 10 10
-f6({}, `undefined`);				// 10 10
+f6();							// 10 10
+f6(undefined, undefined);		// 10 10
+f6({}, undefined);				// 10 10
 
-f6({}, {});						// 10 `undefined`
-f6(`undefined`, {});				// 10 `undefined`
+f6({}, {});						// 10 undefined
+f6(undefined, {});				// 10 undefined
 
-f6({x: 2}, {y: 3});			// 2 3
+f6({x: 2}, {y: 3});				// 2 3
 ```
 
 #### Nested Defaults: Destructured and Restructured
