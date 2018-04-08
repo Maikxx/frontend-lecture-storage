@@ -1285,7 +1285,7 @@ true ? false : (true ? true : true);	// false
 (true ? false : true) ? true : true;	// true
 ```
 
-Ook de = operator is rechts-associatief.
+Ook de `=` operator is rechts-associatief.
 
 ```js
 var a, b, c;
@@ -1295,7 +1295,7 @@ a = b = c = 42;
 
 ### Disambiguation
 
-Je moet beide operator presedence en handmatig groeperen () in je programma’s mixen. Gebruik handmatig groeperen als je verwarring moet verminderen en duidelijkheid moet scheppen.
+Je moet beide operator presedence en handmatig groeperen `()` in je programma’s mixen. Gebruik handmatig groeperen als je verwarring moet verminderen en duidelijkheid moet scheppen.
 
 ### Automatic semicolons
 
@@ -1305,11 +1305,11 @@ ASI gebeurt alleen als er sprake is van een *newline*.
 
 ASI komt ook voor:
 
-* Na do … while (a)
-* Break
-* Continue
-* Return -> Als je multiline wilt returnen, moet je het wrappen in ().
-* ES6 yield
+* Na `do … while` (a)
+* `break`
+* `continue`
+* `return` -> Als je multiline wilt returnen, moet je het wrappen in `()`
+* ES6 `yield`
 
 ### Error correction
 
