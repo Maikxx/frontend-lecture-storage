@@ -4994,7 +4994,7 @@ var o2 = {
 
 ### Object `super`
 
-Super gedraagt zich bijna hetzelfde in standaard objecten, als ik 'classes'.
+`super` gedraagt zich bijna hetzelfde in standaard objecten, als in 'classes'.
 
 ```js
 var o1 = {
