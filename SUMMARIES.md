@@ -2542,7 +2542,7 @@ console.log(b); // 5
 
 ##### API Call 'Contexts'
 
-Veel API's hebben een optionele parameter, met de **context** van this, zodat bind() niet gebruikt hoeft te worden.
+Veel API's hebben een optionele parameter, met de **context** van `this`, zodat `bind()` niet gebruikt hoeft te worden.
 
 ```js
 function foo(el) {
@@ -2559,21 +2559,21 @@ var obj = {
 
 ### new Binding
 
-In class-oriented languages, zijn constructors speciale methodes op classes die die functie uitvoeren als de class wordt aangeroepen met **new**.
+In class-oriented languages, zijn **constructors** speciale methodes op classes die die functie uitvoeren als de class wordt aangeroepen met `new`.
 
 De JavaScript syntax lijkt hetzelfde, maar het is achter de schermen totaal niet zo.
 
-**constructors** zijn functies die worden aangeroepen met het new keyword voor zich.
+**constructors** zijn functies die worden aangeroepen met het `new` keyword voor zich.
 
-Ze zijn niet verbonden aan classes, en ze vormen een class ook niet. Het zijn geen eens speciale functies.
+Ze zijn *niet* verbonden aan **classes**, en ze vormen een class ook niet. Het zijn geen eens speciale functies.
 
-Elke functie met **new** ervoor kan worden gezien als **constructor call**.
+Elke functie met `new` ervoor kan worden gezien als **constructor call**.
 
-Als een functie wordt aangeroepen met new ervoor, dus een constructor call wordt gedaan, dan gebeuren de volgende dingen automatisch:
+Als een functie wordt aangeroepen met `new` ervoor en er dus een constructor call wordt gedaan, dan gebeuren de volgende dingen automatisch:
 1. Een nieuw object wordt gemaakt.
 2. Het nieuwe object wordt via prototype gelinkt.
-3. Het nieuwe object wordt gezet als **this** voor die functie call.
-4. Tenzij de functie een alternatief object returnt, zal de new-aangeroepen functie automatisch het nieuwe object returnen.
+3. Het nieuwe object wordt gezet als `this` voor die functie call.
+4. Tenzij de functie een alternatief object returnt, zal de `new`-aangeroepen functie automatisch het nieuwe object returnen.
 
 ```js
 function foo(a) {
@@ -2636,12 +2636,12 @@ console.log(bar.a); // 4
 
 Zoals hier te zien heeft **new binding** meer voorang dan **implicit binding**.
 
-new en call/apply zijn niet te combineren. Je kan wel **hard binding** gebruiken.
+`new` en call/apply zijn niet te combineren. Je kan wel **hard binding** gebruiken.
 
-**new binding** heeft meer voorang dan en zal dus **hard binding** overriden.
+**new binding** heeft meer voorang dan (en zal dus) **hard binding** overschrijden.
 
 Dit kan, omdat het handig kan zijn om hard binding te overriden:
-> The primary reason for this behavior is to create a function (that can be used with new for constructing objects) that essentially ignores the this hard binding but which presets some or all of the function's arguments. One of the capabilities of bind(..) is that any arguments passed after the first this binding argument are defaulted as standard arguments to the underlying function (technically called "partial application", which is a subset of "currying").
+> The primary reason for this behavior is to create a function (that can be used with `new` for constructing objects) that essentially ignores the `this` hard binding but which presets some or all of the function's arguments. One of the capabilities of `bind(..)` is that any arguments passed after the first `this` binding argument are defaulted as standard arguments to the underlying function (technically called "**partial application**", which is a subset of "**currying**").
 
 ```js
 function foo(p1,p2) {
@@ -2660,10 +2660,10 @@ baz.val; // p1p2
 
 ### Determining this
 
-1. Als de functie met new wordt aangeroepen, is `this` het nieuw gemaakte object.
-2. Als de functie aangeroepen wordt met call, apply of bind dan is `this` het meegegeven object.
+1. Als de functie met `new` wordt aangeroepen, is `this` het nieuw gemaakte object.
+2. Als de functie aangeroepen wordt met `call`, `apply` of `bind` dan is `this` het meegegeven object.
 3. Als de functie met een context wordt aangeroepen, is `this` die context.
-4. Anders in strict mode `undefined` of de global object.
+4. Anders in strict mode `undefined` of het global object.
 
 ### Binding exceptions
 
