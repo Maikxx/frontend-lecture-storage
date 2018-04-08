@@ -1648,12 +1648,12 @@ setTimeout(function(){
 }, 1000);
 ```
 
-Het bovenstaande is een anonieme functie expressie. Functie expressies kunnen anoniem zijn, maar functie declarations niet.
+Het bovenstaande is een **anonieme functie expressie**. Functie expressies kunnen anoniem zijn, maar **functie declarations** niet.
 
 Nadelen aan anonieme functies:
 
 * Debugging moeilijker.
-* Als je in de functie naar deze functie moet refereren, moet je de deprecated arguments.callee gebruiken.
+* Als je in de functie naar deze functie moet refereren, moet je de deprecated `arguments.callee` gebruiken.
 * Verminderd leesbaarheid.
 
 Inline function expressions zijn krachtig en bruikbaar, het maakt niet uit of ze benaamd zijn of niet. Gebruik altijd een naam in je function expressions.
