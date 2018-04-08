@@ -1748,7 +1748,7 @@ console.log(a); // 2
 
 console.log(a);
 
-var a = 2; // `undefined`
+var a = 2; // undefined
 ```
 
 Wat komt er eerder, de kip (assignment) of het ei (declaration)?
@@ -1757,9 +1757,9 @@ Wat komt er eerder, de kip (assignment) of het ei (declaration)?
 
 Alle verklaringen, van variabelen en functies, zullen als eerst worden uitgevoerd in je code.
 
-var a = 2 lijkt alsof het één statement is, maar het wordt door de compiler opgedeeld in twee delen: var a en a = 2.
+`var a = 2` lijkt alsof het één statement is, maar het wordt door de compiler opgedeeld in twee delen: `var a` en `a = 2`.
 
-Het eerste deel van de statement (declaration) wordt verwerkt tijdens de compilation phase, terwijl het tweede deel van de statement (assignment) wordt op zijn plaats gelaten tot de execution phase.
+Het eerste deel van de statement (declaration) wordt verwerkt tijdens de **compilation phase**, terwijl het tweede deel van de statement (assignment) wordt op zijn plaats gelaten tot de **execution phase**.
 
 Het tweede voorbeeld is dus eigenlijk:
 
@@ -1771,8 +1771,8 @@ a = 2;
 
 Vandaar dat er een `undefined` wordt gegeven.
 
-Variabele en functie verklaringen (var a) worden naar het bovenste deel van de code in de huidige scope geplaatst, vandaar de naam hoisting.
-De declaration komt dus eerder dan de assignment.
+Variabele en functie verklaringen (`var a`) worden naar het bovenste deel van de code in de huidige scope geplaatst, vandaar de naam **hoisting**.
+De **declaration** komt dus eerder dan de **assignment**.
 
 Hoisting gebeurt dus per scope.
 
@@ -1786,7 +1786,7 @@ var foo = function bar() {
 };
 ```
 
-In dit geval wordt foo losgehaald van de expression en boven de executing declaration gezet, waardoor er een functie call gedaan wordt op `undefined` en dat levert een TypeError op.
+In dit geval wordt `foo` losgehaald van de expression en boven de executing declaration gezet, waardoor er een functie call gedaan wordt op `undefined` en dat levert een `TypeError` op.
 
 ### Functions first
 
@@ -1818,14 +1818,14 @@ foo = function() {
 };
 ```
 
-Doordat in dit geval in de bovenste code var foo een duplicate was, werd deze genegeerd, zelfs terwijl het voor de functie verklaring kwam. Dit werkt, omdat functies dus hoger in de rangorde staan als het om hoisting gaat.
+Doordat in dit geval in de bovenste code `var foo` een duplicate was, werd deze genegeerd, zelfs terwijl het voor de functie verklaring kwam. Dit werkt, omdat functies dus hoger in de rangorde staan als het om hoisting gaat.
 
 Als je echter meer functies on elkaar hebt met dezelfde naam, dan zal deze echter wel de eerste variant overschrijden.
 
 ```js
 foo(); // "b"
 
-var a = `true`;
+var a = true;
 if (a) {
    function foo() { console.log("a"); }
 }
