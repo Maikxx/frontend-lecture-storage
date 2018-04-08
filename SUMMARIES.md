@@ -123,7 +123,7 @@ Bij `a == b` wordt de a waarde gelijk aan het type van `b`. (“42” -> 42).
 
 Wanneer gebruik je `==` of `===`?
 * Als minstens één van de kanten van de vergelijking `false` of `true` kunnen zijn. ===
-* Als minstens één van de waarde in een vergelijking gelijk kan zijn aan `0`, `“”`, `[ ]`. ===
+* Als minstens één van de waarde in een vergelijking gelijk kan zijn aan `0`, `“”`, `[]`. ===
 * Alle andere momenten ==
 
 Als je twee non-primitieve waardes vergelijkt, zoals objecten, moet je heel goed opletten op de == en ===.
@@ -399,7 +399,7 @@ In plaats van gokken of er iets globaal is verklaard, kan je er voor zorgen dat 
 ```js
 function doSomethingCool(FeatureXYZ) {
 var helper = FeatureXYZ ||
-function() { /*.. default feature ..*/ };
+function() {/*.. default feature ..*/};
 
 var val = helper();
 }
@@ -629,7 +629,7 @@ isThisCool();        // `true`
 
 isThisCool(
     ["a","b","c"],
-    function(v){ return v.toUpperCase(); },
+    function(v){return v.toUpperCase();},
     /D/
 );
 ```
@@ -692,13 +692,13 @@ Een derde argument aan de functie `JSON.stringify()` heet **space** en zorgt erv
 var a = {
     valueOf: function(){
         return "42";
-    }
+   }
 };
 
 var b = {
     toString: function(){
         return "42";
-    }
+   }
 };
 
 var c = [4,2];
@@ -711,7 +711,7 @@ Number(b);// 42
 Number(c);// 42
 Number("");// 0
 Number([]);// 0
-Number([ "abc" ]);// NaN
+Number(["abc"]);// NaN
 ```
 
 ### toBoolean
@@ -782,7 +782,7 @@ if (~a.indexOf("lo")) {	// `true`
 ~a.indexOf("ol");            // 0    <-- falsy!
 !~a.indexOf("ol");        // `true`
 
-if (!~a.indexOf("ol")) {    // `true`
+if (!~a.indexOf("ol")) {   // `true`
     // not found!
 }
 ```
@@ -1077,8 +1077,8 @@ Dus `a > b`, wordt afgehandeld als `b < a`.
 Dit algorithme roept eerst `toPrimitive()` aan op beide waardes, als één van de twee resultaten daarvan geen string is, worden beide waardes omgezet naar nummers.
 
 ```js
-var a = { b: 42 };
-var b = { b: 43 };
+var a = {b: 42};
+var b = {b: 43};
 
 a < b;	// `false`
 ```
@@ -1233,7 +1233,7 @@ function getData() {
 	};
 }
 
-var { a, b } = getData();
+var {a, b} = getData();
 
 console.log(a, b); // 42 “foo"
 ```
@@ -1241,7 +1241,7 @@ console.log(a, b); // 42 “foo"
 Het kan ook gebruikt worden voor het direct deconstructen van objecten als parameters in functies:
 
 ```js
-function foo({ a, b, c }) {
+function foo({a, b, c}) {
 	// no need for:
 	// var a = obj.a, b = obj.b, c = obj.c
 	console.log(a, b, c);
@@ -1662,7 +1662,7 @@ Nadelen aan anonieme functies:
 
 Immediately Invoked Function Expression: IIFE. Gebruik ook hier gewoon een naam.
 
-`(function { } ())` is hetzelfde als `(function { })()`
+`(function {} ())` is hetzelfde als `(function {})()`
 
 Je kan ook parameters meegeven aan een IIFE.
 
@@ -1693,7 +1693,7 @@ Block scoping bestaat niet direct in JavaScript.
 Sommige kenmerken van JavaScript doen daar wel op lijken:
 * `with`
 * `try` / `catch` -> Het catch deel is geblockscoped.
-* `let` -> Koppelt een variabele aan de scope van een block code `({ })` waar deze in is geplaatst. Sommige mensen plaatsen liever om alles waar ze een block van willen maken `{ }` dit is dan een expliciete manier van scoping. Anders is het impliciet. Verklaringen die met `let` zijn gedaan zullen *niet* **hoisten**, dus als je ze probeert te bereiken voordat ze gedefineerd zijn, krijg je een ReferenceError.
+* `let` -> Koppelt een variabele aan de scope van een block code `({})` waar deze in is geplaatst. Sommige mensen plaatsen liever om alles waar ze een block van willen maken `{}` dit is dan een expliciete manier van scoping. Anders is het impliciet. Verklaringen die met `let` zijn gedaan zullen *niet* **hoisten**, dus als je ze probeert te bereiken voordat ze gedefineerd zijn, krijg je een ReferenceError.
 
 ### Garbage collection
 
@@ -1706,7 +1706,7 @@ function process(data) {
 
 // anything declared inside this block can go away after!
 {
-	let someReallyBigData = { .. };
+	let someReallyBigData = {..};
 
 	process(someReallyBigData);
 }
@@ -1827,10 +1827,10 @@ foo(); // "b"
 
 var a = true;
 if (a) {
-   function foo() { console.log("a"); }
+   function foo() {console.log("a");}
 }
 else {
-   function foo() { console.log("b"); }
+   function foo() {console.log("b");}
 }
 ```
 
@@ -2709,9 +2709,9 @@ function foo() {
    console.log("name: " + this.name);
 }
 
-var obj = { name: "obj" },
-    obj2 = { name: "obj2" },
-    obj3 = { name: "obj3" };
+var obj = {name: "obj"},
+    obj2 = {name: "obj2"},
+    obj3 = {name: "obj3"};
 
 var fooOBJ = foo.softBind(obj);
 
@@ -2834,7 +2834,7 @@ De waardes van een property hoeven niet altijd in het object zelf aanwezig te zi
 Om properties te bereiken in een object gebruik je:
 
 * `.` operator / property access - Heeft een Identifier toegankelijke naam nodig.
-* `[ ]` operator / key access - Kan elke UTF-8 / Unicode string bereiken.
+* `[]` operator / key access - Kan elke UTF-8 / Unicode string bereiken.
 
 Je kan met de key access operator programmatisch de identifier opbouwen:
 
@@ -2928,7 +2928,7 @@ Object.getOwnPropertyDescriptor(myObject, "a");
 //    writable: true,
 //    enumerable: true,
 //    configurable: true
-// }
+//}
 ```
 
 Als een property descriptor alleen maar data waardes heeft, heet het een **data descriptor**.
@@ -3057,7 +3057,7 @@ Object.defineProperty(
 	"b",		// property name
 	{			// descriptor
 		// define a getter for `b`
-		get: function(){ return this.a * 2 },
+		get: function(){return this.a * 2},
 
 		// make sure `b` shows up as an object property
 		enumerable: `true`
@@ -3143,13 +3143,13 @@ Als je wilt itereren over de waardes van een object, wordt bij indexed-arrays va
 Als je direct over de waardes van een array, of object properties wilt itereren, kun je de ES6 `for..of` loop gebruiken.
 
 ```js
-var myArray = [ 1, 2, 3 ];
+var myArray = [1, 2, 3];
 var it = myArray[Symbol.iterator]();
 
-it.next(); // { value:1, done:`false` }
-it.next(); // { value:2, done:`false` }
-it.next(); // { value:3, done:`false` }
-it.next(); // { done:`true` }
+it.next(); // {value:1, done:`false`}
+it.next(); // {value:2, done:`false`}
+it.next(); // {value:3, done:`false`}
+it.next(); // {done:`true`}
 ```
 
 Waarom je hier Symbol gebruikt: het houdt een speciale naamwaarde, niet een speciale waarde.
@@ -3185,9 +3185,9 @@ Object.defineProperty(myObject, Symbol.iterator, {
 
 // iterate `myObject` manually
 var it = myObject[Symbol.iterator]();
-it.next(); // { value:2, done:`false` }
-it.next(); // { value:3, done:`false` }
-it.next(); // { value:`undefined`, done:`true` }
+it.next(); // {value:2, done:`false`}
+it.next(); // {value:3, done:`false`}
+it.next(); // {value:`undefined`, done:`true`}
 
 // iterate `myObject` with `for..of`
 for (var v of myObject) {
@@ -3642,9 +3642,9 @@ Hier gebeuren twee class-oriented dingen:
 Deze wordt overgenomen van `Foo`.
 
 ```js
-function Foo() { /* .. */ }
+function Foo() {/* .. */}
 
-Foo.prototype = { /* .. */ }; // create a new prototype object
+Foo.prototype = {/* .. */}; // create a new prototype object
 
 var a1 = new Foo();
 a1.constructor === Foo; // `false`!
@@ -4330,7 +4330,7 @@ Een betere optie, vooral voor grotere data sets, is om **Transferable Objects** 
 ```js
 // `foo` is a `Uint8Array` for instance
 
-postMessage(foo.buffer, [ foo.buffer ]);
+postMessage(foo.buffer, [foo.buffer]);
 ```
 
 Hier is de eerste parameter de *raw buffer* en de tweede, wat er moet worden getransferd.
@@ -4397,8 +4397,8 @@ var v2 = SIMD.float32x4(2.1, 3.2, 4.3, 5.4);
 var v3 = SIMD.int32x4(10, 101, 1001, 10001);
 var v4 = SIMD.int32x4(10, 20, 30, 40);
 
-SIMD.float32x4.mul(v1, v2);	// [ 6.597339, 67.2, 138.89, 299.97 ]
-SIMD.int32x4.add(v3, v4);		// [ 20, 121, 1031, 10041 ]
+SIMD.float32x4.mul(v1, v2);	// [6.597339, 67.2, 138.89, 299.97]
+SIMD.int32x4.add(v3, v4);		// [20, 121, 1031, 10041]
 ```
 
 Hier boven staan twee type vector data: 32-bit floating-point nummers en 32-bit integers.
@@ -4702,8 +4702,8 @@ foo(undefined, 10);				// 9 10
 ### Destructuring
 
 ```js
-var [ a, b, c ] = foo();
-var { x: x, y: y, z: z } = bar();
+var [a, b, c] = foo();
+var {x: x, y: y, z: z} = bar();
 
 console.log(a, b, c);				// 1 2 3
 console.log(x, y, z);
@@ -4711,12 +4711,12 @@ console.log(x, y, z);
 
 #### Object property assignment pattern
 
-Als je, zoals in de vorige snippet `{ x, .. }` doet, haal je het `x:` deel van de code af.
+Als je, zoals in de vorige snippet `{x, ..}` doet, haal je het `x:` deel van de code af.
 
 Als je dit kan schrijven, is het enige nut van het ophalen van objecten in de lange vorm uit andere objecten, het om zetten van de namen van de variabelen.
 
 ```js
-var { x: bam, y: baz, z: bap } = bar();
+var {x: bam, y: baz, z: bap} = bar();
 
 console.log(bam, baz, bap);		// 4 5 6
 console.log(x, y, z);				// ReferenceError
@@ -4727,7 +4727,7 @@ In de orginele object notatie volgt het het volgende schema:
 ```js
 var X = 10, Y = 20;
 
-var o = { a: X, b: Y };
+var o = {a: X, b: Y};
 
 console.log(o.a, o.b);			// 10 20
 ```
@@ -4740,7 +4740,7 @@ Bij de nieuwe variant, met destructuring, is dat patroon omgedraaid: *source: ta
 var a, b, c, x, y, z;
 
 [a,b,c] = foo();
-({ x, y, z } = bar());
+({x, y, z} = bar());
 
 console.log(a, b, c);				// 1 2 3
 console.log(x, y, z);				// 4 5 6
@@ -4755,7 +4755,7 @@ var which = "x",
 	o = {};
 
 // Haal "x" uit bar() en zet deze op het "o" object als "x".
-({ [which]: o[which] } = bar());
+({[which]: o[which]} = bar());
 
 console.log(o.x);					// 4
 ```
@@ -4764,7 +4764,7 @@ console.log(o.x);					// 4
 // Omdraaien van twee variabelen.
 var x = 10, y = 20;
 
-[ y, x ] = [ x, y ];
+[y, x] = [x, y];
 
 console.log(x, y);				// 20 10
 ```
@@ -4774,7 +4774,7 @@ console.log(x, y);				// 20 10
 Je kan met object destructuring een *source property*, meerdere keren destructuren.
 
 ```js
-var { a: X, a: Y } = { a: 1 };
+var {a: X, a: Y} = {a: 1};
 
 X;	// 1
 Y;	// 1
@@ -4783,13 +4783,13 @@ Y;	// 1
 Je kan ook sub-objecten en arrays destructuren:
 
 ```js
-var { a: { x: X, x: Y }, a } = { a: { x: 1 } };
+var {a: {x: X, x: Y}, a} = {a: {x: 1}};
 
 X;	// 1
 Y;	// 1
-a;	// { x: 1 }
+a;	// {x: 1}
 
-({ a: X, a: Y, a: [ Z ] } = { a: [ 1 ] });
+({a: X, a: Y, a: [Z]} = {a: [1]});
 
 X.push(2);
 Y[0] = 10;
@@ -4804,8 +4804,8 @@ De betere vorm om dit te schrijven, voor leesbaarheid:
 ```js
 var {
 	a: {
-		b: [ c, d ],
-		e: { f }
+		b: [c, d],
+		e: {f}
 	},
 	g
 } = obj;
@@ -4814,10 +4814,10 @@ var {
 #### Destructuring assignment expressions
 
 ```js
-var o = { a:1, b:2, c:3 },
+var o = {a:1, b:2, c:3},
 	a, b, c, p;
 
-p = { a, b, c } = o;
+p = {a, b, c} = o;
 
 console.log(a, b, c);			// 1 2 3
 p === o;						// `true`
@@ -4829,7 +4829,7 @@ Je hoeft niet alle waardes die beschikbaar zijn te destructuren.
 
 ```js
 var [,b] = foo();
-var { x, z } = bar();
+var {x, z} = bar();
 
 console.log(b, x, z);				// 2 4 6
 ```
@@ -4837,8 +4837,8 @@ console.log(b, x, z);				// 2 4 6
 #### Default value assignment
 
 ```js
-var [ a = 3, b = 6, c = 9, d = 12 ] = foo();
-var { x = 5, y = 10, z = 15, w = 20 } = bar();
+var [a = 3, b = 6, c = 9, d = 12] = foo();
+var {x = 5, y = 10, z = 15, w = 20} = bar();
 
 console.log(a, b, c, d);			// 1 2 3 12
 console.log(x, y, z, w);			// 4 5 6 20
@@ -4847,7 +4847,7 @@ console.log(x, y, z, w);			// 4 5 6 20
 Je kan dit ook combineren met de **alternative assignment expression**.
 
 ```js
-var { x, y, z, w: WW = 20 } = bar();
+var {x, y, z, w: WW = 20} = bar();
 
 console.log(x, y, z, WW);			// 4 5 6 20
 ```
@@ -4855,11 +4855,11 @@ console.log(x, y, z, WW);			// 4 5 6 20
 #### Nested destructuring
 
 ```js
-var a1 = [ 1, [2, 3, 4], 5 ];
-var o1 = { x: { y: { z: 6 } } };
+var a1 = [1, [2, 3, 4], 5];
+var o1 = {x: {y: {z: 6}}};
 
-var [ a, [ b, c, d ], e ] = a1;
-var { x: { y: { z: w } } } = o1;
+var [a, [b, c, d], e] = a1;
+var {x: {y: {z: w}}} = o1;
 
 console.log(a, b, c, d, e);		// 1 2 3 4 5
 console.log(w);					// 6
@@ -4868,19 +4868,19 @@ console.log(w);					// 6
 #### Destructuring parameters
 
 ```js
-function foo([ x, y ]) {
+function foo([x, y]) {
 	console.log(x, y);
 }
 
-foo([ 1, 2 ]);					// 1 2
-foo([ 1 ]);						// 1 `undefined`
+foo([1, 2]);					// 1 2
+foo([1]);						// 1 `undefined`
 foo([]);							// `undefined` `undefined`
 ```
 
 #### Destructuring defaults + parameter defaults
 
 ```js
-function f6({ x = 10 } = {}, { y } = { y: 10 }) {
+function f6({x = 10} = {}, {y} = {y: 10}) {
 	console.log(x, y);
 }
 
@@ -4891,7 +4891,7 @@ f6({}, `undefined`);				// 10 10
 f6({}, {});						// 10 `undefined`
 f6(`undefined`, {});				// 10 `undefined`
 
-f6({ x: 2 }, { y: 3 });			// 2 3
+f6({x: 2}, {y: 3});			// 2 3
 ```
 
 #### Nested Defaults: Destructured and Restructured
@@ -4939,8 +4939,8 @@ var o = {
 ```js
 var o = {
 	__id: 10,
-	get id() { return this.__id++; },
-	set id(v) { this.__id = v; }
+	get id() {return this.__id++;},
+	set id(v) {this.__id = v;}
 }
 
 o.id;			// 10
@@ -4960,19 +4960,19 @@ o.__id;			// 21 -- still!
 var prefix = "user_";
 
 var o = {
-	baz: function(..){ .. }
+	baz: function(..){..}
 };
 
-o[ prefix + "foo" ] = function(..){ .. };
-o[ prefix + "bar" ] = function(..){ .. };
+o[prefix + "foo"] = function(..){..};
+o[prefix + "bar"] = function(..){..};
 
 // Nieuw
 var prefix = "user_";
 
 var o = {
-	baz: function(..){ .. },
-	[ prefix + "foo" ]: function(..){ .. },
-	[ prefix + "bar" ]: function(..){ .. }
+	baz: function(..){..},
+	[prefix + "foo"]: function(..){..},
+	[prefix + "bar"]: function(..){..}
 	..
 };
 ```
@@ -5088,8 +5088,8 @@ function foo(strings, ...values) {
 var desc = "awesome";
 
 foo`Everything is ${desc}!`;
-// [ "Everything is ", "!"]
-// [ "awesome" ]
+// ["Everything is ", "!"]
+// ["awesome"]
 ```
 
 Dit is een speciaal soort functie call, die niet de `()` nodig heeft.
@@ -5108,9 +5108,9 @@ function showraw(strings, ...values) {
 }
 
 showraw`Hello\nWorld`;
-// [ "Hello
-// World" ]
-// [ "Hello\nWorld" ]
+// ["Hello
+// World"]
+// ["Hello\nWorld"]
 ```
 
 Op deze manier blijven de `\n` karakters bijvoorbeeld zo, in plaats van een echte newline te worden.
@@ -5384,7 +5384,7 @@ const INSTANCE = Symbol("instance");
 function HappyFace() {
 	if (HappyFace[INSTANCE]) return HappyFace[INSTANCE];
 
-	function smile() { .. }
+	function smile() {..}
 
 	return HappyFace[INSTANCE] = {
 		smile: smile
@@ -5412,14 +5412,14 @@ console.log(EVT_LOGIN);		// Symbol(event.login)
 ```js
 var o = {
 	foo: 42,
-	[ Symbol("bar") ]: "hello world",
+	[Symbol("bar")]: "hello world",
 	baz: `true`
 };
 
-Object.getOwnPropertyNames(o);	// [ "foo","baz" ]
+Object.getOwnPropertyNames(o);	// ["foo","baz"]
 
 // Om deze wel op te halen gebruik je:
-Object.getOwnPropertySymbols(o);	// [ Symbol(bar) ]
+Object.getOwnPropertySymbols(o);	// [Symbol(bar)]
 ```
 
 #### Built-In Symbols
@@ -5445,11 +5445,11 @@ var arr = [1,2,3];
 
 var it = arr[Symbol.iterator]();
 
-it.next();		// { value: 1, done: `false` }
-it.next();		// { value: 2, done: `false` }
-it.next();		// { value: 3, done: `false` }
+it.next();		// {value: 1, done: `false`}
+it.next();		// {value: 2, done: `false`}
+it.next();		// {value: 3, done: `false`}
 
-it.next();		// { value: `undefined`, done: `true` }
+it.next();		// {value: `undefined`, done: `true`}
 ```
 
 In een iterator kan je returnen en throwen, verder niks.
@@ -5605,11 +5605,11 @@ function *foo() {
 
 var it = foo();
 
-it.next();				// { value: 1, done: `false` }
+it.next();				// {value: 1, done: `false`}
 
 try {
 	it.throw("Hi!");	// Hi!
-						// { value: 2, done: `false` }
+						// {value: 2, done: `false`}
 	it.next();
 
 	console.log("never gets here");
@@ -5686,7 +5686,7 @@ export function foo() {
 export var awesome = 42;
 
 var bar = [1,2,3];
-export { bar };
+export {bar};
 
 // Hetzelfde als
 function foo() {
@@ -5696,7 +5696,7 @@ function foo() {
 var awesome = 42;
 var bar = [1,2,3];
 
-export { foo, awesome, bar };
+export {foo, awesome, bar};
 ```
 
 Dit zijn zogenaamde **named exports**.
@@ -5705,14 +5705,14 @@ Er is geen globale scope in modules.
 Je kan ook dingen hernoemen (**alias**) als je ze export.
 
 ```js
-function foo() { .. }
+function foo() {..}
 
-export { foo as bar };
+export {foo as bar};
 ```
 
 ```js
 var awesome = 42;
-export { awesome };
+export {awesome};
 
 // later
 awesome = 100;
@@ -5735,7 +5735,7 @@ function foo(..) {
 	// ..
 }
 
-export { foo as default };
+export {foo as default};
 ```
 
 De eerste snippet zal de waarde op het moment van export importeren, in de tweede kan de waarde nog worden veranderd.
@@ -5745,13 +5745,13 @@ Je mag maar één `default` keyword hebben per module.
 Als je specifieke items (die je hebt geëxporteerd) wilt importeren in een andere file gebruik je:
 
 ```js
-import { foo, bar, baz } from "foo";
+import {foo, bar, baz} from "foo";
 ```
 
 Je kan de geïmporteerde naam veranderen via:
 
 ```js
-import { foo as theFooFunc } from "foo";
+import {foo as theFooFunc} from "foo";
 ```
 
 Als je de default wilt importeren:
@@ -5760,7 +5760,7 @@ Als je de default wilt importeren:
 import foo from "foo";
 
 // or:
-import { default as foo } from "foo";
+import {default as foo} from "foo";
 ```
 
 Je kan modules hebben die elkaar importen:
