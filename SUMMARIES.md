@@ -67,7 +67,7 @@ Besluiten in programma’s worden genomen door **conditionals**.
 * Switch statement.
 * Loops zijn ook in zekere zin een conditional, ze kijken namelijk of ze moeten lopen.
 
-Een lege string en de waarde 0 zullen in een conditional false worden.
+Een lege string en de waarde 0 zullen in een conditional `false` worden.
 
 Het herhalen, terwijl de conditie waar is, wordt in programmeren **loopen** genoemd. Een loop bestaat uit een test conditie en een block code. Iedere keer als de code in het blok loopt, heet het een **iteratie**.
 
@@ -85,7 +85,7 @@ Een **scope** of **lexical scope** staat voor een collectie van variabelen, same
 * Je hebt waardes en types nodig om verschillende acties mogelijk te maken op de verschillende types.
 * Je hebt variabelen nodig om data (of state) in op te slaan, gedurende de executie van het programma.
 * Je hebt conditionals nodig om beslissingen te maken.
-* Je hebt loops nodig om herhaaldelijk taken uit te voeren, totdat de condition false wordt.
+* Je hebt loops nodig om herhaaldelijk taken uit te voeren, totdat de condition `false` wordt.
 * Je hebt functies nodig om je code te organiseren in logische en herbruikbare delen.
 
 ## You don't know JavaScript - Up and Going - Hoofdstuk 2
@@ -110,11 +110,11 @@ Equality:
 `Var a = “42”;`
 `Var b = a * 1` — impliciete coersie tot het nummer 42.
 
-Waardes die false zijn:
+Waardes die `false` zijn:
 * “” - lege string
 * `0`, `-0`, `NaN`
 * ``null``, `undefined`
-* false
+* `false`
 
 * `==` - Kijkt naar de waarde gelijkheid, met coersie toegestaan.
 * `===` - Kijkt naar de waarde gelijkheid, zonder dat coersie is toegestaan.
@@ -128,12 +128,12 @@ Wanneer gebruik je `==` of `===`?
 
 Als je twee non-primitieve waardes vergelijkt, zoals objecten, moet je heel goed opletten op de == en ===.
 
-Arrays worden standaard gecoerced naar strings, gescheiden met komma’s, zonder spaties. Twee arrays met dezelfde waarde aan elkaar vergelijken, levert geen true op.
+Arrays worden standaard gecoerced naar strings, gescheiden met komma’s, zonder spaties. Twee arrays met dezelfde waarde aan elkaar vergelijken, levert geen `true` op.
 
 Inequality:
 `<`, `>`, `<=`, `>=` - **Relational comparison**.
-Als je de waardes `32 < “42”` met elkaar vergelijkt komt hier true uit, omdat een van de waardes geen string is, worden beide waardes naar nummers omgezet.
-Als je `“42” < “43”` vergelijkt komt hier true uit, omdat de waardes **lexicografisch** met elkaar worden vergelijken (op alfabetische waarde).
+Als je de waardes `32 < “42”` met elkaar vergelijkt komt hier `true` uit, omdat een van de waardes geen string is, worden beide waardes naar nummers omgezet.
+Als je `“42” < “43”` vergelijkt komt hier `true` uit, omdat de waardes **lexicografisch** met elkaar worden vergelijken (op alfabetische waarde).
 
 Strings die worden omgezet naar nummers worden NaN. Een NaN waarde is altijd groter dan of kleiner dan iedere andere waarde. Je kan hier dus niet mee vergelijken.
 
@@ -473,7 +473,7 @@ Om een nummer te forceren, dat het een 32-bit integer waarde wordt, gebruik je `
 Een andere manier om de `undefined` waarde te krijgen is, met behulp van de **void operator**.
 Als je ergens een waarde graag `undefined` wilt hebben, kun je dus de void operator gebruiken.
 
-Als je twee niet nummers aan elkaar probeert te koppelen in een operation, krijg je een `NaN`. Not a Number. `NaN` is nooit gelijk aan een andere `NaN`. Je kan testen of een waarde `NaN` is met `isNaN()`. Dit heeft echter een probleem, dat het ook true returnt als je string eraan meegeeft.
+Als je twee niet nummers aan elkaar probeert te koppelen in een operation, krijg je een `NaN`. Not a Number. `NaN` is nooit gelijk aan een andere `NaN`. Je kan testen of een waarde `NaN` is met `isNaN()`. Dit heeft echter een probleem, dat het ook `true` returnt als je string eraan meegeeft.
 Je kan ook checken of een waarde niet gelijk is aan zichzelf, aangezien `NaN` de enige variant binnen JavaScript is, waar dat het geval is.
 
 Als je `var a = 1 / 0` doet, krijg je **Infinity**. Hier is een positieve (`POSITIVE_INFINITY`) en een negatieve (`NEGATIVE_INFINITY`) variant van.
@@ -571,7 +571,7 @@ Voor de andere primitieve waarde, zoals strings, booleans en numbers, gebeurt er
 
 Primitieve waardes hebben geen methodes of properties, hiervoor heb je een object wrapper nodig. JavaScript doet dit automatisch.
 
-Als je bijvoorbeeld `var a = new Boolean(false)` doet, zal dit alsnog `true` returnen in een vergelijking, omdat er een object omheen zit.
+Als je bijvoorbeeld `var a = new Boolean(`false`)` doet, zal dit alsnog `true` returnen in een vergelijking, omdat er een object omheen zit.
 
 Als je wel een object wrapper hebt en je wilt de onderliggende waarde hebben, kun je gebruik maken van:
 
@@ -625,7 +625,7 @@ function isThisCool(vals,fn,rx) {
    	);
 }
 
-isThisCool();        // true
+isThisCool();        // `true`
 
 isThisCool(
     ["a","b","c"],
@@ -686,7 +686,7 @@ Een derde argument aan de functie `JSON.stringify()` heet **space** en zorgt erv
 
 ### toNumber
 
-True wordt 1, false wordt 0, `undefined` wordt NaN, `null` wordt 0.
+`True` wordt `1`, `false` wordt `0`, `undefined` wordt `NaN`, `null` wordt `0`.
 
 ```js
 var a = {
@@ -716,24 +716,24 @@ Number([ "abc" ]);// NaN
 
 ### toBoolean
 
-1 en 0 zijn niet hetzelfde als true en false, echter kun je ze wel converteren van 1 > true en 0 > false.
+`1` en `0` zijn niet hetzelfde als `true` en `false`, echter kun je ze wel converteren van `1` > `true` en `0` > `false`.
 
 Alle JavaScript waardes kunnen in een van de twee categorieën vallen:
-Waardes die false worden als ze omgezet worden naar een boolean.
-Alle andere gevallen (true).
+Waardes die `false` worden als ze omgezet worden naar een boolean.
+Alle andere gevallen (`true`).
 
 Falsy values list:
 
 * `undefined`
 * `null`
-* False
-* +0, -0, NaN
-* “”
+* `false`
+* `+0`, `-0`, `NaN`
+* `“”`
 
 Falsy objects zijn niet slechts objecten die falsy waardes omringen.Een falsy object is een waarde, die lijkt op en zich hetzelfde gedraagt als een normaal
-Object, maar als je ze naar een boolean coerced, zal het een false waarde worden.
+Object, maar als je ze naar een boolean coerced, zal het een `false` waarde worden.
 
-Falsy objects werden gebruikt voornamelijk in legacy code. Zoals document.all, dit zal true returnen. Het zit niet in JavaScript zelf, maar in de implementatie van oude browsers.
+Falsy objects werden gebruikt voornamelijk in legacy code. Zoals document.all, dit zal `true` returnen. Het zit niet in JavaScript zelf, maar in de implementatie van oude browsers.
 
 ### Explicit Coercion
 
@@ -775,14 +775,14 @@ var a = "Hello World";
 
 ~a.indexOf("lo");            // -4   <-- truthy!
 
-if (~a.indexOf("lo")) {	// true
+if (~a.indexOf("lo")) {	// `true`
     // found it!
 }
 
 ~a.indexOf("ol");            // 0    <-- falsy!
-!~a.indexOf("ol");        // true
+!~a.indexOf("ol");        // `true`
 
-if (!~a.indexOf("ol")) {    // true
+if (!~a.indexOf("ol")) {    // `true`
     // not found!
 }
 ```
@@ -807,7 +807,7 @@ Gebruik dit alleen met string waardes.
 ```js
 parseInt(0.000008);		// 0   ("0" from "0.000008")
 parseInt(0.0000008);		// 8   ("8" from "8e-7")
-parseInt(false, 16);		// 250 ("fa" from "false")
+parseInt(`false`, 16);		// 250 ("fa" from "`false`")
 parseInt(parseInt, 16);	// 15  ("f" from "function..")
 
 parseInt("0x10");			// 16
@@ -825,14 +825,14 @@ var e = 0;
 var f = `null`;
 var g;
 
-Boolean(a); // true
-Boolean(b); // true
-Boolean(c); // true
+Boolean(a); // `true`
+Boolean(b); // `true`
+Boolean(c); // `true`
 
-Boolean(d); // false
-Boolean(e); // false
-Boolean(f); // false
-Boolean(g); // false
+Boolean(d); // `false`
+Boolean(e); // `false`
+Boolean(f); // `false`
+Boolean(g); // `false`
 
 var a = "0";
 var b = [];
@@ -843,15 +843,15 @@ var e = 0;
 var f = `null`;
 var g;
 
-!!a;	// true
-!!b;	// true
-!!c;	// true
+!!a;	// `true`
+!!b;	// `true`
+!!c;	// `true`
 
-!!d;	// false
-!!e;	// false
-!!f;	// false
-!!g;	// false
-var b = a ? true : false;
+!!d;	// `false`
+!!e;	// `false`
+!!f;	// `false`
+!!g;	// `false`
+var b = a ? `true` : `false`;
 ```
 
 Bovenstaande zou expliciet te noemen zijn, maar a moet eerst naar een boolean worden omgezet impliciet. Dit heet dus explicitly implicit.
@@ -884,14 +884,14 @@ function onlyOne() {
 	return sum == 1;
 }
 
-var a = true;
-var b = false;
+var a = `true`;
+var b = `false`;
 
-onlyOne(b, a);        // true
-onlyOne(b, a, b, b, b);    // true
+onlyOne(b, a);        // `true`
+onlyOne(b, a, b, b, b);    // `true`
 
-onlyOne(b, b);        // false
-onlyOne(b, a, b, b, b, a);    // false
+onlyOne(b, b);        // `false`
+onlyOne(b, a, b, b, b, a);    // `false`
 ```
 
 ### Alles —> Boolean
@@ -922,7 +922,7 @@ De impliciete transformatie naar een boolean zal plaatsvinden nadat de compound 
 ### Symbol Coercion
 
 Expliciete coercion naar strings is toegestaan, maar impliciet niet en geeft een error.
-Ook kan het nooit naar een nummer gecoerced worden, maar wel naar een boolean (dat wordt true).
+Ook kan het nooit naar een nummer gecoerced worden, maar wel naar een boolean (dat wordt `true`).
 
 ### Loose equals vs. Strict equals
 
@@ -946,10 +946,10 @@ Strings worden omgezet naar nummers.
 Booleans worden omgezet naar nummers en vervolgens vergeleken.
 
 ```js
-var x = true;
+var x = `true`;
 var y = "42";
 
-x == y; // false
+x == y; // `false`
 ```
 
 Een boolean wordt altijd eerst omgezet in een nummer, als het wordt vergeleken.
@@ -958,12 +958,12 @@ Een boolean wordt altijd eerst omgezet in een nummer, als het wordt vergeleken.
 var a = "42";
 
 // bad (will fail!):
-if (a == true) {
+if (a == `true`) {
 	// ..
 }
 
 // also bad (will fail!):
-if (a === true) {
+if (a === `true`) {
 	// ..
 }
 
@@ -986,7 +986,7 @@ if (Boolean(a)) {
 
 #### Comparing: `null` to `undefined`
 
-Als je `null` en `undefined` met == vergelijkt, zal dit altijd true geven.
+Als je `null` en `undefined` met == vergelijkt, zal dit altijd `true` geven.
 
 #### Comparing: object to non-objects
 
@@ -997,8 +997,8 @@ In een array worden nummers omgezet in strings en dan als er vergeleken wordt me
 var a = "abc";
 var b = Object(a);	// same as `new String(a)`
 
-a === b;				// false
-a == b;					// true
+a === b;				// `false`
+a == b;					// `true`
 ```
 
 Gevallen waar dit niet zo is:
@@ -1006,54 +1006,54 @@ Gevallen waar dit niet zo is:
 ```js
 var a = `null`;
 var b = Object(a);	// same as `Object()`
-a == b;					// false
+a == b;					// `false`
 
 var c = `undefined`;
 var d = Object(c);	// same as `Object()`
-c == d;					// false
+c == d;					// `false`
 
 var e = NaN;
 var f = Object(e);	// same as `new Number(e)`
-e == f;					// false
+e == f;					// `false`
 ```
 
 ### Edge cases
 
 ```js
-"0" == `null`;			// false
-"0" == `undefined`;		// false
-"0" == false;			// true -- UH OH!
-"0" == NaN;				// false
-"0" == 0;				// true
-"0" == "";				// false
+"0" == `null`;			// `false`
+"0" == `undefined`;		// `false`
+"0" == `false`;			// `true` -- UH OH!
+"0" == NaN;				// `false`
+"0" == 0;				// `true`
+"0" == "";				// `false`
 
-false == `null`;			// false
-false == `undefined`;		// false
-false == NaN;			// false
-false == 0;				// true -- UH OH!
-false == "";			// true -- UH OH!
-false == [];			// true -- UH OH!
-false == {};			// false
+`false` == `null`;			// `false`
+`false` == `undefined`;		// `false`
+`false` == NaN;			// `false`
+`false` == 0;				// `true` -- UH OH!
+`false` == "";			// `true` -- UH OH!
+`false` == [];			// `true` -- UH OH!
+`false` == {};			// `false`
 
-"" == `null`;				// false
-"" == `undefined`;		// false
-"" == NaN;				// false
-"" == 0;				// true -- UH OH!
-"" == [];				// true -- UH OH!
-"" == {};				// false
+"" == `null`;				// `false`
+"" == `undefined`;		// `false`
+"" == NaN;				// `false`
+"" == 0;				// `true` -- UH OH!
+"" == [];				// `true` -- UH OH!
+"" == {};				// `false`
 
-0 == `null`;				// false
-0 == `undefined`;			// false
-0 == NaN;				// false
-0 == [];				// true -- UH OH!
-0 == {};				// false
+0 == `null`;				// `false`
+0 == `undefined`;			// `false`
+0 == NaN;				// `false`
+0 == [];				// `true` -- UH OH!
+0 == {};				// `false`
 
-0 == "\n";		// true
+0 == "\n";		// `true`
 ```
 
 Het laatste voorbeeld hierboven werkt, omdat ieder karakter met een soort van witruimte wordt via toNumber omgezet naar 0.
 
-Je moet loose equal vergelijkingen met false altijd vermijden.
+Je moet loose equal vergelijkingen met `false` altijd vermijden.
 
 ### Safely using implicit coercion
 
@@ -1061,7 +1061,7 @@ Je moet ervoor zorgen dat je van te voren weet welke waardes er aan beide kanten
 
 Om problemen te voorkomen gebruik de volgende stappen:
 
-1. Als een van de kanten true of false kan hebben, gebruik dan nooit ==.
+1. Als een van de kanten `true` of `false` kan hebben, gebruik dan nooit ==.
 2. Als een van de kanten [], “” of 0 kan hebben, vraag je af of je == wilt gebruiken.
 
 Een andere plek waar je coercion kunt gebruiken, zonder angst, is met de typeof operator.
@@ -1080,10 +1080,10 @@ Dit algorithme roept eerst toPrimitive aan op beide waardes, als één van de tw
 var a = { b: 42 };
 var b = { b: 43 };
 
-a < b;	// false
+a < b;	// `false`
 ```
 
-Dit wordt false, omdat beide variabelen omgezet worden tot [object Object], waardoor ze gelijk zijn aan elkaar en dus niet minder.
+Dit wordt `false`, omdat beide variabelen omgezet worden tot [object Object], waardoor ze gelijk zijn aan elkaar en dus niet minder.
 
 <= wordt in JavaScript vaak gezien als not greater than.
 
@@ -1114,7 +1114,7 @@ De completion value van een statement is bijna als een impliciete return van het
 var a, b;
 
 a = do {
-	if (true) {
+	if (`true`) {
 		b = 4 + 38;
 	}
 };
@@ -1154,7 +1154,7 @@ b;	// 43
 Dit betekent: de tweede expressie (a) zal worden uitgevoerd, nadat het after side effect van a++ is gebeurt.
 
 **delete** wordt gebruikt om properties van objecten te halen.
-Het resultaat van het succesvol verwijderen van iets, is true als het lukt en false als het niet lukt.
+Het resultaat van het succesvol verwijderen van iets, is `true` als het lukt en `false` als het niet lukt.
 Het side effect hiervan is, dat het een property verwijderd.
 
 Van een assignment statement is het directe resultaat dat de waarde die eraan toe wordt gewezen, wordt gelogd en het neven effect is dat het ook echt wordt toegewezen.
@@ -1279,10 +1279,10 @@ Rechts associativiteit heeft niks te maken met rechts-naar-links evaluatie van d
 De ternary operator is rechts-associatief.
 
 ```js
-true ? false : true ? true : true;		// false
+`true` ? `false` : `true` ? `true` : `true`;		// `false`
 
-true ? false : (true ? true : true);	// false
-(true ? false : true) ? true : true;	// true
+`true` ? `false` : (`true` ? `true` : `true`);	// `false`
+(`true` ? `false` : `true`) ? `true` : `true`;	// `true`
 ```
 
 Ook de = operator is rechts-associatief.
@@ -1425,7 +1425,7 @@ Als er in een switch een case matcht, zal dit block beginnen executen, totdat he
 ```js
 var a = "42";
 
-switch (true) {
+switch (`true`) {
 	case a == 10:
 		console.log("10 or '10'");
 		break;
@@ -1438,13 +1438,13 @@ switch (true) {
 // 42 or ’42'
 ```
 
-In dit geval moet bijvoorbeeld a == 10 gelijk zijn aan true.
+In dit geval moet bijvoorbeeld a == 10 gelijk zijn aan `true`.
 
 ```js
 var a = "hello world";
 var b = 10;
 
-switch (true) {
+switch (`true`) {
 	case (a || b == 10):
 		// never gets here
 		break;
@@ -1717,7 +1717,7 @@ var btn = document.getElementById("my_button");
 
 btn.addEventListener("click", function click(evt){
 	console.log("button clicked");
-}, /*capturingPhase=*/false);
+}, /*capturingPhase=*/`false`);
 ```
 
 ### Let loops
@@ -1827,7 +1827,7 @@ Als je echter meer functies on elkaar hebt met dezelfde naam, dan zal deze echte
 ```js
 foo(); // "b"
 
-var a = true;
+var a = `true`;
 if (a) {
    function foo() { console.log("a"); }
 }
@@ -2808,11 +2808,11 @@ Dit zijn eigenlijk allemaal ingebouwde functies, in JavaScript.
 ```js
 var strPrimitive = "I am a string";
 typeof strPrimitive;							// "string"
-strPrimitive instanceof String;					// false
+strPrimitive instanceof String;					// `false`
 
 var strObject = new String("I am a string");
 typeof strObject; 								// "object"
-strObject instanceof String;					// true
+strObject instanceof String;					// `true`
 
 // inspect the object sub-type
 Object.prototype.toString.call(strObject);	// [object String]
@@ -2840,7 +2840,7 @@ Om properties te bereiken in een object gebruik je:
 Je kan met de key access operator programmatisch de identifier opbouwen:
 
 ```js
-var wantA = true;
+var wantA = `true`;
 var myObject = {
 	a: 2
 };
@@ -2909,9 +2909,9 @@ Deze zal over alle **enumerable**, **owned keys** (die direct aanwezig zijn), va
 var newObj = Object.assign({}, myObject);
 
 newObj.a;						// 2
-newObj.b === anotherObject;		// true
-newObj.c === anotherArray;		// true
-newObj.d === anotherFunction;	// true
+newObj.b === anotherObject;		// `true`
+newObj.c === anotherArray;		// `true`
+newObj.d === anotherFunction;	// `true`
 ```
 
 ### Property descriptors
@@ -2926,9 +2926,9 @@ var myObject = {
 Object.getOwnPropertyDescriptor(myObject, "a");
 // {
 //    value: 2,
-//    writable: true,
-//    enumerable: true,
-//    configurable: true
+//    writable: `true`,
+//    enumerable: `true`,
+//    configurable: `true`
 // }
 ```
 
@@ -2941,9 +2941,9 @@ var myObject = {};
 
 Object.defineProperty(myObject, "a", {
 	value: 2,
-	writable: true,
-	configurable: true,
-	enumerable: true
+	writable: `true`,
+	configurable: `true`,
+	enumerable: `true`
 });
 
 myObject.a; // 2
@@ -2951,16 +2951,16 @@ myObject.a; // 2
 
 #### Writable
 
-Als je een object via de defineProperty methode op writable: false zet, dan kan je die property niet meer veranderen.
+Als je een object via de defineProperty methode op writable: `false` zet, dan kan je die property niet meer veranderen.
 Je krijgt een TypeError in strict mode.
 
 #### Configurable
 
-Als je een configurable property via de bovenstaande methode op false zet kan je die niet meer terug zetten naar true, het levert een TypeError op.
+Als je een configurable property via de bovenstaande methode op `false` zet kan je die niet meer terug zetten naar `true`, het levert een TypeError op.
 
-Als een property al configurable false is, kan je writeable nog wel naar false zetten, maar niet meer naar true.
+Als een property al configurable `false` is, kan je writeable nog wel naar `false` zetten, maar niet meer naar `true`.
 
-**configurable:false** zorgt er ook voor dat je een property niet meer kan verwijderen met **delete**.
+**configurable:`false`** zorgt er ook voor dat je een property niet meer kan verwijderen met **delete**.
 
 #### Enumerable
 
@@ -2972,15 +2972,15 @@ Soms wil je properties hebben, die niet kunnen worden veranderd, sinds ES5 kan d
 
 ##### Object constant
 
-Als je *writable: false* en *configurable:false* combineert, creëer je als het ware een **constant** (iets dat niet kan worden verwijderd, veranderd of hergedefineerd).
+Als je *writable: `false`* en *configurable:`false`* combineert, creëer je als het ware een **constant** (iets dat niet kan worden verwijderd, veranderd of hergedefineerd).
 
 ```js
 var myObject = {};
 
 Object.defineProperty(myObject, "FAVORITE_NUMBER", {
 	value: 42,
-	writable: false,
-	configurable: false
+	writable: `false`,
+	configurable: `false`
 });
 ```
 
@@ -3001,13 +3001,13 @@ myObject.b; // `undefined`
 
 ##### Seal
 
-**Object.seal()** maakt een sealed object, wat betekent het pakt een bestaand object en roept daarop aan Object.preventExtensions(), maar zet ook diens configurable: false.
+**Object.seal()** maakt een sealed object, wat betekent het pakt een bestaand object en roept daarop aan Object.preventExtensions(), maar zet ook diens configurable: `false`.
 
 Je kan dus geen properties meer toevoegen, maar je kan ook de bestaande properties niet meer veranderen of verwijderen. Je kan nog wel de waardes veranderen.
 
 ##### Freeze
 
-**Object.freeze()** doet hetzelfde als seal, maar zet ook alle **data accesor** properties writable: false, zodat de waardes niet meer kunnen veranderen.
+**Object.freeze()** doet hetzelfde als seal, maar zet ook alle **data accesor** properties writable: `false`, zodat de waardes niet meer kunnen veranderen.
 
 Dit is de hoogst mogelijke vorm van immutability.
 
@@ -3032,7 +3032,7 @@ Als het via de bovenstaande manier, op geen enkele manier, een waarde kan terugg
 Je zou denken dat deze methode wordt aangeroepen als je een waarde toevoegd aan een object, maar het ligt meer genuanceerd, voornamelijk met betrekking tot het gedrag dat gebeurt als het property al bestaat.
 
 1. Is de property een **accesor descriptor**? Roep dan de setter aan, als die er is.
-2. Is de property een **data descriptor** met writable:false, doe niks in non-strict, en geef een TypeError in strict mode.
+2. Is de property een **data descriptor** met writable:`false`, doe niks in non-strict, en geef een TypeError in strict mode.
 3. Zet anders de waarde als normaal.
 
 ### Getters & Setters
@@ -3061,7 +3061,7 @@ Object.defineProperty(
 		get: function(){ return this.a * 2 },
 
 		// make sure `b` shows up as an object property
-		enumerable: true
+		enumerable: `true`
 	}
 );
 
@@ -3113,11 +3113,11 @@ var myObject = {
 	a: 2
 };
 
-("a" in myObject);				// true
-("b" in myObject);				// false
+("a" in myObject);				// `true`
+("b" in myObject);				// `false`
 
-myObject.hasOwnProperty("a");	// true
-myObject.hasOwnProperty("b");	// false
+myObject.hasOwnProperty("a");	// `true`
+myObject.hasOwnProperty("b");	// `false`
 ```
 
 Je kan een van deze twee manieren gebruiken, om erachter te komen of een property bestaat op een object, of dat er gewoon `undefined` aan deze property is toegewezen.
@@ -3149,15 +3149,15 @@ Deze werkt als volgt:
 var myArray = [ 1, 2, 3 ];
 var it = myArray[Symbol.iterator]();
 
-it.next(); // { value:1, done:false }
-it.next(); // { value:2, done:false }
-it.next(); // { value:3, done:false }
-it.next(); // { done:true }
+it.next(); // { value:1, done:`false` }
+it.next(); // { value:2, done:`false` }
+it.next(); // { value:3, done:`false` }
+it.next(); // { done:`true` }
 ```
 
 Waarom je hier Symbol gebruikt: het houdt een speciale naamwaarde, niet een speciale waarde.
 
-Je moet één keer meer it.next() aanroepen, om de done's naar true te zetten.
+Je moet één keer meer it.next() aanroepen, om de done's naar `true` te zetten.
 
 Gewone objecten hebben geen **@@iterator**. Deze kan je er wel handmatig op zetten.
 
@@ -3168,9 +3168,9 @@ var myObject = {
 };
 
 Object.defineProperty(myObject, Symbol.iterator, {
-	enumerable: false,
-	writable: false,
-	configurable: true,
+	enumerable: `false`,
+	writable: `false`,
+	configurable: `true`,
 	value: function() {
 		var o = this;
 		var idx = 0;
@@ -3188,9 +3188,9 @@ Object.defineProperty(myObject, Symbol.iterator, {
 
 // iterate `myObject` manually
 var it = myObject[Symbol.iterator]();
-it.next(); // { value:2, done:false }
-it.next(); // { value:3, done:false }
-it.next(); // { value:`undefined`, done:true }
+it.next(); // { value:2, done:`false` }
+it.next(); // { value:3, done:`false` }
+it.next(); // { value:`undefined`, done:`true` }
 
 // iterate `myObject` with `for..of`
 for (var v of myObject) {
@@ -3508,7 +3508,7 @@ for (var k in myObject) {
 }
 // found: a
 
-("a" in myObject); // true
+("a" in myObject); // `true`
 ```
 
 #### Object.prototype
@@ -3525,8 +3525,8 @@ Als een property op beide het directe object en hoger in de chain bestaat, heet 
 
 Als een property assignt, die niet direct op het object is, maar wel hoger in de chain kunnen er enkele dingen gebeuren:
 
-* Als een normale data accessor property, met dezelfde naam als deze property bestaat hoger in de chain, en deze is *niet* **read-only (writable:false)**, zal de assignment direct op het target object worden gezet, wat zorgt voor een **shadowed property**.
-* Als een normale data accessor property, met dezelfde naam als deze property bestaat hoger in de chain, en deze is *wel* **read-only (writable:false)**, dan zijn beide het aanmaken van die nieuwe property en het maken van een **shadowed property** niet toegestaan.
+* Als een normale data accessor property, met dezelfde naam als deze property bestaat hoger in de chain, en deze is *niet* **read-only (writable:`false`)**, zal de assignment direct op het target object worden gezet, wat zorgt voor een **shadowed property**.
+* Als een normale data accessor property, met dezelfde naam als deze property bestaat hoger in de chain, en deze is *wel* **read-only (writable:`false`)**, dan zijn beide het aanmaken van die nieuwe property en het maken van een **shadowed property** niet toegestaan.
 * Als de property naam hoger in de chain voorkomt en het een **setter** is, wordt deze aangeroepen en wordt deze *niet* opnieuw gedefineerd.
 
 Als je toch wilt shadowen in de laatste twee gevallen, moet je Object.defineProperty() gebruiken.
@@ -3545,15 +3545,15 @@ var myObject = Object.create(anotherObject);
 anotherObject.a; // 2
 myObject.a; // 2
 
-anotherObject.hasOwnProperty("a"); // true
-myObject.hasOwnProperty("a"); // false
+anotherObject.hasOwnProperty("a"); // `true`
+myObject.hasOwnProperty("a"); // `false`
 
 myObject.a++; // oops, implicit shadowing!
 
 anotherObject.a; // 2
 myObject.a; // 3
 
-myObject.hasOwnProperty("a"); // true
+myObject.hasOwnProperty("a"); // `true`
 ```
 
 ### "Class"
@@ -3573,7 +3573,7 @@ function Foo() {
 
 var a = new Foo();
 
-Object.getPrototypeOf(a) === Foo.prototype; // true
+Object.getPrototypeOf(a) === Foo.prototype; // `true`
 ```
 
 In dit geval, doordat a wordt toegewezen aan de new functie, zal deze een interne **[[Prototype]]** link krijgen, naar het object, waarnaar Foo.prototype linkt.
@@ -3650,8 +3650,8 @@ function Foo() { /* .. */ }
 Foo.prototype = { /* .. */ }; // create a new prototype object
 
 var a1 = new Foo();
-a1.constructor === Foo; // false!
-a1.constructor === Object; // true!
+a1.constructor === Foo; // `false`!
+a1.constructor === Object; // `true`!
 ```
 
 `instanceof` pakt een standaard object als linker argument en een functie, als diens rechter argument. Dit kijkt of er ergens in de hele [[Prototype]] chain van het standaard object, wijst het object naar Functie.prototype dat echt bestaat.
@@ -4820,7 +4820,7 @@ var o = { a:1, b:2, c:3 },
 p = { a, b, c } = o;
 
 console.log(a, b, c);			// 1 2 3
-p === o;						// true
+p === o;						// `true`
 ```
 
 #### Too many, too few, just enough
@@ -5154,7 +5154,7 @@ var controller = {
 		btn.addEventListener("click", function(){
 			// ..
 			self.makeRequest(..);
-		}, false);
+		}, `false`);
 	}
 };
 
@@ -5164,7 +5164,7 @@ var controller = {
 		btn.addEventListener("click", () => {
 			// ..
 			this.makeRequest(..);
-		}, false);
+		}, `false`);
 	}
 };
 ```
@@ -5223,11 +5223,11 @@ var re1 = /foo/,
 	str = "++foo++";
 
 re1.lastIndex;			// 0
-re1.test(str);		// true
+re1.test(str);		// `true`
 re1.lastIndex;			// 0 -- not updated
 
 re1.lastIndex = 4;
-re1.test(str);		// true -- ignored `lastIndex`
+re1.test(str);		// `true` -- ignored `lastIndex`
 re1.lastIndex;			// 4 -- not updated
 
 // Sticky
@@ -5235,14 +5235,14 @@ var re2 = /foo/y,		// <-- notice the `y` sticky flag
 	str = "++foo++";
 
 re2.lastIndex;			// 0
-re2.test(str);		// false -- "foo" not found at `0`
+re2.test(str);		// `false` -- "foo" not found at `0`
 re2.lastIndex;			// 0
 
 re2.lastIndex = 2;
-re2.test(str);		// true
+re2.test(str);		// `true`
 re2.lastIndex;			// 5 -- updated to after previous match
 
-re2.test(str);		// false
+re2.test(str);		// `false`
 re2.lastIndex;			// 0 -- reset after previous match failure
 ```
 
@@ -5354,12 +5354,12 @@ sym.toString();		// "Symbol(some optional description)"
 ```
 
 ```js
-sym instanceof Symbol;		// false
+sym instanceof Symbol;		// `false`
 
 var symObj = Object(sym);
-symObj instanceof Symbol;	// true
+symObj instanceof Symbol;	// `true`
 
-symObj.valueOf() === sym;	// true
+symObj.valueOf() === sym;	// `true`
 ```
 
 Het doel van een symbol is om een string-achtige waarde te maken, die niet met een andere waarde kan botsen.
@@ -5394,7 +5394,7 @@ function HappyFace() {
 var me = HappyFace(),
 	you = HappyFace();
 
-me === you;			// true
+me === you;			// `true`
 ```
 
 #### Symbol Registry
@@ -5413,7 +5413,7 @@ console.log(EVT_LOGIN);		// Symbol(event.login)
 var o = {
 	foo: 42,
 	[ Symbol("bar") ]: "hello world",
-	baz: true
+	baz: `true`
 };
 
 Object.getOwnPropertyNames(o);	// [ "foo","baz" ]
@@ -5445,11 +5445,11 @@ var arr = [1,2,3];
 
 var it = arr[Symbol.iterator]();
 
-it.next();		// { value: 1, done: false }
-it.next();		// { value: 2, done: false }
-it.next();		// { value: 3, done: false }
+it.next();		// { value: 1, done: `false` }
+it.next();		// { value: 2, done: `false` }
+it.next();		// { value: 3, done: `false` }
 
-it.next();		// { value: `undefined`, done: true }
+it.next();		// { value: `undefined`, done: `true` }
 ```
 
 In een iterator kan je returnen en throwen, verder niks.
@@ -5501,7 +5501,7 @@ function *foo() {
 
 ```js
 function *foo() {
-	while (true) {
+	while (`true`) {
 		yield Math.random();
 	}
 }
@@ -5605,11 +5605,11 @@ function *foo() {
 
 var it = foo();
 
-it.next();				// { value: 1, done: false }
+it.next();				// { value: 1, done: `false` }
 
 try {
 	it.throw("Hi!");	// Hi!
-						// { value: 2, done: false }
+						// { value: 2, done: `false` }
 	it.next();
 
 	console.log("never gets here");
