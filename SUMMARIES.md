@@ -857,7 +857,7 @@ var g;
 var b = a ? `true` : `false`;
 ```
 
-Bovenstaande zou expliciet te noemen zijn, maar a moet eerst naar een boolean worden omgezet impliciet. Dit heet dus explicitly implicit.
+Bovenstaande zou expliciet te noemen zijn, maar `a` moet eerst naar een boolean worden omgezet impliciet. Dit heet dus **explicitly implicit**.
 
 ### Implicit Coercion
 
