@@ -1279,10 +1279,10 @@ Rechts associativiteit heeft niks te maken met rechts-naar-links evaluatie van d
 De ternary operator is rechts-associatief.
 
 ```js
-`true` ? `false` : `true` ? `true` : `true`;		// `false`
+true ? false : true ? true : true;		// false
 
-`true` ? `false` : (`true` ? `true` : `true`);	// `false`
-(`true` ? `false` : `true`) ? `true` : `true`;	// `true`
+true ? false : (true ? true : true);	// false
+(true ? false : true) ? true : true;	// true
 ```
 
 Ook de = operator is rechts-associatief.
