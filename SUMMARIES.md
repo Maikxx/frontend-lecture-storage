@@ -1137,7 +1137,7 @@ a;	// 43
 b;	// 42
 ```
 
-++ en - - kunnen beide worden gebruikt als **postfix** (na) en **prefix** (voor).
+`++` en `--` kunnen beide worden gebruikt als **postfix** (na) en **prefix** (voor).
 Als het in de prefix versie wordt gebruikt, gebeurt het side effect voordat de waarde is gereturned.
 Het side effect verdwijnt niet als je het in () wrapt.
 
