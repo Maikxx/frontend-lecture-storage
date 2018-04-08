@@ -4579,7 +4579,7 @@ let (a = 2, b, c) {
 
 Deze bovenstaande code is niet in de ES6 standaard.
 
-Het `let` mechanisme is nieuwe en is **impliciet**, wat ons even doet denken, dat heet **mental tax**.
+Het `let` mechanisme is nieuw en **impliciet**, wat ons even doet denken, dat heet **mental tax**.
 
 `let` moet altijd aan de bovenkant van een scope, om problemen te voorkomen.
 
