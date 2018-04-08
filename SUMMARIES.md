@@ -1715,15 +1715,15 @@ var btn = document.getElementById("my_button");
 
 btn.addEventListener("click", function click(evt){
 	console.log("button clicked");
-}, /*capturingPhase=*/`false`);
+}, /*capturingPhase=*/false);
 ```
 
 ### Let loops
 
-Als je gebruik maakt van let loops zal de variabele die je daarin aanmaakt niet buiten de loop beschikbaar zijn.
+Als je gebruik maakt van `let` loops zal de variabele die je daarin aanmaakt niet buiten de loop beschikbaar zijn.
 
-Let bindt i aan de for loop body en herbind het iedere iteratie van de loop.
-Let bindt zich aan artibraire blocks code in plaats van functie scopes of globale scopes, kunnen er problemen opspelen als je de code gaat refactoren.
+`let` bindt `i` aan de `for` loop body en herbind het iedere iteratie van de loop.
+`let` bindt zich aan artibraire blocks code in plaats van functie scopes of globale scopes, kunnen er problemen opspelen als je de code gaat refactoren.
 
 ### Const
 
