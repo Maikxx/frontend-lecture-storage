@@ -800,9 +800,9 @@ Math.floor(-49.6);    // -50
 
 ### Parsing numeric strings
 
-parseInt is een functie die zoekt in een string naar het eerst te vinden nummer en transformeert deze naar een nummer.
-Er is ook parseFloat.
-Gebruik dit alleen met string waardes.
+`parseInt()` is een functie die zoekt in een string naar het eerst te vinden nummer en transformeert deze naar een nummer.
+Er is ook `parseFloat()`.
+Gebruik deze beiden alleen met string waardes.
 
 ```js
 parseInt(0.000008);		// 0   ("0" from "0.000008")
