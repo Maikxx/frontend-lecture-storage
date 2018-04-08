@@ -4696,7 +4696,7 @@ foo();								// "bar called"
 foo(10);							// "bar called"
 									// 10 15
 y = 6;
-foo(`undefined`, 10);				// 9 10
+foo(undefined, 10);				// 9 10
 ```
 
 ### Destructuring
