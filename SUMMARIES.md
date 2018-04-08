@@ -3889,16 +3889,16 @@ schedule(function(){
 
 Callbacks zijn een fundamenteel van asynchroniteit in JavaScript, maar ze zijn niet genoeg om het hele spectrum van async programmeren in JavaScript bij te houden.
 
-Callbacks zorgen ervoor dat we harder moeten gaan nadenken over de code die we schrijven, omdat ze een non-lineaire, non-sequentiele flow volgen.
+**Callbacks** zorgen ervoor dat we harder moeten gaan nadenken over de code die we schrijven, omdat ze een *non-lineaire*, *non-sequentiele* flow volgen.
 
 Callbacks hebben last van **inversion of control**, wat betekent dat ze impliciet de controle overgeven aan een andere partij (vaak third party), om jouw programma goed te laten verlopen.
-Dit kan voor meerdere problemen zorgen, waaronder bijvoorbeeld of een callback meer is aangeroepen dan de bedoelde hoeveelheid.
+Dit kan voor meerdere problemen zorgen, waaronder bijvoorbeeld of een callback vaker is aangeroepen dan de beoogde hoeveelheid.
 
-Vaak *fake* je multitasken, in dat je snel van context switcht. We doen dingen alsnog *simultaan* en niet in *parallel*.
+Vaak *fake* je multitasken, in dat je snel van context switcht. We doen dingen alsnog *achtereenvolgend* en niet in *parallel*.
 
-De reden dat het moeilijk is om asynchrone code te schrijven,vooral als alles wat we hebben callbacks zijn, is omdat de gedachtestroom van een mens tegelijk denken en plannen niet natuurlijk is voor ons.
+De reden dat het moeilijk is om asynchrone code te schrijven, vooral als alles wat we hebben callbacks zijn, is omdat de gedachtestroom van een mens tegelijk denken en plannen niet natuurlijk is voor ons.
 
-**House of cards**: De code werkt, geen idee waarom, niemand kom eraan.
+**House of cards**: De code werkt, geen idee waarom, niemand mag eraan komen.
 
 **Nested / Chained Callbacks**
 ```js
