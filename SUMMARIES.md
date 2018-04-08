@@ -5354,12 +5354,12 @@ sym.toString();		// "Symbol(some optional description)"
 ```
 
 ```js
-sym instanceof Symbol;		// `false`
+sym instanceof Symbol;		// false
 
 var symObj = Object(sym);
-symObj instanceof Symbol;	// `true`
+symObj instanceof Symbol;	// true
 
-symObj.valueOf() === sym;	// `true`
+symObj.valueOf() === sym;	// true
 ```
 
 Het doel van een symbol is om een string-achtige waarde te maken, die niet met een andere waarde kan botsen.
@@ -5394,7 +5394,7 @@ function HappyFace() {
 var me = HappyFace(),
 	you = HappyFace();
 
-me === you;			// `true`
+me === you;			// true
 ```
 
 #### Symbol Registry
