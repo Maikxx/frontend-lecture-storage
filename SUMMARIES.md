@@ -766,9 +766,9 @@ Soms als je bitwise operators gebruikt, met bepaalde nummers, zullen de waardes 
 ~42;    // -(42+1) ==> -43
 ```
 
--1 heet een sentinel value, wat betekent: een waarde, die een arbitraire semantische betekenis heeft gekregen, binnen een set van soortgelijke waardes (nummers).
+`-1` heet een **sentinel value**, wat betekent: een waarde, die een arbitraire semantische betekenis heeft gekregen, binnen een set van soortgelijke waardes (nummers).
 
-Deze waarde wordt bijvoorbeeld gebruikt bij het checken of een string een andere substring heeft, met indexOf(). Deze geeft -1 terug, als er niks is gevonden en anders een 0-based index waar de substring begint.
+Deze waarde wordt bijvoorbeeld gebruikt bij het checken of een string een andere substring heeft, met `indexOf()`. Deze geeft `-1` terug, als er niks is gevonden en anders een 0-based index waar de substring begint.
 
 ```js
 var a = "Hello World";
