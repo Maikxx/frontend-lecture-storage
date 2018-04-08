@@ -2179,7 +2179,7 @@ for (i=0; i<10; i++) {
 console.log(foo.count); // 0 -- WTF?
 ```
 
-De oplossing is ook niet per se, om de naam van de functie te gebruiken als this (het kan wel, maar dan moet je functie wel altijd een naam hebben):
+De oplossing is ook niet per se, om de naam van de functie te gebruiken als `this` (het kan wel, maar dan moet je functie wel altijd een naam hebben):
 
 ```js
 function foo() {
@@ -2240,23 +2240,23 @@ function bar() {
 	console.log(this.a);
 }
 
-foo(); //`undefined`
+foo(); // undefined
 ```
 
-In dit bovenstaande voorbeeld gaan meerdere dingen mis, ten eerste dat this.bar() wordt aangeroepen (wat overigens wel lukt), om vervolgens te falen bij het loggen van this.a.
+In dit bovenstaande voorbeeld gaan meerdere dingen mis, ten eerste dat `this.bar()` wordt aangeroepen (wat overigens wel lukt), om vervolgens te falen bij het loggen van `this.a`.
 
-Je kan this niet gebruiken om in de lexicale scope iets op te zoeken.
+Je kan `this` niet gebruiken om in de lexicale scope iets op te zoeken.
 
-### What's this?
+### What's `this`?
 
-This heeft niks te maken met waar de functie is verklaard, maar juist de manier waarop deze wordt aangeroepen.
+`this` heeft niks te maken met waar de functie is verklaard, maar juist de manier waarop deze wordt aangeroepen.
 
 Als een functie wordt aangeroepen, wordt er een **activation record** of **execution context** aangemaakt. Deze bevat informatie over:
 
 * **Waar** de functie **vandaan** is aangeroepen (**call-stack**)
 * **Hoe** de functie is aangeroepen
 * Welke parameters er werden meegegeven
-* Etcetera
+* Etc.
 
 Hierin staat ook een waarde van de 'this' reference, die voor de levensduur van de functie geldt.
 
