@@ -3084,7 +3084,7 @@ myObject.a = 3;
 myObject.a; // 2
 ```
 
-In dit geval is alleen een getter gemaakt, en wordt bij een poging om de waarde van a te veranderen deze assignment genegeerd.
+In dit geval is alleen een getter gemaakt, en wordt bij een poging om de waarde van `a` te veranderen deze assignment genegeerd.
 
 ```js
 	// define a getter for `a`
@@ -3112,23 +3112,23 @@ var myObject = {
 	a: 2
 };
 
-("a" in myObject);				// `true`
-("b" in myObject);				// `false`
+("a" in myObject);				// true
+("b" in myObject);				// false
 
-myObject.hasOwnProperty("a");	// `true`
-myObject.hasOwnProperty("b");	// `false`
+myObject.hasOwnProperty("a");	// true
+myObject.hasOwnProperty("b");	// false
 ```
 
 Je kan een van deze twee manieren gebruiken, om erachter te komen of een property bestaat op een object, of dat er gewoon `undefined` aan deze property is toegewezen.
 
-De **in** methode kijkt of het object een property heeft met die naam, of dat het in de prototype zit.
-De **hasOwnProperty** methode kijkt alleen of het object een property heeft met die naam. Deze kijkt ook naar de [[Prototype]]
+De `in` methode kijkt of het object een property heeft met die naam, of dat het in de prototype zit.
+De `hasOwnProperty` methode kijkt alleen of het object een property heeft met die naam. Deze kijkt ook naar de [[Prototype]]
 
 ### Enumeration
 
-Niet enumerable properties worden alsnog gezien via hasOwnProperty en de in methode, behalve als de in methode zich bevindt in een for loop.
-**Object.keys(obj)** returnt een array van alle enumerable properties.
-**Object.getOwnPropertyNames(obj)** returnt een array van alle properties, of ze enumerable of niet zijn maar niet uit.
+Niet enumerable properties worden alsnog gezien via `hasOwnProperty` en de in methode, behalve als de in methode zich bevindt in een `for` loop.
+`Object.keys(obj)` returnt een array van alle enumerable properties.
+`Object.getOwnPropertyNames(obj)` returnt een array van alle properties, of ze enumerable of niet zijn maakt niet uit.
 
 Deze twee methodes kijken niet naar de [[Prototype]].
 
