@@ -1591,7 +1591,7 @@ foo(o1);
 console.log(o1.a); // 2
 
 foo(o2);
-console.log(o2.a); // `undefined`
+console.log(o2.a); // undefined
 console.log(a); // 2 -- Oops, leaked global!
 ```
 
