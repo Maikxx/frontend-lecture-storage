@@ -5169,7 +5169,7 @@ var controller = {
 };
 ```
 
-![Arrow function decision chart](https://raw.githubusercontent.com/getify/You-Dont-Know-JavaScript/master/es6%20%26%20beyond/fig1.png)
+![Arrow function decision chart](https://github.com/getify/You-Dont-Know-JS/blob/master/es6%20%26%20beyond/fig1.png)
 
 ### For..of loops
 
