@@ -3385,13 +3385,13 @@ Vehicle.drive.call(this)
 ```
 
 Dit is een voorbeeld van **explicit pseudo-polymorphism**.
-In dit geval wordt een absolute referentie gemaakt naar de bovenstaande drive methode.
+In dit geval wordt een absolute referentie gemaakt naar de bovenstaande `drive` methode.
 
 Dit systeem zorgt voor heel veel ingewikkelde ideeën met de code en verhoogt de onderhoudstijd.
 
 ##### Mixing Copies
 
-**Mixin** komt van een alternatieve manier om een taak uit te leggen: Car heeft de content van Vehicle *mixed-in*.
+**Mixin** komt van een alternatieve manier om een taak uit te leggen: `Car` heeft de content van `Vehicle` *mixed-in*.
 Doordat de twee objecten een referentie hebben naar diens gezamenlijke functies, betekent dat ook handmatig kopieëren van functies (mixins), van het ene object naar het ander, niet het echte dupliceren kan emuleren, zoals dat bij class-oriented languages wel zo is.
 
 ##### Parasitic Inheritance
