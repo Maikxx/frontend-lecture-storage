@@ -1184,7 +1184,7 @@ De curly braces is de **r-value**.
 } // Dit is een standalone block.
 ```
 
-Het is valide JavaScript. En foo: bar() is een **labeled statement**. Dit is een soort van **goto**, wat volgens vele een hele slechte manier van coden is.
+Het is valide JavaScript. En `foo: bar()` is een **labeled statement**. Dit is een soort van **goto**, wat volgens vele een hele slechte manier van coden is.
 JavaScript heeft **labeled jumps**. Het betekent niet letterlijk ga hierheen, maar meer dat het hier iets mee moet doen.
 
 ```js
