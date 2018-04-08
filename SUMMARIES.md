@@ -1051,9 +1051,9 @@ false == {};			// `false`
 0 == "\n";		// `true`
 ```
 
-Het laatste voorbeeld hierboven werkt, omdat ieder karakter met een soort van witruimte wordt via toNumber omgezet naar 0.
+Het laatste voorbeeld hierboven werkt, omdat ieder karakter met een soort van witruimte wordt via `toNumber()` omgezet naar 0.
 
-Je moet loose equal vergelijkingen met `false` altijd vermijden.
+Je moet **loose equal** vergelijkingen met `false` altijd vermijden.
 
 ### Safely using implicit coercion
 
@@ -1061,11 +1061,11 @@ Je moet ervoor zorgen dat je van te voren weet welke waardes er aan beide kanten
 
 Om problemen te voorkomen gebruik de volgende stappen:
 
-1. Als een van de kanten `true` of `false` kan hebben, gebruik dan nooit ==.
-2. Als een van de kanten [], “” of 0 kan hebben, vraag je af of je == wilt gebruiken.
+1. Als een van de kanten `true` of `false` kan hebben, gebruik dan nooit `==`.
+2. Als een van de kanten `[]`, `“”` of `0` kan hebben, vraag je af of je `==` wilt gebruiken.
 
-Een andere plek waar je coercion kunt gebruiken, zonder angst, is met de typeof operator.
-Deze geeft één van de zeven strings terug, genoemd in H1, hiervan is er geen één een “”.
+Een andere plek waar je coercion kunt gebruiken, zonder angst, is met de `typeof` operator.
+Deze geeft één van de zeven strings terug, genoemd in H1, hiervan is er geen één een `“”`.
 
 [Javascript Equality Table](https://github.com/dorey/JavaScript-Equality-Table)
 
