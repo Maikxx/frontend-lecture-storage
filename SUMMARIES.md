@@ -1906,7 +1906,7 @@ for (var i=1; i<=5; i++) {
 }
 ```
 
-Het kan zelfs nog makkelijk worden gemaakt met JavaScript, doordat er speciaal gedrag is vastgesteld voor let in het hoofd van een for-loop. Als je hier namelijk let gebruikt, zal dit aangeven dat je de variabele niet slechts één keer wilt verklaren voor de hele loop, maar voor iedere iteratie.
+Het kan zelfs nog makkelijk worden gemaakt met JavaScript, doordat er speciaal gedrag is vastgesteld voor `let` in het hoofd van een `for`-loop. Als je hier namelijk `let` gebruikt, zal dit aangeven dat je de variabele niet slechts één keer wilt verklaren voor de hele loop, maar voor iedere iteratie.
 
 ```js
 for (let i=1; i<=5; i++) {
@@ -1917,7 +1917,7 @@ for (let i=1; i<=5; i++) {
 ```
 
 ### Modules
-Er zijn nog meer code patronen, die de kracht van closures omarmen, maar aan het oppervlak geen schijn van callbacks tonen, hiervan is de meest bekende en krachtigste het module patroon. De meest bekende vorm binnen het module pattern is de revealing module.
+Er zijn nog meer code patronen, die de kracht van closures omarmen, maar aan het oppervlak geen schijn van callbacks tonen, hiervan is de meest bekende en krachtigste het **module patroon**. De meest bekende vorm binnen het module pattern is de **revealing module**.
 
 ```js
 function CoolModule() {
@@ -1944,17 +1944,18 @@ foo.doSomething(); // cool
 foo.doAnother(); // 1 ! 2 ! 3
 ```
 
-De bovenstaande CoolModule() is slechts een functie, die moet worden aangeroepen, zodat er een module instance wordt gemaakt.
+De bovenstaande `CoolModule()` is slechts een functie, die moet worden aangeroepen, zodat er een **module instance** wordt gemaakt.
 
-Hetgeen wat hierboven wordt gereturnt kan worden gezien als de public API van de module, aangezien deze gereturnde waardes geen toegang geven tot de privé variabelen.
+Hetgeen wat hierboven wordt ge`return`t kan worden gezien als de public API van de module, aangezien deze ge`return`de waardes geen toegang geven tot de privé variabelen.
 
 De innerlijke functies hebben closure over de binnenste scope van de instance van de module, doordat deze wordt aangeroepen en dus ergens anders beschikbaar worden.
 
-Vereisten module pattern:
-Er moet een omringende functie zijn, die wordt aangeroepen, ten minste één keer.
-De omringende functie moet tenminste één binnenste functie returnen, zodat deze functie closure heeft over de privé scope en toegang heeft tot en/of de privé state kan aanpassen.
+*Vereisten module pattern*
 
-De bovenstaande code maakt het niet uit hoeveel module instanties ervan afstammen. Als een module daar wel om geeft heet het een singleton.
+* Er moet een omringende functie zijn, die wordt aangeroepen, ten minste één keer.
+* De omringende functie moet tenminste één binnenste functie `return`en, zodat deze functie closure heeft over de privé scope en toegang heeft tot en/of de privé state kan aanpassen.
+
+De bovenstaande code maakt het niet uit hoeveel module instanties ervan afstammen. Als een module daar wel om geeft heet het een **singleton**.
 
 ```js
 var foo = (function CoolModule() {
