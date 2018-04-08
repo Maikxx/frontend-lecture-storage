@@ -3142,8 +3142,6 @@ Als je wilt itereren over de waardes van een object, wordt bij indexed-arrays va
 
 Als je direct over de waardes van een array, of object properties wilt itereren, kun je de ES6 `for..of` loop gebruiken.
 
-Deze werkt als volgt:
-
 ```js
 var myArray = [ 1, 2, 3 ];
 var it = myArray[Symbol.iterator]();
@@ -3156,7 +3154,7 @@ it.next(); // { done:`true` }
 
 Waarom je hier Symbol gebruikt: het houdt een speciale naamwaarde, niet een speciale waarde.
 
-Je moet één keer meer it.next() aanroepen, om de done's naar `true` te zetten.
+Je moet één keer meer `it.next()` aanroepen, om de done's naar `true` te zetten.
 
 Gewone objecten hebben geen **@@iterator**. Deze kan je er wel handmatig op zetten.
 
