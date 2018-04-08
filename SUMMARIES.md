@@ -3522,7 +3522,7 @@ Als een property op beide het directe object en hoger in de chain bestaat, heet 
 
 Als je een property assignt, die niet direct op het object is, maar wel hoger in de chain kunnen er enkele dingen gebeuren:
 
-* Als een normale data accessor property, met dezelfde naam als deze property bestaat hoger in de chain, en deze is *niet* **read-only (writable:`false`)**, zal de assignment direct op het target object worden gezet, wat zorgt voor een **shadowed property**.
+* Als een normale data accessor property, met dezelfde naam als deze property bestaat hoger in de chain, en deze is *niet* **read-only (writable:`true`)**, zal de assignment direct op het target object worden gezet, wat zorgt voor een **shadowed property**.
 * Als een normale data accessor property, met dezelfde naam als deze property bestaat hoger in de chain, en deze is *wel* **read-only (writable:`false`)**, dan zijn beide het aanmaken van die nieuwe property en het maken van een **shadowed property** niet toegestaan.
 * Als de property naam hoger in de chain voorkomt en het een **setter** is, wordt deze aangeroepen en wordt deze *niet* opnieuw gedefineerd.
 
