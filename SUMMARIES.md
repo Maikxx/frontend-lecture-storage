@@ -5173,7 +5173,7 @@ var controller = {
 
 ### For..of loops
 
-**For..of** loopt over een set van waardes, die gemaakt zijn door een **iterator**.
+`for..of` loopt over een set van waardes, die gemaakt zijn door een **iterator**.
 
 Een **iterable** is een object, die een iterator kan maken, die gebruikt kan worden door een loop.
 
