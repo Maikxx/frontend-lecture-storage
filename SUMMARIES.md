@@ -990,8 +990,8 @@ Als je `null` en `undefined` met `==` vergelijkt, zal dit altijd `true` geven.
 
 #### Comparing: object to non-objects
 
-In deze situatie worden objecten omgezet met toPrimitive en vervolgens vergeleken.
-In een array worden nummers omgezet in strings en dan als er vergeleken wordt met == omgezet tot nummers.
+In deze situatie worden objecten omgezet met `toPrimitive()` en vervolgens vergeleken.
+In een array worden nummers omgezet in strings en dan als er vergeleken wordt met `==` omgezet tot nummers.
 
 ```js
 var a = "abc";
@@ -1020,30 +1020,30 @@ e == f;					// `false`
 ### Edge cases
 
 ```js
-"0" == `null`;			// `false`
-"0" == `undefined`;		// `false`
-"0" == `false`;			// `true` -- UH OH!
+"0" == null;			// `false`
+"0" == undefined;		// `false`
+"0" == false;			// `true` -- UH OH!
 "0" == NaN;				// `false`
 "0" == 0;				// `true`
 "0" == "";				// `false`
 
-`false` == `null`;			// `false`
-`false` == `undefined`;		// `false`
+`false` == null;			// `false`
+`false` == undefined;		// `false`
 `false` == NaN;			// `false`
 `false` == 0;				// `true` -- UH OH!
 `false` == "";			// `true` -- UH OH!
 `false` == [];			// `true` -- UH OH!
 `false` == {};			// `false`
 
-"" == `null`;				// `false`
-"" == `undefined`;		// `false`
+"" == null;				// `false`
+"" == undefined;		// `false`
 "" == NaN;				// `false`
 "" == 0;				// `true` -- UH OH!
 "" == [];				// `true` -- UH OH!
 "" == {};				// `false`
 
-0 == `null`;				// `false`
-0 == `undefined`;			// `false`
+0 == null;				// `false`
+0 == undefined;			// `false`
 0 == NaN;				// `false`
 0 == [];				// `true` -- UH OH!
 0 == {};				// `false`
