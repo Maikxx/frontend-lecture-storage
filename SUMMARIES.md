@@ -5199,7 +5199,7 @@ Standaard iterables:
 
 Objecten hebben niet standaard een for..of manier.
 
-Je kan dit soort loops stoppen met break, continue, returns (in functies) en thrown exceptions.
+Je kan dit soort loops stoppen met `break`, `continue`, `return`s (in functies) en `thrown exceptions`.
 
 ### Regular Expressions
 
@@ -5211,7 +5211,7 @@ Standaard worden JavaScript strings gezien als 16-bits karakters, die overeen ko
 
 Veel UTF-16 karakters vallen hier niet onder. Sinds ES6 kan je hier dus wel voor zorgen.
 
-Deze flag zet je aan met `/u`
+Deze flag zet je aan met `/u`.
 
 #### Sticky Flag
 
