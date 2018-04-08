@@ -3326,7 +3326,7 @@ Als classes zijn geinherit, is er een manier voor deze classes zelf (niet de ins
 
 ### Multiple Inheritance
 
-**Diamond Problem** komt voort als er meer dan één parent class zou zijn. In dit geval inherit een class met de naam D van twee parents (B en C) en die inheriten van A. Als a een methode Drive() heeft, en B en C overschrijven die allebei, als D dan drive() aanroept, welke wordt het dan?
+**Diamond Problem** komt voort als er meer dan één parent class zou zijn. In dit geval inherit een class met de naam `D` van twee parents (`B` en `C`) en die inheriten van `A`. Als `A` een methode `Drive()` heeft, en `B` en `C` overschrijven die allebei, als `D` dan `drive()` aanroept, welke wordt het dan?
 
 ### Mixins
 
@@ -3338,7 +3338,7 @@ JavaScript faket dit gedrag van andere classes via twee verschillende manieren.
 
 #### Explicit Mixins
 
-Een utility, dat wordt gebruik om een parent class, zoals Vehicle te kopieëren naar een child class, zoals Car, heet **extend()**, volgens vele librarier en frameworks. Het kan ook een mixin heten.
+Een utility, dat wordt gebruik om een parent class, zoals `Vehicle` te kopieëren naar een child class, zoals `Car`, heet `extend()`, volgens vele libraries en frameworks. Het kan ook een `mixin` heten.
 
 ```js
 // vastly simplified `mixin(..)` example:
