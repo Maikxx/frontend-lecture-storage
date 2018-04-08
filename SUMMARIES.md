@@ -1842,11 +1842,11 @@ Je kan beter functies in blocks vermijden.
 Closures zijn een resultaat van het schrijven van code, dat vertrouwt op de **lexical scope**.
 
 ### Nitty Gritty
-Een closure betekent: Het herinneren en toegang hebben tot de lexicale scope van een functie, terwijl die functie wordt uitgevoerd buiten diens lexical scope.
+Een **closure** betekent: Het herinneren en toegang hebben tot de lexicale scope van een functie, terwijl die functie wordt uitgevoerd buiten diens lexical scope.
 
-De lookup rules van de lexical scope zijn slecht een (belangrijk) deel van closure, maar het is niet het enige.
+De lookup rules van de lexical scope zijn slechts een (belangrijk) deel van closure, maar het is niet het enige.
 
-Als iets over de scope van een ander iets ‘closes’ dan heeft het eerste iets een closure over de scope van het andere iets.
+Als iets over de scope van een ander iets **closes** dan heeft het eerste iets een closure over de scope van het andere iets.
 
 ```js
 function foo() {
@@ -1864,11 +1864,11 @@ var baz = foo();
 baz(); // 2 -- Whoa, closure was just observed, man.
 ```
 
-In dit geval wordt bar aangeroepen buiten de lexical scope, waar hij in is verklaard, omdat je het als waarde meegeeft aan de baz variabele.
+In dit geval wordt `bar` aangeroepen buiten de lexical scope, waar hij in is verklaard, omdat je het als waarde meegeeft aan de `baz` variabele.
 
-Omdat bar nog een referentie heeft naar de scope, nadat het is uitgevoerd (omdat het via een variabele is meegegeven) zal deze niet worden garbage collected. Deze referentie is een closure.
+Omdat `bar` nog een referentie heeft naar de scope, nadat het is uitgevoerd (omdat het via een variabele is meegegeven) zal deze niet worden garbage collected. Deze referentie is een closure.
 
-Closure zorgt ervoor dat functies toegang behouden tot de lexicale scope, zoals deze was bepaald tijdens author-time.
+Closure zorgt ervoor dat functies toegang behouden tot de lexicale scope, zoals deze was bepaald tijdens **author-time**.
 
 Iedere manier waarop inner functions meegegeven worden aan een scope buiten hun eigen lexical scope, zal de binnenste functie toegang houden tot de originele waardes van de lexicale scope en zal de closure blijven bestaan.
 
