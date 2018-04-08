@@ -1512,7 +1512,7 @@ Elke functie maakt een nieuwe bubble van scope.
 
 ### Look-ups
 
-Als er twee variabelen met dezelfde naam binnen het bereik van de look-up zitten, pakt het altijd de dichtstbijzijnde. Als dezelfde naam op meerdere levels voorkomt, heet dat shadowing.
+Als er twee variabelen met dezelfde naam binnen het bereik van de look-up zitten, pakt het altijd de dichtstbijzijnde. Als dezelfde naam op meerdere levels voorkomt, heet dat **shadowing**.
 
 Globale variabelen zijn ook automatisch properties van het globale object, dus het is mogelijk om waardes niet alleen te refereren met hun lexicale naam, maar ook indirect als property van het globale object.
 
@@ -1536,19 +1536,19 @@ var b = 2;
 foo("var b = 3;", 1); // 1 3
 ```
 
-In dit geval zal er in foo een nieuwe variabele b worden aangemaakt, die de globale b overshadowt.
+In dit geval zal er in foo een nieuwe variabele `b` worden aangemaakt, die de globale `b` overshadowt.
 
-Als je in strict mode zit, zal eval in zijn eigen lexicale scope werken. In dit geval zullen veranderingen die in eval gedaan worden, niet de omringende scope van waar deze is aangeroepen, aanpassen.
+Als je in `strict mode` zit, zal `eval` in zijn eigen lexicale scope werken. In dit geval zullen veranderingen die in `eval` gedaan worden, niet de omringende scope van waar deze is aangeroepen, aanpassen.
 
 Andere dingen in JavaScript, die ongeveer hetzelfde doen:
 
-* setInterval
-* setTimeout
+* `setInterval`
+* `setTimeout`
 * Function constructor
 
 **With**
 Dit is een depricated kenmerk van JavaScript.
-With wordt normaal gezien als een short-hand voor het maken van meerdere property references tegen een object, zonder het object steeds opnieuw te refereren.
+`with` wordt normaal gezien als een short-hand voor het maken van meerdere property references tegen een object, zonder het object steeds opnieuw te refereren.
 
 ```js
 var obj = {
