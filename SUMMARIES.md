@@ -1175,7 +1175,7 @@ var a = {
 };
 ```
 
-Hier is a een **l-value**, omdat het het eindpunt is van de assignment.
+Hier is `a` een **l-value**, omdat het het eindpunt is van de assignment.
 De curly braces is de **r-value**.
 
 ```js
