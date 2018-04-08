@@ -3976,7 +3976,7 @@ Een belangrijk aspect van future values, is dat ze kunnen slagen of falen.
 
 Een promise die niet kan resolven, krijgt een **rejection reason / value** mee.
 
-Je kan in een .then een functie mee geven die uitgevoerd moet worden als iets goed gaat, en een als iets fout gaat.
+Je kan in een `.then()` een functie mee geven die uitgevoerd moet worden als iets goed gaat, en een als iets fout gaat.
 `.then(resolve, error)`
 
 Als een promise is geresolved, blijft het dat ook, voor altijd. Het wordt dan als het ware een **immutable value**, die wel zo vaak als gewenst, kan worden bekeken.
@@ -3988,17 +3988,17 @@ Als een promise is geresolved, blijft het dat ook, voor altijd. Het wordt dan al
 Als je wilt checken of iets een Promise zal zijn, kan je niet `instanceof Promise` doen.
 
 Dit is, omdat:
-Je bijvoorbeeld kan een Promise van een ander browser window krijgen (bijvoorbeeld via een iframe), die een andere promise heeft dan degene in het huidige window/frame.
+Je bijvoorbeeld een Promise van een ander browser window kan krijgen (bijvoorbeeld via een iframe), die een andere promise heeft dan degene in het huidige window/frame.
 
 De term voor **type checks**, die gokken over het type van een waarde, gebaseerd op de vorm (welke properties er beschikbaar zijn) heet **duck typing**.
 
 ### De redenen dat promises het vertrouwen terugwinnen
 
 #### Calling too early
-Zelfs een promise die direct wordt geresolved, is niet synchroon, als je er via then een aanroept. Dus een promise .then functie zal nooit te vroeg worden aangeroepen.
+Zelfs een promise die direct wordt geresolved, is niet synchroon, als je er via `then` een aanroept. Dus een promise `.then` functie zal nooit te vroeg worden aangeroepen.
 
 #### Calling too late
-resolve en reject callbacks zullen worden gecalld, op het volgende asyncrone moment.
+`resolve` en `reject` callbacks zullen worden gecalld, op het volgende asyncrone moment.
 Er is geen manier om andere promises te vertragen, vanuit andere promises.
 
 ```js
@@ -4088,10 +4088,10 @@ Je kan weten of iets een promise is, met `Promise.resolve()`.
 
 `Promise.resolve()` accepteert alles wat *thenable* is en unwrapt het naar een non-thenable waarde.
 Om vertrouwen te verkrijgen is er niks mis met het filteren door Promise.resolve().
-Je krijgt een echte promise terug van promise.resolve.
+Je krijgt een echte promise terug van `Promise.resolve()`.
 
 Redenen waarom je promises kan chainen:
-* Iedere keer als je then aanroept op een promise, maakt het en returnt het een nieuwe promise.
+* Iedere keer als je `then` aanroept op een promise, maakt het en returnt het een nieuwe promise.
 
 De tweede parameter in een Promise constructor, is altijd een **rejected**.
 De eerste naam van een Promise constructor kan je het beste resolve noemen.
@@ -4101,7 +4101,7 @@ De eerste naam van een Promise constructor kan je het beste resolve noemen.
 
 Promises moeten eigenlijk een pit of success worden, waar:
 * Op de volgende Job of event loop tick, er een rejection wordt gegeven in de developer console, als er geen error is geregisteerd voor die Promise.
-* Als je een rejected Promise in die state wilt houden, voordat je het kan observeren, kan je defer() gebruiken.
+* Als je een rejected Promise in die state wilt houden, voordat je het kan observeren, kan je `defer()` gebruiken.
 
 ### Promise.all([...])
 Een **gate** is een mechanisme, die wacht op twee of meer parallele / concurrent taken om te volbrengen, voordat er wordt doorgegegaan. In JavaScript heet dit `Promise.All([])`
@@ -4113,7 +4113,7 @@ Promises kunnen niet worden uitgezet.
 
 *Niet in ES6*
 * Promise.none([]) hetzelfde als all, behalve dat alle promises moeten worden gereject.
-* Promise.any([]) hetzelfde als all, maar het negeert alle rejections. Er hoeft er slechts een te fulfillen.
+* Promise.any([]) hetzelfde als all, maar het negeert alle rejections. Er hoeft er slechts één te fulfillen.
 * Promise.first({}) en Promise.last({}) respectivelijk over welke promise moet worden gefulfillt.
 
 Negatief aan promises:
