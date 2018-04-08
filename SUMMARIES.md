@@ -4610,10 +4610,10 @@ funcs[3]();		// 3
 
 ### Const
 
-Const is nog een vorm van block-scoped verklaringen.
+`const` is nog een vorm van block-scoped verklaringen.
 Dit zijn variabelen die **read-only** zijn, nadat je de waarde hebt geset.
 
-Als de waarde van een const een array of object is, kan die alsnog worden veranderd.
+Als de waarde van een `const` een array of object is, kan die alsnog worden veranderd.
 
 #### Const or not
 
