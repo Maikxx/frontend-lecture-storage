@@ -655,21 +655,21 @@ Het side effect van bovenstaande is dat 42 een string wordt.
 
 ### toString
 
-toString maakt van waardes een string.
-array.toString geeft een string vertegenwoordiging van de array terug, waar de waardes gescheiden zijn met een komma.
+`toString()` maakt van waardes een string.
+`array.toString()` geeft een string vertegenwoordiging van de array terug, waar de waardes gescheiden zijn met een komma.
 
 ### JSON
 
-JSON.stringify() zorgt ervoor dat waardes geschikt zijn, als JSON string waarde.
-JSON-safe: Iedere waarde die op een correcte manier kan worden vertegenwoordigd in een JSON representatie.
-JSON.stringify is geen directe vorm van coercion.
+`JSON.stringify()` zorgt ervoor dat waardes geschikt zijn, als JSON string waarde.
+**JSON-safe**: Iedere waarde die op een correcte manier kan worden vertegenwoordigd in een JSON representatie.
+`JSON.stringify()` is geen directe vorm van coercion.
 
 Illegale JSON waardes:
 
 * `undefined`
 * Functions
 * Symbols
-* Objects met circular references (property referenties binnen een object structuur, die een nooit-eindigende cyclus creëren)
+* Objects met **circular references** (property referenties binnen een object structuur, die een nooit-eindigende cyclus creëren)
 
 Als JSON in een array een invalide waarde vindt, vervangt deze de waarde met `null`. Als het op een object gebeurt, wordt die property verwijderd.
 
