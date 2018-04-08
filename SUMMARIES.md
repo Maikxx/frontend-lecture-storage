@@ -1691,9 +1691,9 @@ Block scoping is een tool om Principles of Least Exposure te verlengen.
 
 Block scoping bestaat niet direct in JavaScript.
 Sommige kenmerken van JavaScript doen daar wel op lijken:
- With
- Try / Catch -> Het catch deel is geblockscoped.
- Let -> Koppelt een variabele aan de scope van een block code ({ }) waar deze in is geplaatst. Sommige mensen plaatsen liever om alles waar ze een block van willen maken { } dit is dan een expliciete manier van scoping. Anders is het impliciet.  Verklaringen die met let zijn gedaan zullen niet hoisten, dus als je ze probeert te bereiken voordat ze gedefineerd zijn, krijg je een referenceerror.
+* `with`
+* `try` / `catch` -> Het catch deel is geblockscoped.
+* `let` -> Koppelt een variabele aan de scope van een block code `({ })` waar deze in is geplaatst. Sommige mensen plaatsen liever om alles waar ze een block van willen maken `{ }` dit is dan een expliciete manier van scoping. Anders is het impliciet. Verklaringen die met `let` zijn gedaan zullen *niet* **hoisten**, dus als je ze probeert te bereiken voordat ze gedefineerd zijn, krijg je een ReferenceError.
 
 ### Garbage collection
 
