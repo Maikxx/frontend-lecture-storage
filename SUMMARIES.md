@@ -1153,19 +1153,19 @@ b;	// 43
 
 Dit betekent: de tweede expressie `a` zal worden uitgevoerd, nadat het after side effect van `a++` is gebeurt.
 
-**delete** wordt gebruikt om properties van objecten te halen.
+`delete` wordt gebruikt om properties van objecten te halen.
 Het resultaat van het succesvol verwijderen van iets, is `true` als het lukt en `false` als het niet lukt.
 Het side effect hiervan is, dat het een property verwijderd.
 
 Van een assignment statement is het directe resultaat dat de waarde die eraan toe wordt gewezen, wordt gelogd en het neven effect is dat het ook echt wordt toegewezen.
 
 ```js
-Var a, b, c;
-A = b = c = 42;
+var a, b, c;
+a = b = c = 42;
 ```
 
-C = 42 wordt eerst uitgevoerd, gevolgd door b = 42, gevolgd door a = 42.
-Let op dat je niet var a = b = c = 42 doet, want dat kan niet.
+`c = 42` wordt eerst uitgevoerd, gevolgd door `b = 42`, gevolgd door `a = 42`.
+Let op dat je niet `var a = b = c = 42` doet, want dat kan niet.
 
 ### Contextual rules
 
