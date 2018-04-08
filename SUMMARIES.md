@@ -4283,9 +4283,9 @@ var w1 = new Worker("http://some.url.1/mycoolworker.js");
 Op deze manier worden **dedicated workers** aangemaakt.
 Je kan ook **inline workers** maken, door gebruik te maken van **blob urls** (een nieuwe feature van HTML5). Dit is in feite een inline bestand, opgeslagen in een enkele binaire waarde.
 
-Workers hebben geen gedeelde scope of recourses, maar ze hebben we een basaal evenementen bericht systeem, die ze verbindt.
+Workers hebben *geen* gedeelde **scope of recourses**, maar ze hebben we een basaal evenementen bericht systeem, die ze verbindt.
 
-Je kan luisteren naar events op de volgende manier:
+Je kan luisteren naar **events** op de volgende manier:
 
 ```js
 w1.addEventListener("message", function(evt){
@@ -4460,9 +4460,9 @@ In het benchmarking geval is er een **outer loop** (die herhalende cycles doet) 
 
 Het testen van *niet-echte code* geeft je ook *niet-echte resultaten*.
 
-Het schrijven van goede tests, vereist het huiverende analytische denken, tussen de verschillen die bestaan in de twee test cases en of deze **opzettelijk** of **Niet opzettelijk** waren.
+Het schrijven van goede tests, vereist het huiverende analytische denken, tussen de verschillen die bestaan in de twee test cases en of deze **opzettelijk** of **niet opzettelijk** waren.
 
-**Unrolling recursion**: Een fenomeen waar de engine ziet dat de aangebrachte recursie makkelijk (meer geoptimaliseerd)kan worden uitgevoerd, met een loop.
+**Unrolling recursion**: Een fenomeen waar de engine ziet dat de aangebrachte recursie makkelijk (meer geoptimaliseerd) kan worden uitgevoerd, met een loop.
 
 ```js
 function factorial(n) {
