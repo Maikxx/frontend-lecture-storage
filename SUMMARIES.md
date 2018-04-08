@@ -5347,7 +5347,7 @@ var sym = Symbol("some optional description");
 typeof sym;		// "symbol"
 ```
 
-De parameter in de `Symbol()` is optioneel, maar wordt gebruikt als een beschrijving van het doel van deze symbol.
+De parameter in de `Symbol()` is optioneel, maar wordt gebruikt als een beschrijving van het doel van dit symbol.
 
 ```js
 sym.toString();		// "Symbol(some optional description)"
