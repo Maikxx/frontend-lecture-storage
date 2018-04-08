@@ -1656,19 +1656,19 @@ Nadelen aan anonieme functies:
 * Als je in de functie naar deze functie moet refereren, moet je de deprecated `arguments.callee` gebruiken.
 * Verminderd de leesbaarheid.
 
-Inline function expressions zijn krachtig en bruikbaar, het maakt niet uit of ze benaamd zijn of niet. Gebruik altijd een naam in je function expressions.
+**Inline function expressions** zijn krachtig en bruikbaar, het maakt niet uit of ze benaamd zijn of niet. Gebruik altijd een naam in je function expressions.
 
 ### Invoking function expressions immediately
 
 Immediately Invoked Function Expression: IIFE. Gebruik ook hier gewoon een naam.
 
-(function { } ()) is hetzelfde als (function { })()
+`(function { } ())` is hetzelfde als `(function { })()`
 
 Je kan ook parameters meegeven aan een IIFE.
 
 Met een IIFE kan je ook heel goed ervoor zorgen dat in die scope `undefined` niet veranderd is.
 
-Een ander gebruik van een IIFE is om de volgorde van dingen te veranderen, met het UMD (Universal Module Definition) project:
+Een ander gebruik van een IIFE is om de volgorde van dingen te veranderen, met het **UMD (Universal Module Definition)** project:
 
 ```js
 var a = 2;
@@ -1676,11 +1676,9 @@ var a = 2;
 (function IIFE(def){
 	def(window);
 })(function def(global){
-
 	var a = 3;
 	console.log(a); // 3
 	console.log(global.a); // 2
-
 });
 ```
 
