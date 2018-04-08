@@ -641,9 +641,9 @@ Gebruik ook nooit `Array.prototype` die achtereenvolgend worden aangepast.
 
 ## You don't know JavaScript - Types & Grammar - H4
 
-Het ombouwen van een waarde, van het ene type naar het andere heet vaak type casting, als het expliciet wordt gedaan en coercion als het impliciet gedaan wordt (door JavaScript zelf, die volgt de regels op die gaan over hoe een waarde gebruikt mag en kan worden).
+Het ombouwen van een waarde, van het ene type naar het andere heet vaak **type casting**, als het *expliciet* wordt gedaan en **coercion** als het *impliciet* gedaan wordt (door JavaScript zelf, die volgt de regels op die gaan over hoe een waarde gebruikt mag en kan worden).
 
-Eigenlijk wordt bij beide varianten gepraat over coercion, dus tegenwoordig heet het explicit coercion en implicit coercion.
+Eigenlijk wordt bij beide varianten gepraat over coercion, dus tegenwoordig heet het **explicit coercion** en **implicit coercion**.
 
 ```js
 Var b = 42 + ‘’; // Implicit coercion
@@ -651,7 +651,7 @@ Var b = 42 + ‘’; // Implicit coercion
 
 Het side effect van bovenstaande is dat 42 een string wordt.
 
-Astract operations: internal-only operations.
+**Astract operations**: internal-only operations.
 
 ### toString
 
