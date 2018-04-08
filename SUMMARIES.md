@@ -1313,7 +1313,7 @@ ASI komt ook voor:
 
 ### Error correction
 
-Bijna alle semicolons zijn optioneel, behalve die in de for.
+Bijna alle semicolons zijn optioneel, behalve die in de `for`.
 ASI is een **error correction routine**, met als error **parser error**.
 Gebruik gewoon zo veel mogelijk wel semicolons, waar ze nodig zijn.
 
