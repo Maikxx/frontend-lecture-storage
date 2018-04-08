@@ -4263,7 +4263,7 @@ fooThunk(function(sum) {
 });
 ```
 
-In het bovenstaande geval is `whatIsThis` eigenlijk iets dat thunks maakt, vanuit foo. Het is dus eigenlijk een **factory** voor **thunks**. Een **thunktory**.
+In het bovenstaande geval is `whatIsThis` eigenlijk iets dat thunks maakt, vanuit `foo`. Het is dus eigenlijk een **factory** voor **thunks**. Een **thunktory**.
 
 ## You don't know JavaScript - Async & Performance - H5 - Program Performance
 
