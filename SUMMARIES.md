@@ -1320,7 +1320,7 @@ Gebruik gewoon zo veel mogelijk wel semicolons, waar ze nodig zijn.
 ### Errors
 
 **Early errors**: Errors die gebeuren tijdens het compilen, hieronder vallen ook grammatische fouten.
-Doordat ze niet gevonden kunnen worden in het executen van je code, kan je ze niet catchen.
+Doordat ze niet gevonden kunnen worden in het executen van je code, kan je ze niet `catch`en.
 
 Early errors:
 
@@ -1345,7 +1345,7 @@ Het duidelijkste voorbeeld komt uit ES6 let block-scoping:
 }
 ```
 
-Er zit een duidelijk verschil in een variabele die helemaal niet in een block is verklaard en een variabele die wel verklaard is, maar nog niet tot de initialisatie is gekomen. (**`undefined` vs ReferenceError**).
+Er zit een duidelijk verschil in een variabele die helemaal niet in een block is verklaard en een variabele die wel verklaard is, maar nog niet tot de initialisatie is gekomen. (`undefined` vs **ReferenceError**).
 
 ### Function arguments
 
