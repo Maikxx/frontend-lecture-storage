@@ -2305,7 +2305,7 @@ Je kan de call-stack vinden via de `debugger` in de browser.
 
 #### Default binding
 
-De standaard versie van this binding, komt van standaard alleenstaande functie calls. Dit is de default, als geen van de onderstaande regels gelden.
+De standaard versie van `this` binding, komt van standaard alleenstaande functie calls. Dit is de default, als geen van de onderstaande regels gelden.
 
 ```js
 function foo() {
@@ -2317,7 +2317,7 @@ var a = 2;
 foo(); // 2
 ```
 
-Als 'strict mode' aan staat breekt de bovenstaande code, omdat het globale object niet **default binding** ondersteunt.
+Als `strict mode` aan staat breekt de bovenstaande code, omdat het globale object niet **default binding** ondersteunt.
 
 ```js
 function foo() {
@@ -2328,12 +2328,12 @@ function foo() {
 
 var a = 2;
 
-foo(); // TypeError: `this` is `undefined`
+foo(); // TypeError: this is undefined
 ```
 
-Dit geldt echter alleen als de content van de foo function 'strict mode' aan heeft staan, als de call-site dit aan heeft staan, refereert this wel naar het globale object.
+Dit geldt echter alleen als de content van de foo function `strict mode` aan heeft staan, als de call-site dit aan heeft staan, refereert `this` wel naar het globale object.
 
-Vaak kom je dit probleem niet tegen, want je hele code loopt óf in strict mode, of niet.
+Vaak kom je dit probleem niet tegen, want je hele code loopt óf in `strict mode`, of niet.
 
 #### Implicit binding
 
@@ -2356,7 +2356,7 @@ Ookal heeft foo een reference in het object gekregen, wordt de functie niet eige
 
 In dit geval gebruikt de call-site de context van het object om te refereren naar de functie. In dit geval is het object eigenaar en omringer van de **functie referentie**.
 
-Alleen het laatste / hoogste level van een object property reference chain geldt voor de call-site.
+Alleen het laatste / hoogste level van een **object property reference chain** geldt voor de call-site.
 
 ```js
 function foo() {
@@ -2378,7 +2378,7 @@ obj1.obj2.foo(); // 42
 
 #### Implicitly lost
 
-Als een implicitly bound function de binding met **this** verliest, om vervolgens terug te vallen op **default binding**.
+Als een **implicitly bound** function de binding met `this` verliest, om vervolgens terug te vallen op **default binding**.
 
 ```js
 function foo() {
@@ -2397,7 +2397,7 @@ var a = "oops, global"; // `a` also property on global object
 bar(); // "oops, global"
 ```
 
-In dit geval is bar() de call site, wat dus **default binding** veroorzaakt en refereert naar het globale object.
+In dit geval is `bar()` de call site, wat dus **default binding** veroorzaakt en refereert naar het globale object.
 
 Ook als je functies meegeeft via de parameters, geldt het bovenstaande fenomeen:
 
@@ -2422,15 +2422,15 @@ var a = "oops, global"; // `a` also property on global object
 doFoo(obj.foo); // "oops, global"
 ```
 
-Zelfs als de functie een ingebouwde JavaScript functie is, zoals setTimeout(), geldt dit.
+Zelfs als de functie een ingebouwde JavaScript functie is, zoals `setTimeout()`, geldt dit.
 
 #### Explicit binding
 
-Als je een function call wilt dwingen om een bepaald object te gebruiken als **this** binding, zonder een property reference op een object te zetten.
+Als je een function call wilt dwingen om een bepaald object te gebruiken als `this` binding, zonder een property reference op een object te zetten.
 
-Enkele tools om dit te doen in JavaScript zijn, dingen zoals **.call() en .apply()**. Elke functie die je zelf maakt heeft deze properties via diens prototype.
+Enkele tools om dit te doen in JavaScript zijn, dingen zoals `.call()` en `.apply()`. Elke functie die je zelf maakt heeft deze properties via diens prototype.
 
-Deze functies werken, door beide als eerste argument een object mee te krijgen, die gebruikt moet worden voor this, om vervolgens de functie aan te roepen met die this.
+Deze functies werken, door beide als eerste argument een object mee te krijgen, die gebruikt moet worden voor `this`, om vervolgens de functie aan te roepen met die `this`.
 
 ```js
 function foo() {
@@ -2444,11 +2444,11 @@ var obj = {
 foo.call(obj); // 2
 ```
 
-Als je een string meegeeft als this, wordt deze gewrapt in diens Object vorm (new String etc.).
+Als je een string meegeeft als `this`, wordt deze gewrapt in diens Object vorm (`new String()` etc.).
 
-Als het om this binding gaat, gedragen beide methodes (call en apply) zich hetzelfde, behalve als er meerdere parameters worden meegegeven.
+Als het om `this` binding gaat, gedragen beide methodes (call en apply) zich hetzelfde, behalve als er meerdere parameters worden meegegeven.
 
-Dit zorgt er nog niet voor dat een functie diens bedoelde this binding verliest.
+Dit zorgt er nog niet voor dat een functie diens bedoelde `this` binding verliest.
 
 ##### Hard binding
 
