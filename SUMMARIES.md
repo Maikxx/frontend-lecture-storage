@@ -2144,11 +2144,11 @@ identify(you); // READER
 speak(me); // Hello, I'm KYLE
 ```
 
-This zorgt voor een elegantere manier van het doorgeven van referenties naar objecten. Dit leidt weer tot een schonere API en het makkelijker hergebruiken van functies.
+`this` zorgt voor een elegantere manier van het doorgeven van referenties naar objecten. Dit leidt weer tot een schonere API en het makkelijker hergebruiken van functies.
 
 ### Itself
 
-This refereert niet naar de functie zelf.
+`this` refereert niet naar de functie zelf.
 Je kan **state** opslaan (als waardes in properties van een functie).
 
 Veel developers vallen terug op een ander mechanisme als ze niet snappen waarom het onderstaande niet werkt, zoals ze willen.
