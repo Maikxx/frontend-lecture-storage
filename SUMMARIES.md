@@ -1266,7 +1266,7 @@ Het chainen van verschillende operators achter elkaar is iets wat heel vaak gebe
 
 ### Short circuited
 
-Dit betekent en komt voor als een van de twee operatoren (&& of ||) de linker operand als genoege neemt om de uitkomt van de operation te weergeven.
+Dit betekent en komt voor als een van de twee operatoren (`&&` of `||`) de linker operand als genoege neemt om de uitkomt van de operation te weergeven.
 
 ### Tighter binding
 
