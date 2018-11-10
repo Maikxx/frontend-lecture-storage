@@ -1,9 +1,8 @@
 # About this repository
 
 This repository is a storage for the notes and summaries of the [You Don't Know JS](https://github.com/getify/You-Dont-Know-JS) books series.
-There might as well be some excersises here in the README.
 
-## Best Practices
+## Best Practices for writing code
 
 * Start testing - [Open Source](https://opensource.com/article/17/5/30-best-practices-software-development-and-testing)
 * Write less code, delete code you don't need - [Open Source](https://opensource.com/article/17/5/30-best-practices-software-development-and-testing)
