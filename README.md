@@ -2,6 +2,12 @@
 
 This repository is a storage for the notes and summaries of the [You Don't Know JS](https://github.com/getify/You-Dont-Know-JS) books series.
 
+## Installation
+
+```
+git clone git@github.com:Maikxx/frontend-lecture-storage.git
+```
+
 ## Best Practices for writing code
 
 * Start testing - [Open Source](https://opensource.com/article/17/5/30-best-practices-software-development-and-testing)
