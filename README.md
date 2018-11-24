@@ -16,3 +16,7 @@ git clone git@github.com:Maikxx/frontend-lecture-storage.git
 * Globals are bad - [Open Source](https://opensource.com/article/17/5/30-best-practices-software-development-and-testing)
 * If a function or method passes 30 lines of code, break it up if possible - [Open Source](https://opensource.com/article/17/5/30-best-practices-software-development-and-testing)
 * Refactor whenever you see the need and have the chance - [Open Source](https://opensource.com/article/17/5/30-best-practices-software-development-and-testing)
+
+## License
+
+This repository is licensed as [MIT](LICENSE) by [Maikel van Veen](https://github.com/maikxx).
